@@ -3,12 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\ConfigModel;
+use App\Models\MainModel;
 use App\Models\ProfileModel;
 
 class Clients extends BaseController
 {
 	protected $objSession;
 	protected $objRequest;
+	protected $objMainModel;
 	protected $objConfig;
 	protected $objProfile;
 	protected $config;
@@ -21,6 +23,7 @@ class Clients extends BaseController
 		# Models
 		$this->objConfig = new ConfigModel;
 		$this->objProfile = new ProfileModel;
+		$this->objMainModel = new MainModel;
 
 		# Services
 		$this->objRequest = \Config\Services::request();
@@ -45,14 +48,15 @@ class Clients extends BaseController
 			return view('logout');
 
 		$data = array();
-		$data['page'] = 'admin/clients/mainClients';
+		$data['clients'] = $this->objMainModel->objData('customer', 'deleted', 0);
 
 		# Company
 		$data['company'] = $this->company;
 
-		# Page Title
+		# Page
 		$data['pageTitle'] = 'Clientes';
-
+		$data['page'] = 'admin/clients/mainClients';
+		
 		# Tab
 		$data['tab'] = 'clients';
 		$data['subTab'] = 'list';

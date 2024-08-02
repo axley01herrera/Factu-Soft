@@ -45,13 +45,13 @@ class Dashboard extends BaseController
 			return view('logout');
 
 		$data = array();
-		$data['page'] = 'admin/dashboard/mainDashboard';
 
 		# Company
 		$data['company'] = $this->company;
 
-		# Page Title
+		# Page
 		$data['pageTitle'] = 'Tablero';
+		$data['page'] = 'admin/dashboard/mainDashboard';
 
 		# Tab
 		$data['tab'] = 'dashboard';

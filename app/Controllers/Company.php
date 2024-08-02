@@ -48,13 +48,13 @@ class Company extends BaseController
 			return view('logout');
 
 		$data = array();
-		$data['page'] = 'admin/settings/config/mainConfig';
 
 		# Company
 		$data['company'] = $this->company;
 
-		# Page Title
+		# Page
 		$data['pageTitle'] = 'Configuración';
+		$data['page'] = 'admin/settings/config/mainConfig';
 
 		# Tab
 		$data['tab'] = 'settings';
@@ -74,14 +74,14 @@ class Company extends BaseController
 			return view('logout');
 
 		$data = array();
-		$data['page'] = 'admin/settings/company/mainCompany';
 		$data['uniqid'] = uniqid();
 
 		# Company
 		$data['company'] = $this->company;
 
-		# Page Title
+		# Page
 		$data['pageTitle'] = 'Compañía';
+		$data['page'] = 'admin/settings/company/mainCompany';
 
 		# Tab
 		$data['tab'] = 'settings';
