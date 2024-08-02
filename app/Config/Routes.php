@@ -14,13 +14,17 @@ $routes->post('Home/login', 'Home::login');
 # Dashboard
 $routes->get('Dashboard', 'Dashboard::index');
 
-# Clients
-$routes->get('Clients', 'Clients::index');
-$routes->post('Clients/processingClients', 'Clients::processingClients');
+# Customers
+$routes->get('Customer', 'Customer::index');
 
-# Company -> config
-$routes->get('Company/config', 'Company::config');
+# Invoices
+$routes->get('Invoice', 'Invoice::index');
+$routes->get('Invoice/series', 'Invoice::series');
 
-# Company -> profile
-$routes->get('Company/company', 'Company::company');
-$routes->post('Company/saveCompanyInfo', 'Company::saveCompanyInfo');
+# Profile
+$routes->get('Profile', 'Profile::index');
+
+# Config
+$routes->get('Config', 'Config::index');
+
+

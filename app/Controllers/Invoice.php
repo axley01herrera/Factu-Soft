@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ConfigModel;
 
-class Dashboard extends BaseController
+class Invoice extends BaseController
 {
 	protected $objSession;
 	protected $objRequest;
@@ -40,10 +40,21 @@ class Dashboard extends BaseController
 			return view('logout');
 
 		$data = array();
-		# menu
-		$data['dashboardActive'] = 'active';
-		# page
-		$data['page'] = 'dashboard/mainDashboard';
+		$data['page'] = 'invoice/mainInvoice';
+		$data['invoiceActive'] = 'active';
+
+		return view('layouts/main', $data);
+	}
+
+    public function series()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		$data = array();
+		$data['page'] = 'invoice/serie/mainSerie';
+		$data['invoiceSeriesActive'] = 'active';
 
 		return view('layouts/main', $data);
 	}

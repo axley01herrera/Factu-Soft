@@ -15,20 +15,26 @@
 	<link rel="stylesheet" href="<?php echo base_url('public/assets/css/styles.css'); ?>" />
 	<link rel="stylesheet" href="<?php echo base_url('public/assets/libs/sweetalert/sweetalert2.css'); ?>" />
 
+	<script>
+		var userSettings = {
+			Layout: "vertical", // vertical | horizontal
+			SidebarType: "full", // full | mini-sidebar
+			BoxedLayout: true, // true | false
+			Direction: "ltr", // ltr | rtl
+			Theme: "light", // light | dark
+			ColorTheme: "Blue_Theme", // Blue_Theme | Aqua_Theme | Purple_Theme | Green_Theme | Cyan_Theme | Orange_Theme
+			cardBorder: false, // true | false
+		};
+	</script>
+
 	<!-- js -->
 	<script src="<?php echo base_url('public/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js'); ?>"></script>
-	<script src="<?php echo base_url('public/assets/libs/simplebar/dist/simplebar.min.js'); ?>"></script>
-	<script src="<?php echo base_url('public/assets/js/theme/app.init.js'); ?>"></script>
-	<script src="<?php echo base_url('public/assets/js/theme/theme.js'); ?>"></script>
-	<script src="<?php echo base_url('public/assets/js/theme/app.min.js'); ?>"></script>
 	<script src="<?php echo base_url('public/assets/libs/jquery/3.7.1.min.js'); ?>"></script>
 	<script src="<?php echo base_url('public/assets/libs/sweetalert/sweetalert2.js'); ?>"></script>
 
-	<style>
-		.dt-vertical-align {
-			vertical-align: middle;
-		}
-	</style>
+	<script src="<?php echo base_url('public/assets/libs/simplebar/dist/simplebar.min.js'); ?>"></script>
+	<script src="<?php echo base_url('public/assets/js/theme/theme.js'); ?>"></script>
+	<script src="<?php echo base_url('public/assets/js/theme/sidebarmenu.js'); ?>"></script>
 
 	<script>
 		function globalError() {
@@ -40,27 +46,7 @@
 				timer: 2500
 			});
 		}
-
-		function successAlert(title) {
-			Swal.fire({
-				position: "top-end",
-				icon: "success",
-				text: title,
-				showConfirmButton: false,
-				timer: 2500
-			});
-		}
-
-		function warningAlert(title) {
-			Swal.fire({
-				position: "top-end",
-				icon: "warning",
-				text: title,
-				showConfirmButton: false,
-				timer: 2500
-			});
-		}
 	</script>
 
-	<title><?php echo $company[0]->name; ?></title>
+	<title>Factu-Soft</title>
 </head>

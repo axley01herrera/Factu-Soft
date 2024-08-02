@@ -41,12 +41,4 @@ class ProfileModel extends Model
             return $result;
         }
     }
-
-	public function getProfile() 
-    {
-        $query = $this->db->table('profile');
-        $data = $query->get()->getResult();
-
-        return $data;
-    }
 }

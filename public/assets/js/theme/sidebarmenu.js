@@ -5,20 +5,14 @@ if ((at = "vertical")) {
   // Active 2 file at same time 
   // ----------------------------------------
 
-  var currentNewURL =
-    window.location != window.parent.location
-      ? document.referrer
-      : document.location.href;
-
+  var currentNewURL = window.location != window.parent.location ? document.referrer: document.location.href;
   var current_link = document.getElementById("get-url");
+
   if (currentNewURL.includes("/main/index.html")) {
     current_link.setAttribute("href", "../main/index.html");
   } else if (currentNewURL.includes("/index.html")) {
     current_link.setAttribute("href", "./index.html");
-  } else {
-    current_link.setAttribute("href", "./");
   }
-  // end
 
   function findMatchingElement() {
     var currentUrl = window.location.href;
@@ -31,6 +25,7 @@ if ((at = "vertical")) {
 
     return null; // Return null if no matching element is found
   }
+
   var elements = findMatchingElement();
 
   // Do something with the matching element
@@ -38,12 +33,10 @@ if ((at = "vertical")) {
     elements.classList.add("active");
   }
 
-  document
-    .querySelectorAll("ul#sidebarnav ul li a.active")
-    .forEach(function (link) {
-      link.closest("ul").classList.add("in");
-      link.closest("ul").parentElement.classList.add("selected");
-    });
+  document.querySelectorAll("ul#sidebarnav ul li a.active").forEach(function (link) {
+    link.closest("ul").classList.add("in");
+    link.closest("ul").parentElement.classList.add("selected");
+  });
 
   document.querySelectorAll("#sidebarnav li").forEach(function (li) {
     const isActive = li.classList.contains("selected");
@@ -54,6 +47,7 @@ if ((at = "vertical")) {
       }
     }
   });
+
   document.querySelectorAll("#sidebarnav a").forEach(function (link) {
     link.addEventListener("click", function (e) {
       const isActive = this.classList.contains("active");
@@ -85,6 +79,7 @@ if ((at = "vertical")) {
     });
   });
 }
+
 if ((at = "horizontal")) {
   function findMatchingElement() {
     var currentUrl = window.location.href;
@@ -102,10 +97,9 @@ if ((at = "horizontal")) {
   if (elements) {
     elements.classList.add("active");
   }
-  document
-    .querySelectorAll("#sidebarnavh ul#sidebarnav a.active")
-    .forEach(function (link) {
-      link.closest("a").parentElement.classList.add("selected");
-      link.closest("ul").parentElement.classList.add("selected");
-    });
+
+  document.querySelectorAll("#sidebarnavh ul#sidebarnav a.active").forEach(function (link) {
+    link.closest("a").parentElement.classList.add("selected");
+    link.closest("ul").parentElement.classList.add("selected");
+  });
 }
