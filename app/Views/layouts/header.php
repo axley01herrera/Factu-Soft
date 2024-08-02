@@ -24,6 +24,12 @@
 	<script src="<?php echo base_url('public/assets/libs/jquery/3.7.1.min.js'); ?>"></script>
 	<script src="<?php echo base_url('public/assets/libs/sweetalert/sweetalert2.js'); ?>"></script>
 
+	<style>
+		.dt-vertical-align {
+			vertical-align: middle;
+		}
+	</style>
+
 	<script>
 		function globalError() {
 			Swal.fire({

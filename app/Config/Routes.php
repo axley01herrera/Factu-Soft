@@ -16,6 +16,7 @@ $routes->get('Dashboard', 'Dashboard::index');
 
 # Clients
 $routes->get('Clients', 'Clients::index');
+$routes->post('Clients/processingClients', 'Clients::processingClients');
 
 # Company -> config
 $routes->get('Company/config', 'Company::config');
