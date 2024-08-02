@@ -33,20 +33,44 @@ class Company extends BaseController
 		}
 	}
 
-	public function index()
+	public function config()
 	{
 		# Verify Session 
 		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
 			return view('logout');
 
 		$data = array();
-		$data['page'] = 'admin/company/mainCompany';
+		$data['page'] = 'admin/settings/config/mainConfig';
+
+		# Page Title
+		$data['pageTitle'] = 'Configuración';
+
+		# Tab
+		$data['tab'] = 'settings';
+		$data['subTab'] = 'config';
+
+		return view(MAIN_ADMIN, $data);
+	}
+
+	#####################################
+	# Company
+	#####################################
+
+	public function company()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		$data = array();
+		$data['page'] = 'admin/settings/company/mainCompany';
 
 		# Page Title
 		$data['pageTitle'] = 'Compañía';
 
 		# Tab
-		$data['tab'] = 'company';
+		$data['tab'] = 'settings';
+		$data['subTab'] = 'company';
 
 		return view(MAIN_ADMIN, $data);
 	}

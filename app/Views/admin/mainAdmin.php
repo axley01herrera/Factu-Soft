@@ -83,13 +83,19 @@
 								<span class="hide-menu">Crear Cliente</span>
 							</a>
 						</li>
-						<!-- COMPANY -->
+						<!-- SETTINGS -->
 						<li class="nav-small-cap">
 							<iconify-icon icon="solar:menu-dots-linear" class="mini-icon"></iconify-icon>
-							<span class="hide-menu">Compañía</span>
+							<span class="hide-menu">Ajustes</span>
 						</li>
 						<li class="sidebar-item">
-							<a class="sidebar-link <?php if ($tab == 'company') echo 'active'; ?>" href="<?php echo base_url('Company'); ?>" aria-expanded="false">
+							<a class="sidebar-link <?php if ($tab == 'settings' && $subTab == 'company') echo 'active'; ?>" href="<?php echo base_url('Company/company'); ?>" aria-expanded="false">
+								<iconify-icon icon="solar:screencast-2-linear"></iconify-icon>
+								<span class="hide-menu">Compañía</span>
+							</a>
+						</li>
+						<li class="sidebar-item">
+							<a class="sidebar-link <?php if ($tab == 'settings' && $subTab == 'config') echo 'active'; ?>" href="<?php echo base_url('Company/config'); ?>" aria-expanded="false">
 								<iconify-icon icon="solar:screencast-2-linear"></iconify-icon>
 								<span class="hide-menu">Configuración</span>
 							</a>

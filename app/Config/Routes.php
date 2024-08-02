@@ -18,4 +18,5 @@ $routes->get('Dashboard', 'Dashboard::index');
 $routes->get('Clients', 'Clients::index');
 
 # Company
-$routes->get('Company', 'Company::index');
+$routes->get('Company/config', 'Company::config');
+$routes->get('Company/company', 'Company::company');
