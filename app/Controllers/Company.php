@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ConfigModel;
 
-class Dashboard extends BaseController
+class Company extends BaseController
 {
 	protected $objSession;
 	protected $objRequest;
@@ -40,13 +40,13 @@ class Dashboard extends BaseController
 			return view('logout');
 
 		$data = array();
-		$data['page'] = 'admin/dashboard/mainDashboard';
+		$data['page'] = 'admin/company/mainCompany';
 
 		# Page Title
-		$data['pageTitle'] = 'Tablero';
+		$data['pageTitle'] = 'Compañía';
 
 		# Tab
-		$data['tab'] = 'dashboard';
+		$data['tab'] = 'company';
 
 		return view(MAIN_ADMIN, $data);
 	}
