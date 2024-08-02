@@ -11,7 +11,7 @@ class Company extends BaseController
 	protected $objSession;
 	protected $objRequest;
 	protected $objConfig;
-	protected $objProfileModel;
+	protected $objProfile;
 	protected $objMainModel;
 	protected $config;
 	protected $company;
@@ -22,14 +22,14 @@ class Company extends BaseController
 
 		# Models
 		$this->objConfig = new ConfigModel;
-		$this->objProfileModel = new ProfileModel;
+		$this->objProfile = new ProfileModel;
 		$this->objMainModel = new MainModel;
 
 		# Services
 		$this->objRequest = \Config\Services::request();
 
 		$this->config = $this->objConfig->getConfig();
-		$this->company = $this->objProfileModel->getProfile();
+		$this->company = $this->objProfile->getProfile();
 
 		# Set Lang
 		if (!empty($this->config)) {
@@ -49,6 +49,9 @@ class Company extends BaseController
 
 		$data = array();
 		$data['page'] = 'admin/settings/config/mainConfig';
+
+		# Company
+		$data['company'] = $this->company;
 
 		# Page Title
 		$data['pageTitle'] = 'Configuración';

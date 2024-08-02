@@ -7,66 +7,70 @@ use App\Models\ProfileModel;
 
 class Home extends BaseController
 {
-    protected $objSession;
-    protected $objRequest;
-    protected $objConfig;
-    protected $objProfile;
-    protected $config;
+	protected $objSession;
+	protected $objRequest;
+	protected $objConfig;
+	protected $objProfile;
+	protected $config;
+	protected $company;
 
-    public function __construct()
-    {
-        $this->objSession = session();
-        # Clear Session
-        $this->objSession->set('user', []);
+	public function __construct()
+	{
+		$this->objSession = session();
+		# Clear Session
+		$this->objSession->set('user', []);
 
-        # Models
-        $this->objConfig = new ConfigModel;
-        $this->objProfile = new ProfileModel;
+		# Models
+		$this->objConfig = new ConfigModel;
+		$this->objProfile = new ProfileModel;
 
-        # Services
-        $this->objRequest = \Config\Services::request();
+		# Services
+		$this->objRequest = \Config\Services::request();
 
-        $this->config = $this->objConfig->getConfig();
+		$this->config = $this->objConfig->getConfig();
+		$this->company = $this->objProfile->getProfile();
 
-        # Set Lang
-        if (!empty($this->config)) {
-            $this->objRequest->setLocale($this->config[0]->lang);
-            date_default_timezone_set($this->config[0]->timezone);
-        } else {
-            $this->objRequest->setLocale("es");
-            date_default_timezone_set("UTC");
-        }
-    }
+		# Set Lang
+		if (!empty($this->config)) {
+			$this->objRequest->setLocale($this->config[0]->lang);
+			date_default_timezone_set($this->config[0]->timezone);
+		} else {
+			$this->objRequest->setLocale("es");
+			date_default_timezone_set("UTC");
+		}
+	}
 
-    public function index()
-    {
-        # params
-        $msg = $this->objRequest->getPostGet('session');
+	public function index()
+	{
+		# params
+		$msg = $this->objRequest->getPostGet('session');
 
-        $data = array();
-        $data['msg'] = $msg;
+		$data = array();
+		$data['msg'] = $msg;
 
-        return view('home/mainHome', $data);
-    }
+		# Company
+		$data['company'] = $this->company;
 
-    public function login()
-    {
-        # params
-        $accessKey = $this->objRequest->getPost('accessKey');
+		return view('home/mainHome', $data);
+	}
 
-        if (!empty($accessKey)) {
-            $result = $this->objProfile->verifyAccessKey($accessKey);
+	public function login()
+	{
+		# params
+		$accessKey = $this->objRequest->getPost('accessKey');
 
-            if ($result['error'] == 0) {
-                # Create Session
-                $session = array();
-                $session['role'] = 'admin';
+		if (!empty($accessKey)) {
+			$result = $this->objProfile->verifyAccessKey($accessKey);
 
-                $this->objSession->set('user', $session);
-            }
+			if ($result['error'] == 0) {
+				# Create Session
+				$session = array();
+				$session['role'] = 'admin';
 
-            return json_encode($result);
-        }
-    }
+				$this->objSession->set('user', $session);
+			}
+
+			return json_encode($result);
+		}
+	}
 }
-

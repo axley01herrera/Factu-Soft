@@ -10,7 +10,7 @@ class Clients extends BaseController
 	protected $objSession;
 	protected $objRequest;
 	protected $objConfig;
-	protected $objProfileModel;
+	protected $objProfile;
 	protected $config;
 	protected $company;
 
@@ -20,13 +20,13 @@ class Clients extends BaseController
 
 		# Models
 		$this->objConfig = new ConfigModel;
-		$this->objProfileModel = new ProfileModel;
+		$this->objProfile = new ProfileModel;
 
 		# Services
 		$this->objRequest = \Config\Services::request();
 
 		$this->config = $this->objConfig->getConfig();
-		$this->company = $this->objProfileModel->getProfile();
+		$this->company = $this->objProfile->getProfile();
 
 		# Set Lang
 		if (!empty($this->config)) {
@@ -47,8 +47,8 @@ class Clients extends BaseController
 		$data = array();
 		$data['page'] = 'admin/clients/mainClients';
 
-				# Company
-				$data['company'] = $this->company;
+		# Company
+		$data['company'] = $this->company;
 
 		# Page Title
 		$data['pageTitle'] = 'Clientes';
