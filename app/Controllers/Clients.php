@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\ConfigModel;
+use App\Models\ProfileModel;
 
 class Clients extends BaseController
 {
 	protected $objSession;
 	protected $objRequest;
 	protected $objConfig;
+	protected $objProfileModel;
 	protected $config;
+	protected $company;
 
 	public function __construct()
 	{
@@ -17,11 +20,13 @@ class Clients extends BaseController
 
 		# Models
 		$this->objConfig = new ConfigModel;
+		$this->objProfileModel = new ProfileModel;
 
 		# Services
 		$this->objRequest = \Config\Services::request();
 
 		$this->config = $this->objConfig->getConfig();
+		$this->company = $this->objProfileModel->getProfile();
 
 		# Set Lang
 		if (!empty($this->config)) {
@@ -41,6 +46,9 @@ class Clients extends BaseController
 
 		$data = array();
 		$data['page'] = 'admin/clients/mainClients';
+
+				# Company
+				$data['company'] = $this->company;
 
 		# Page Title
 		$data['pageTitle'] = 'Clientes';

@@ -34,7 +34,27 @@
 				timer: 2500
 			});
 		}
+
+		function successAlert(title) {
+			Swal.fire({
+				position: "top-end",
+				icon: "success",
+				text: title,
+				showConfirmButton: false,
+				timer: 2500
+			});
+		}
+
+		function warningAlert(title) {
+			Swal.fire({
+				position: "top-end",
+				icon: "warning",
+				text: title,
+				showConfirmButton: false,
+				timer: 2500
+			});
+		}
 	</script>
 
-	<title>Factu-Soft</title>
+	<title><?php echo $company[0]->name; ?></title>
 </head>

@@ -17,6 +17,9 @@ $routes->get('Dashboard', 'Dashboard::index');
 # Clients
 $routes->get('Clients', 'Clients::index');
 
-# Company
+# Company -> config
 $routes->get('Company/config', 'Company::config');
+
+# Company -> profile
 $routes->get('Company/company', 'Company::company');
+$routes->post('Company/saveCompanyInfo', 'Company::saveCompanyInfo');

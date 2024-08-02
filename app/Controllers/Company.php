@@ -3,13 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\ConfigModel;
+use App\Models\ProfileModel;
+use App\Models\MainModel;
 
 class Company extends BaseController
 {
 	protected $objSession;
 	protected $objRequest;
 	protected $objConfig;
+	protected $objProfileModel;
+	protected $objMainModel;
 	protected $config;
+	protected $company;
 
 	public function __construct()
 	{
@@ -17,11 +22,14 @@ class Company extends BaseController
 
 		# Models
 		$this->objConfig = new ConfigModel;
+		$this->objProfileModel = new ProfileModel;
+		$this->objMainModel = new MainModel;
 
 		# Services
 		$this->objRequest = \Config\Services::request();
 
 		$this->config = $this->objConfig->getConfig();
+		$this->company = $this->objProfileModel->getProfile();
 
 		# Set Lang
 		if (!empty($this->config)) {
@@ -64,6 +72,10 @@ class Company extends BaseController
 
 		$data = array();
 		$data['page'] = 'admin/settings/company/mainCompany';
+		$data['uniqid'] = uniqid();
+
+		# Company
+		$data['company'] = $this->company;
 
 		# Page Title
 		$data['pageTitle'] = 'Compañía';
@@ -73,5 +85,41 @@ class Company extends BaseController
 		$data['subTab'] = 'company';
 
 		return view(MAIN_ADMIN, $data);
+	}
+
+	public function saveCompanyInfo()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$response = array();
+			$response['error'] = 2;
+			$response['msg'] = 'SESSION_EXPIRED';
+
+			return $response;
+		}
+
+		# Params
+		$companyID = htmlspecialchars(trim($this->objRequest->getPost('companyID')));
+		$name = htmlspecialchars(trim($this->objRequest->getPost('name')));
+		$email = htmlspecialchars(trim($this->objRequest->getPost('email')));
+		$phone = htmlspecialchars(trim($this->objRequest->getPost('phone')));
+		$address1 = htmlspecialchars(trim($this->objRequest->getPost('address1')));
+		$address2 = htmlspecialchars(trim($this->objRequest->getPost('address2')));
+		$zip = htmlspecialchars(trim($this->objRequest->getPost('zip')));
+		$country = htmlspecialchars(trim($this->objRequest->getPost('country')));
+
+		$data = array();
+		$data['companyID'] = $companyID;
+		$data['name'] = $name;
+		$data['email'] = $email;
+		$data['phone'] = $phone;
+		$data['address1'] = $address1;
+		$data['address2'] = $address2;
+		$data['zipCode'] = $zip;
+		$data['country'] = $country;
+
+		$response = $this->objMainModel->objUpdate('profile', $data, 1);
+
+		return json_encode($response);
 	}
 }
