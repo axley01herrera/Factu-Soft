@@ -49,4 +49,28 @@ class ProfileModel extends Model
 
         return @$data[0];
     }
+
+	public function uploadLogo($file)
+	{
+		$fileContent = file_get_contents($file['tmp_name']);
+
+		$data = array(
+			'logo' => $fileContent
+		);
+
+		$query = $this->db->table('profile')
+			->where('id', 1)
+			->update($data);
+
+		$result = array();
+
+		if ($query == true) {
+			$result['error'] = 0;
+		} else {
+			$result['error'] = 1;
+			$result['msg'] = 'fail upload file';
+		}
+
+		return $result;
+	}
 }

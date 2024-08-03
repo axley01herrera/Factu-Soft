@@ -16,7 +16,11 @@
 
 			<!-- Logo -->
 			<div class="d-block d-lg-none py-4 py-xl-0">
-				<img src="<?php echo base_url('assets/images/logos/dark-logo.svg'); ?>" alt="Logo" class="dark-logo">
+				<?php if (!empty($profile->name)) { ?>
+					<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="logo" class="rounded-circle" style="width: 25px;">
+				<?php } else { ?>
+					<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="logo" class="rounded-circle" style="width: 25px;">
+				<?php } ?>
 			</div>
 
 			<ul class="navbar-nav navbar-toggler p-0 border-0">
@@ -36,7 +40,11 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link" href="javascript:void(0)" id="drop1" aria-expanded="false">
 								<div class="d-flex align-items-center lh-base">
-									<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
+									<?php if (!empty($profile->name)) { ?>
+										<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
+									<?php } else { ?>
+										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
+									<?php } ?>
 								</div>
 							</a>
 							<div class="dropdown-menu content-dd dropdown-menu-end animated flipInY" aria-labelledby="drop1">
@@ -45,7 +53,11 @@
 										<h5 class="mb-0 fs-5"><?php echo lang('Text.profile_page_title'); ?></h5>
 									</div>
 									<div class="d-flex align-items-center py-9 mx-7 border-bottom">
-										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="80" alt="Avatar" />
+										<?php if (!empty($profile->name)) { ?>
+											<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" class="rounded-circle" width="80" alt="Avatar" />
+										<?php } else { ?>
+											<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="80" alt="Avatar" />
+										<?php } ?>
 										<div class="ms-3">
 											<h5 class="mb-1 fs-4 text-truncate">
 												<?php echo @$profile->name; ?>
@@ -59,8 +71,8 @@
 												<iconify-icon icon="solar:user-circle-line-duotone"></iconify-icon>
 											</span>
 											<div class="w-75 d-inline-block v-middle ps-3">
-												<h6 class="mb-1 fs-3 lh-base"><?php echo lang('Text.menu_profile')?></h6>
-												<span class="fs-2 d-block text-body-secondary"><?php echo lang('Text.profile_text_company_data')?></span>
+												<h6 class="mb-1 fs-3 lh-base"><?php echo lang('Text.menu_profile') ?></h6>
+												<span class="fs-2 d-block text-body-secondary"><?php echo lang('Text.profile_text_company_data') ?></span>
 											</div>
 										</a>
 										<a href="<?php echo base_url('AccountV2/resetPassword'); ?>" class="py-8 px-7 d-flex align-items-center">
@@ -68,7 +80,7 @@
 												<iconify-icon icon="solar:key-square-outline"></iconify-icon>
 											</span>
 											<div class="w-75 d-inline-block v-middle ps-3">
-												<h6 class="mb-1 fs-3 lh-base"><?php echo lang('Text.menu_security')?></h6>
+												<h6 class="mb-1 fs-3 lh-base"><?php echo lang('Text.menu_security') ?></h6>
 												<span class="fs-2 d-block text-body-secondary"><?php echo lang('Text.menu_access_key'); ?></span>
 											</div>
 										</a>

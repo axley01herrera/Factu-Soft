@@ -5,6 +5,11 @@ $lang = array();
 $lang['msg_ajax_error'] = "Ha ocurrido un error";
 $lang['msg_session_expired'] = "Sesión Expirada";
 
+# Global Btn
+$lang['btn_save'] = "Guardar";
+$lang['btn_update'] = "Actualizar";
+$lang['btn_cancel'] = "Cancelar";
+
 # Menu
 $lang['menu_user'] = "Usuario";
 $lang['menu_statistics'] = "Estadísticas";
@@ -49,7 +54,11 @@ $lang['profile_text_state'] = "Provincia";
 $lang['profile_text_zip'] = "Código Postal";
 $lang['profile_text_country'] = "País";
 $lang['profile_text_desc'] = "Descripción";
-$lang['profile_msg_success_update_profile'] = "Datos de empresa actualzados satisfactoriamente";
+$lang['profile_msg_success_update_profile'] = "Datos de empresa actualizados satisfactoriamente";
+$lang['profile_msg_success_upload_logo'] = "Logo actualizado satisfactoriamente";
+$lang['profile_upload_logo_modal_title'] = "Añade un logo a tu empresa";
+$lang['profile_upload_logo_modal_dropzone_text_1'] = "Arrastre o haga click aquí para subir un archivo";
+$lang['profile_upload_logo_modal_dropzone_text_2'] = "Sube un archivo";
 
 # Config
 $lang['config_page_title'] = "Configuración del Sistema";

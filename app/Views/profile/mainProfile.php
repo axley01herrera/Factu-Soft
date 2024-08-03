@@ -25,7 +25,11 @@
 							<div class="d-flex align-items-center justify-content-center mb-2">
 								<div class="d-flex align-items-center justify-content-center round-110">
 									<div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden round-100">
-										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="profile-logo" class="w-100 h-100">
+										<?php if (!empty($profile->name)) { ?>
+											<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="profile-logo" class="w-100 h-100">
+										<?php } else { ?>
+											<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="profile-logo" class="w-100 h-100">
+										<?php } ?>
 									</div>
 								</div>
 							</div>
@@ -199,6 +203,19 @@
 
 <script>
 	$(document).ready(function() {
+
+		$('#edit-logo').on('click', function() {
+			$.ajax({
+				type: "POST",
+				url: "<?php echo base_url('Profile/editCompanyLogo'); ?>",
+				dataType: "html",
+				success: function(response) {
+					$('#app-modal').html(response);
+				},
+				error: function(error) {}
+			});
+		});
+
 		$('#btn-save-company-info').on('click', function() {
 			$('#btn-save-company-info').attr('disabled', true);
 			$.ajax({
@@ -246,26 +263,26 @@
 			});
 
 		});
-	});
 
-	$('#btn-edit-company-info').on('click', function() {
-		$('.ci-disabled').each(function() {
-			$(this).removeAttr('disabled');
+		$('#btn-edit-company-info').on('click', function() {
+			$('.ci-disabled').each(function() {
+				$(this).removeAttr('disabled');
+			});
+
+			$(this).attr('hidden', true);
+			$('#btn-cancel-company-info').removeAttr('hidden');
+			$('#btn-save-company-info').removeAttr('hidden');
 		});
 
-		$(this).attr('hidden', true);
-		$('#btn-cancel-company-info').removeAttr('hidden');
-		$('#btn-save-company-info').removeAttr('hidden');
-	});
+		$('#btn-cancel-company-info').on('click', function() {
+			$('.ci-disabled').each(function() {
+				$(this).attr('disabled', true);
+			});
 
-	$('#btn-cancel-company-info').on('click', function() {
-		$('.ci-disabled').each(function() {
-			$(this).attr('disabled', true);
+			$('#btn-cancel-company-info').attr('hidden', true);
+			$('#btn-save-company-info').attr('hidden', true);
+
+			$('#btn-edit-company-info').removeAttr('hidden');
 		});
-
-		$('#btn-cancel-company-info').attr('hidden', true);
-		$('#btn-save-company-info').attr('hidden', true);
-
-		$('#btn-edit-company-info').removeAttr('hidden');
 	});
 </script>
