@@ -35,6 +35,19 @@ $lang['inv_serie_page_title'] = "Listado de Series";
 
 # Profile
 $lang['profile_page_title'] = "Perfil de Empresa";
+$lang['profile_text_company_data'] = "Datos de Empresa";
+$lang['profile_text_name'] = "Nombre";
+$lang['profile_text_nif'] = "NIF";
+$lang['profile_text_email'] = "Correo Electrónico";
+$lang['profile_text_phone'] = "Teléfono";
+$lang['profile_text_address_a'] = "Dirección";
+$lang['profile_text_address_b'] = "Línea de dirección 2";
+$lang['profile_text_city'] = "Ciudad";
+$lang['profile_text_state'] = "Provincia";
+$lang['profile_text_zip'] = "Código Postal";
+$lang['profile_text_country'] = "País";
+$lang['profile_text_desc'] = "Descripción";
+$lang['profile_msg_success_update_profile'] = "Datos de empresa actualzados satisfactoriamente";
 
 # Config
 $lang['config_page_title'] = "Configuración del Sistema";

@@ -23,6 +23,7 @@ $routes->get('Invoice/series', 'Invoice::series');
 
 # Profile
 $routes->get('Profile', 'Profile::index');
+$routes->post('Profile/updateProfile', 'Profile::updateProfile');
 
 # Config
 $routes->get('Config', 'Config::index');
