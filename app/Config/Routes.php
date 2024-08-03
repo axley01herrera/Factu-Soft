@@ -16,6 +16,7 @@ $routes->get('Dashboard', 'Dashboard::index');
 
 # Customers
 $routes->get('Customer', 'Customer::index');
+$routes->post('Customer/processingCustomers', 'Customer::processingCustomers');
 
 # Invoices
 $routes->get('Invoice', 'Invoice::index');

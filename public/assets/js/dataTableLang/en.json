@@ -1,0 +1,243 @@
+{
+    "processing": "Processing...",
+    "lengthMenu": "Show _MENU_ entries",
+    "zeroRecords": "No results found",
+    "emptyTable": "No data available in the table",
+    "infoEmpty": "Showing 0 to 0 of 0 entries",
+    "infoFiltered": "(filtered from a total of _MAX_ entries)",
+    "search": "",
+    "searchPlaceholder": "Search",
+    "infoThousands": ",",
+    "loadingRecords": "Loading...",
+    "paginate": {
+        "first": "First",
+        "last": "Last",
+        "next": "Next",
+        "previous": "Previous"
+    },
+    "aria": {
+        "sortAscending": ": Activate to sort column ascending",
+        "sortDescending": ": Activate to sort column descending"
+    },
+    "buttons": {
+        "copy": "Copy",
+        "colvis": "Visibility",
+        "collection": "Collection",
+        "colvisRestore": "Restore visibility",
+        "copyKeys": "Press ctrl or ⌘ + C to copy table data to your system's clipboard. <br \/> <br \/> To cancel, click this message or press escape.",
+        "copySuccess": {
+            "1": "Copied 1 row to clipboard",
+            "_": "Copied %ds rows to clipboard"
+        },
+        "copyTitle": "Copy to clipboard",
+        "csv": "CSV",
+        "excel": "Excel",
+        "pageLength": {
+            "-1": "Show all rows",
+            "_": "Show %d rows"
+        },
+        "pdf": "PDF",
+        "print": "Print",
+        "renameState": "Rename",
+        "updateState": "Update",
+        "createState": "Create State",
+        "removeAllStates": "Remove States",
+        "removeState": "Remove",
+        "savedStates": "Saved States",
+        "stateRestore": "State %d"
+    },
+    "autoFill": {
+        "cancel": "Cancel",
+        "fill": "Fill all cells with <i>%d<\/i>",
+        "fillHorizontal": "Fill cells horizontally",
+        "fillVertical": "Fill cells vertically"
+    },
+    "decimal": ",",
+    "searchBuilder": {
+        "add": "Add condition",
+        "button": {
+            "0": "Search Builder",
+            "_": "Search Builder (%d)"
+        },
+        "clearAll": "Clear all",
+        "condition": "Condition",
+        "conditions": {
+            "date": {
+                "after": "After",
+                "before": "Before",
+                "between": "Between",
+                "empty": "Empty",
+                "equals": "Equals",
+                "notBetween": "Not between",
+                "notEmpty": "Not Empty",
+                "not": "Not equal to"
+            },
+            "number": {
+                "between": "Between",
+                "empty": "Empty",
+                "equals": "Equals",
+                "gt": "Greater than",
+                "gte": "Greater than or equal to",
+                "lt": "Less than",
+                "lte": "Less than or equal to",
+                "notBetween": "Not between",
+                "notEmpty": "Not empty",
+                "not": "Not equal to"
+            },
+            "string": {
+                "contains": "Contains",
+                "empty": "Empty",
+                "endsWith": "Ends with",
+                "equals": "Equals",
+                "notEmpty": "Not Empty",
+                "startsWith": "Starts with",
+                "not": "Not equal to",
+                "notContains": "Does not contain",
+                "notStartsWith": "Does not start with",
+                "notEndsWith": "Does not end with"
+            },
+            "array": {
+                "not": "Not equal to",
+                "equals": "Equals",
+                "empty": "Empty",
+                "contains": "Contains",
+                "notEmpty": "Not Empty",
+                "without": "Without"
+            }
+        },
+        "data": "Data",
+        "deleteTitle": "Delete filter rule",
+        "leftTitle": "Cancelled criteria",
+        "logicAnd": "And",
+        "logicOr": "Or",
+        "rightTitle": "Indented criteria",
+        "title": {
+            "0": "Search Builder",
+            "_": "Search Builder (%d)"
+        },
+        "value": "Value"
+    },
+    "searchPanes": {
+        "clearMessage": "Clear all",
+        "collapse": {
+            "0": "Search Panes",
+            "_": "Search Panes (%d)"
+        },
+        "count": "{total}",
+        "countFiltered": "{shown} ({total})",
+        "emptyPanes": "No search panes",
+        "loadMessage": "Loading search panes",
+        "title": "Active Filters - %d",
+        "showMessage": "Show All",
+        "collapseMessage": "Collapse All"
+    },
+    "select": {
+        "cells": {
+            "1": "1 cell selected",
+            "_": "%d cells selected"
+        },
+        "columns": {
+            "1": "1 column selected",
+            "_": "%d columns selected"
+        },
+        "rows": {
+            "1": "1 row selected",
+            "_": "%d rows selected"
+        }
+    },
+    "thousands": ".",
+    "datetime": {
+        "previous": "Previous",
+        "next": "Next",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds",
+        "unknown": "-",
+        "amPm": [
+            "AM",
+            "PM"
+        ],
+        "months": {
+            "0": "January",
+            "1": "February",
+            "10": "November",
+            "11": "December",
+            "2": "March",
+            "3": "April",
+            "4": "May",
+            "5": "June",
+            "6": "July",
+            "7": "August",
+            "8": "September",
+            "9": "October"
+        },
+        "weekdays": [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat"
+        ]
+    },
+    "editor": {
+        "close": "Close",
+        "create": {
+            "button": "New",
+            "title": "Create New Entry",
+            "submit": "Create"
+        },
+        "edit": {
+            "button": "Edit",
+            "title": "Edit Entry",
+            "submit": "Update"
+        },
+        "remove": {
+            "button": "Delete",
+            "title": "Delete Entry",
+            "submit": "Delete",
+            "confirm": {
+                "_": "Are you sure you want to delete %d rows?",
+                "1": "Are you sure you want to delete 1 row?"
+            }
+        },
+        "error": {
+            "system": "An error has occurred in the system (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">More information&lt;\\\/a&gt;).<\/a>"
+        },
+        "multi": {
+            "title": "Multiple Values",
+            "info": "The selected items contain different values for this record. To edit and set all items of this record with the same value, click or tap here; otherwise, they will retain their individual values.",
+            "restore": "Undo Changes",
+            "noMulti": "This record can be edited individually but not as part of a group."
+        },
+        "info": "Showing _START_ to _END_ of _TOTAL_ records",
+        "stateRestore": {
+            "creationModal": {
+                "button": "Create",
+                "name": "Name:",
+                "order": "Order",
+                "paging": "Pagination",
+                "search": "Search",
+                "select": "Select",
+                "columns": {
+                    "search": "Column Search",
+                    "visible": "Column Visibility"
+                },
+                "title": "Create New State",
+                "toggleLabel": "Include:"
+            },
+            "emptyError": "Name cannot be empty",
+            "removeConfirm": "Are you sure you want to remove this %s?",
+            "removeError": "Error removing the record",
+            "removeJoiner": "and",
+            "removeSubmit": "Remove",
+            "renameButton": "Rename",
+            "renameLabel": "New name for %s",
+            "duplicateError": "A state with this name already exists.",
+            "emptyStates": "No saved states",
+            "removeTitle": "Remove State",
+            "renameTitle": "Rename State"
+        }
+    }
+}

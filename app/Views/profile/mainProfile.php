@@ -132,8 +132,6 @@
 	</div>
 
 	<div class="col-12 col-md-8 col-lg-8">
-
-
 		<div class="card shadow-none border">
 			<div class="card-body">
 				<h4 class="mb-3"><?php echo lang('Text.profile_text_company_data'); ?></h4>
