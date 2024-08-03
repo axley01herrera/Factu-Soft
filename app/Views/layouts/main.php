@@ -33,9 +33,9 @@
                     el.classList.toggle("close");
                 });
 
-                var dataTheme = document.body.getAttribute("data-sidebartype");
-
-                if (dataTheme === "full") {
+                let dataTheme = document.body.getAttribute("data-sidebartype");
+             
+                if (dataTheme == "full" || dataTheme == "null" || dataTheme == null) {
                     document.body.setAttribute("data-sidebartype", "mini-sidebar");
                 } else {
                     document.body.setAttribute("data-sidebartype", "full");
