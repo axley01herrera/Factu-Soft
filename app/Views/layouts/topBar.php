@@ -36,16 +36,16 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link" href="javascript:void(0)" id="drop1" aria-expanded="false">
 								<div class="d-flex align-items-center lh-base">
-									<img src="<?php echo base_url('public/assets/images/avatar/user-1.jpg'); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
+									<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
 								</div>
 							</a>
 							<div class="dropdown-menu content-dd dropdown-menu-end animated flipInY" aria-labelledby="drop1">
 								<div class="profile-dropdown position-relative" data-simplebar>
 									<div class="py-3 px-7 pb-0">
-										<h5 class="mb-0 fs-5">User Profile</h5>
+										<h5 class="mb-0 fs-5"><?php echo lang('Text.profile_page_title'); ?></h5>
 									</div>
 									<div class="d-flex align-items-center py-9 mx-7 border-bottom">
-										<img src="<?php echo base_url('public/assets/images/avatar/user-1.jpg'); ?>" class="rounded-circle" width="80" alt="Avatar" />
+										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="80" alt="Avatar" />
 										<div class="ms-3">
 											<h5 class="mb-1 fs-4 text-truncate">Text</h5>
 											<span class="mb-1 d-block text-truncate">Text</span>
@@ -55,13 +55,13 @@
 										</div>
 									</div>
 									<div class="message-body">
-										<a href="<?php echo base_url('AccountV2/profile'); ?>" class="py-8 px-7 mt-8 d-flex align-items-center">
+										<a href="<?php echo base_url('Profile'); ?>" class="py-8 px-7 mt-8 d-flex align-items-center">
 											<span class="d-flex align-items-center justify-content-center bg-info-subtle rounded p-6 fs-7 text-info">
 												<iconify-icon icon="solar:user-circle-line-duotone"></iconify-icon>
 											</span>
 											<div class="w-75 d-inline-block v-middle ps-3">
-												<h6 class="mb-1 fs-3 lh-base">My Profile</h6>
-												<span class="fs-2 d-block text-body-secondary">Account Settings</span>
+												<h6 class="mb-1 fs-3 lh-base"><?php echo lang('Text.menu_profile')?></h6>
+												<span class="fs-2 d-block text-body-secondary"><?php echo lang('Text.profile_text_company_data')?></span>
 											</div>
 										</a>
 										<a href="<?php echo base_url('AccountV2/resetPassword'); ?>" class="py-8 px-7 d-flex align-items-center">
@@ -69,13 +69,13 @@
 												<iconify-icon icon="solar:key-square-outline"></iconify-icon>
 											</span>
 											<div class="w-75 d-inline-block v-middle ps-3">
-												<h6 class="mb-1 fs-3 lh-base">Security</h6>
-												<span class="fs-2 d-block text-body-secondary">Reset Password</span>
+												<h6 class="mb-1 fs-3 lh-base"><?php echo lang('Text.menu_security')?></h6>
+												<span class="fs-2 d-block text-body-secondary"><?php echo lang('Text.menu_access_key'); ?></span>
 											</div>
 										</a>
 									</div>
 									<div class="d-grid py-4 px-7 pt-8">
-										<a href="<?php echo base_url('/'); ?>" class="btn btn-danger">Log Out</a>
+										<a href="<?php echo base_url('/'); ?>" class="btn btn-danger"><?php echo lang('Text.menu_logout'); ?></a>
 									</div>
 								</div>
 

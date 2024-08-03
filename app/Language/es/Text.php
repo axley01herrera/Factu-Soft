@@ -18,6 +18,8 @@ $lang['menu_config'] = "Configuración";
 $lang['menu_profile'] = "Perfil";
 $lang['menu_system'] = "Sistema";
 $lang['menu_logout'] = "Cerrar Sesión";
+$lang['menu_security'] = "Seguridad";
+$lang['menu_access_key'] = "Clave de Acceso";
 
 # Home
 $lang['text_start_session'] = "Inicio de Sesión";
