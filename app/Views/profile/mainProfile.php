@@ -6,21 +6,52 @@
 	<div class="d-flex align-items-center justify-content-between gap-6"></div>
 </div>
 
+
+
 <!-- Page Content -->
 <div class="row">
-
 	<div class="col-12 col-md-4 col-lg-4">
 		<!-- Card Profile Information -->
 		<div class="card shadow-none border">
 			<div class="card-body">
-				<h4 class="mb-3">
-					<?php if (!empty($profile->name)) echo $profile->name;
-					else echo lang('Text.profile_text_name'); ?>
-				</h4>
-				<p class="card-subtitle">
-					<?php if (!empty($profile->description)) echo $profile->description;
-					else echo lang('Text.profile_text_desc'); ?>
-				</p>
+				<img src="<?php echo base_url('public/assets/images/backgrounds/profilebg.jpg'); ?>" alt="profile-bg" class="img-fluid">
+				<div class="row align-items-center">
+					<div class="col-lg-4 order-lg-1 order-2">
+						<div class="d-flex align-items-center justify-content-around m-4">
+						</div>
+					</div>
+					<div class="col-lg-4 mt-n3 order-lg-2 order-1">
+						<div class="mt-n5">
+							<div class="d-flex align-items-center justify-content-center mb-2">
+								<div class="d-flex align-items-center justify-content-center round-110">
+									<div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden round-100">
+										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="profile-logo" class="w-100 h-100">
+									</div>
+								</div>
+							</div>
+							<div class="text-center">
+								<h5 class="mb-0">
+									<?php
+									if (!empty($profile->name))
+										echo $profile->name;
+									else
+										echo lang('Text.profile_text_name'); ?></h5>
+								<p class="mb-0 text-center">
+									<button type="button" id="edit-logo" class="btn btn-sm btn-rounded btn-outline-primary border-0">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+											<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+											<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+										</svg>
+									</button>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 order-last">
+					</div>
+				</div>
+
+
 				<div class="vstack gap-3 mt-4">
 					<div class="hstack gap-6">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-postcard" viewBox="0 0 16 16">
@@ -83,11 +114,22 @@
 						</h6>
 					</div>
 				</div>
+
+				<p class="card-subtitle mt-4">
+					<?php
+					if (!empty($profile->description))
+						echo $profile->description;
+					else
+						echo lang('Text.profile_text_desc');
+					?>
+				</p>
 			</div>
 		</div>
 	</div>
 
 	<div class="col-12 col-md-8 col-lg-8">
+
+
 		<div class="card shadow-none border">
 			<div class="card-body">
 				<h4 class="mb-3"><?php echo lang('Text.profile_text_company_data'); ?></h4>
@@ -168,7 +210,7 @@
 					'email': $('#txt-email').val(),
 					'phone': $('#txt-phone').val(),
 					'address_a': $('#txt-address_a').val(),
-					'city': $('#txt-ciy').val(),
+					'city': $('#txt-city').val(),
 					'state': $('#txt-state').val(),
 					'zip': $('#txt-zip').val(),
 					'country': $('#txt-country').val(),
