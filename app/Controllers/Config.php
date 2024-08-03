@@ -3,13 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\ConfigModel;
+use App\Models\ProfileModel;
 
 class Config extends BaseController
 {
     protected $objSession;
     protected $objRequest;
+
     protected $objConfig;
+    protected $objProfile;
+
     protected $config;
+    protected $profile;
 
     public function __construct()
     {
@@ -17,11 +22,13 @@ class Config extends BaseController
 
         # Models
         $this->objConfig = new ConfigModel;
+        $this->objProfile = new ProfileModel;
 
         # Services
         $this->objRequest = \Config\Services::request();
 
         $this->config = $this->objConfig->getConfig();
+        $this->profile = $this->objProfile->getProfile();
 
         # Set Lang
         if (!empty($this->config)) {
@@ -40,6 +47,7 @@ class Config extends BaseController
             return view('logout');
 
         $data = array();
+        $data['profile'] = $this->profile;
         # menu
         $data['configActive'] = "active";
         # page

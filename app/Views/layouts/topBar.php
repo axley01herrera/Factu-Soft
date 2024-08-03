@@ -47,11 +47,10 @@
 									<div class="d-flex align-items-center py-9 mx-7 border-bottom">
 										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="80" alt="Avatar" />
 										<div class="ms-3">
-											<h5 class="mb-1 fs-4 text-truncate">Text</h5>
-											<span class="mb-1 d-block text-truncate">Text</span>
-											<p class="mb-0 d-flex align-items-center gap-2 text-truncate">
-												<i class="ti ti-mail fs-4"></i> Text
-											</p>
+											<h5 class="mb-1 fs-4 text-truncate">
+												<?php echo @$profile->name; ?>
+											</h5>
+											<span class="mb-1 d-block text-truncate"><?php echo @$profile->company_id; ?></span>
 										</div>
 									</div>
 									<div class="message-body">

@@ -3,13 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\ConfigModel;
+use App\Models\ProfileModel;
 
 class Invoice extends BaseController
 {
 	protected $objSession;
 	protected $objRequest;
+
 	protected $objConfig;
+	protected $objProfile;
+
 	protected $config;
+	protected $profile;
 
 	public function __construct()
 	{
@@ -17,11 +22,13 @@ class Invoice extends BaseController
 
 		# Models
 		$this->objConfig = new ConfigModel;
+		$this->objProfile = new ProfileModel;
 
 		# Services
 		$this->objRequest = \Config\Services::request();
 
 		$this->config = $this->objConfig->getConfig();
+		$this->profile = $this->objProfile->getProfile();
 
 		# Set Lang
 		if (!empty($this->config)) {
@@ -40,8 +47,11 @@ class Invoice extends BaseController
 			return view('logout');
 
 		$data = array();
-		$data['page'] = 'invoice/mainInvoice';
+		$data['profile'] = $this->profile;
+		# menu
 		$data['invoiceActive'] = 'active';
+		# page
+		$data['page'] = 'invoice/mainInvoice';
 
 		return view('layouts/main', $data);
 	}
@@ -53,8 +63,11 @@ class Invoice extends BaseController
 			return view('logout');
 
 		$data = array();
-		$data['page'] = 'invoice/serie/mainSerie';
+		$data['profile'] = $this->profile;
+		# menu
 		$data['invoiceSeriesActive'] = 'active';
+		# page
+		$data['page'] = 'invoice/serie/mainSerie';
 
 		return view('layouts/main', $data);
 	}

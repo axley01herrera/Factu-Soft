@@ -10,10 +10,13 @@ class Profile extends BaseController
 {
     protected $objSession;
     protected $objRequest;
+
     protected $objConfig;
     protected $objProfile;
     protected $objMainModel;
+
     protected $config;
+    protected $profile;
 
     public function __construct()
     {
@@ -28,6 +31,7 @@ class Profile extends BaseController
         $this->objRequest = \Config\Services::request();
 
         $this->config = $this->objConfig->getConfig();
+        $this->profile = $this->objProfile->getProfile();
 
         # Set Lang
         if (!empty($this->config)) {
@@ -45,10 +49,8 @@ class Profile extends BaseController
 		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
 			return view('logout');
 
-        $profile = $this->objProfile->getProfile();
-
 		$data = array();
-        $data['profile'] = $profile;
+        $data['profile'] = $this->profile;
         # menu
 		$data['profileActive'] = 'active';
         # page
