@@ -20,10 +20,10 @@
 					</div>
 
 					<div class="col-12 col-md-4 col-lg-4 mb-2">
-						<label for="sel-type" class="form-label">Type</label>
+						<label for="sel-type" class="form-label"><?php echo lang('Text.customer_text_type'); ?></label>
 						<select id="sel-type" class="form-select required">
-							<option value="0" <?php if (@$customer[0]->type == 0) echo 'selected'; ?>>Particular</option>
-							<option value="1" <?php if (@$customer[0]->type == 1) echo 'selected'; ?>>Empresa</option>
+							<option value="0" <?php if (@$customer[0]->type == 0) echo 'selected'; ?>><?php echo lang('Text.customer_type_particular');?></option>
+							<option value="1" <?php if (@$customer[0]->type == 1) echo 'selected'; ?>><?php echo lang('Text.customer_type_enterprise');?></option>
 						</select>
 					</div>
 
@@ -83,10 +83,10 @@
 		}
 
 		$('#btn-save').on('click', function() {
-			let result = checkRequiredValues();
+			let requiredValues = checkRequiredValues();
 			let resultEmail = checkEmailFormat();
 
-			if (result == 0 && resultEmail == 0) {
+			if (requiredValues == 0 && resultEmail == 0) {
 				$.ajax({
 					type: "POST",
 					url: "<?php echo base_url('Customer/saveCustomer'); ?>",
@@ -125,7 +125,7 @@
 					}
 				});
 			} else {
-				if (result != 0) {
+				if (requiredValues != 0) {
 					Swal.fire({
 						position: "top-end",
 						icon: "warning",

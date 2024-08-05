@@ -89,17 +89,17 @@ class Customer extends BaseController
 			$col['lastName'] = $result[$i]->last_name;
 
 			if ($result[$i]->type == 0)
-				$col['type'] = '<span class="badge bg-primary">Particular</span>';
+				$col['type'] = lang('Text.customer_type_particular');
 			else if ($result[$i]->type == 1)
-				$col['type'] = '<span class="badge bg-primary">Empresa</span>';
+				$col['type'] = lang('Text.customer_type_enterprise');
 
 			$col['email'] = $result[$i]->email;
 			$col['phone'] = $result[$i]->phone;
 
 			if ($result[$i]->deleted == 1)
-				$col['status'] = '<span class="badge bg-danger">Eliminado</span>';
+				$col['status'] = '<span class="text-danger">' . lang('Text.status_deleted') . '</span>';
 			else
-				$col['status'] = '<span class="badge bg-success">Activo</span>';
+				$col['status'] = '<span class="text-primary">' . lang('Text.status_active') . '</span>';
 
 			if ($result[$i]->deleted == 0) {
 				$col['action'] = '	

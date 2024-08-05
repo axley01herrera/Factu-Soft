@@ -11,6 +11,10 @@ $lang['not_revert_this_msg'] = "Está acción es irreversible";
 $lang['yes_remove_msg'] = "Sí, Eliminar";
 $lang['no_cancel_msg'] = "No, Cancelar";
 
+# Status
+$lang['status_active'] = "Activo";
+$lang['status_deleted'] = "Eliminado";
+
 # Global Btn
 $lang['btn_save'] = "Guardar";
 $lang['btn_update'] = "Actualizar";
@@ -61,6 +65,7 @@ $lang['customer_modal_title_create'] = "Creando Cliente";
 $lang['customer_modal_title_update'] = "Actualizando Cliente";
 $lang['customer_text_name'] = "Nombre";
 $lang['customer_text_last_name'] = "Apellidos";
+$lang['customer_text_type'] = "Tipo";
 $lang['customer_text_email'] = "Correo Electrónico";
 $lang['customer_text_phone'] = "Teléfono";
 $lang['customer_text_address_a'] = "Dirección";
@@ -69,6 +74,8 @@ $lang['customer_text_city'] = "Ciudad";
 $lang['customer_text_state'] = "Provincia";
 $lang['customer_text_zip'] = "Código Postal";
 $lang['customer_text_country'] = "País";
+$lang['customer_type_particular'] = "Particular";
+$lang['customer_type_enterprise'] = "Empresa";
 
 # Profile
 $lang['profile_page_title'] = "Perfil de Empresa";

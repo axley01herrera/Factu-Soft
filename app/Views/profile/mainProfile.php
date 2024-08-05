@@ -138,60 +138,60 @@
 				<div class="row mb-3">
 					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-name" class="form-label"><?php echo lang('Text.profile_text_name'); ?></label>
-						<input type="text" id="txt-name" class="form-control ci-disabled" value="<?php echo $profile->name; ?>" disabled />
+						<input type="text" id="txt-name" class="form-control ci-disabled required" value="<?php echo $profile->name; ?>" disabled />
 					</div>
 
 					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-nif" class="form-label"><?php echo lang('Text.profile_text_nif'); ?></label>
-						<input type="text" id="txt-nif" class="form-control ci-disabled" value="<?php echo $profile->company_id; ?>" disabled />
+						<input type="text" id="txt-nif" class="form-control ci-disabled required" value="<?php echo $profile->company_id; ?>" disabled />
 					</div>
 
 					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-email" class="form-label"><?php echo lang('Text.profile_text_email'); ?></label>
-						<input type="text" id="txt-email" class="form-control ci-disabled" value="<?php echo $profile->email; ?>" disabled />
+						<input type="text" id="txt-email" class="form-control ci-disabled required email" value="<?php echo $profile->email; ?>" disabled />
 					</div>
 
 					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-phone" class="form-label"><?php echo lang('Text.profile_text_phone'); ?></label>
-						<input type="text" id="txt-phone" class="form-control ci-disabled" value="<?php echo $profile->phone; ?>" disabled />
+						<input type="text" id="txt-phone" class="form-control ci-disabled required" value="<?php echo $profile->phone; ?>" disabled />
 					</div>
 
 					<div class="col-12 mb-2">
 						<label for="txt-address_a" class="form-label"><?php echo lang('Text.profile_text_address_a'); ?></label>
-						<input type="text" id="txt-address_a" class="form-control ci-disabled" value="<?php echo $profile->address_a; ?>" disabled />
+						<input type="text" id="txt-address_a" class="form-control ci-disabled required" value="<?php echo $profile->address_a; ?>" disabled />
 					</div>
 
 					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-ciy" class="form-label"><?php echo lang('Text.profile_text_city'); ?></label>
-						<input type="text" id="txt-city" class="form-control ci-disabled" value="<?php echo $profile->city; ?>" disabled />
+						<input type="text" id="txt-city" class="form-control ci-disabled required" value="<?php echo $profile->city; ?>" disabled />
 					</div>
 
 					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-state" class="form-label"><?php echo lang('Text.profile_text_state'); ?></label>
-						<input type="text" id="txt-state" class="form-control ci-disabled" value="<?php echo $profile->state; ?>" disabled />
+						<input type="text" id="txt-state" class="form-control ci-disabled required" value="<?php echo $profile->state; ?>" disabled />
 					</div>
 
 					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-zip" class="form-label"><?php echo lang('Text.profile_text_zip'); ?></label>
-						<input type="text" id="txt-zip" class="form-control ci-disabled" value="<?php if (!empty($profile->zip)) echo $profile->zip; ?>" disabled />
+						<input type="text" id="txt-zip" class="form-control ci-disabled required" maxlength="5" value="<?php if (!empty($profile->zip)) echo $profile->zip; ?>" disabled />
 					</div>
 
 					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-country" class="form-label"><?php echo lang('Text.profile_text_country'); ?></label>
-						<input type="text" id="txt-country" class="form-control ci-disabled" value="<?php echo $profile->country; ?>" disabled />
+						<input type="text" id="txt-country" class="form-control ci-disabled required" value="<?php echo $profile->country; ?>" disabled />
 					</div>
 
 					<div class="col-12">
 						<label for="txt-desc" class="form-label"><?php echo lang('Text.profile_text_desc'); ?></label>
-						<textarea id="txt-desc" class="form-control ci-disabled" rows="5" disabled><?php echo $profile->description; ?></textarea>
+						<textarea id="txt-desc" class="form-control ci-disabled required" rows="5" disabled><?php echo $profile->description; ?></textarea>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-12 text-end">
 						<button id="btn-edit-company-info" class="btn btn-sm btn-primary">Editar</button>
-						<button id="btn-cancel-company-info" class="btn btn-sm btn-secondary" hidden>Cancelar</button>
-						<button id="btn-save-company-info" class="btn btn-sm btn-success" hidden>Guardar</button>
+						<button id="btn-cancel-company-info" class="btn btn-sm btn-gray" hidden>Cancelar</button>
+						<button id="btn-save-company-info" class="btn btn-sm btn-primary" hidden>Guardar</button>
 					</div>
 				</div>
 			</div>
@@ -215,50 +215,73 @@
 		});
 
 		$('#btn-save-company-info').on('click', function() {
-			$('#btn-save-company-info').attr('disabled', true);
-			$.ajax({
-				type: "post",
-				url: "<?php echo base_url('Profile/updateProfile'); ?>",
-				data: {
-					'name': $('#txt-name').val(),
-					'company_id': $('#txt-nif').val(),
-					'email': $('#txt-email').val(),
-					'phone': $('#txt-phone').val(),
-					'address_a': $('#txt-address_a').val(),
-					'city': $('#txt-city').val(),
-					'state': $('#txt-state').val(),
-					'zip': $('#txt-zip').val(),
-					'country': $('#txt-country').val(),
-					'description': $('#txt-desc').val()
+			let requiredValues = checkRequiredValues();
+			let emailFormat = checkEmailFormat();
 
-				},
-				dataType: "json",
-				success: function(response) {
-					console.log(response);
-					if (response.error == 0) { // Success
-						Swal.fire({
-							position: "top-end",
-							icon: "success",
-							text: "<?php echo lang("Text.profile_msg_success_update_profile"); ?>..!",
-							showConfirmButton: false,
-							timer: 2500
-						});
+			if (requiredValues == 0 && emailFormat == 0) {
+				$('#btn-save-company-info').attr('disabled', true);
+				$.ajax({
+					type: "post",
+					url: "<?php echo base_url('Profile/updateProfile'); ?>",
+					data: {
+						'name': $('#txt-name').val(),
+						'company_id': $('#txt-nif').val(),
+						'email': $('#txt-email').val(),
+						'phone': $('#txt-phone').val(),
+						'address_a': $('#txt-address_a').val(),
+						'city': $('#txt-city').val(),
+						'state': $('#txt-state').val(),
+						'zip': $('#txt-zip').val(),
+						'country': $('#txt-country').val(),
+						'description': $('#txt-desc').val()
 
-						setTimeout(() => {
-							window.location.reload();
-						}, 2501);
-					} else if (response.error == 1) { // Error
+					},
+					dataType: "json",
+					success: function(response) {
+						console.log(response);
+						if (response.error == 0) { // Success
+							Swal.fire({
+								position: "top-end",
+								icon: "success",
+								text: "<?php echo lang("Text.profile_msg_success_update_profile"); ?>..!",
+								showConfirmButton: false,
+								timer: 2500
+							});
+
+							setTimeout(() => {
+								window.location.reload();
+							}, 2501);
+						} else if (response.error == 1) { // Error
+							$('#btn-save-company-info').removeAttr('disabled');
+							globalError();
+						} else if (response.error == 2) { // Session Expired
+							window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
+						}
+					},
+					error: function(error) {
 						$('#btn-save-company-info').removeAttr('disabled');
 						globalError();
-					} else if (response.error == 2) { // Session Expired
-						window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
 					}
-				},
-				error: function(error) {
-					$('#btn-save-company-info').removeAttr('disabled');
-					globalError();
+				});
+			} else {
+				if (requiredValues != 0) {
+					Swal.fire({
+						position: "top-end",
+						icon: "warning",
+						text: "<?php echo lang("Text.msg_required_values"); ?>..!",
+						showConfirmButton: false,
+						timer: 2500
+					});
+				} else if (emailFormat != 0) {
+					Swal.fire({
+						position: "top-end",
+						icon: "warning",
+						text: "<?php echo lang("Text.msg_invalid_email_format"); ?>..!",
+						showConfirmButton: false,
+						timer: 2500
+					});
 				}
-			});
+			}
 
 		});
 
@@ -281,6 +304,39 @@
 			$('#btn-save-company-info').attr('hidden', true);
 
 			$('#btn-edit-company-info').removeAttr('hidden');
+		});
+
+		function checkRequiredValues() {
+			let result = 0;
+			let value = "";
+
+			$('.required').each(function() {
+				value = $(this).val();
+				if (value == "") {
+					$(this).addClass('is-invalid');
+					result = 1;
+				}
+			});
+
+			return result;
+		}
+
+		function checkEmailFormat() {
+			let inputValue = '';
+			let response = 0;
+			let regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+			$('.email').each(function() {
+				inputValue = $(this).val();
+				if (!regex.test(inputValue)) {
+					$(this).addClass('is-invalid');
+					response = 1;
+				}
+			});
+			return response;
+		}
+
+		$('.required').on('focus', function() {
+			$(this).removeClass('is-invalid');
 		});
 	});
 </script>

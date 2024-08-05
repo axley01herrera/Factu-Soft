@@ -32,9 +32,9 @@ class DataTableModel extends Model
 			$query->groupEnd();
 		}
 
-		$query->groupStart();
-		$query->where('customer.deleted', 0);
-		$query->groupEnd();
+		// $query->groupStart();
+		// $query->where('customer.deleted', 0);
+		// $query->groupEnd();
 
 		$query->offset($params['start']);
 		$query->limit($params['length']);
