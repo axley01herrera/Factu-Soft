@@ -75,7 +75,7 @@
 			type: "POST"
 		},
 		order: [
-			[1, 'desc']
+			[0, 'asc']
 		],
 		columns: [{
 				data: 'name',
