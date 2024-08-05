@@ -28,7 +28,7 @@
 								<th><?php echo lang('Text.customer_dt_col_email'); ?></th>
 								<th><?php echo lang('Text.customer_dt_col_phone'); ?></th>
 								<th><?php echo lang('Text.customer_dt_col_status'); ?></th>
-								<th style="width: 50px;"></th>
+								<th style="width: 75px;"></th>
 							</tr>
 						</thead>
 					</table>
