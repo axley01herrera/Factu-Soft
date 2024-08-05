@@ -4,6 +4,12 @@ $lang = array();
 # Global
 $lang['msg_ajax_error'] = "Ha ocurrido un error";
 $lang['msg_session_expired'] = "Sesión Expirada";
+$lang['msg_required_values'] = "Campos requeridos";
+$lang['msg_invalid_email_format'] = "Formato de correo incorrecto";
+$lang['are_you_sure_msg'] = "Está seguro ?";
+$lang['not_revert_this_msg'] = "Está acción es irreversible";
+$lang['yes_remove_msg'] = "Sí, Eliminar";
+$lang['no_cancel_msg'] = "No, Cancelar";
 
 # Global Btn
 $lang['btn_save'] = "Guardar";
@@ -39,6 +45,30 @@ $lang['inv_page_title'] = "Listado de Facturas";
 
 # Invoices Series
 $lang['inv_serie_page_title'] = "Listado de Series";
+
+# Customer
+$lang['btn_create_customer'] = 'Crear Cliente';
+$lang['customer_dt_col_name'] = "Nombre";
+$lang['customer_dt_col_lastName'] = "Apellidos";
+$lang['customer_dt_col_type'] = "Tipo";
+$lang['customer_dt_col_email'] = "Correo Electrónico";
+$lang['customer_dt_col_phone'] = "Telefóno";
+$lang['customer_dt_col_status'] = "Estado";
+$lang['customer_msg_success_create'] = "Cliente Creado";
+$lang['customer_msg_success_update'] = "Cliente Actualizado";
+$lang['customer_msg_success_deleted'] = "Cliente Eliminado";
+$lang['customer_modal_title_create'] = "Creando Cliente";
+$lang['customer_modal_title_update'] = "Actualizando Cliente";
+$lang['customer_text_name'] = "Nombre";
+$lang['customer_text_last_name'] = "Apellidos";
+$lang['customer_text_email'] = "Correo Electrónico";
+$lang['customer_text_phone'] = "Teléfono";
+$lang['customer_text_address_a'] = "Dirección";
+$lang['customer_text_address_b'] = "Línea de dirección 2";
+$lang['customer_text_city'] = "Ciudad";
+$lang['customer_text_state'] = "Provincia";
+$lang['customer_text_zip'] = "Código Postal";
+$lang['customer_text_country'] = "País";
 
 # Profile
 $lang['profile_page_title'] = "Perfil de Empresa";
