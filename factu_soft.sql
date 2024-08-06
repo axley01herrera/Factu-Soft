@@ -1,3 +1,12 @@
+DROP TABLE IF EXISTS `config`;
+CREATE TABLE IF NOT EXISTS `config` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `lang` varchar(45) COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT 'es',
+  `timezone` varchar(45) COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT 'Atlantic/Canary',
+  `currency` varchar(45) COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT '€',
+  PRIMARY KEY (`id`)
+);
+
 DROP TABLE IF EXISTS `profile`;
 CREATE TABLE IF NOT EXISTS `profile` (
   `id` int NOT NULL AUTO_INCREMENT,

@@ -93,11 +93,14 @@ $lang['profile_text_country'] = "País";
 $lang['profile_text_desc'] = "Descripción";
 $lang['profile_msg_success_update_profile'] = "Datos de empresa actualizados satisfactoriamente";
 $lang['profile_msg_success_upload_logo'] = "Logo actualizado satisfactoriamente";
-$lang['profile_upload_logo_modal_title'] = "Añade un logo a tu empresa";
+$lang['profile_upload_logo_modal_title'] = "Añade tu logo";
 $lang['profile_upload_logo_modal_dropzone_text_1'] = "Arrastre o haga click aquí para subir un archivo";
-$lang['profile_upload_logo_modal_dropzone_text_2'] = "Sube un archivo";
+$lang['profile_upload_logo_modal_dropzone_text_2'] = ".PNG .JPG .JPEG";
 
 # Config
 $lang['config_page_title'] = "Configuración del Sistema";
+$lang['config_text_lang'] = "Idioma";
+$lang['config_text_timezone'] = "Zona Horaria";
+$lang['config_text_currency'] = "Moneda de Facturación";
 
 return $lang;

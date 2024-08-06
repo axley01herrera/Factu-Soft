@@ -1,4 +1,4 @@
-<!-- libs dropzone -->
+<!-- dropzone -->
 <link rel="stylesheet" href="<?php echo base_url('public/assets/libs/dropzone/dist/dropzone.css'); ?>">
 <script src="<?php echo base_url('public/assets/libs/dropzone/dist/dropzone.js'); ?>"></script>
 

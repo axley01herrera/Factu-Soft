@@ -14,7 +14,7 @@
 				<li>
 					<div class="user-profile text-center position-relative pt-4 mt-1">
 						<div class="profile-img m-auto">
-							<?php if (!empty($profile->name)) { ?>
+							<?php if (!empty($profile->logo)) { ?>
 								<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="logo" class="w-100 rounded-circle">
 							<?php } else { ?>
 								<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="logo" class="w-100 rounded-circle">

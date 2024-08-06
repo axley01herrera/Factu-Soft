@@ -6,8 +6,6 @@
 	<div class="d-flex align-items-center justify-content-between gap-6"></div>
 </div>
 
-
-
 <!-- Page Content -->
 <div class="row">
 	<div class="col-12 col-md-4 col-lg-4">
@@ -25,7 +23,7 @@
 							<div class="d-flex align-items-center justify-content-center mb-2">
 								<div class="d-flex align-items-center justify-content-center round-110">
 									<div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden round-100">
-										<?php if (!empty($profile->name)) { ?>
+										<?php if (!empty($profile->logo)) { ?>
 											<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="profile-logo" class="w-100 h-100">
 										<?php } else { ?>
 											<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="profile-logo" class="w-100 h-100">

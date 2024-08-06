@@ -16,7 +16,7 @@
 
 			<!-- Logo -->
 			<div class="d-block d-lg-none py-4 py-xl-0">
-				<?php if (!empty($profile->name)) { ?>
+				<?php if (!empty($profile->logo)) { ?>
 					<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="logo" class="rounded-circle" style="width: 25px;">
 				<?php } else { ?>
 					<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="logo" class="rounded-circle" style="width: 25px;">
@@ -40,7 +40,7 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link" href="javascript:void(0)" id="drop1" aria-expanded="false">
 								<div class="d-flex align-items-center lh-base">
-									<?php if (!empty($profile->name)) { ?>
+									<?php if (!empty($profile->logo)) { ?>
 										<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
 									<?php } else { ?>
 										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
@@ -53,7 +53,7 @@
 										<h5 class="mb-0 fs-5"><?php echo lang('Text.profile_page_title'); ?></h5>
 									</div>
 									<div class="d-flex align-items-center py-9 mx-7 border-bottom">
-										<?php if (!empty($profile->name)) { ?>
+										<?php if (!empty($profile->logo)) { ?>
 											<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" class="rounded-circle" width="80" alt="Avatar" />
 										<?php } else { ?>
 											<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="80" alt="Avatar" />

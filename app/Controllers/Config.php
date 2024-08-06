@@ -48,6 +48,7 @@ class Config extends BaseController
 
         $data = array();
         $data['profile'] = $this->profile;
+        $data['config'] = $this->config;
         # menu
         $data['configActive'] = "active";
         # page
