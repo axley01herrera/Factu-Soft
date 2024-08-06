@@ -32,9 +32,9 @@ class DataTableModel extends Model
 			$query->groupEnd();
 		}
 
-		// $query->groupStart();
-		// $query->where('customer.deleted', 0);
-		// $query->groupEnd();
+		$query->groupStart();
+		$query->where('customer.deleted', 0);
+		$query->groupEnd();
 
 		$query->offset($params['start']);
 		$query->limit($params['length']);
@@ -100,6 +100,10 @@ class DataTableModel extends Model
 			$query->orLike('customer.phone', $params['search']);
 			$query->groupEnd();
 		}
+
+		$query->groupStart();
+		$query->where('customer.deleted', 0);
+		$query->groupEnd();
 
 		return $query->countAllResults();
 	}

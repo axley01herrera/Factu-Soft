@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="<?php echo base_url('public/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') ?>">
 <script src="<?php echo base_url('public/assets/libs/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
 
-
 <!-- Page Header-->
 <div class="d-md-flex align-items-center justify-content-between mb-7">
 	<div class="mb-4 mb-md-0">
@@ -9,7 +8,7 @@
 	</div>
 
 	<div class="d-flex align-items-center justify-content-between gap-6">
-		<button type="button" id="btn-create-customer" class="btn bg-primary-subtle text-primary"><?php echo lang('Text.btn_create_customer'); ?></button>
+		<button type="button" id="btn-create-customer" class="btn btn-success"><?php echo lang('Text.btn_create_customer'); ?></button>
 	</div>
 </div>
 
@@ -27,7 +26,6 @@
 								<th><?php echo lang('Text.customer_dt_col_type'); ?></th>
 								<th><?php echo lang('Text.customer_dt_col_email'); ?></th>
 								<th><?php echo lang('Text.customer_dt_col_phone'); ?></th>
-								<th><?php echo lang('Text.customer_dt_col_status'); ?></th>
 								<th style="width: 75px;"></th>
 							</tr>
 						</thead>
@@ -48,12 +46,14 @@
 		dtLang = "<?php echo base_url('public/assets/js/dataTableLang/en.json'); ?>";
 
 	$('#btn-create-customer').on('click', function() {
+		$('#btn-create-customer').attr('disabled', true);
 		$.ajax({
 			type: "POST",
 			url: "<?php echo base_url('Customer/addEditCustomer') ?>",
 			data: "",
 			dataType: "html",
 			success: function(response) {
+				$('#btn-create-customer').removeAttr('disabled');
 				$('#app-modal').html(response);
 			},
 			error: function(error) {
@@ -97,11 +97,6 @@
 			{
 				data: 'phone',
 				class: 'dt-vertical-align p-2',
-			},
-			{
-				data: 'status',
-				class: 'dt-vertical-align p-2',
-				searchable: false
 			},
 			{
 				data: 'action',

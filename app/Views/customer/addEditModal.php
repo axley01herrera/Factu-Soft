@@ -1,5 +1,5 @@
 <div class="modal fade show" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal" style="display: block;" aria-modal="true" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-lg">
+	<div class="modal-dialog modal-dialog-centered modal-md">
 		<div class="modal-content">
 			<div class="modal-header d-flex align-items-center">
 				<h4 class="modal-title">
@@ -9,63 +9,80 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-12 col-md-6 col-lg-6 mb-2">
-						<label for="txt-name" class="form-label"><?php echo lang('Text.customer_text_name'); ?></label>
-						<input type="text" id="txt-name" class="form-control required" value="<?php echo @$customer[0]->name; ?>" />
-					</div>
 
-					<div class="col-12 col-md-6 col-lg-6 mb-2">
-						<label for="txt-last_name" class="form-label"><?php echo lang('Text.customer_text_last_name'); ?></label>
-						<input type="text" id="txt-last_name" class="form-control required" value="<?php echo @$customer[0]->last_name; ?>" />
-					</div>
-
-					<div class="col-12 col-md-4 col-lg-4 mb-2">
+					<!-- Custmer Type -->
+					<div class="col-12 mb-2">
 						<label for="sel-type" class="form-label"><?php echo lang('Text.customer_text_type'); ?></label>
 						<select id="sel-type" class="form-select required">
-							<option value="0" <?php if (@$customer[0]->type == 0) echo 'selected'; ?>><?php echo lang('Text.customer_type_particular');?></option>
-							<option value="1" <?php if (@$customer[0]->type == 1) echo 'selected'; ?>><?php echo lang('Text.customer_type_enterprise');?></option>
+							<option value="" hidden></option>
+							<option value="0" <?php if (isset($customer[0]->type) && $customer[0]->type == 0) echo 'selected'; ?>><?php echo lang('Text.customer_type_particular'); ?></option>
+							<option value="1" <?php if (isset($customer[0]->type) && $customer[0]->type == 1) echo 'selected'; ?>><?php echo lang('Text.customer_type_enterprise'); ?></option>
 						</select>
 					</div>
 
-					<div class="col-12 col-md-4 col-lg-4 mb-2">
+					<!-- Name -->
+					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
+						<label for="txt-name" class="form-label"><?php echo lang('Text.customer_text_name'); ?></label>
+						<input type="text" id="txt-name" class="form-control required particular enterprise" value="<?php echo @$customer[0]->name; ?>" />
+					</div>
+
+					<!-- Last Name -->
+					<div class="col-12 col-md-6 col-lg-6 mb-2 particular" hidden>
+						<label for="txt-last_name" class="form-label"><?php echo lang('Text.customer_text_last_name'); ?></label>
+						<input type="text" id="txt-last_name" class="form-control" value="<?php echo @$customer[0]->last_name; ?>" />
+					</div>
+
+					<!-- NIF -->
+					<div class="col-12 col-md-6 col-lg-6 mb-2 enterprise" hidden>
+						<label for="txt-nif" class="form-label"><?php echo lang('Text.customer_text_nif'); ?></label>
+						<input type="text" id="txt-nif" class="form-control" value="<?php echo @$customer[0]->nif; ?>" />
+					</div>
+
+					<!-- Email -->
+					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
 						<label for="txt-email" class="form-label"><?php echo lang('Text.customer_text_email'); ?></label>
 						<input type="text" id="txt-email" class="form-control email required" value="<?php echo @$customer[0]->email; ?>" />
 					</div>
 
-					<div class="col-12 col-md-4 col-lg-4 mb-2">
+					<!-- Phone -->
+					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
 						<label for="txt-phone" class="form-label"><?php echo lang('Text.customer_text_phone'); ?></label>
-						<input type="text" id="txt-phone" class="form-control required" value="<?php echo @$customer[0]->phone; ?>" />
+						<input type="text" id="txt-phone" class="form-control" value="<?php echo @$customer[0]->phone; ?>" />
 					</div>
 
-					<div class="col-12 mb-2">
+					<!-- Address -->
+					<div class="col-12 mb-2 particular enterprise" hidden>
 						<label for="txt-address_a" class="form-label"><?php echo lang('Text.customer_text_address_a'); ?></label>
-						<input type="text" id="txt-address_a" class="form-control required" value="<?php echo @$customer[0]->address_a; ?>" />
+						<input type="text" id="txt-address_a" class="form-control" value="<?php echo @$customer[0]->address_a; ?>" />
 					</div>
 
-					<div class="col-12 col-md-6 col-lg-6 mb-2">
+					<!-- City -->
+					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
 						<label for="txt-city" class="form-label"><?php echo lang('Text.customer_text_city'); ?></label>
-						<input type="text" id="txt-city" class="form-control required" value="<?php echo @$customer[0]->address_city; ?>" />
+						<input type="text" id="txt-city" class="form-control" value="<?php echo @$customer[0]->address_city; ?>" />
 					</div>
 
-					<div class="col-12 col-md-6 col-lg-6 mb-2">
+					<!-- State -->
+					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
 						<label for="txt-state" class="form-label"><?php echo lang('Text.customer_text_state'); ?></label>
-						<input type="text" id="txt-state" class="form-control required" value="<?php echo @$customer[0]->address_state; ?>" />
+						<input type="text" id="txt-state" class="form-control " value="<?php echo @$customer[0]->address_state; ?>" />
 					</div>
 
-					<div class="col-12 col-md-6 col-lg-6 mb-2">
+					<!-- Zip -->
+					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
 						<label for="txt-zip" class="form-label"><?php echo lang('Text.customer_text_zip'); ?></label>
-						<input type="text" id="txt-zip" class="form-control required" maxlength="5" value="<?php if (!empty(@$customer[0]->address_zip)) echo @$customer[0]->address_zip; ?>" />
+						<input type="text" id="txt-zip" class="form-control" maxlength="5" value="<?php if (!empty(@$customer[0]->address_zip)) echo @$customer[0]->address_zip; ?>" />
 					</div>
 
-					<div class="col-12 col-md-6 col-lg-6 mb-2">
+					<!-- Country -->
+					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
 						<label for="txt-country" class="form-label"><?php echo lang('Text.customer_text_country'); ?></label>
-						<input type="text" id="txt-country" class="form-control required" value="<?php echo @$customer[0]->address_country; ?>" />
+						<input type="text" id="txt-country" class="form-control" value="<?php echo @$customer[0]->address_country; ?>" />
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn bg-danger-subtle text-danger waves-effect text-start" data-bs-dismiss="modal"><?php echo lang('Text.btn_cancel'); ?></button>
-				<button type="button" id="btn-save" class="btn bg-primary-subtle text-primary waves-effect text-start"><?php echo lang('Text.btn_save'); ?></button>
+				<button type="button" id="btn-save" class="btn btn-primary"><?php echo lang('Text.btn_save'); ?></button>
 			</div>
 		</div>
 	</div>
@@ -80,6 +97,36 @@
 		if (action == 'update') {
 			$('#btn-save').html('<?php echo lang('Text.btn_update'); ?>');
 			alerMsg = '<?php echo lang('Text.customer_msg_success_update'); ?>';
+
+			let value = $('#sel-type').val();
+
+			if (value == 0) { // Particular
+				$('.enterprise').each(function() {
+					$(this).attr('hidden', true);
+				});
+
+				$('.particular').each(function() {
+					$(this).removeAttr('hidden');
+				});
+
+				$('#txt-last_name').addClass('required');
+				$('#txt-nif').removeClass('required');
+				$('#txt-nif').val('');
+			} else if (value == 1) { // Enterprize
+				$('.particular').each(function() {
+					$(this).attr('hidden', true);
+				});
+
+				$('.enterprise').each(function() {
+					$(this).removeAttr('hidden');
+				});
+
+				$('#txt-nif').addClass('required');
+				$('#txt-last_name').removeClass('required');
+				$('#txt-last_name').val('');
+			}
+
+			focused();
 		}
 
 		$('#btn-save').on('click', function() {
@@ -94,6 +141,7 @@
 						'customerID': '<?php echo @$customer[0]->id; ?>',
 						'name': $('#txt-name').val(),
 						'last_name': $('#txt-last_name').val(),
+						'nif': $('#txt-nif').val(),
 						'type': $('#sel-type').val(),
 						'email': $('#txt-email').val(),
 						'phone': $('#txt-phone').val(),
@@ -106,7 +154,7 @@
 					dataType: "json",
 					success: function(response) {
 						if (response.error == 0) {
-							$('#modal').modal('hide');
+							closeModal();
 							Swal.fire({
 								position: "top-end",
 								icon: "success",
@@ -177,5 +225,45 @@
 		$('.required').on('focus', function() {
 			$(this).removeClass('is-invalid');
 		});
+
+		$('#sel-type').on('change', function() {
+			let value = $(this).val();
+
+			if (value == 0) { // Particular
+				$('.enterprise').each(function() {
+					$(this).attr('hidden', true);
+				});
+
+				$('.particular').each(function() {
+					$(this).removeAttr('hidden');
+				});
+
+				$('#txt-last_name').addClass('required');
+				$('#txt-nif').removeClass('required');
+				$('#txt-nif').val('');
+			} else if (value == 1) { // Enterprize
+				$('.particular').each(function() {
+					$(this).attr('hidden', true);
+				});
+
+				$('.enterprise').each(function() {
+					$(this).removeAttr('hidden');
+				});
+
+				$('#txt-nif').addClass('required');
+				$('#txt-last_name').removeClass('required');
+				$('#txt-last_name').val('');
+			}
+
+			focused();
+		});
+
+		function focused() {
+			$('.required').on('focus', function() {
+				$(this).removeClass('is-invalid');
+			});
+		}
+
+		focused();
 	});
 </script>

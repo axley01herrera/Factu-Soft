@@ -95,27 +95,16 @@ class Customer extends BaseController
 
 			$col['email'] = $result[$i]->email;
 			$col['phone'] = $result[$i]->phone;
-
-			if ($result[$i]->deleted == 1)
-				$col['status'] = '<span class="text-danger">' . lang('Text.status_deleted') . '</span>';
-			else
-				$col['status'] = '<span class="text-primary">' . lang('Text.status_active') . '</span>';
-
-			if ($result[$i]->deleted == 0) {
-				$col['action'] = '	
+			$col['action'] = '	
 			<button type="button" class="btn btn-sm btn-rounded btn-outline-primary border-0 btn-edit-customer" data-customer-id=' . $result[$i]->id . '>
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 					<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 					<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
 				</svg>
 			</button>
-			
 			<button type="button" class="btn btn-sm btn-rounded btn-outline-danger border-0 btn-delete-customer" data-customer-id=' . $result[$i]->id . '>
-			<i class="fas fa-trash fs-3"></i>
+				<i class="fas fa-trash fs-3"></i>
 			</button>';
-			} else
-				$col['action'] = '';
-
 			$row[$i] =  $col;
 		}
 
@@ -146,7 +135,7 @@ class Customer extends BaseController
 			$data['action'] = 'create';
 		} else {
 			$customer = $this->objCustomerModel->getCustomer($customerID);
-			$data['modalTitle'] = lang('Text.customer_modal_title_update');
+			$data['modalTitle'] = $customer[0]->name;
 			$data['action'] = 'update';
 			$data['customer'] = $customer;
 		}
@@ -190,9 +179,9 @@ class Customer extends BaseController
 		$data['address_zip'] = $address_zip;
 		$data['address_country'] = $address_country;
 
-		if (!empty($customerID)) # Update
+		if (!empty($customerID)) // Update
 			$result = $this->objMainModel->objUpdate('customer', $data, $customerID);
-		else # Create
+		else // Create
 			$result = $this->objMainModel->objCreate('customer', $data);
 
 		return json_encode($result);

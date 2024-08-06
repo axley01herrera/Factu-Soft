@@ -36,9 +36,9 @@
 				</div>
 				<div class="row">
 					<div class="col-12 text-end">
-						<button id="btn-edit-config" class="btn btn-sm btn-primary">Editar</button>
-						<button id="btn-cancel-config" class="btn btn-sm btn-gray" hidden>Cancelar</button>
-						<button id="btn-save-config" class="btn btn-sm btn-primary" hidden>Guardar</button>
+						<button id="btn-edit-config" class="btn btn-warning">Editar</button>
+						<button id="btn-cancel-config" class="btn btn-secondary" hidden>Cancelar</button>
+						<button id="btn-save-config" class="btn btn-primary" hidden>Guardar</button>
 					</div>
 				</div>
 			</div>

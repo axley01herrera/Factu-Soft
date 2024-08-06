@@ -1,5 +1,12 @@
 <?php echo view('layouts/header'); ?>
 
+<script>
+    function closeModal() {
+        $('#modal').modal('hide');
+        $('#app-modal').html('');
+    }
+</script>
+
 <body>
     <!-- App Modal -->
     <div id="app-modal"></div>
