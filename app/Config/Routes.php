@@ -16,10 +16,12 @@ $routes->get('Dashboard', 'Dashboard::index');
 
 # Customers
 $routes->get('Customer', 'Customer::index');
+$routes->get('Customer/customerProfile', 'Customer::customerProfile');
 $routes->post('Customer/processingCustomers', 'Customer::processingCustomers');
 $routes->post('Customer/addEditCustomer', 'Customer::addEditCustomer');
 $routes->post('Customer/saveCustomer', 'Customer::saveCustomer');
 $routes->post('Customer/deleteCustomer', 'Customer::deleteCustomer');
+$routes->post('Customer/getTabContent', 'Customer::getTabContent');
 
 # Invoices
 $routes->get('Invoice', 'Invoice::index');

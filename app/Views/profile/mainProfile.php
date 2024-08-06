@@ -187,9 +187,9 @@
 
 				<div class="row">
 					<div class="col-12 text-end">
-						<button id="btn-edit-company-info" class="btn btn-warning">Editar</button>
-						<button id="btn-cancel-company-info" class="btn btn-secondary" hidden>Cancelar</button>
-						<button id="btn-save-company-info" class="btn btn-primary" hidden>Guardar</button>
+						<button id="btn-edit-company-info" class="btn btn-warning"><?php echo lang('Text.btn_edit');?></button>
+						<button id="btn-cancel-company-info" class="btn btn-secondary" hidden><?php echo lang('Text.btn_cancel');?></button>
+						<button id="btn-save-company-info" class="btn btn-primary" hidden><?php echo lang('Text.btn_save');?></button>
 					</div>
 				</div>
 			</div>

@@ -18,6 +18,7 @@ $lang['status_deleted'] = "Eliminado";
 # Global Btn
 $lang['btn_save'] = "Guardar";
 $lang['btn_update'] = "Actualizar";
+$lang['btn_edit'] = "Editar";
 $lang['btn_cancel'] = "Cancelar";
 
 # Menu
@@ -76,6 +77,11 @@ $lang['customer_text_zip'] = "Código Postal";
 $lang['customer_text_country'] = "País";
 $lang['customer_type_particular'] = "Particular";
 $lang['customer_type_enterprise'] = "Empresa";
+$lang['customer_view_profile_label'] = "Ver Perfil";
+$lang['customer_profile_page_title'] = "Perfil del Cliente";
+$lang['customer_label'] = "Cliente";
+$lang['customer_profile_personal_title'] = "Datos Personales";
+$lang['customer_profile_invoices_title'] = "Listado de Facturas";
 
 # Profile
 $lang['profile_page_title'] = "Perfil de Empresa";

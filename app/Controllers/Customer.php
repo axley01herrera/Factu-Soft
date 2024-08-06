@@ -85,7 +85,7 @@ class Customer extends BaseController
 
 		for ($i = 0; $i < $totalRows; $i++) {
 			$col = array();
-			$col['name'] = $result[$i]->name;
+			$col['name'] = '<a href=' . base_url('Customer/customerProfile?customerID=') . $result[$i]->id . '&&tab=personal' . ' class="text-primary" style="cursor: pointer;" title="' . lang('Text.customer_view_profile_label') . '">' . $result[$i]->name . '</a>';
 			$col['lastName'] = $result[$i]->last_name;
 
 			if ($result[$i]->type == 0)
@@ -207,5 +207,61 @@ class Customer extends BaseController
 		$result = $this->objMainModel->objUpdate('customer', $data, $customerID);
 
 		return json_encode($result);
+	}
+
+	public function customerProfile()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		# Params
+		$customerID = $this->objRequest->getPostGet('customerID');
+		$tab = $this->objRequest->getPostGet('tab');
+
+		if (empty($tab)) {
+			$tab = 'personal';
+		}
+
+		$customer = $this->objCustomerModel->getCustomer($customerID);
+
+		$data = array();
+		$data['profile'] = $this->profile;
+		# menu
+		$data['customerActive'] = 'active';
+		# page
+		$data['page'] = 'customer/customerProfile';
+		$data['customer'] = $customer;
+		$data['tab'] = $tab;
+
+		return view('layouts/main', $data);
+	}
+
+	public function getTabContent()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		# Params
+		$tab = $this->objRequest->getPostGet('tab');
+		$customerID = $this->objRequest->getPostGet('customerID');
+
+		$data = array();
+		switch ($tab) {
+			case 'personal':
+				$customer = $this->objCustomerModel->getCustomer($customerID);
+				$view = 'customer/customerProfile/tabs/personal';
+				$data['customer'] = $customer;
+				break;
+			case 'invoices':
+				$customer = $this->objCustomerModel->getCustomer($customerID);
+				$view = 'customer/customerProfile/tabs/invoices';
+				$data['customer'] = $customer;
+				break;
+		}
+
+
+		return view($view, $data);
 	}
 }
