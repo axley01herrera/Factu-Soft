@@ -30,6 +30,9 @@ $routes->get('Profile', 'Profile::index');
 $routes->post('Profile/updateProfile', 'Profile::updateProfile');
 $routes->post('Profile/editCompanyLogo', 'Profile::editCompanyLogo');
 $routes->post('Profile/uploadLogo', 'Profile::uploadLogo');
+$routes->post('Profile/changePassword', 'Profile::changePassword');
+$routes->post('Profile/changePasswordProcess', 'Profile::changePasswordProcess');
 
 # Config
 $routes->get('Config', 'Config::index');
+$routes->post('Config/saveConfig', 'Config::saveConfig');

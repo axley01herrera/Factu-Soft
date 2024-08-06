@@ -131,4 +131,35 @@ class Profile extends BaseController
 
 		return json_encode($result);
 	}
+
+	public function changePassword()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		return view('profile/changePasswordModal');
+	}
+
+	public function changePasswordProcess()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+
+			return json_encode($result);
+		}
+
+		# Params
+		$newPassword =  password_hash(htmlspecialchars(trim($this->objRequest->getPost('newPassword'))), PASSWORD_DEFAULT);
+
+		$data = array();
+		$data['access_key'] = $newPassword;
+
+		$result = $this->objMainModel->objUpdate('profile', $data, 1);
+
+		return json_encode($result);
+	}
 }

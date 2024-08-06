@@ -75,7 +75,7 @@
 												<span class="fs-2 d-block text-body-secondary"><?php echo lang('Text.profile_text_company_data') ?></span>
 											</div>
 										</a>
-										<a href="<?php echo base_url('AccountV2/resetPassword'); ?>" class="py-8 px-7 d-flex align-items-center">
+										<a href="#" id="btn-change-password" class="py-8 px-7 d-flex align-items-center">
 											<span class="d-flex align-items-center justify-content-center bg-info-subtle rounded p-6 fs-7 text-info">
 												<iconify-icon icon="solar:key-square-outline"></iconify-icon>
 											</span>
@@ -211,3 +211,21 @@
 		</nav>
 	</div>
 </header>
+
+<script>
+	$('#btn-change-password').on('click', function(e) {
+		e.preventDefault();
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url('Profile/changePassword') ?>",
+			data: "data",
+			dataType: "html",
+			success: function(response) {
+				$('#app-modal').html(response);
+			},
+			error: function(error) {
+				globalError();
+			}
+		});
+	});
+</script>

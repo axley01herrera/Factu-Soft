@@ -15,7 +15,7 @@
 				<div class="row mb-3">
 					<div class="col-12 mb-2">
 						<label for="sel-lang" class="form-label"><?php echo lang('Text.config_text_lang'); ?></label>
-						<select id="sel-lang" class="form-select config-disabled required" disabled >
+						<select id="sel-lang" class="form-select config-disabled required" disabled>
 							<option value="" hidden></option>
 							<option value="es" <?php if ($config[0]->lang == "es") echo 'selected'; ?>>Español</option>
 							<option value="en" <?php if ($config[0]->lang == "en") echo 'selected'; ?>>English</option>
@@ -27,7 +27,7 @@
 					</div>
 					<div class="col-12 mb-2">
 						<label for="sel-currency" class="form-label"><?php echo lang('Text.config_text_currency'); ?></label>
-						<select id="sel-currency" class="form-select config-disabled required" disabled >
+						<select id="sel-currency" class="form-select config-disabled required" disabled>
 							<option value="" hidden></option>
 							<option value="€" <?php if ($config[0]->currency == "€") echo 'selected'; ?>>Euro (€)</option>
 							<option value="$" <?php if ($config[0]->currency == "$") echo 'selected'; ?>>USD ($)</option>
@@ -48,9 +48,53 @@
 </div>
 
 <script>
+	$('#btn-save-config').on('click', function() {
+		let requiredValues = checkRequiredValues();
 
-	$('#btn-save-config').on('click', function () {
-		
+		if (requiredValues == 0) {
+			$('#btn-save-config').attr('disabled', true);
+			$.ajax({
+				type: "POST",
+				url: "<?php echo base_url('Config/saveConfig'); ?>",
+				data: {
+					'lang': $('#sel-lang').val(),
+					'timezone': $('#txt-timezone').val(),
+					'currency': $('#sel-currency').val(),
+				},
+				dataType: "json",
+				success: function(response) {
+					if (response.error == 0) {
+						Swal.fire({
+							position: "top-end",
+							icon: "success",
+							text: "<?php echo lang('Text.config_msg_success_save_config'); ?>" + '..!',
+							showConfirmButton: false,
+							timer: 2500
+						});
+						$('#btn-cancel-config').trigger('click');
+						setTimeout(() => {
+							window.location.reload();
+						}, 2500);
+					} else if (response.error == 2)
+						window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
+					else
+						globalError();
+					$('#btn-save-config').removeAttr('disabled');
+				},
+				error: function(error) {
+					globalError();
+					$('#btn-save-config').removeAttr('disabled');
+				}
+			});
+		} else {
+			Swal.fire({
+				position: "top-end",
+				icon: "warning",
+				text: "<?php echo lang("Text.msg_required_values"); ?>..!",
+				showConfirmButton: false,
+				timer: 2500
+			});
+		}
 	});
 
 	$('#btn-edit-config').on('click', function() {
@@ -72,5 +116,24 @@
 		$('#btn-save-config').attr('hidden', true);
 
 		$('#btn-edit-config').removeAttr('hidden');
+	});
+
+	function checkRequiredValues() {
+		let result = 0;
+		let value = "";
+
+		$('.required').each(function() {
+			value = $(this).val();
+			if (value == "") {
+				$(this).addClass('is-invalid');
+				result = 1;
+			}
+		});
+
+		return result;
+	}
+
+	$('.required').on('focus', function() {
+		$(this).removeClass('is-invalid');
 	});
 </script>
