@@ -247,20 +247,19 @@ class Customer extends BaseController
 		$tab = $this->objRequest->getPostGet('tab');
 		$customerID = $this->objRequest->getPostGet('customerID');
 
+		$customer = $this->objCustomerModel->getCustomer($customerID);
+
 		$data = array();
+		$data['customer'] = $customer;
+		
 		switch ($tab) {
 			case 'personal':
-				$customer = $this->objCustomerModel->getCustomer($customerID);
 				$view = 'customer/customerProfile/tabs/personal';
-				$data['customer'] = $customer;
 				break;
 			case 'invoices':
-				$customer = $this->objCustomerModel->getCustomer($customerID);
 				$view = 'customer/customerProfile/tabs/invoices';
-				$data['customer'] = $customer;
 				break;
 		}
-
 
 		return view($view, $data);
 	}

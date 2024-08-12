@@ -30,6 +30,8 @@ $lang['menu_customers_list'] = "Listado de Clientes";
 $lang['menu_invoices'] = "Facturación";
 $lang['menu_series'] = "Series";
 $lang['menu_invoice'] = "Facturas";
+$lang['menu_services'] = "Servicios";
+$lang['menu_services_list'] = "Listado de Servicios";
 $lang['menu_config'] = "Configuración";
 $lang['menu_profile'] = "Perfil";
 $lang['menu_system'] = "Sistema";
@@ -82,6 +84,15 @@ $lang['customer_profile_page_title'] = "Perfil del Cliente";
 $lang['customer_label'] = "Cliente";
 $lang['customer_profile_personal_title'] = "Datos Personales";
 $lang['customer_profile_invoices_title'] = "Listado de Facturas";
+
+# Service
+$lang['btn_create_service'] = 'Crear Servicio';
+$lang['services_modal_title_create'] = "Nuevo Servicio";
+$lang['service_text_name'] = 'Nombre';
+$lang['services_dt_col_name'] = "Nombre";
+$lang['services_msg_success_create'] = "Servicio Creado";
+$lang['services_msg_success_update'] = "Servicio Actualizado";
+$lang['services_msg_success_deleted'] = "Servicio Eliminado";
 
 # Profile
 $lang['profile_page_title'] = "Perfil de Empresa";

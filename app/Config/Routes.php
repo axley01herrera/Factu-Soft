@@ -23,6 +23,12 @@ $routes->post('Customer/saveCustomer', 'Customer::saveCustomer');
 $routes->post('Customer/deleteCustomer', 'Customer::deleteCustomer');
 $routes->post('Customer/getTabContent', 'Customer::getTabContent');
 
+# Services
+$routes->get('Services', 'Services::index');
+$routes->post('Services/addEditService', 'Services::addEditService');
+$routes->post('Services/saveService', 'Services::saveService');
+$routes->post('Services/deleteService', 'Services::deleteService');
+
 # Invoices
 $routes->get('Invoice', 'Invoice::index');
 $routes->get('Invoice/series', 'Invoice::series');
