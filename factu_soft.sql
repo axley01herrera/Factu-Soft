@@ -37,3 +37,13 @@ CREATE TABLE `services` (
 	 `deleted` INT NOT NULL DEFAULT '0' COMMENT '1 = deleted' ,
 	  PRIMARY KEY (`id`)
 ); 
+
+<VirtualHost *:80>
+	ServerName dev.factusoft
+	DocumentRoot "c:/wamp64/www/factu-soft"
+	<Directory  "c:/wamp64/www/factu-soft/">
+		Options +Indexes +Includes +FollowSymLinks +MultiViews
+		AllowOverride All
+		Require local
+	</Directory>
+</VirtualHost>
