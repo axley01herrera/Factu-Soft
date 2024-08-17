@@ -85,18 +85,21 @@ class Customer extends BaseController
 
 		for ($i = 0; $i < $totalRows; $i++) {
 			$col = array();
-			$col['name'] = '<a href=' . base_url('Customer/customerProfile?customerID=') . $result[$i]->id . '&&tab=personal' . ' class="text-primary" style="cursor: pointer;" title="' . lang('Text.customer_view_profile_label') . '">' . $result[$i]->name . '</a>';
-			$col['lastName'] = $result[$i]->last_name;
-
-			if ($result[$i]->type == 0)
-				$col['type'] = lang('Text.customer_type_particular');
-			else if ($result[$i]->type == 1)
-				$col['type'] = lang('Text.customer_type_enterprise');
+			$col['name'] = '<a href=' . base_url('Customer/customerProfile?customerID=') . $result[$i]->id . '&tab=info' . ' class="text-primary" style="cursor: pointer;" title="' . lang('Text.customer_view_profile_label') . '">' . $result[$i]->name . '</a>';
+			if ($result[$i]->type == 0) {
+				$col['last_nif'] = $result[$i]->last_name;
+				$col['type'] = '<span class="badge bg-primary-subtle text-primary">' . lang('Text.customer_type_particular') . '</span>';
+			} else if ($result[$i]->type == 1) {
+				$col['last_nif'] = $result[$i]->nif;
+				$col['type'] = '<span class="badge bg-success-subtle text-success">' . lang('Text.customer_type_enterprise') . '</span>';
+			}
 
 			$col['email'] = $result[$i]->email;
 			$col['phone'] = $result[$i]->phone;
+			$col['updated'] = $result[$i]->updated;
+			$col['added'] = $result[$i]->added;
 			$col['action'] = '	
-			<button type="button" class="btn btn-sm btn-rounded btn-outline-primary border-0 btn-edit-customer" data-customer-id=' . $result[$i]->id . '>
+			<button type="button" class="btn btn-sm btn-rounded btn-outline-warning border-0 btn-edit-customer" data-customer-id=' . $result[$i]->id . '>
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 					<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 					<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -166,11 +169,12 @@ class Customer extends BaseController
 		$address_state = htmlspecialchars(trim($this->objRequest->getPost('address_state')));
 		$address_zip = htmlspecialchars(trim($this->objRequest->getPost('address_zip')));
 		$address_country = htmlspecialchars(trim($this->objRequest->getPost('address_country')));
+		$nif = htmlspecialchars(trim($this->objRequest->getPost('nif')));
 
 		$data = array();
 		$data['name'] = $name;
 		$data['last_name'] = $last_name;
-		$data['type'] = $type;
+		if (!empty($type)) $data['type'] = $type;
 		$data['email'] = $email;
 		$data['phone'] = $phone;
 		$data['address_a'] = $address_a;
@@ -178,11 +182,16 @@ class Customer extends BaseController
 		$data['address_state'] = $address_state;
 		$data['address_zip'] = $address_zip;
 		$data['address_country'] = $address_country;
+		$data['nif'] = $nif;
 
-		if (!empty($customerID)) // Update
+		if (!empty($customerID)) { // Update
+			$data['updated'] = date('Y-m-d H:i:s');
 			$result = $this->objMainModel->objUpdate('customer', $data, $customerID);
-		else // Create
+		} else { // Create
+			$data['updated'] = date('Y-m-d H:i:s');
+			$data['added'] = date('Y-m-d H:i:s');
 			$result = $this->objMainModel->objCreate('customer', $data);
+		}
 
 		return json_encode($result);
 	}
@@ -220,7 +229,7 @@ class Customer extends BaseController
 		$tab = $this->objRequest->getPostGet('tab');
 
 		if (empty($tab)) {
-			$tab = 'personal';
+			$tab = 'info';
 		}
 
 		$customer = $this->objCustomerModel->getCustomer($customerID);
@@ -251,10 +260,10 @@ class Customer extends BaseController
 
 		$data = array();
 		$data['customer'] = $customer;
-		
+
 		switch ($tab) {
-			case 'personal':
-				$view = 'customer/customerProfile/tabs/personal';
+			case 'info':
+				$view = 'customer/customerProfile/tabs/info';
 				break;
 			case 'invoices':
 				$view = 'customer/customerProfile/tabs/invoices';

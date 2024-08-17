@@ -1,27 +1,16 @@
 <div class="card shadow-none border">
 	<div class="card-body">
 		<div class="row mb-3 mt-3">
-			<div class="col-12 mb-2">
-				<label for="sel-type" class="form-label"><?php echo lang('Text.customer_text_type'); ?></label>
-				<select id="sel-type" class="form-select c-disabled required" disabled>
-					<option value="" hidden></option>
-					<option value="0" <?php if (isset($customer[0]->type) && $customer[0]->type == 0) echo 'selected'; ?>><?php echo lang('Text.customer_type_particular'); ?></option>
-					<option value="1" <?php if (isset($customer[0]->type) && $customer[0]->type == 1) echo 'selected'; ?>><?php echo lang('Text.customer_type_enterprise'); ?></option>
-				</select>
-			</div>
-
 			<div class="col-12 col-md-6 col-lg-6 mb-2">
 				<label for="txt-name" class="form-label"><?php echo lang('Text.customer_text_name'); ?></label>
 				<input type="text" id="txt-name" class="form-control c-disabled required" value="<?php echo $customer[0]->name; ?>" disabled />
 			</div>
 
-			<!-- CASE PARTICULAR -->
 			<div id="div-particular" class="col-12 col-md-6 col-lg-6 mb-2" <?php if ($customer[0]->type == 1) echo 'hidden'; ?>>
 				<label for="txt-last-name" class="form-label"><?php echo lang('Text.customer_text_last_name'); ?></label>
 				<input type="text" id="txt-last-name" class="form-control c-disabled <?php if ($customer[0]->type == 0) echo 'required'; ?>" value="<?php echo $customer[0]->last_name; ?>" disabled />
 			</div>
 
-			<!-- CASE ENTERPRISE -->
 			<div id="div-enterprise" class="col-12 col-md-6 col-lg-6 mb-2" <?php if ($customer[0]->type == 0) echo 'hidden'; ?>>
 				<label for="txt-nif" class="form-label"><?php echo lang('Text.customer_text_nif'); ?></label>
 				<input type="text" id="txt-nif" class="form-control c-disabled <?php if ($customer[0]->type == 1) echo 'required'; ?>" value="<?php echo $customer[0]->nif; ?>" disabled />
@@ -29,12 +18,12 @@
 
 			<div class="col-12 col-md-6 col-lg-6 mb-2">
 				<label for="txt-email" class="form-label"><?php echo lang('Text.customer_text_email'); ?></label>
-				<input type="text" id="txt-email" class="form-control c-disabled required email" value="<?php echo $customer[0]->email; ?>" disabled />
+				<input type="text" id="txt-email" class="form-control c-disabled email" value="<?php echo $customer[0]->email; ?>" disabled />
 			</div>
 
 			<div class="col-12 col-md-6 col-lg-6 mb-2">
 				<label for="txt-phone" class="form-label"><?php echo lang('Text.customer_text_phone'); ?></label>
-				<input type="text" id="txt-phone" class="form-control c-disabled required" value="<?php echo $customer[0]->phone; ?>" disabled />
+				<input type="text" id="txt-phone" class="form-control c-disabled" value="<?php echo $customer[0]->phone; ?>" disabled />
 			</div>
 
 			<div class="col-12 mb-2">
@@ -128,11 +117,10 @@
 				type: "POST",
 				url: "<?php echo base_url('Customer/saveCustomer'); ?>",
 				data: {
-					'customerID': '<?php echo @$customer[0]->id; ?>',
+					'customerID': '<?php echo $customer[0]->id; ?>',
 					'name': $('#txt-name').val(),
 					'last_name': $('#txt-last-name').val(),
 					'nif': $('#txt-nif').val(),
-					'type': $('#sel-type').val(),
 					'email': $('#txt-email').val(),
 					'phone': $('#txt-phone').val(),
 					'address_a': $('#txt-address_a').val(),
@@ -151,7 +139,6 @@
 							showConfirmButton: false,
 							timer: 2500
 						});
-						$('#btn-cancel-customer').trigger('click');
 						setTimeout(() => {
 							window.location.reload();
 						}, 2500);
@@ -206,9 +193,11 @@
 		let regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 		$('.email').each(function() {
 			inputValue = $(this).val();
-			if (!regex.test(inputValue)) {
-				$(this).addClass('is-invalid');
-				response = 1;
+			if (inputValue != "") {
+				if (!regex.test(inputValue)) {
+					$(this).addClass('is-invalid');
+					response = 1;
+				}
 			}
 		});
 		return response;

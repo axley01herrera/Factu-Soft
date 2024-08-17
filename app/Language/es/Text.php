@@ -56,10 +56,12 @@ $lang['inv_serie_page_title'] = "Listado de Series";
 # Customer
 $lang['btn_create_customer'] = 'Crear Cliente';
 $lang['customer_dt_col_name'] = "Nombre";
-$lang['customer_dt_col_lastName'] = "Apellidos";
+$lang['customer_dt_col_lastName'] = "Apellidos / Nif";
 $lang['customer_dt_col_type'] = "Tipo";
 $lang['customer_dt_col_email'] = "Correo Electrónico";
 $lang['customer_dt_col_phone'] = "Telefóno";
+$lang['customer_dt_col_updated'] = "Actualizado";
+$lang['customer_dt_col_added'] = "Agregado";
 $lang['customer_msg_success_create'] = "Cliente Creado";
 $lang['customer_msg_success_update'] = "Cliente Actualizado";
 $lang['customer_msg_success_deleted'] = "Cliente Eliminado";
@@ -82,8 +84,8 @@ $lang['customer_type_enterprise'] = "Empresa";
 $lang['customer_view_profile_label'] = "Ver Perfil";
 $lang['customer_profile_page_title'] = "Perfil del Cliente";
 $lang['customer_label'] = "Cliente";
-$lang['customer_profile_personal_title'] = "Datos Personales";
-$lang['customer_profile_invoices_title'] = "Listado de Facturas";
+$lang['customer_profile_personal_title'] = "Información";
+$lang['customer_profile_invoices_title'] = "Facturas";
 
 # Service
 $lang['btn_create_service'] = 'Crear Servicio';

@@ -13,7 +13,7 @@
 					<!-- Custmer Type -->
 					<div class="col-12 mb-2">
 						<label for="sel-type" class="form-label"><?php echo lang('Text.customer_text_type'); ?></label>
-						<select id="sel-type" class="form-select required">
+						<select id="sel-type" class="form-select required" <?php if($action == "update") echo "disabled"; ?>>
 							<option value="" hidden></option>
 							<option value="0" <?php if (isset($customer[0]->type) && $customer[0]->type == 0) echo 'selected'; ?>><?php echo lang('Text.customer_type_particular'); ?></option>
 							<option value="1" <?php if (isset($customer[0]->type) && $customer[0]->type == 1) echo 'selected'; ?>><?php echo lang('Text.customer_type_enterprise'); ?></option>
@@ -41,7 +41,7 @@
 					<!-- Email -->
 					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
 						<label for="txt-email" class="form-label"><?php echo lang('Text.customer_text_email'); ?></label>
-						<input type="text" id="txt-email" class="form-control email required" value="<?php echo @$customer[0]->email; ?>" />
+						<input type="text" id="txt-email" class="form-control email" value="<?php echo @$customer[0]->email; ?>" />
 					</div>
 
 					<!-- Phone -->
@@ -214,9 +214,11 @@
 			let regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 			$('.email').each(function() {
 				inputValue = $(this).val();
-				if (!regex.test(inputValue)) {
-					$(this).addClass('is-invalid');
-					response = 1;
+				if (inputValue != "") {
+					if (!regex.test(inputValue)) {
+						$(this).addClass('is-invalid');
+						response = 1;
+					}
 				}
 			});
 			return response;

@@ -26,7 +26,7 @@ class DataTableModel extends Model
 			$query->groupStart();
 			$query->like('customer.name', $params['search']);
 			$query->orLike('customer.last_name', $params['search']);
-			$query->orLike('customer.type', $params['search']);
+			$query->orLike('customer.nif', $params['search']);
 			$query->orLike('customer.email', $params['search']);
 			$query->orLike('customer.phone', $params['search']);
 			$query->groupEnd();
@@ -51,25 +51,19 @@ class DataTableModel extends Model
 
 		if ($column == 0) {
 			if ($dir == 'asc')
-				$sort = 'customer.name ASC';
-			else
-				$sort = 'customer.name DESC';
-		}
-
-		if ($column == 1) {
-			if ($dir == 'asc')
-				$sort = 'customer.last_name ASC';
-			else
-				$sort = 'customer.last_name DESC';
-		}
-
-		if ($column == 2) {
-			if ($dir == 'asc')
 				$sort = 'customer.type ASC';
 			else
 				$sort = 'customer.type DESC';
 		}
 
+		if ($column == 1) {
+			if ($dir == 'asc')
+				$sort = 'customer.name ASC';
+			else
+				$sort = 'customer.name DESC';
+		}
+
+		
 		if ($column == 3) {
 			if ($dir == 'asc')
 				$sort = 'customer.email ASC';
@@ -84,6 +78,19 @@ class DataTableModel extends Model
 				$sort = 'customer.phone DESC';
 		}
 
+		if ($column == 5) {
+			if ($dir == 'asc')
+				$sort = 'customer.updated ASC';
+			else
+				$sort = 'customer.updated DESC';
+		}
+
+		if ($column == 6) {
+			if ($dir == 'asc')
+				$sort = 'customer.added ASC';
+			else
+				$sort = 'customer.added DESC';
+		}
 		return $sort;
 	}
 
@@ -95,7 +102,7 @@ class DataTableModel extends Model
 			$query->groupStart();
 			$query->like('customer.name', $params['search']);
 			$query->orLike('customer.last_name', $params['search']);
-			$query->orLike('customer.type', $params['search']);
+			$query->orLike('customer.nif', $params['search']);
 			$query->orLike('customer.email', $params['search']);
 			$query->orLike('customer.phone', $params['search']);
 			$query->groupEnd();

@@ -16,13 +16,19 @@
 					<div class="d-flex align-items-center justify-content-center mb-2">
 						<div class="d-flex align-items-center justify-content-center round-110">
 							<div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden round-100">
-								<img src="<?php echo base_url('public/assets/images/avatar/user-1.jpg');?>" alt="monster-img" class="w-100 h-100">
+								<img src="<?php echo base_url('public/assets/images/avatar/user-1.jpg'); ?>" alt="monster-img" class="w-100 h-100">
 							</div>
 						</div>
 					</div>
 					<div class="text-center">
 						<h5 class="mb-0"><?php echo $customer[0]->name . ' ' . $customer[0]->last_name; ?></h5>
-						<p class="mb-0"><?php echo lang('Text.customer_label');?></p>
+						<p class="mb-0">
+							<?php if ($customer[0]->type == 0) { ?>
+								<span class="badge bg-primary-subtle text-primary"><?php echo lang('Text.customer_type_particular'); ?></span>
+							<?php } else if (($customer[0]->type == 1)) { ?>
+								<span class="badge bg-success-subtle text-success"><?php echo lang('Text.customer_type_enterprise'); ?></span>
+							<?php } ?>
+						</p>
 					</div>
 				</div>
 
@@ -88,13 +94,13 @@
 	<div class="col-12 col-md-8 col-lg-8">
 		<ul class="nav nav-underline mb-2" id="myTab" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a href="#" class="nav-link tab-link <?php if ($tab == 'personal') echo 'active'; ?>" data-tab="personal">
-					<span><?php echo lang('Text.customer_profile_personal_title');?></span>
+				<a href="#" class="nav-link tab-link <?php if ($tab == 'info') echo 'active'; ?>" data-tab="info">
+					<span><?php echo lang('Text.customer_profile_personal_title'); ?></span>
 				</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a href="#" class="nav-link tab-link <?php if ($tab == 'invoices') echo 'active'; ?>" data-tab="invoices">
-					<span><?php echo lang('Text.customer_profile_invoices_title');?></span>
+					<span><?php echo lang('Text.customer_profile_invoices_title'); ?></span>
 				</a>
 			</li>
 		</ul>
@@ -139,7 +145,7 @@
 
 			$(this).addClass('active');
 
-			window.location.href = "<?php echo base_url('Customer/customerProfile?customerID='); ?>" + "<?php echo $customer[0]->id; ?>" + "&&tab=" + tab;
+			window.location.href = "<?php echo base_url('Customer/customerProfile?customerID='); ?>" + "<?php echo $customer[0]->id; ?>" + "&tab=" + tab;
 		});
 
 

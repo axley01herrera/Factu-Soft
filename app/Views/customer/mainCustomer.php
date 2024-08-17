@@ -21,11 +21,13 @@
 					<table id="dt-clients" class="table text-nowrap align-middle" style="width: 100%;">
 						<thead>
 							<tr>
+								<th><?php echo lang('Text.customer_dt_col_type'); ?></th>
 								<th><?php echo lang('Text.customer_dt_col_name'); ?></th>
 								<th><?php echo lang('Text.customer_dt_col_lastName'); ?></th>
-								<th><?php echo lang('Text.customer_dt_col_type'); ?></th>
 								<th><?php echo lang('Text.customer_dt_col_email'); ?></th>
 								<th><?php echo lang('Text.customer_dt_col_phone'); ?></th>
+								<th><?php echo lang('Text.customer_dt_col_updated'); ?></th>
+								<th><?php echo lang('Text.customer_dt_col_added'); ?></th>
 								<th style="width: 75px;"></th>
 							</tr>
 						</thead>
@@ -62,7 +64,7 @@
 		});
 	});
 
-	var dtClients = $('#dt-clients').DataTable({ // DATA TABLE USER LIST
+	var dtClients = $('#dt-clients').DataTable({
 		processing: true,
 		serverSide: true,
 		pageLength: 10,
@@ -75,20 +77,20 @@
 			type: "POST"
 		},
 		order: [
-			[0, 'asc']
+			[6, 'desc']
 		],
 		columns: [{
+				data: 'type',
+				class: 'dt-vertical-align p-2',
+				searchable: false
+			}, {
 				data: 'name',
 				class: 'dt-vertical-align p-2',
 			},
 			{
-				data: 'lastName',
-				class: 'dt-vertical-align p-2'
-			},
-			{
-				data: 'type',
+				data: 'last_nif',
 				class: 'dt-vertical-align p-2',
-				searchable: false
+				orderable: false
 			},
 			{
 				data: 'email',
@@ -96,6 +98,14 @@
 			},
 			{
 				data: 'phone',
+				class: 'dt-vertical-align p-2',
+			},
+			{
+				data: 'updated',
+				class: 'dt-vertical-align p-2',
+			},
+			{
+				data: 'added',
 				class: 'dt-vertical-align p-2',
 			},
 			{
@@ -125,7 +135,6 @@
 			}
 		});
 	});
-
 
 	dtClients.on('click', '.btn-delete-customer', function() {
 		let customerID = $(this).attr('data-customer-id');
