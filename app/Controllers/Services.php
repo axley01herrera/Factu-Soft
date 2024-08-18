@@ -44,6 +44,9 @@ class Services extends BaseController
 			$this->objRequest->setLocale("es");
 			date_default_timezone_set("UTC");
 		}
+
+		# Helper
+		helper('Site');
 	}
 
 	public function index()
@@ -54,6 +57,7 @@ class Services extends BaseController
 
 		$data = array();
 		$data['profile'] = $this->profile;
+		$data['config'] = $this->config;
 		# menu
 		$data['servicesActive'] = 'active';
 		# page
@@ -74,6 +78,7 @@ class Services extends BaseController
 		$serviceID = @$this->objRequest->getPost('serviceID');
 
 		$data = array();
+		$data['config'] = $this->config;
 		if (empty($serviceID)) {
 			$data['modalTitle'] = lang('Text.services_modal_title_create');
 			$data['action'] = 'create';
@@ -101,14 +106,21 @@ class Services extends BaseController
 		# Params
 		$serviceID = $this->objRequest->getPost('serviceID');
 		$name = htmlspecialchars(trim($this->objRequest->getPost('name')));
+		$description = htmlspecialchars(trim($this->objRequest->getPost('description')));
+		$price = htmlspecialchars(trim($this->objRequest->getPost('price')));
 
 		$data = array();
 		$data['name'] = $name;
+		$data['description'] = $description;
+		$data['price'] = $price;
+		$data['updated'] = date('Y-m-d H:i:s');
 
 		if (!empty($serviceID)) // Update
 			$result = $this->objMainModel->objUpdate('services', $data, $serviceID);
-		else // Create
+		else { // Create
+			$data['created'] = date('Y-m-d H:i:s');
 			$result = $this->objMainModel->objCreate('services', $data);
+		}
 
 		return json_encode($result);
 	}

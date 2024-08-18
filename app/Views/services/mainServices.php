@@ -22,6 +22,10 @@
 						<thead>
 							<tr>
 								<th><?php echo lang('Text.services_dt_col_name'); ?></th>
+								<th><?php echo lang('Text.services_dt_col_description'); ?></th>
+								<th><?php echo lang('Text.services_dt_col_price'); ?></th>
+								<th><?php echo lang('Text.services_dt_col_date_updated'); ?></th>
+								<th><?php echo lang('Text.services_dt_col_date_created'); ?></th>
 								<th style="width: 75px;"></th>
 							</tr>
 						</thead>
@@ -29,6 +33,10 @@
 							<?php foreach ($services as $s) { ?>
 								<tr>
 									<td><?php echo $s->name; ?></td>
+									<td><?php echo $s->description; ?></td>
+									<td><?php echo getMoneyFormat($config[0]->currency,$s->price); ?></td>
+									<td><?php echo $s->updated; ?></td>
+									<td><?php echo $s->created; ?></td>
 									<td>
 										<button type="button" class="btn btn-sm btn-rounded btn-outline-primary border-0 btn-edit-service" data-service-id='<?php echo $s->id; ?>'>
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -83,13 +91,11 @@
 		language: {
 			url: dtLang
 		},
-		columnDefs: [
-			{
-				targets: [1],
-				searchable: false,
-				orderable: false
-			}
-		],
+		columnDefs: [{
+			targets: [5],
+			searchable: false,
+			orderable: false
+		}],
 		order: [
 			[0, 'asc']
 		],

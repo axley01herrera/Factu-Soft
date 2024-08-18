@@ -10,9 +10,21 @@
 			<div class="modal-body">
 				<div class="row">
 					<!-- Name -->
-					<div class="col-12 mb-2">
+					<div class="col-12 col-lg-6 mb-2">
 						<label for="txt-name" class="form-label"><?php echo lang('Text.service_text_name'); ?></label>
 						<input type="text" id="txt-name" class="form-control required" value="<?php echo @$service[0]->name; ?>" />
+					</div>
+
+					<!-- Price -->
+					<div class="col-12 col-lg-6 mb-2">
+						<label for="txt-price" class="form-label"><?php echo lang('Text.service_text_price'); ?> (<?php echo $config[0]->currency; ?>)</label>
+						<input type="text" id="txt-price" class="form-control required price" value="<?php echo @$service[0]->price; ?>" />
+					</div>
+
+					<!-- Description -->
+					<div class="col-12 mb-2">
+						<label for="txt-description" class="form-label"><?php echo lang('Text.service_text_description'); ?></label>
+						<input type="text" id="txt-description" class="form-control required" value="<?php echo @$service[0]->description; ?>" />
 					</div>
 				</div>
 			</div>
@@ -46,11 +58,13 @@
 					data: {
 						'serviceID': '<?php echo @$service[0]->id; ?>',
 						'name': $('#txt-name').val(),
+						'description': $('#txt-description').val(),
+						'price': $('#txt-price').val(),
 					},
 					dataType: "json",
 					success: function(response) {
 						if (response.error == 0) {
-							closeModal();
+							$('#modal').modal('hide');
 							Swal.fire({
 								position: "top-end",
 								icon: "success",
@@ -98,6 +112,15 @@
 
 		$('.required').on('focus', function() {
 			$(this).removeClass('is-invalid');
+		});
+
+		$('.price').each(function() {
+			$(this).on('keypress', function(event) {
+				var charCode = event.which;
+				if ((charCode < 48 || charCode > 57) && charCode !== 46) {
+					event.preventDefault();
+				}
+			});
 		});
 
 		function focused() {
