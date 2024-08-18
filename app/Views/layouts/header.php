@@ -32,10 +32,6 @@
 	<script src="<?php echo base_url('public/assets/libs/jquery/3.7.1.min.js'); ?>"></script>
 	<script src="<?php echo base_url('public/assets/libs/sweetalert/sweetalert2.js'); ?>"></script>
 
-	<script src="<?php echo base_url('public/assets/libs/simplebar/dist/simplebar.min.js'); ?>"></script>
-	<script src="<?php echo base_url('public/assets/js/theme/theme.js'); ?>"></script>
-	<script src="<?php echo base_url('public/assets/js/theme/sidebarmenu.js'); ?>"></script>
-
 	<script>
 		function globalError() {
 			Swal.fire({

@@ -18,6 +18,10 @@
         </div>
     </div>
 
+    <script src="<?php echo base_url('public/assets/libs/simplebar/dist/simplebar.min.js'); ?>"></script>
+	<script src="<?php echo base_url('public/assets/js/theme/theme.js'); ?>"></script>
+	<script src="<?php echo base_url('public/assets/js/theme/sidebarmenu.js'); ?>"></script>
+
     <script>
         document.querySelectorAll(".sidebartoggler").forEach(function(element) {
             element.addEventListener("click", function(e) {
