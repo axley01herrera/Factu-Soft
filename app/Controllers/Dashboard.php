@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ConfigModel;
 use App\Models\ProfileModel;
+use App\Models\DashboardModel;
 
 class Dashboard extends BaseController
 {
@@ -12,6 +13,7 @@ class Dashboard extends BaseController
 
 	protected $objConfig;
 	protected $objProfile;
+	protected $objDashboardModel;
 
 	protected $config;
 	protected $profile;
@@ -23,6 +25,7 @@ class Dashboard extends BaseController
 		# Models
 		$this->objConfig = new ConfigModel;
 		$this->objProfile = new ProfileModel;
+		$this->objDashboardModel = new DashboardModel;
 
 		# Services
 		$this->objRequest = \Config\Services::request();
@@ -52,6 +55,9 @@ class Dashboard extends BaseController
 		$data['dashboardActive'] = 'active';
 		# page
 		$data['page'] = 'dashboard/mainDashboard';
+		# data cards
+		$data['clients'] = $this->objDashboardModel->getActiveClients();
+		$data['services'] = $this->objDashboardModel->getActiveServices();
 
 		return view('layouts/main', $data);
 	}

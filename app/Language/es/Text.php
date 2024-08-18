@@ -47,6 +47,10 @@ $lang['text_log_in'] = "Entrar";
 $lang['text_error_empty_access_key'] = "Introduzca su clave de acceso";
 $lang['text_error_invalid_access_key'] = "Rectifique su clave de acceso";
 
+# Dashboard
+$lang['dashboard_cards_customers_active'] = "Clientes Activos";
+$lang['dashboard_cards_services_active'] = "Servicios Activos";
+
 # Invoices
 $lang['inv_page_title'] = "Listado de Facturas";
 
