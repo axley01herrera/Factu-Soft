@@ -1,7 +1,3 @@
-<!-- dropzone -->
-<link rel="stylesheet" href="<?php echo base_url('public/assets/libs/dropzone/dist/dropzone.css'); ?>">
-<script src="<?php echo base_url('public/assets/libs/dropzone/dist/dropzone.js'); ?>"></script>
-
 <div class="modal fade show" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal" style="display: block;" aria-modal="true" role="dialog">
 	<div class="modal-dialog modal-dialog-centered modal-md">
 		<div class="modal-content">
@@ -22,7 +18,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn bg-secondary text-white" data-bs-dismiss="modal"><?php echo lang('Text.btn_cancel'); ?></button>
-				<button type="button" id="btn-save" class="btn bg-primary text-white"><?php echo lang('Text.btn_save'); ?></button>
+				<button type="button" id="btn-save-key" class="btn bg-primary text-white"><?php echo lang('Text.btn_save'); ?></button>
 			</div>
 		</div>
 	</div>
@@ -31,8 +27,12 @@
 	$(document).ready(function() {
 		$('#modal').modal('show');
 
+		$('#modal').on('hidden.bs.modal', function(event) {
+            $('#app-modal').html('');
+        });
+
 		$("#password-eye").on("click", function() {
-			var input = $(this).prev("input");
+			let input = $(this).prev("input");
 			if (input.attr("type") === "password") {
 				input.attr("type", "text");
 				$(this).find("i").removeClass("fa-eye").addClass("fa-eye-slash");
@@ -43,11 +43,11 @@
 
 		});
 
-		$('#btn-save').on('click', function() {
+		$('#btn-save-key').on('click', function() {
 			let newPassword = $('#txt-new-password').val();
 
 			if (newPassword != '') {
-				$('#btn-save').attr('disabled', true);
+				$('#btn-save-key').attr('disabled', true);
 				$.ajax({
 					type: "POST",
 					url: "<?php echo base_url('Profile/changePasswordProcess'); ?>",
@@ -70,11 +70,11 @@
 						else
 							globalError();
 
-						$('#btn-save').removeAttr('disabled');
+						$('#btn-save-key').removeAttr('disabled');
 					},
 					error: function(error) {
 						globalError();
-						$('#btn-save').removeAttr('disabled');
+						$('#btn-save-key').removeAttr('disabled');
 					}
 				});
 			} else {

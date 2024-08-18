@@ -153,7 +153,7 @@ class Profile extends BaseController
 		}
 
 		# Params
-		$newPassword =  password_hash(htmlspecialchars(trim($this->objRequest->getPost('newPassword'))), PASSWORD_DEFAULT);
+		$newPassword =  password_hash($this->objRequest->getPost('newPassword'), PASSWORD_DEFAULT);
 
 		$data = array();
 		$data['access_key'] = $newPassword;

@@ -123,9 +123,9 @@ $lang['profile_msg_success_upload_logo'] = "Logo actualizado satisfactoriamente"
 $lang['profile_upload_logo_modal_title'] = "Añade tu logo";
 $lang['profile_upload_logo_modal_dropzone_text_1'] = "Arrastre o haga click aquí para subir un archivo";
 $lang['profile_upload_logo_modal_dropzone_text_2'] = ".PNG .JPG .JPEG";
-$lang['profile_change_password_modal_title'] = "Cambiar contraseña";
-$lang['profile_new_password_label'] = "Nueva contraseña";
-$lang['profile_msg_success_change_password'] = "Contraseña actualizada";
+$lang['profile_change_password_modal_title'] = "Cambiar clave de accesp";
+$lang['profile_new_password_label'] = "Nueva clave de acceso";
+$lang['profile_msg_success_change_password'] = "Clave de acceso actualizada";
 
 # Config
 $lang['config_page_title'] = "Configuración del Sistema";
