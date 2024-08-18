@@ -39,7 +39,7 @@
 </div>
 
 <script>
-	var lang = "es";
+	var lang = "<?php echo $lang; ?>";
 	var dtLang = "";
 
 	if (lang == "es")

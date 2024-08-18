@@ -52,6 +52,14 @@ $lang['inv_page_title'] = "Listado de Facturas";
 
 # Invoices Series
 $lang['inv_serie_page_title'] = "Listado de Series";
+$lang['inv_create_serial'] = "Crear Serie";
+$lang['inv_new_serial'] = "Nueva Serie";
+$lang['inv_name_serial'] = "Nombre de Serie";
+$lang['inv_serial_created'] = "Serie Creada";
+$lang['inv_serial_dt_col_name'] = "Name";
+$lang['inv_serial_dt_col_serial'] = "Serial";
+$lang['inv_serial_dt_col_updated'] = "Actualizado";
+$lang['inv_serial_dt_col_added'] = "Agregado";
 
 # Customer
 $lang['btn_create_customer'] = 'Crear Cliente';

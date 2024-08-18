@@ -15,7 +15,7 @@ class DataTableModel extends Model
 	}
 
 	####################
-	#### Client DT
+	#### Customers Data Table
 	####################
 
 	public function getCustomersProcessingData($params)
@@ -113,5 +113,17 @@ class DataTableModel extends Model
 		$query->groupEnd();
 
 		return $query->countAllResults();
+	}
+
+	####################
+	#### Series Data Table
+	####################
+
+	public function getSerials()
+	{
+		$query = $this->db->table('serial');
+		$data = $query->get()->getResult();
+
+		return $data;
 	}
 }

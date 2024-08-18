@@ -57,6 +57,7 @@ class Customer extends BaseController
 
 		$data = array();
 		$data['profile'] = $this->profile;
+		$data['lang'] = $this->config[0]->lang;
 		# menu
 		$data['customerActive'] = 'active';
 		# page

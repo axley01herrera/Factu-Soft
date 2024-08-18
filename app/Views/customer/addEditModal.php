@@ -13,7 +13,7 @@
 					<!-- Custmer Type -->
 					<div class="col-12 mb-2">
 						<label for="sel-type" class="form-label"><?php echo lang('Text.customer_text_type'); ?></label>
-						<select id="sel-type" class="form-select required" <?php if($action == "update") echo "disabled"; ?>>
+						<select id="sel-type" class="form-select required" <?php if ($action == "update") echo "disabled"; ?>>
 							<option value="" hidden></option>
 							<option value="0" <?php if (isset($customer[0]->type) && $customer[0]->type == 0) echo 'selected'; ?>><?php echo lang('Text.customer_type_particular'); ?></option>
 							<option value="1" <?php if (isset($customer[0]->type) && $customer[0]->type == 1) echo 'selected'; ?>><?php echo lang('Text.customer_type_enterprise'); ?></option>
@@ -82,7 +82,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="btn-save" class="btn btn-primary"><?php echo lang('Text.btn_save'); ?></button>
+				<button type="button" id="btn-save-customer" class="btn btn-primary"><?php echo lang('Text.btn_save'); ?></button>
 			</div>
 		</div>
 	</div>
@@ -91,11 +91,15 @@
 	$(document).ready(function() {
 		$('#modal').modal('show');
 
+		$('#modal').on('hidden.bs.modal', function(event) {
+			$('#app-modal').html('');
+		});
+
 		let action = '<?php echo $action; ?>';
 		let alerMsg = '<?php echo lang('Text.customer_msg_success_create'); ?>';
 
 		if (action == 'update') {
-			$('#btn-save').html('<?php echo lang('Text.btn_update'); ?>');
+			$('#btn-save-customer').html('<?php echo lang('Text.btn_update'); ?>');
 			alerMsg = '<?php echo lang('Text.customer_msg_success_update'); ?>';
 
 			let value = $('#sel-type').val();
@@ -129,11 +133,12 @@
 			focused();
 		}
 
-		$('#btn-save').on('click', function() {
+		$('#btn-save-customer').on('click', function() {
 			let requiredValues = checkRequiredValues();
 			let resultEmail = checkEmailFormat();
 
 			if (requiredValues == 0 && resultEmail == 0) {
+				$('#btn-save-customer').attr('disabled', true);
 				$.ajax({
 					type: "POST",
 					url: "<?php echo base_url('Customer/saveCustomer'); ?>",
@@ -154,7 +159,7 @@
 					dataType: "json",
 					success: function(response) {
 						if (response.error == 0) {
-							closeModal();
+							$('#modal').modal('hide');;
 							Swal.fire({
 								position: "top-end",
 								icon: "success",
@@ -163,13 +168,16 @@
 								timer: 2500
 							});
 							dtClients.draw();
-						} else if (response.error == 2)
+						} else if (response.error == 2) {
 							window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
-						else
+						} else {
 							globalError();
+						}
+						$('#btn-save-customer').removeAttr('disabled');
 					},
 					error: function(error) {
 						globalError();
+						$('#btn-save-customer').removeAttr('disabled');
 					}
 				});
 			} else {

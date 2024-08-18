@@ -32,6 +32,8 @@ $routes->post('Services/deleteService', 'Services::deleteService');
 # Invoices
 $routes->get('Invoice', 'Invoice::index');
 $routes->get('Invoice/series', 'Invoice::series');
+$routes->post('Invoice/createSerie', 'Invoice::createSerie'); 
+$routes->post('Invoice/createSerieProcess', 'Invoice::createSerieProcess');
 
 # Profile
 $routes->get('Profile', 'Profile::index');
