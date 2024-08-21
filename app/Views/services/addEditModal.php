@@ -10,13 +10,13 @@
 			<div class="modal-body">
 				<div class="row">
 					<!-- Name -->
-					<div class="col-12 col-lg-6 mb-2">
+					<div class="col-12 mb-2">
 						<label for="txt-name" class="form-label"><?php echo lang('Text.service_text_name'); ?></label>
 						<input type="text" id="txt-name" class="form-control required" value="<?php echo @$service[0]->name; ?>" />
 					</div>
 
 					<!-- Price -->
-					<div class="col-12 col-lg-6 mb-2">
+					<div class="col-6 mb-2">
 						<label for="txt-price" class="form-label"><?php echo lang('Text.service_text_price'); ?> (<?php echo $config[0]->currency; ?>)</label>
 						<input type="text" id="txt-price" class="form-control required price" value="<?php echo @$service[0]->price; ?>" />
 					</div>
@@ -24,7 +24,7 @@
 					<!-- Description -->
 					<div class="col-12 mb-2">
 						<label for="txt-description" class="form-label"><?php echo lang('Text.service_text_description'); ?></label>
-						<input type="text" id="txt-description" class="form-control required" value="<?php echo @$service[0]->description; ?>" />
+						<textarea id="txt-description" class="form-control"><?php echo @$service[0]->description; ?></textarea>
 					</div>
 				</div>
 			</div>
