@@ -1,9 +1,12 @@
 <?php $total = 0; ?>
 <div class="scroll-container">
 	<?php if (empty($basket)) { ?>
-		<div class="alert bg-light-subtle alert-dismissible fade show" role="alert">
-			No hay ningún servicio en la cesta
+		<div class="alert bg-light-subtle alert-dismissible fade show text-center" role="alert">
+			<?php echo lang('Text.tpv_empty_services_label'); ?>
 		</div>
+		<script>
+			submitByServices = 0; // Not allow submit by empty services
+		</script>
 	<?php } else { ?>
 		<div class="table-responsive">
 			<table class="table" style="width: 100%;">
@@ -27,11 +30,11 @@
 									<div class="col-4 ms-auto">
 										<div class="position-relative d-flex align-items-center" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="10" data-kt-dialer-step="1" data-kt-dialer-decimals="0">
 											<button type="button" class="btn btn-icon btn-sm btn-quantity btn-light btn-icon-gray-400 w-30px h-30px" data-kt-dialer-control="rest" data-basket-service-id="<?php echo $b->id; ?>" data-quantity="<?php echo $b->quantity; ?>" data-service-id="<?php echo $b->serviceID; ?>" data-amount="<?php echo $b->amount; ?>">
-												<i class="fas fa-minus fs-2"></i>
+												<i class="fas fa-minus fs-1"></i>
 											</button>
-											<input type="text" class="form-control border-0 text-center px-0 fs-7 fw-bold text-gray-800 w-30px" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" readonly="readonly" value="<?php echo $b->quantity; ?>">
+											<input type="text" class="form-control border-0 text-center px-0 fs-5 fw-bold text-gray-800 w-30px" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" readonly="readonly" value="<?php echo $b->quantity; ?>">
 											<button type="button" class="btn btn-icon btn-sm btn-quantity btn-light btn-icon-gray-400 w-30px h-30px" data-kt-dialer-control="add" data-basket-service-id="<?php echo $b->id; ?>" data-quantity="<?php echo $b->quantity; ?>" data-service-id="<?php echo $b->serviceID; ?>" data-amount="<?php echo $b->amount; ?>">
-												<i class="fa fa-plus fs-2"></i>
+												<i class="fa fa-plus fs-1"></i>
 											</button>
 										</div>
 									</div>
@@ -47,6 +50,9 @@
 				</tbody>
 			</table>
 		</div>
+		<script>
+			submitByServices = 1; // Allow Submit by not empty services
+		</script>
 	<?php } ?>
 </div>
 
@@ -54,6 +60,27 @@
 	$('#total-price').html("<?php echo getMoneyFormat($config[0]->currency, $total); ?>");
 
 	var totalPrice = "<?php echo @$total; ?>";
+
+	$('.edit-price').on('click', function(e) {
+		e.preventDefault();
+		let basketServiceID = $(this).attr('data-basket-service-id');
+		let serviceInfo = $(this).attr('data-service-info');
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url('TPV/editPriceTPV') ?>",
+			data: {
+				'basketServiceID': basketServiceID,
+				'serviceInfo': serviceInfo
+			},
+			dataType: "html",
+			success: function(response) {
+				$('#app-modal').html(response);
+			},
+			error: function(error) {
+				globalError();
+			}
+		});
+	});
 
 	$('.delete-service').on('click', function(e) {
 		e.preventDefault();

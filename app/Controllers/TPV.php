@@ -191,4 +191,72 @@ class TPV extends BaseController
 
 		return json_encode($result);
 	}
+
+	public function editPriceTPV()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+
+			return json_encode($result);
+		}
+
+		# params
+		$basketServiceID = $this->objRequest->getPost('basketServiceID');
+		$serviceInfo = $this->objRequest->getPost('serviceInfo');
+
+		$data = array();
+		# data
+		$data['basketServiceID'] = $basketServiceID;
+		$data['serviceInfo'] = $serviceInfo;
+		$data['uniqid'] = uniqid();
+
+		return view('TPV/editPriceModal', $data);
+	}
+
+	public function editPriceProcessTPV()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+
+			return json_encode($result);
+		}
+
+		# params
+		$basketServiceID = $this->objRequest->getPost('basketServiceID');
+		$newPrice = $this->objRequest->getPost('newPrice');
+
+		return json_encode($this->objMainModel->objUpdate('basket_service', array('amount' => $newPrice), $basketServiceID));
+	}
+
+	public function saveInvoice()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+
+			return json_encode($result);
+		}
+
+		# params
+		$basketID = $this->objRequest->getPost('basketID');
+		$payType = $this->objRequest->getPost('payType');
+
+		$data = array();
+		$data['status'] = 1;
+		$data['date'] = date("Y-m-d");
+		$data['dateTime'] = date("Y-m-d H:i:s");
+		$data['payType'] = $payType;
+
+		$result = $this->objMainModel->objUpdate('basket', $data, $basketID);
+
+		return json_encode($result);
+	}
 }

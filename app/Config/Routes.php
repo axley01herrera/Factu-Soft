@@ -54,4 +54,6 @@ $routes->post('TPV/addServiceToBasket', 'TPV::addServiceToBasket');
 $routes->post('TPV/clearBasketService', 'TPV::clearBasketService');
 $routes->post('TPV/removeServiceFromBasket', 'TPV::removeServiceFromBasket');
 $routes->post('TPV/changeQuantity', 'TPV::changeQuantity');
-$routes->post('TPV/saveBasket', 'TPV::saveBasket');
+$routes->post('TPV/editPriceTPV', 'TPV::editPriceTPV');
+$routes->post('TPV/editPriceProcessTPV', 'TPV::editPriceProcessTPV');
+$routes->post('TPV/saveInvoice', 'TPV::saveInvoice');

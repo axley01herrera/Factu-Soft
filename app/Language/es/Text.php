@@ -52,6 +52,20 @@ $lang['text_error_invalid_access_key'] = "Rectifique su clave de acceso";
 $lang['dashboard_cards_customers_active'] = "Clientes Activos";
 $lang['dashboard_cards_services_active'] = "Servicios Activos";
 
+# TPV
+$lang['tpv_page_title'] = "TPV";
+$lang['tpv_modal_new_price'] = "Nuevo Precio";
+$lang['tpv_basket_btn_clear'] = "Limpiar";
+$lang['tpv_basket_payment_type_label'] = "Método de Pago";
+$lang['tpv_basket_payment_type_target'] = "Tarjeta";
+$lang['tpv_basket_payment_type_cash'] = "Efectivo";
+$lang['tpv_empty_services_label'] = "No hay Servicios";
+$lang['tpv_alert_not_services_basket'] = "Debe añadir al menos un servicio";
+$lang['tpv_alert_not_payment_basket'] = "Seleccione un método de pago";
+$lang['tpv_alert_success_save_invoice'] = "Factura creada";
+$lang['tpv_alert_success_save_new_price'] = "Precio Actualizado";
+$lang['tpv_basket_btn_ticket'] = "Cobrar";
+
 # Invoices
 $lang['inv_page_title'] = "Listado de Facturas";
 
