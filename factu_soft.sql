@@ -103,6 +103,38 @@ CREATE TABLE IF NOT EXISTS `services` (
   PRIMARY KEY (`id`)
 );
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `basket`
+--
+
+DROP TABLE IF EXISTS `basket`;
+CREATE TABLE IF NOT EXISTS `basket` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `status` int NOT NULL,
+  `dateTime` datetime NOT NULL,
+  `date` date NOT NULL,
+  `payType` int NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `basket_service`
+--
+
+DROP TABLE IF EXISTS `basket_service`;
+CREATE TABLE IF NOT EXISTS `basket_service` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `basketID` int DEFAULT NULL,
+  `serviceID` varchar(999) DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+);
+
 /* Not Remove */
 INSERT INTO `profile` (`id`, `logo`, `access_key`, `name`, `company_id`, `email`, `phone`, `address_a`, `address_b`, `city`, `state`, `zip`, `country`, `description`) VALUES
 (1, NULL, '$2y$10$nSh5/VR7O3a0IkaZD8MVwO0o8xoia0JS9FVTfH.RVj8TZrLWBR0uC', 'Grupo AHV', '45368548-X', 'grupoahv@gmail.com', '(+34) 658-789-789', 'Calle Rosa #2', '', '', 'Las Palmas', 35570, 'España', 'Empresa dedicada al desarrollo de soluciones informáticas.');

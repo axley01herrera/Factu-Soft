@@ -25,6 +25,7 @@ $lang['btn_cancel'] = "Cancelar";
 $lang['menu_user'] = "Usuario";
 $lang['menu_statistics'] = "Estadísticas";
 $lang['menu_dashboard'] = "Tablero";
+$lang['menu_tpv'] = "TPV";
 $lang['menu_customers'] = "Clientes";
 $lang['menu_customers_list'] = "Listado de Clientes";
 $lang['menu_invoices'] = "Facturación";
