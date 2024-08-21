@@ -28,10 +28,12 @@
 						</thead>
 						<tbody>
 							<?php foreach ($series as $s) { ?>
-								<td><?php echo $s->name; ?></td>
-								<td><?php echo str_pad($s->count, 4, '0', STR_PAD_LEFT); ?></td>
-								<td><?php echo $s->updated; ?></td>
-								<td><?php echo $s->created; ?></td>
+								<tr>
+									<td><?php echo $s->name; ?></td>
+									<td><?php echo str_pad($s->count, 4, '0', STR_PAD_LEFT); ?></td>
+									<td><?php echo $s->updated; ?></td>
+									<td><?php echo $s->created; ?></td>
+								</tr>
 							<?php } ?>
 						</tbody>
 					</table>
