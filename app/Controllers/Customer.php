@@ -198,7 +198,7 @@ class Customer extends BaseController
 
 		if (empty($serialID)) {
 			$data = array();
-			$data['name'] = $serial;
+			$data['name'] = strtoupper($serial);
 			$data['count'] = 0;
 			$data['created'] = date('Y-m-d H:i:s');
 			$data['updated'] = date('Y-m-d H:i:s');
