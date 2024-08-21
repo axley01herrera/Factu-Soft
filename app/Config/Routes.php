@@ -57,3 +57,5 @@ $routes->post('TPV/changeQuantity', 'TPV::changeQuantity');
 $routes->post('TPV/editPriceTPV', 'TPV::editPriceTPV');
 $routes->post('TPV/editPriceProcessTPV', 'TPV::editPriceProcessTPV');
 $routes->post('TPV/saveInvoice', 'TPV::saveInvoice');
+
+$routes->get('TPV/printTicket', 'TPV::printTicket');

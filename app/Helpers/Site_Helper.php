@@ -22,3 +22,11 @@ function getService($serviceID)
 
     return $data;
 }
+
+function getDateLabel($lang)
+{
+    if ($lang == 'es')
+        return "d-m-Y";
+    else
+        return "m-d-Y";
+}

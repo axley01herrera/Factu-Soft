@@ -259,4 +259,31 @@ class TPV extends BaseController
 
 		return json_encode($result);
 	}
+
+	public function printTicket()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+
+			return json_encode($result);
+		}
+
+		# params
+		$basketID = $this->objRequest->getPostGet('basketID');
+
+		$ticket = $this->objTPVModel->getViewBasket($basketID);
+
+		$data = array();
+		# config
+		$data['config'] = $this->config;
+		$data['profile'] = $this->profile;
+		$data['dateLabel'] = getDateLabel($this->config[0]->lang);
+		# data 
+		$data['ticket'] = $ticket;
+
+		return view('TPV/ticket', $data);
+	}
 }

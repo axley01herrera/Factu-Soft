@@ -88,4 +88,13 @@ class TPVModel extends Model
 
 		return $result;
 	}
+
+	public function getViewBasket($basketID)
+	{
+		$query = $this->db->table('view_basket')
+			->where('basketID', $basketID);
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
 }

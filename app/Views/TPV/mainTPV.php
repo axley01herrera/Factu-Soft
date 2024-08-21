@@ -183,6 +183,8 @@
 							showConfirmButton: false,
 							timer: 2500
 						});
+						url = "<?php echo base_url('TPV/printTicket?basketID='); ?>" + basketID;
+						window.open(url, '_blank');
 						setTimeout(() => {
 							window.location.reload();
 						}, 2500);
@@ -200,7 +202,7 @@
 				Swal.fire({
 					position: "top-end",
 					icon: "warning",
-					text: "<?php echo lang('Text.tpv_alert_not_services_basket');?>" + '..!',
+					text: "<?php echo lang('Text.tpv_alert_not_services_basket'); ?>" + '..!',
 					showConfirmButton: false,
 					timer: 2500
 				});
@@ -211,7 +213,7 @@
 				Swal.fire({
 					position: "top-end",
 					icon: "warning",
-					text: "<?php echo lang('Text.tpv_alert_not_payment_basket');?>" + '..!',
+					text: "<?php echo lang('Text.tpv_alert_not_payment_basket'); ?>" + '..!',
 					showConfirmButton: false,
 					timer: 2500
 				});
