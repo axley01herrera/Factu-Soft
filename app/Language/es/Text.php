@@ -99,6 +99,8 @@ $lang['customer_profile_page_title'] = "Perfil del Cliente";
 $lang['customer_label'] = "Cliente";
 $lang['customer_profile_personal_title'] = "Información";
 $lang['customer_profile_invoices_title'] = "Facturas";
+$lang['customer_serial_msg'] = "Si necesita utilizar una serie específica al emitir facturas para este cliente, por favor, introdúzcala en el campo a continuación.";
+$lang['customer_serial'] = "Serie de Facturación";
 
 # Service
 $lang['btn_create_service'] = 'Crear Servicio';
@@ -134,7 +136,7 @@ $lang['profile_msg_success_upload_logo'] = "Logo actualizado satisfactoriamente"
 $lang['profile_upload_logo_modal_title'] = "Añade tu logo";
 $lang['profile_upload_logo_modal_dropzone_text_1'] = "Arrastre o haga click aquí para subir un archivo";
 $lang['profile_upload_logo_modal_dropzone_text_2'] = ".PNG .JPG .JPEG";
-$lang['profile_change_password_modal_title'] = "Cambiar clave de accesp";
+$lang['profile_change_password_modal_title'] = "Cambiar clave de acces";
 $lang['profile_new_password_label'] = "Nueva clave de acceso";
 $lang['profile_msg_success_change_password'] = "Clave de acceso actualizada";
 

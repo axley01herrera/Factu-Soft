@@ -108,7 +108,7 @@ class Invoice extends BaseController
 		$name = htmlspecialchars(trim($this->objRequest->getPost('name')));
 
 		$data = array();
-		$data['name'] = $name;
+		$data['name'] = strtoupper($name);
 		$data['count'] = 0;
 		$data['created'] = date('Y-m-d H:i:s');
 		$data['updated'] = date('Y-m-d H:i:s');

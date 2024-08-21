@@ -58,6 +58,7 @@ class Services extends BaseController
 		$data = array();
 		$data['profile'] = $this->profile;
 		$data['config'] = $this->config;
+		$data['lang'] = $this->config[0]->lang;
 		# menu
 		$data['servicesActive'] = 'active';
 		# page
@@ -75,10 +76,11 @@ class Services extends BaseController
 			return view('logout');
 
 		# Params
-		$serviceID = @$this->objRequest->getPost('serviceID');
+		$serviceID = $this->objRequest->getPost('serviceID');
 
 		$data = array();
 		$data['config'] = $this->config;
+		
 		if (empty($serviceID)) {
 			$data['modalTitle'] = lang('Text.services_modal_title_create');
 			$data['action'] = 'create';

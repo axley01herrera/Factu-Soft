@@ -160,6 +160,7 @@ class Customer extends BaseController
 
 		# Params
 		$customerID = $this->objRequest->getPost('customerID');
+		$serialID = $this->objRequest->getPost('serialID');
 		$name = htmlspecialchars(trim($this->objRequest->getPost('name')));
 		$last_name = htmlspecialchars(trim($this->objRequest->getPost('last_name')));
 		$type = htmlspecialchars(trim($this->objRequest->getPost('type')));
@@ -171,7 +172,8 @@ class Customer extends BaseController
 		$address_zip = htmlspecialchars(trim($this->objRequest->getPost('address_zip')));
 		$address_country = htmlspecialchars(trim($this->objRequest->getPost('address_country')));
 		$nif = htmlspecialchars(trim($this->objRequest->getPost('nif')));
-
+		$serial = htmlspecialchars(trim($this->objRequest->getPost('serial')));
+		
 		$data = array();
 		$data['name'] = $name;
 		$data['last_name'] = $last_name;
@@ -192,6 +194,25 @@ class Customer extends BaseController
 			$data['updated'] = date('Y-m-d H:i:s');
 			$data['added'] = date('Y-m-d H:i:s');
 			$result = $this->objMainModel->objCreate('customer', $data);
+		}
+
+		if (empty($serialID)) {
+			$data = array();
+			$data['name'] = strtoupper($serial);
+			$data['count'] = 0;
+			$data['created'] = date('Y-m-d H:i:s');
+			$data['updated'] = date('Y-m-d H:i:s');
+
+			$rs = $this->objMainModel->objCreate('serial', $data);
+
+			$data = array();
+			$data['serial_id'] = $rs['id'];
+
+			if (!empty($customerID)) {
+				$this->objMainModel->objUpdate('customer', $data, $customerID);
+			} else { // Create
+				$this->objMainModel->objUpdate('customer', $data, $result['id']);
+			}
 		}
 
 		return json_encode($result);

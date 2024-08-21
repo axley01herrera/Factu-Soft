@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `deleted` int NOT NULL DEFAULT '0',
   `added` datetime NOT NULL,
   `updated` datetime NOT NULL,
+  `serial_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
