@@ -136,6 +136,29 @@ CREATE TABLE IF NOT EXISTS `basket_service` (
   PRIMARY KEY (`id`)
 );
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for View `view_basket`
+--
+
+CREATE VIEW view_basket AS
+SELECT 
+ b.id as basketID,
+ b.dateTime,
+ b.date,
+ b.payType,
+ bs.amount,
+ bs.quantity,
+ s.id as serviceID,
+ s.name as serviceName,
+ s.price as servicePrice,
+ s.description as serviceDescription
+FROM 
+  basket b
+  INNER JOIN basket_service bs ON b.id = bs.basketID
+  INNER JOIN services s ON bs.serviceID = s.id
+
 /* Not Remove */
 INSERT INTO `profile` (`id`, `logo`, `access_key`, `name`, `company_id`, `email`, `phone`, `address_a`, `address_b`, `city`, `state`, `zip`, `country`, `description`) VALUES
 (1, NULL, '$2y$10$nSh5/VR7O3a0IkaZD8MVwO0o8xoia0JS9FVTfH.RVj8TZrLWBR0uC', 'Grupo AHV', '45368548-X', 'grupoahv@gmail.com', '(+34) 658-789-789', 'Calle Rosa #2', '', '', 'Las Palmas', 35570, 'España', 'Empresa dedicada al desarrollo de soluciones informáticas.');
