@@ -80,6 +80,18 @@
 						<input type="text" id="txt-country" class="form-control" value="<?php echo @$customer[0]->address_country; ?>" />
 					</div>
 				</div>
+
+				<!-- Invoice Serial -->
+				<?php if (empty($customer[0]->serial_id)) { ?>
+					<div class="row particular enterprise" hidden >
+						<div class="col-12">
+							<div class="alert alert-warning" role="alert">
+								<?php echo lang('Text.customer_serial_msg'); ?>
+							</div>
+							<input type="text" id="serial" class="form-control" placeholder="<?php echo lang('Text.customer_serial') ?>" />
+						</div>
+					</div>
+				<?php } ?>
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="btn-save-customer" class="btn btn-primary"><?php echo lang('Text.btn_save'); ?></button>
@@ -144,6 +156,7 @@
 					url: "<?php echo base_url('Customer/saveCustomer'); ?>",
 					data: {
 						'customerID': '<?php echo @$customer[0]->id; ?>',
+						'serialID': "<?php echo @$customer[0]->serial_id; ?>",
 						'name': $('#txt-name').val(),
 						'last_name': $('#txt-last_name').val(),
 						'nif': $('#txt-nif').val(),
@@ -155,6 +168,7 @@
 						'address_state': $('#txt-state').val(),
 						'address_zip': $('#txt-zip').val(),
 						'address_country': $('#txt-country').val(),
+						'serial': $('#serial').val()
 					},
 					dataType: "json",
 					success: function(response) {

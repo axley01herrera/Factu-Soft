@@ -98,6 +98,8 @@ $lang['customer_profile_page_title'] = "Perfil del Cliente";
 $lang['customer_label'] = "Cliente";
 $lang['customer_profile_personal_title'] = "Información";
 $lang['customer_profile_invoices_title'] = "Facturas";
+$lang['customer_serial_msg'] = "Si necesita utilizar una serie específica al emitir facturas para este cliente, por favor, introdúzcala en el campo a continuación.";
+$lang['customer_serial'] = "Serie de Facturación";
 
 # Service
 $lang['btn_create_service'] = 'Crear Servicio';
