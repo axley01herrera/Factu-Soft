@@ -10,7 +10,7 @@
             <!-- Top Bar -->
             <?php echo view('layouts/topBar'); ?>
             <div class="body-wrapper">
-                <div class="container-fluid">
+                <div class="container">
                     <!-- page -->
                     <?php echo view($page); ?>
                 </div>

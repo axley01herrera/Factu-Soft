@@ -1,8 +1,5 @@
 <header class="topbar">
 	<div class="with-vertical">
-		<!-- ---------------------------------- -->
-		<!-- Start Vertical Layout Header -->
-		<!-- ---------------------------------- -->
 		<nav class="navbar navbar-expand-lg p-0">
 			<ul class="navbar-nav">
 				<li style="cursor: pointer;" class="nav-item nav-icon-hover-bg dark rounded-circle d-flex sidebartoggler">
@@ -13,97 +10,7 @@
 
 				</li>
 			</ul>
-
-			<!-- Logo -->
-			<div class="d-block d-lg-none py-4 py-xl-0">
-				<?php if (!empty($profile->logo)) { ?>
-					<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="logo" class="rounded-circle" style="width: 25px;">
-				<?php } else { ?>
-					<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="logo" class="rounded-circle" style="width: 25px;">
-				<?php } ?>
-			</div>
-
-			<ul class="navbar-nav navbar-toggler p-0 border-0">
-				<li class="nav-item nav-icon-hover-bg dark rounded-circle d-flex">
-					<a class="nav-link rounded-circle" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						<iconify-icon icon="solar:menu-dots-bold-duotone" class="fs-6"></iconify-icon>
-					</a>
-				</li>
-			</ul>
-
-			<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-				<div class="d-flex align-items-center justify-content-between">
-					<ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
-						<!-- ------------------------------- -->
-						<!-- start profile Dropdown -->
-						<!-- ------------------------------- -->
-						<li class="nav-item dropdown">
-							<a class="nav-link" href="javascript:void(0)" id="drop1" aria-expanded="false">
-								<div class="d-flex align-items-center lh-base">
-									<?php if (!empty($profile->logo)) { ?>
-										<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
-									<?php } else { ?>
-										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
-									<?php } ?>
-								</div>
-							</a>
-							<div class="dropdown-menu content-dd dropdown-menu-end animated flipInY" aria-labelledby="drop1">
-								<div class="profile-dropdown position-relative" data-simplebar>
-									<div class="py-3 px-7 pb-0">
-										<h5 class="mb-0 fs-5"><?php echo lang('Text.profile_page_title'); ?></h5>
-									</div>
-									<div class="d-flex align-items-center py-9 mx-7 border-bottom">
-										<?php if (!empty($profile->logo)) { ?>
-											<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" class="rounded-circle" width="80" alt="Avatar" />
-										<?php } else { ?>
-											<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png'); ?>" class="rounded-circle" width="80" alt="Avatar" />
-										<?php } ?>
-										<div class="ms-3">
-											<h5 class="mb-1 fs-4 text-truncate">
-												<?php echo @$profile->name; ?>
-											</h5>
-											<span class="mb-1 d-block text-truncate"><?php echo @$profile->company_id; ?></span>
-										</div>
-									</div>
-									<div class="message-body">
-										<a href="<?php echo base_url('Profile'); ?>" class="py-8 px-7 mt-8 d-flex align-items-center">
-											<span class="d-flex align-items-center justify-content-center bg-info-subtle rounded p-6 fs-7 text-info">
-												<iconify-icon icon="solar:user-circle-line-duotone"></iconify-icon>
-											</span>
-											<div class="w-75 d-inline-block v-middle ps-3">
-												<h6 class="mb-1 fs-3 lh-base"><?php echo lang('Text.menu_profile') ?></h6>
-												<span class="fs-2 d-block text-body-secondary"><?php echo lang('Text.profile_text_company_data') ?></span>
-											</div>
-										</a>
-										<a href="#" id="btn-change-password" class="py-8 px-7 d-flex align-items-center">
-											<span class="d-flex align-items-center justify-content-center bg-info-subtle rounded p-6 fs-7 text-info">
-												<iconify-icon icon="solar:key-square-outline"></iconify-icon>
-											</span>
-											<div class="w-75 d-inline-block v-middle ps-3">
-												<h6 class="mb-1 fs-3 lh-base"><?php echo lang('Text.menu_security') ?></h6>
-												<span class="fs-2 d-block text-body-secondary"><?php echo lang('Text.menu_access_key'); ?></span>
-											</div>
-										</a>
-									</div>
-									<div class="d-grid py-4 px-7 pt-8">
-										<a href="<?php echo base_url('/'); ?>" class="btn btn-danger"><?php echo lang('Text.menu_logout'); ?></a>
-									</div>
-								</div>
-
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
 		</nav>
-		<!-- ---------------------------------- -->
-		<!-- End Vertical Layout Header -->
-		<!-- ---------------------------------- -->
-
-		<!-- ------------------------------- -->
-		<!-- apps Dropdown in Small screen -->
-		<!-- ------------------------------- -->
-		<!--  Mobilenavbar -->
 		<div class="offcanvas offcanvas-start pt-0" data-bs-scroll="true" tabindex="-1" id="mobilenavbar" aria-labelledby="offcanvasWithBothOptionsLabel">
 			<nav class="sidebar-nav scroll-sidebar">
 				<div class="offcanvas-header justify-content-between ps-0 pt-0">
@@ -151,81 +58,9 @@
 								<iconify-icon icon="solar:sort-line-duotone" class="fs-6"></iconify-icon>
 							</a>
 						</li>
-						<!-- ------------------------------- -->
-						<!-- start profile Dropdown -->
-						<!-- ------------------------------- -->
-						<li class="nav-item dropdown">
-							<a class="nav-link" href="javascript:void(0)" id="drop1" aria-expanded="false">
-								<div class="d-flex align-items-center lh-base">
-									<img src="<?php echo base_url('public/assets/images/avatar/user-1.jpg'); ?>" class="rounded-circle" width="35" height="35" alt="Avatar" />
-								</div>
-							</a>
-							<div class="dropdown-menu content-dd dropdown-menu-end animated flipInY" aria-labelledby="drop1">
-								<div class="profile-dropdown position-relative" data-simplebar>
-									<div class="py-3 px-7 pb-0">
-										<h5 class="mb-0 fs-5">User Profile</h5>
-									</div>
-									<div class="d-flex align-items-center py-9 mx-7 border-bottom">
-										<img src="<?php echo base_url('public/assets/images/avatar/user-1.jpg'); ?>" class="rounded-circle" width="80" alt="Avatar" />
-										<div class="ms-3">
-											<h5 class="mb-1 fs-4 text-truncate">Text</h5>
-											<span class="mb-1 d-block text-truncate">Text</span>
-											<p class="mb-0 d-flex align-items-center gap-2 text-trunate">
-												<i class="ti ti-mail fs-4"></i> Text
-											</p>
-										</div>
-									</div>
-									<div class="message-body">
-										<a href="#" class="py-8 px-7 mt-8 d-flex align-items-center">
-											<span class="d-flex align-items-center justify-content-center bg-info-subtle rounded p-6 fs-7 text-info">
-												<iconify-icon icon="solar:user-circle-line-duotone"></iconify-icon>
-											</span>
-											<div class="w-75 d-inline-block v-middle ps-3">
-												<h6 class="mb-1 fs-3 lh-base">My Profile</h6>
-												<span class="fs-2 d-block text-body-secondary">Account Settings</span>
-											</div>
-										</a>
-										<a href="<?php echo base_url('AccountV2/resetPassword'); ?>" class="py-8 px-7 d-flex align-items-center">
-											<span class="d-flex align-items-center justify-content-center bg-info-subtle rounded p-6 fs-7 text-info">
-												<iconify-icon icon="solar:key-square-outline"></iconify-icon>
-											</span>
-											<div class="w-75 d-inline-block v-middle ps-3">
-												<h6 class="mb-1 fs-3 lh-base">Security</h6>
-												<span class="fs-2 d-block text-body-secondary">Reset Password</span>
-											</div>
-										</a>
-									</div>
-									<div class="d-grid py-4 px-7 pt-8">
-										<a href="<?php echo base_url('/'); ?>" class="btn btn-danger">Log Out</a>
-									</div>
-								</div>
-
-							</div>
-						</li>
-						<!-- ------------------------------- -->
-						<!-- end profile Dropdown -->
-						<!-- ------------------------------- -->
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</div>
 </header>
-
-<script>
-	$('#btn-change-password').on('click', function(e) {
-		e.preventDefault();
-		$.ajax({
-			type: "POST",
-			url: "<?php echo base_url('Profile/changePassword') ?>",
-			data: "data",
-			dataType: "html",
-			success: function(response) {
-				$('#app-modal').html(response);
-			},
-			error: function(error) {
-				globalError();
-			}
-		});
-	});
-</script>

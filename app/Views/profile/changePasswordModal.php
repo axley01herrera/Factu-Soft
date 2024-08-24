@@ -28,8 +28,8 @@
 		$('#modal').modal('show');
 
 		$('#modal').on('hidden.bs.modal', function(event) {
-            $('#app-modal').html('');
-        });
+			$('#app-modal').html('');
+		});
 
 		$("#password-eye").on("click", function() {
 			let input = $(this).prev("input");
@@ -57,7 +57,7 @@
 					dataType: "json",
 					success: function(response) {
 						if (response.error == 0) {
-							$('#modal').modal('hide');
+
 							Swal.fire({
 								position: "top-end",
 								icon: "success",
@@ -65,6 +65,10 @@
 								showConfirmButton: false,
 								timer: 2500
 							});
+
+							setTimeout(() => {
+								window.location.reload();
+							}, 2600);
 						} else if (response.error == 2)
 							window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
 						else
