@@ -17,6 +17,12 @@ CREATE TABLE IF NOT EXISTS `config` (
   PRIMARY KEY (`id`)
 );
 
+-- Insert after create table
+INSERT INTO `profile` (`id`, `logo`, `access_key`, `name`, `company_id`, `email`, `phone`, `address_a`, `address_b`, `city`, `state`, `zip`, `country`, `description`) VALUES
+(1, NULL, '$2y$10$nSh5/VR7O3a0IkaZD8MVwO0o8xoia0JS9FVTfH.RVj8TZrLWBR0uC', 'Grupo AHV', '45368548-X', 'grupoahv@gmail.com', '(+34) 658-789-789', 'Calle Rosa #2', '', '', 'Las Palmas', 35570, 'España', 'Empresa dedicada al desarrollo de soluciones informáticas.');
+
+INSERT INTO `config` (`id`, `lang`, `timezone`, `currency`) VALUES (NULL, 'es', 'Atlantic/Canary', '€');
+
 -- --------------------------------------------------------
 
 --
@@ -73,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `serial` Require Execute Insert After Create table
+-- Table structure for table `serial`
 --
 
 DROP TABLE IF EXISTS `serial`;
@@ -86,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `serial` (
   PRIMARY KEY (`id`)
 );
 
-
+-- Insert after create table
 INSERT INTO `serial` (`id`, `name`, `count`, `created`, `updated`) VALUES
 (1, 'TPV', 0, '2024-08-24 11:00:18', '2024-08-24 11:00:18');
 
@@ -108,9 +114,61 @@ CREATE TABLE IF NOT EXISTS `services` (
   PRIMARY KEY (`id`)
 );
 
+-- --------------------------------------------------------
 
-/* Not Remove */
-INSERT INTO `profile` (`id`, `logo`, `access_key`, `name`, `company_id`, `email`, `phone`, `address_a`, `address_b`, `city`, `state`, `zip`, `country`, `description`) VALUES
-(1, NULL, '$2y$10$nSh5/VR7O3a0IkaZD8MVwO0o8xoia0JS9FVTfH.RVj8TZrLWBR0uC', 'Grupo AHV', '45368548-X', 'grupoahv@gmail.com', '(+34) 658-789-789', 'Calle Rosa #2', '', '', 'Las Palmas', 35570, 'España', 'Empresa dedicada al desarrollo de soluciones informáticas.');
+--
+-- Table structure for table `invoice`
+--
 
-INSERT INTO `config` (`id`, `lang`, `timezone`, `currency`) VALUES (NULL, 'es', 'Atlantic/Canary', '€');
+DROP TABLE IF EXISTS `invoice`;
+CREATE TABLE IF NOT EXISTS `invoice` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `serie` int NOT NULL,
+  `number` int NOT NULL,
+  `customer` int DEFAULT NULL,
+  `created_date` date NOT NULL,
+  `due_date` date DEFAULT NULL,
+  `status` int NOT NULL DEFAULT '0' COMMENT '0 = OPEN\r\n1 = PAID',
+  `pay_type` int DEFAULT NULL COMMENT '1 = Card\r\n2 = Cash',
+  `added` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_items`
+--
+
+DROP TABLE IF EXISTS `invoice_items`;
+CREATE TABLE IF NOT EXISTS `invoice_items` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `invoice_id` int DEFAULT NULL,
+  `service_id` varchar(999) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+)
+
+-- --------------------------------------------------------
+
+--
+-- View structure for view `dt_invoice`
+--
+
+DROP VIEW IF EXISTS dt_invoice;
+CREATE VIEW dt_invoice AS
+SELECT
+    invoice.id AS invoiceID,
+    invoice.serie AS serieID,
+    invoice.number AS invoiceNumber,
+    invoice.created_date AS created,
+    invoice.due_date AS due_date,
+    invoice.status AS invoiceStatus,
+    invoice.added AS added,
+    invoice.updated AS updated,
+    serial.name
+FROM
+    invoice
+INNER JOIN serial ON invoice.serie = serial.id;
