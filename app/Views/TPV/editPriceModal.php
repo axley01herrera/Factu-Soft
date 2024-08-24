@@ -49,7 +49,7 @@
 				type: "POST",
 				url: "<?php echo base_url('TPV/editPriceProcessTPV') ?>",
 				data: {
-					'basketServiceID': "<?php echo $basketServiceID; ?>",
+					'invoiceItemsID': "<?php echo $invoiceItemsID; ?>",
 					'newPrice': newPrice
 				},
 				dataType: "json",
@@ -63,7 +63,7 @@
 							showConfirmButton: false,
 							timer: 2500
 						});
-						getDtBasket();
+						getItems();
 					} else if (response.error == 2)
 						window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
 					else

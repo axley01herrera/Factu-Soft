@@ -49,10 +49,10 @@ $routes->post('Config/saveConfig', 'Config::saveConfig');
 
 # TPV
 $routes->get('TPV', 'TPV::index');
-$routes->post('TPV/dtBasket', 'TPV::dtBasket');
-$routes->post('TPV/addServiceToBasket', 'TPV::addServiceToBasket');
-$routes->post('TPV/clearBasketService', 'TPV::clearBasketService');
-$routes->post('TPV/removeServiceFromBasket', 'TPV::removeServiceFromBasket');
+$routes->post('TPV/invoiceItems', 'TPV::invoiceItems');
+$routes->post('TPV/addInvoiceItem', 'TPV::addInvoiceItem');
+$routes->post('TPV/clearInvoiceItems', 'TPV::clearInvoiceItems');
+$routes->post('TPV/removeInvoiceItem', 'TPV::removeInvoiceItem');
 $routes->post('TPV/changeQuantity', 'TPV::changeQuantity');
 $routes->post('TPV/editPriceTPV', 'TPV::editPriceTPV');
 $routes->post('TPV/editPriceProcessTPV', 'TPV::editPriceProcessTPV');

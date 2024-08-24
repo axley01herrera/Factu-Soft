@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `serial`
+-- Table structure for table `serial` Require Execute Insert After Create table
 --
 
 DROP TABLE IF EXISTS `serial`;
@@ -85,6 +85,10 @@ CREATE TABLE IF NOT EXISTS `serial` (
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+
+INSERT INTO `serial` (`id`, `name`, `count`, `created`, `updated`) VALUES
+(1, 'TPV', 0, '2024-08-24 11:00:18', '2024-08-24 11:00:18');
 
 -- --------------------------------------------------------
 
@@ -104,60 +108,6 @@ CREATE TABLE IF NOT EXISTS `services` (
   PRIMARY KEY (`id`)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `basket`
---
-
-DROP TABLE IF EXISTS `basket`;
-CREATE TABLE IF NOT EXISTS `basket` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `status` int NOT NULL,
-  `dateTime` datetime NOT NULL,
-  `date` date NOT NULL,
-  `payType` int NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `basket_service`
---
-
-DROP TABLE IF EXISTS `basket_service`;
-CREATE TABLE IF NOT EXISTS `basket_service` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `basketID` int DEFAULT NULL,
-  `serviceID` varchar(999) DEFAULT NULL,
-  `amount` float DEFAULT NULL,
-  `quantity` int NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-);
-
--- --------------------------------------------------------
-
---
--- Table structure for View `view_basket`
---
-
-CREATE VIEW view_basket AS
-SELECT 
- b.id as basketID,
- b.dateTime,
- b.date,
- b.payType,
- bs.amount,
- bs.quantity,
- s.id as serviceID,
- s.name as serviceName,
- s.price as servicePrice,
- s.description as serviceDescription
-FROM 
-  basket b
-  INNER JOIN basket_service bs ON b.id = bs.basketID
-  INNER JOIN services s ON bs.serviceID = s.id
 
 /* Not Remove */
 INSERT INTO `profile` (`id`, `logo`, `access_key`, `name`, `company_id`, `email`, `phone`, `address_a`, `address_b`, `city`, `state`, `zip`, `country`, `description`) VALUES

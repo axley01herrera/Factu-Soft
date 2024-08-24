@@ -94,3 +94,4 @@ define('EVENT_PRIORITY_NORMAL', 100);
 define('EVENT_PRIORITY_HIGH', 10);
 
 define('MAIN_ADMIN', 'admin/mainAdmin');
+define('STR_PAD_LEFT_NUMBER', 4);

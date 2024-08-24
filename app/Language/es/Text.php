@@ -10,6 +10,8 @@ $lang['are_you_sure_msg'] = "Está seguro ?";
 $lang['not_revert_this_msg'] = "Está acción es irreversible";
 $lang['yes_remove_msg'] = "Sí, Eliminar";
 $lang['no_cancel_msg'] = "No, Cancelar";
+$lang['cash'] = "Efectivo";
+$lang['card'] = "Tarjeta";
 
 # Status
 $lang['status_active'] = "Activo";
@@ -59,12 +61,16 @@ $lang['tpv_basket_btn_clear'] = "Limpiar";
 $lang['tpv_basket_payment_type_label'] = "Método de Pago";
 $lang['tpv_basket_payment_type_target'] = "Tarjeta";
 $lang['tpv_basket_payment_type_cash'] = "Efectivo";
-$lang['tpv_empty_services_label'] = "No hay Servicios";
-$lang['tpv_alert_not_services_basket'] = "Debe añadir al menos un servicio";
+$lang['tpv_empty_basket'] = "Cesta Vacía";
+$lang['tpv_alert_not_services_basket'] = "La Cesta está Vacía";
 $lang['tpv_alert_not_payment_basket'] = "Seleccione un método de pago";
 $lang['tpv_alert_success_save_invoice'] = "Factura creada";
 $lang['tpv_alert_success_save_new_price'] = "Precio Actualizado";
 $lang['tpv_basket_btn_ticket'] = "Cobrar";
+$lang['ticket_establishment'] = "Establecimiento";
+$lang['ticket_date'] = "Fecha";
+$lang['ticket_pay_type'] = "Pago";
+$lang['ticket_msg'] = "Gracias por su visita";
 
 # Invoices
 $lang['inv_page_title'] = "Listado de Facturas";

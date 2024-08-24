@@ -52,31 +52,43 @@ class TPV extends BaseController
 		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
 			return view('logout');
 
-		$basket = $this->objTPVModel->getOpenBasket();
+		$invoice = $this->objTPVModel->getOpenInvoice();
 
-		if (empty($basket)) {
-			$data = array();
-			$data['dateTime'] = '';
-			$data['date'] = '';
-			$createBasket = $this->objMainModel->objCreate('basket', $data);
-			$basket = $this->objTPVModel->getBasket($createBasket['id']);
+		if (empty($invoice)) {
+			$serial = $this->objTPVModel->getTpvSerial();
+
+			$d = array();
+			$d['serie'] = $serial[0]->id;
+			$d['number'] = $serial[0]->count + 1;
+			$d['created_date'] = date('Y-m-d');
+			$d['added'] = date('Y-m-d H:i:s');
+			$d['updated'] = date('Y-m-d H:i:s');
+
+			$rsInvoice = $this->objMainModel->objCreate('invoice', $d);
+
+			$d = array();
+			$d['count'] = $serial[0]->count + 1;
+			$d['updated'] = date('Y-m-d H:i:s');
+
+			$this->objMainModel->objUpdate('serial', $d, $serial[0]->id);
+			$invoice = $this->objTPVModel->getInvoice($rsInvoice['id']);
 		}
 
 		$data = array();
 		$data['profile'] = $this->profile;
 		$data['config'] = $this->config;
 		# menu
-		$data['TPVActive'] = 'active';
+		$data['tpvActive'] = 'active';
 		# page
 		$data['page'] = 'TPV/mainTPV';
 
-		$data['services'] = $this->objTPVModel->getActiveServices();
-		$data['basket'] = $basket;
+		$data['services'] = $this->objTPVModel->getServices();
+		$data['invoice'] = $invoice;
 
 		return view('layouts/main', $data);
 	}
 
-	public function dtBasket()
+	public function invoiceItems()
 	{
 		# Verify Session 
 		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
@@ -84,79 +96,75 @@ class TPV extends BaseController
 		}
 
 		# Params
-		$basketID = $this->objRequest->getPost('basketID');
+		$invoiceID = $this->objRequest->getPost('invoiceID');
 
 		$data = array();
-		$data['profile'] = $this->profile;
 		$data['config'] = $this->config;
+		$data['items'] = $this->objTPVModel->getInvoiceItems($invoiceID);
 
-		$data['basket'] = $this->objTPVModel->getBasketServices($basketID);
-
-		return view('TPV/dtBasket', $data);
+		return view('TPV/items', $data);
 	}
 
-	public function addServiceToBasket()
+	public function addInvoiceItem()
 	{
 		# Verify Session 
 		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
 			$result = array();
 			$result['error'] = 2;
 			$result['msg'] = "SESSION_EXPIRED";
-
 			return json_encode($result);
 		}
 
 		# Params
-		$basketID = $this->objRequest->getPost('basketID');
+		$invoiceID = $this->objRequest->getPost('invoiceID');
 		$serviceID = $this->objRequest->getPost('serviceID');
 
-		$amount = $this->objTPVModel->getActiveServices($serviceID)[0]->price;
+		$service = $this->objTPVModel->getService($serviceID);
+		$amount = $service[0]->price;
 
-		$data = array();
-		$data['basketID'] = $basketID;
-		$data['serviceID'] = $serviceID;
-		$data['amount'] = $amount;
-		$data['quantity'] = 1;
+		$d = array();
+		$d['invoice_id'] = $invoiceID;
+		$d['service_id'] = $serviceID;
+		$d['amount'] = $amount;
+		$d['quantity'] = 1;
 
-		$result = $this->objTPVModel->addServiceToBasket($data);
+		$result = $this->objMainModel->objCreate('invoice_items', $d);
 
 		return json_encode($result);
 	}
 
-	public function clearBasketService()
+	public function clearInvoiceItems()
 	{
 		# Verify Session 
 		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
 			$result = array();
 			$result['error'] = 2;
 			$result['msg'] = "SESSION_EXPIRED";
-
 			return json_encode($result);
 		}
 
 		# Params
-		$basketID = $this->objRequest->getPost('basketID');
+		$invoiceID = $this->objRequest->getPost('invoiceID');
 
-		$result = $this->objTPVModel->clearBasketServices($basketID);
+		$result = $this->objTPVModel->clearInvoiceItems($invoiceID);
 
 		return json_encode($result);
 	}
 
-	public function removeServiceFromBasket()
+	public function removeInvoiceItem()
 	{
 		# Verify Session 
 		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
 			$result = array();
 			$result['error'] = 2;
 			$result['msg'] = "SESSION_EXPIRED";
-
 			return json_encode($result);
 		}
 
 		# params
-		$basketServiceID = $this->objRequest->getPost('basketServiceID');
+		$id = $this->objRequest->getPost('id');
 
-		return json_encode($this->objMainModel->objDelete('basket_service', $basketServiceID));
+		return json_encode($this->objMainModel->objDelete('invoice_items', $id));
 	}
 
 	public function changeQuantity()
@@ -175,7 +183,7 @@ class TPV extends BaseController
 		$action = $this->objRequest->getPost('action');
 		$serviceID = $this->objRequest->getPost('serviceID');
 		$currentAmount = $this->objRequest->getPost('currentAmount');
-		$basketServiceID = $this->objRequest->getPost('basketServiceID');
+		$invoiceItemsID = $this->objRequest->getPost('invoiceItemsID');
 		$servicePrice = getService($serviceID)[0]->price;
 
 		$result['error'] = 3;
@@ -187,7 +195,7 @@ class TPV extends BaseController
 			$amount = $currentAmount - $servicePrice;
 
 		if ($amount > 0)
-			$result = $this->objMainModel->objUpdate('basket_service', array('quantity' => $quantity, 'amount' => $amount), $basketServiceID);
+			$result = $this->objMainModel->objUpdate('invoice_items', array('quantity' => $quantity, 'amount' => $amount), $invoiceItemsID);
 
 		return json_encode($result);
 	}
@@ -204,12 +212,12 @@ class TPV extends BaseController
 		}
 
 		# params
-		$basketServiceID = $this->objRequest->getPost('basketServiceID');
+		$invoiceItemsID = $this->objRequest->getPost('invoiceItemsID');
 		$serviceInfo = $this->objRequest->getPost('serviceInfo');
 
 		$data = array();
 		# data
-		$data['basketServiceID'] = $basketServiceID;
+		$data['invoiceItemsID'] = $invoiceItemsID;
 		$data['serviceInfo'] = $serviceInfo;
 		$data['uniqid'] = uniqid();
 
@@ -228,10 +236,10 @@ class TPV extends BaseController
 		}
 
 		# params
-		$basketServiceID = $this->objRequest->getPost('basketServiceID');
+		$invoiceItemsID = $this->objRequest->getPost('invoiceItemsID');
 		$newPrice = $this->objRequest->getPost('newPrice');
 
-		return json_encode($this->objMainModel->objUpdate('basket_service', array('amount' => $newPrice), $basketServiceID));
+		return json_encode($this->objMainModel->objUpdate('invoice_items', array('amount' => $newPrice), $invoiceItemsID));
 	}
 
 	public function saveInvoice()
@@ -241,21 +249,19 @@ class TPV extends BaseController
 			$result = array();
 			$result['error'] = 2;
 			$result['msg'] = "SESSION_EXPIRED";
-
 			return json_encode($result);
 		}
 
 		# params
-		$basketID = $this->objRequest->getPost('basketID');
+		$invoiceID = $this->objRequest->getPost('invoiceID');
 		$payType = $this->objRequest->getPost('payType');
 
-		$data = array();
-		$data['status'] = 1;
-		$data['date'] = date("Y-m-d");
-		$data['dateTime'] = date("Y-m-d H:i:s");
-		$data['payType'] = $payType;
+		$d = array();
+		$d['status'] = 1;
+		$d['pay_type'] = $payType;
+		$d['updated'] = date('Y-m-d H:i:s');
 
-		$result = $this->objMainModel->objUpdate('basket', $data, $basketID);
+		$result = $this->objMainModel->objUpdate('invoice', $d, $invoiceID);
 
 		return json_encode($result);
 	}
@@ -272,17 +278,18 @@ class TPV extends BaseController
 		}
 
 		# params
-		$basketID = $this->objRequest->getPostGet('basketID');
+		$invoiceID = $this->objRequest->getPostGet('invoiceID');
 
-		$ticket = $this->objTPVModel->getViewBasket($basketID);
+		$invoice = $this->objTPVModel->getInvoice($invoiceID);
+		$items = $this->objTPVModel->getInvoiceItems($invoiceID);
 
 		$data = array();
 		# config
 		$data['config'] = $this->config;
 		$data['profile'] = $this->profile;
-		$data['dateLabel'] = getDateLabel($this->config[0]->lang);
 		# data 
-		$data['ticket'] = $ticket;
+		$data['invoice'] = $invoice;
+		$data['items'] = $items;
 
 		return view('TPV/ticket', $data);
 	}

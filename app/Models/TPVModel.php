@@ -14,52 +14,71 @@ class TPVModel extends Model
 		$this->db = \Config\Database::connect();
 	}
 
-	public function getActiveServices($serviceID = null)
+	public function getOpenInvoice()
 	{
-		$query = $this->db->table('services')
-			->where('deleted', 0);
-
-		if (!empty($serviceID))
-			$query->where('id', $serviceID);
-
-		$data = $query->get()->getResult();
-
-		return $data;
-	}
-
-	public function getOpenBasket()
-	{
-		$query = $this->db->table('basket')
+		$query = $this->db->table('invoice')
 			->where('status', 0);
 		$data = $query->get()->getResult();
 
 		return $data;
 	}
 
-	public function getBasket($basketID)
+	public function getTpvSerial()
 	{
-		$query = $this->db->table('basket')
-			->where('id', $basketID);
+		$query = $this->db->table('serial')
+			->where('id', 1);
+
 		$data = $query->get()->getResult();
 
 		return $data;
 	}
 
-	public function getBasketServices($basketID)
+	public function getInvoice($id)
 	{
-		$query = $this->db->table('basket_service')
-			->where('basketID', $basketID);
+		$query = $this->db->table('invoice')
+			->where('id', $id);
+
 		$data = $query->get()->getResult();
 
 		return $data;
 	}
 
-	public function clearBasketServices($basketID)
+	public function getServices()
+	{
+		$query = $this->db->table('services')
+			->where('deleted', 0);
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function getService($id)
+	{
+		$query = $this->db->table('services')
+			->where('id', $id);
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function getInvoiceItems($invoiceID)
+	{
+		$query = $this->db->table('invoice_items')
+			->where('invoice_id', $invoiceID);
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function clearInvoiceItems($invoiceID)
 	{
 		$return = array();
 
-		$query = $this->db->table('basket_service')
-			->where('basketID', $basketID)
+		$query = $this->db->table('invoice_items')
+			->where('invoice_id', $invoiceID)
 			->delete();
 
 		if ($query == true) {
@@ -71,30 +90,5 @@ class TPVModel extends Model
 		}
 
 		return $return;
-	}
-
-	public function addServiceToBasket($data)
-	{
-		$this->db->table('basket_service')
-			->insert($data);
-
-		$result = array();
-		if ($this->db->resultID) {
-			$result['error'] = 0;
-			$result['id'] = $this->db->connID->insert_id;
-		} else {
-			$result['error'] = 1;
-		}
-
-		return $result;
-	}
-
-	public function getViewBasket($basketID)
-	{
-		$query = $this->db->table('view_basket')
-			->where('basketID', $basketID);
-		$data = $query->get()->getResult();
-
-		return $data;
 	}
 }
