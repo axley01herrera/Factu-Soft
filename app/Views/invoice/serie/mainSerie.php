@@ -12,33 +12,29 @@
 </div>
 
 <!-- Page Content -->
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-body">
-				<div class="table-responsive overflow-hidden">
-					<table id="dt-serie" class="table text-nowrap align-middle" style="width: 100%;">
-						<thead>
-							<tr>
-								<th><?php echo lang('Text.inv_serial_dt_col_name'); ?></th>
-								<th><?php echo lang('Text.inv_serial_dt_col_serial'); ?></th>
-								<th><?php echo lang('Text.inv_serial_dt_col_updated'); ?></th>
-								<th><?php echo lang('Text.inv_serial_dt_col_added'); ?></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($series as $s) { ?>
-								<tr>
-									<td><?php echo $s->name; ?></td>
-									<td><?php echo str_pad($s->count, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT); ?></td>
-									<td><?php echo $s->updated; ?></td>
-									<td><?php echo $s->created; ?></td>
-								</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-				</div>
-			</div>
+<div class="card">
+	<div class="card-body">
+		<div class="table-responsive overflow-hidden">
+			<table id="dt-serie" class="table text-nowrap align-middle" style="width: 100%;">
+				<thead>
+					<tr>
+						<th><?php echo lang('Text.inv_serial_dt_col_name'); ?></th>
+						<th><?php echo lang('Text.inv_serial_dt_col_serial'); ?></th>
+						<th><?php echo lang('Text.inv_serial_dt_col_updated'); ?></th>
+						<th><?php echo lang('Text.inv_serial_dt_col_added'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($series as $s) { ?>
+						<tr>
+							<td><?php echo $s->name; ?></td>
+							<td><?php echo str_pad($s->count, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT); ?></td>
+							<td><?php echo $s->updated; ?></td>
+							<td><?php echo $s->created; ?></td>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
@@ -62,7 +58,7 @@
 		order: [
 			[3, 'desc']
 		],
-		
+
 		dom: '<"top"f>rt<"row"<"col-4 mt-3"l><"col-4 mt-3"i><"col-4 mt-3"p>>',
 	});
 

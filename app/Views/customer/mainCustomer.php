@@ -13,31 +13,26 @@
 </div>
 
 <!-- Page Content -->
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-body">
-				<div class="table-responsive overflow-hidden">
-					<table id="dt-clients" class="table text-nowrap align-middle" style="width: 100%;">
-						<thead>
-							<tr>
-								<th><?php echo lang('Text.customer_dt_col_type'); ?></th>
-								<th><?php echo lang('Text.customer_dt_col_name'); ?></th>
-								<th><?php echo lang('Text.customer_dt_col_lastName'); ?></th>
-								<th><?php echo lang('Text.customer_dt_col_email'); ?></th>
-								<th><?php echo lang('Text.customer_dt_col_phone'); ?></th>
-								<th><?php echo lang('Text.customer_dt_col_updated'); ?></th>
-								<th><?php echo lang('Text.customer_dt_col_added'); ?></th>
-								<th style="width: 75px;"></th>
-							</tr>
-						</thead>
-					</table>
-				</div>
-			</div>
+<div class="card">
+	<div class="card-body">
+		<div class="table-responsive overflow-hidden">
+			<table id="dt-clients" class="table text-nowrap align-middle" style="width: 100%;">
+				<thead>
+					<tr>
+						<th><?php echo lang('Text.customer_dt_col_type'); ?></th>
+						<th><?php echo lang('Text.customer_dt_col_name'); ?></th>
+						<th><?php echo lang('Text.customer_dt_col_lastName'); ?></th>
+						<th><?php echo lang('Text.customer_dt_col_email'); ?></th>
+						<th><?php echo lang('Text.customer_dt_col_phone'); ?></th>
+						<th><?php echo lang('Text.customer_dt_col_updated'); ?></th>
+						<th><?php echo lang('Text.customer_dt_col_added'); ?></th>
+						<th style="width: 75px;"></th>
+					</tr>
+				</thead>
+			</table>
 		</div>
 	</div>
 </div>
-
 <script>
 	var lang = "<?php echo $lang; ?>";
 	var dtLang = "";
@@ -178,6 +173,5 @@
 				});
 			}
 		});
-
 	});
 </script>

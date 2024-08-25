@@ -30,7 +30,15 @@ $routes->post('Services/saveService', 'Services::saveService');
 $routes->post('Services/deleteService', 'Services::deleteService');
 
 # Invoices
-$routes->get('Invoice', 'Invoice::index');
+$routes->get('Invoice/invoice', 'Invoice::invoice');
+$routes->get('Invoice/createInvoice', 'Invoice::createInvoice');
+$routes->get('Invoice/editInvoice', 'Invoice::editInvoice');
+$routes->post('Invoice/objUpdateInvoice', 'Invoice::objUpdateInvoice');
+$routes->post('Invoice/addLineItem', 'Invoice::addLineItem');
+$routes->post('Invoice/addLineItemProcess', 'Invoice::addLineItemProcess');
+$routes->post('Invoice/removeItem', 'Invoice::removeItem'); 
+$routes->post('Invoice/issueInvoice', 'Invoice::issueInvoice'); 
+$routes->get('Invoice/print', 'Invoice::print');
 $routes->get('Invoice/series', 'Invoice::series');
 $routes->post('Invoice/createSerie', 'Invoice::createSerie');
 $routes->post('Invoice/createSerieProcess', 'Invoice::createSerieProcess');

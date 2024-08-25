@@ -11,24 +11,20 @@
 </div>
 
 <!-- Page Content -->
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive overflow-hidden">
-                    <table id="dt-tickets" class="table text-nowrap align-middle" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th><?php echo lang('Text.inv_t_dt_col_number'); ?></th>
-                                <th><?php echo lang('Text.inv_t_dt_col_pay_type'); ?></th>
-                                <th><?php echo lang('Text.inv_t_dt_col_added'); ?></th>
-                                <th><?php echo lang('Text.inv_t_dt_col_amount'); ?></th>
-                                <th class="text-center"></th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive overflow-hidden">
+            <table id="dt-tickets" class="table text-nowrap align-middle" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th><?php echo lang('Text.inv_t_dt_col_number'); ?></th>
+                        <th><?php echo lang('Text.inv_t_dt_col_pay_type'); ?></th>
+                        <th><?php echo lang('Text.inv_t_dt_col_added'); ?></th>
+                        <th><?php echo lang('Text.inv_t_dt_col_amount'); ?></th>
+                        <th class="text-center"></th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 </div>

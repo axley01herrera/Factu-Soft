@@ -74,17 +74,29 @@ $lang['ticket_pay_type'] = "Pago";
 $lang['ticket_msg'] = "Gracias por su visita";
 
 # Invoices
-$lang['inv_page_title'] = "Listado de Facturas";
-$lang['invoices_dt_col_invoiceID'] = "Id de Factura";
-$lang['invoices_dt_col_serieID'] = "Id de Serie";
-$lang['invoices_dt_col_invoiceNumber'] = "Número de Factura";
-$lang['invoices_dt_col_created'] = "Creado";
-$lang['invoices_dt_col_due_date'] = "Fecha de Pago";
-$lang['invoices_dt_col_invoiceStatus'] = "Estado";
-$lang['invoices_dt_status_open'] = "Abierto";
-$lang['invoices_dt_status_paid'] = "Pagado";
+$lang['inv_page_title'] = "Facturas";
+$lang['inv_create'] = "Crear Factura";
+$lang['inv_create_page_title'] = "Factura";
+$lang['inv_label_status'] = "Estado";
+$lang['inv_number_label'] = "Número de Factura";
+$lang['inv_status_draft'] = "BORRADOR";
+$lang['inv_from_label'] = "De";
+$lang['inv_to_label'] = "Para";
+$lang['inv_select_customer'] = "Seleccione un Cliente";
+$lang['inv_add_line'] = "Agregar Línea";
+$lang['inv_dt_item_col_qty'] = "Cantidad";
+$lang['inv_dt_item_col_desc'] = "Descripción";
+$lang['inv_dt_item_col_amount'] = "Precio";
+$lang['inv_not_invoice_lines'] = "Sin líneas de facturación";
+$lang['inv_issue'] = "Emitir Factura";
+$lang['inv_new_invoice_line'] = "Nueva línea de factura";
+$lang['inv_add_service_msg'] = " Puede selecionar un servicio para añadirlo a la descripción automaticamente.";
+$lang['inv_due_date'] = "Fecha de Vencimiento";
+$lang['inv_issue_date'] = "Fecha de Emisión";
+$lang['inv_issue_msg'] = "Una vez que emita la factura no prdrá ser modificada";
+$lang['inv_yes_issue'] = "Si, Emitir";
 
-# Invoices Tickts
+# Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Tickets";
 $lang['inv_t_dt_col_number'] = "Ticket #";
 $lang['inv_t_dt_col_pay_type'] = "Tipo de Pago";

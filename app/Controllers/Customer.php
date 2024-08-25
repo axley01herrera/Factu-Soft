@@ -196,7 +196,7 @@ class Customer extends BaseController
 			$result = $this->objMainModel->objCreate('customer', $data);
 		}
 
-		if (empty($serialID)) {
+		if (empty($serialID) && !empty($serial)) {
 			$data = array();
 			$data['name'] = strtoupper($serial);
 			$data['count'] = 0;
