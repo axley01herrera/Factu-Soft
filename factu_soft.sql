@@ -124,18 +124,17 @@ DROP TABLE IF EXISTS `invoice`;
 CREATE TABLE IF NOT EXISTS `invoice` (
   `id` int NOT NULL AUTO_INCREMENT,
   `serie` int NOT NULL,
-  `number` int NOT NULL,
+  `number` varchar(150) COLLATE utf8mb4_spanish_ci NOT NULL,
   `customer` int DEFAULT NULL,
   `created_date` date NOT NULL,
   `due_date` date DEFAULT NULL,
-  `status` int NOT NULL DEFAULT '0' COMMENT '0 = OPEN\r\n1 = PAID',
+  `status` int NOT NULL DEFAULT '0' COMMENT '0 = OPEN\r\n1 = PAID\r\n2 = DRAFT\r\n3 = PENDING',
   `pay_type` int DEFAULT NULL COMMENT '1 = Card\r\n2 = Cash',
+  `type` int NOT NULL DEFAULT '1' COMMENT '1 = Ticket\r\n2 = Invoice',
   `added` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
 );
-
-ALTER TABLE `invoice` CHANGE `number` `number` VARCHAR(150) NOT NULL; 
 
 -- --------------------------------------------------------
 
@@ -146,12 +145,13 @@ ALTER TABLE `invoice` CHANGE `number` `number` VARCHAR(150) NOT NULL;
 DROP TABLE IF EXISTS `invoice_items`;
 CREATE TABLE IF NOT EXISTS `invoice_items` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `invoice_id` int DEFAULT NULL,
+  `invoice_id` int NOT NULL,
   `service_id` varchar(999) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `amount` float DEFAULT NULL,
+  `description` varchar(999) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `amount` float NOT NULL,
   `quantity` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-)
+);
 
 -- --------------------------------------------------------
 
@@ -184,3 +184,34 @@ WHERE
     AND invoice.type = 1
 GROUP BY
     invoice.id
+
+-- --------------------------------------------------------
+
+--
+-- View structure for view `dt_invoices`
+--
+
+DROP VIEW IF EXISTS dt_invoices;
+
+CREATE VIEW dt_invoices AS
+SELECT
+    invoice.id AS invoiceID,
+    invoice.serie AS serieID,
+    invoice.number AS invoiceNumber,
+    invoice.created_date AS created,
+    invoice.due_date AS due_date,
+    invoice.status AS invoiceStatus,
+    invoice.pay_type AS pay_type,
+    invoice.type AS type,
+    invoice.added AS added,
+    invoice.updated AS updated,
+    serial.name,
+    COALESCE(SUM(invoice_items.amount), 0) AS amount 
+FROM
+    invoice
+LEFT JOIN serial ON invoice.serie = serial.id
+LEFT JOIN invoice_items ON invoice.id = invoice_items.invoice_id  
+WHERE
+    invoice.type = 2
+GROUP BY
+    invoice.id;  
