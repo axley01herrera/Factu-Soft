@@ -54,12 +54,60 @@ class Invoice extends BaseController
 
 		$data = array();
 		$data['profile'] = $this->profile;
+		$data['lang'] = $this->config[0]->lang;
 		# menu
 		$data['invoiceActive'] = 'active';
 		# page
 		$data['page'] = 'invoice/mainInvoice';
 
 		return view('layouts/main', $data);
+	}
+
+	public function processingInvoices()
+	{
+		$dataTableRequest = $_REQUEST;
+
+		$params = array();
+		$params['draw'] = $dataTableRequest['draw'];
+		$params['start'] = $dataTableRequest['start'];
+		$params['length'] = $dataTableRequest['length'];
+		$params['search'] = $dataTableRequest['search']['value'];
+		$params['sortColumn'] = $dataTableRequest['order'][0]['column'];
+		$params['sortDir'] = $dataTableRequest['order'][0]['dir'];
+
+		$row = array();
+		$totalRecords = 0;
+
+		$result = $this->objDataTableModel->getInvoicesProcessingData($params);
+		$totalRows = sizeof($result);
+
+		$dateFormat = 'm-d-Y';
+
+		if ($this->config[0]->lang == 'es')
+			$dateFormat = 'd-m-Y';
+
+		for ($i = 0; $i < $totalRows; $i++) {
+			$col = array();
+			$col['invoiceID'] = $result[$i]->invoiceID;
+			$col['invoiceNumber'] = str_pad($result[$i]->invoiceNumber, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
+			$col['created'] = date($dateFormat, strtotime($result[$i]->created));
+			$col['due_date'] = date($dateFormat, strtotime($result[$i]->due_date));
+			$col['invoiceStatus'] = '<span class="badge bg-primary-subtle text-primary">'.lang('Text.invoices_dt_status_open').'</span>';
+			if ($result[$i]->invoiceStatus == 1)
+				$col['invoiceStatus'] = '<span class="badge bg-primary-subtle text-primary">'.lang('Text.invoices_dt_status_paid').'</span>';
+			$row[$i] =  $col;
+		}
+
+		if ($totalRows > 0)
+			$totalRecords = $this->objDataTableModel->getTotalInvoices($params);
+
+		$data = array();
+		$data['draw'] = $dataTableRequest['draw'];
+		$data['recordsTotal'] = intval($totalRecords);
+		$data['recordsFiltered'] = intval($totalRecords);
+		$data['data'] = $row;
+
+		return json_encode($data);
 	}
 
 	public function series()

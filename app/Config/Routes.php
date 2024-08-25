@@ -34,6 +34,7 @@ $routes->get('Invoice', 'Invoice::index');
 $routes->get('Invoice/series', 'Invoice::series');
 $routes->post('Invoice/createSerie', 'Invoice::createSerie');
 $routes->post('Invoice/createSerieProcess', 'Invoice::createSerieProcess');
+$routes->post('Invoice/processingInvoices', 'Invoice::processingInvoices');
 
 # Profile
 $routes->get('Profile', 'Profile::index');
@@ -57,5 +58,4 @@ $routes->post('TPV/changeQuantity', 'TPV::changeQuantity');
 $routes->post('TPV/editPriceTPV', 'TPV::editPriceTPV');
 $routes->post('TPV/editPriceProcessTPV', 'TPV::editPriceProcessTPV');
 $routes->post('TPV/saveInvoice', 'TPV::saveInvoice');
-
 $routes->get('TPV/printTicket', 'TPV::printTicket');

@@ -74,6 +74,14 @@ $lang['ticket_msg'] = "Gracias por su visita";
 
 # Invoices
 $lang['inv_page_title'] = "Listado de Facturas";
+$lang['invoices_dt_col_invoiceID'] = "Id de Factura";
+$lang['invoices_dt_col_serieID'] = "Id de Serie";
+$lang['invoices_dt_col_invoiceNumber'] = "Número de Factura";
+$lang['invoices_dt_col_created'] = "Creado";
+$lang['invoices_dt_col_due_date'] = "Fecha de Pago";
+$lang['invoices_dt_col_invoiceStatus'] = "Estado";
+$lang['invoices_dt_status_open'] = "Abierto";
+$lang['invoices_dt_status_paid'] = "Pagado";
 
 # Invoices Series
 $lang['inv_serie_page_title'] = "Listado de Series";

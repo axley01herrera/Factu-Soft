@@ -63,7 +63,7 @@ class DataTableModel extends Model
 				$sort = 'customer.name DESC';
 		}
 
-		
+
 		if ($column == 3) {
 			if ($dir == 'asc')
 				$sort = 'customer.email ASC';
@@ -125,5 +125,92 @@ class DataTableModel extends Model
 		$data = $query->get()->getResult();
 
 		return $data;
+	}
+
+	####################
+	#### Invoices Data Table
+	####################
+
+	public function getInvoicesProcessingData($params)
+	{
+		$query = $this->db->table('dt_invoice');
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('dt_invoice.invoiceID', $params['search']);
+			$query->orLike('dt_invoice.invoiceNumber', $params['search']);
+			$query->orLike('dt_invoice.created', $params['search']);
+			$query->orLike('dt_invoice.due_date', $params['search']);
+			$query->orLike('dt_invoice.invoiceStatus', $params['search']);
+			$query->groupEnd();
+		}
+
+		$query->offset($params['start']);
+		$query->limit($params['length']);
+		$query->orderBy($this->getInvoiceProcessingSort($params['sortColumn'], $params['sortDir']));
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function getInvoiceProcessingSort($column, $dir)
+	{
+		$sort = '';
+
+		if ($column == 0) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoice.invoiceStatus ASC';
+			else
+				$sort = 'dt_invoice.invoiceStatus DESC';
+		}
+
+		if ($column == 1) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoice.invoiceID ASC';
+			else
+				$sort = 'dt_invoice.invoiceID DESC';
+		}
+
+		if ($column == 2) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoice.invoiceNumber ASC';
+			else
+				$sort = 'dt_invoice.invoiceNumber DESC';
+		}
+
+		if ($column == 3) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoice.created ASC';
+			else
+				$sort = 'dt_invoice.created DESC';
+		}
+
+		if ($column == 4) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoice.due_date ASC';
+			else
+				$sort = 'dt_invoice.due_date DESC';
+		}
+
+		return $sort;
+	}
+
+	public function getTotalInvoices($params)
+	{
+		$query = $this->db->table('dt_invoice');
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('dt_invoice.invoiceID', $params['search']);
+			$query->orLike('dt_invoice.serieID', $params['search']);
+			$query->orLike('dt_invoice.invoiceNumber', $params['search']);
+			$query->orLike('dt_invoice.created', $params['search']);
+			$query->orLike('dt_invoice.due_date', $params['search']);
+			$query->orLike('dt_invoice.invoiceStatus', $params['search']);
+			$query->groupEnd();
+		}
+
+		return $query->countAllResults();
 	}
 }
