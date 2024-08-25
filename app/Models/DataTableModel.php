@@ -213,4 +213,77 @@ class DataTableModel extends Model
 
 		return $query->countAllResults();
 	}
+
+	####################
+	#### Tickets Data Table
+	####################
+
+	public function getTicketsProcessingData($params)
+	{
+		$query = $this->db->table('dt_tickets');
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('dt_tickets.invoiceNumber', $params['search']);
+			$query->orLike('DATE(dt_tickets.added)', $params['search']);
+			$query->groupEnd();
+		}
+
+		$query->offset($params['start']);
+		$query->limit($params['length']);
+		$query->orderBy($this->getTicketProcessingSort($params['sortColumn'], $params['sortDir']));
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function getTicketProcessingSort($column, $dir)
+	{
+		$sort = '';
+
+		if ($column == 0) {
+			if ($dir == 'asc')
+				$sort = 'dt_tickets.invoiceNumber ASC';
+			else
+				$sort = 'dt_tickets.invoiceNumber DESC';
+		}
+
+		if ($column == 1) {
+			if ($dir == 'asc')
+				$sort = 'dt_tickets.pay_type ASC';
+			else
+				$sort = 'dt_tickets.pay_type DESC';
+		}
+
+		if ($column == 2) {
+			if ($dir == 'asc')
+				$sort = 'dt_tickets.added ASC';
+			else
+				$sort = 'dt_tickets.added DESC';
+		}
+
+		if ($column == 3) {
+			if ($dir == 'asc')
+				$sort = 'dt_tickets.amount ASC';
+			else
+				$sort = 'dt_tickets.amount DESC';
+		}
+
+		return $sort;
+	}
+
+	public function getTotalTickets($params)
+	{
+		$query = $this->db->table('dt_tickets');
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('dt_tickets.invoiceNumber', $params['search']);
+			$query->orLike('dt_tickets.added', $params['search']);
+			$query->groupEnd();
+		}
+
+		return $query->countAllResults();
+	}
 }

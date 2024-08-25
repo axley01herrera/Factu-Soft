@@ -56,18 +56,16 @@ class TPV extends BaseController
 
 		if (empty($invoice)) {
 			$serial = $this->objTPVModel->getTpvSerial();
+			$consecutive = $serial[0]->count + 1;
 
 			$d = array();
 			$d['serie'] = $serial[0]->id;
-			$d['number'] = $serial[0]->count + 1;
-			$d['created_date'] = date('Y-m-d');
-			$d['added'] = date('Y-m-d H:i:s');
-			$d['updated'] = date('Y-m-d H:i:s');
-
+			$d['number'] = $serial[0]->name.str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
+			
 			$rsInvoice = $this->objMainModel->objCreate('invoice', $d);
 
 			$d = array();
-			$d['count'] = $serial[0]->count + 1;
+			$d['count'] = $consecutive;
 			$d['updated'] = date('Y-m-d H:i:s');
 
 			$this->objMainModel->objUpdate('serial', $d, $serial[0]->id);
@@ -259,6 +257,7 @@ class TPV extends BaseController
 		$d = array();
 		$d['status'] = 1;
 		$d['pay_type'] = $payType;
+		$d['added'] = date('Y-m-d H:i:s');
 		$d['updated'] = date('Y-m-d H:i:s');
 
 		$result = $this->objMainModel->objUpdate('invoice', $d, $invoiceID);

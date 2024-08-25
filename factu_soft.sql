@@ -135,6 +135,8 @@ CREATE TABLE IF NOT EXISTS `invoice` (
   PRIMARY KEY (`id`)
 );
 
+ALTER TABLE `invoice` CHANGE `number` `number` VARCHAR(150) NOT NULL; 
+
 -- --------------------------------------------------------
 
 --
@@ -154,21 +156,31 @@ CREATE TABLE IF NOT EXISTS `invoice_items` (
 -- --------------------------------------------------------
 
 --
--- View structure for view `dt_invoice`
+-- View structure for view `dt_tickets`
 --
 
-DROP VIEW IF EXISTS dt_invoice;
-CREATE VIEW dt_invoice AS
+DROP VIEW IF EXISTS dt_tickets;
+
+CREATE VIEW dt_tickets AS
 SELECT
-    invoice.id AS invoiceID,
-    invoice.serie AS serieID,
-    invoice.number AS invoiceNumber,
-    invoice.created_date AS created,
-    invoice.due_date AS due_date,
-    invoice.status AS invoiceStatus,
-    invoice.added AS added,
-    invoice.updated AS updated,
-    serial.name
+  invoice.id AS invoiceID,
+  invoice.serie AS serieID,
+  invoice.number AS invoiceNumber,
+  invoice.created_date AS created,
+  invoice.due_date AS due_date,
+  invoice.status AS invoiceStatus,
+  invoice.pay_type AS pay_type,
+  invoice.type AS type,
+  invoice.added AS added,
+  invoice.updated AS updated,
+  serial.name,
+  SUM(invoice_items.amount) AS amount
 FROM
     invoice
-INNER JOIN serial ON invoice.serie = serial.id;
+INNER JOIN serial ON invoice.serie = serial.id
+INNER JOIN invoice_items ON invoice.id = invoice_items.invoice_id
+WHERE
+    invoice.status = 1
+    AND invoice.type = 1
+GROUP BY
+    invoice.id

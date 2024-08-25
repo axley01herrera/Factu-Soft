@@ -32,6 +32,7 @@ $lang['menu_customers'] = "Clientes";
 $lang['menu_customers_list'] = "Listado de Clientes";
 $lang['menu_invoices'] = "Facturación";
 $lang['menu_series'] = "Series";
+$lang['menu_tickets'] = "Tickets";
 $lang['menu_invoice'] = "Facturas";
 $lang['menu_services'] = "Servicios";
 $lang['menu_services_list'] = "Listado de Servicios";
@@ -82,6 +83,13 @@ $lang['invoices_dt_col_due_date'] = "Fecha de Pago";
 $lang['invoices_dt_col_invoiceStatus'] = "Estado";
 $lang['invoices_dt_status_open'] = "Abierto";
 $lang['invoices_dt_status_paid'] = "Pagado";
+
+# Invoices Tickts
+$lang['inv_t_page_title'] = "Historial de Tickets";
+$lang['inv_t_dt_col_number'] = "Ticket #";
+$lang['inv_t_dt_col_pay_type'] = "Tipo de Pago";
+$lang['inv_t_dt_col_added'] = "Creado";
+$lang['inv_t_dt_col_amount'] = "Total";
 
 # Invoices Series
 $lang['inv_serie_page_title'] = "Listado de Series";

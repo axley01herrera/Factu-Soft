@@ -44,6 +44,81 @@ class Invoice extends BaseController
 			$this->objRequest->setLocale("es");
 			date_default_timezone_set("UTC");
 		}
+
+		# Helper
+		helper('Site');
+	}
+
+	public function ticket()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		$data = array();
+		$data['profile'] = $this->profile;
+		$data['lang'] = $this->config[0]->lang;
+
+		# menu
+		$data['ticketActive'] = 'active';
+		# page
+		$data['page'] = 'invoice/ticket/mainTicket';
+
+		return view('layouts/main', $data);
+	}
+
+	public function processingTickets()
+	{
+		$dataTableRequest = $_REQUEST;
+
+		$params = array();
+		$params['draw'] = $dataTableRequest['draw'];
+		$params['start'] = $dataTableRequest['start'];
+		$params['length'] = $dataTableRequest['length'];
+		$params['search'] = $dataTableRequest['search']['value'];
+		$params['sortColumn'] = $dataTableRequest['order'][0]['column'];
+		$params['sortDir'] = $dataTableRequest['order'][0]['dir'];
+
+		$row = array();
+		$totalRecords = 0;
+
+		$result = $this->objDataTableModel->getTicketsProcessingData($params);
+		$totalRows = sizeof($result);
+
+		for ($i = 0; $i < $totalRows; $i++) {
+			$pay_type = "";
+
+			if ($result[$i]->pay_type == 1)
+				$pay_type = lang("Text.card");
+			else if ($result[$i]->pay_type == 2)
+				$pay_type = lang("Text.cash");
+
+			$col = array();
+			$col['number'] = $result[$i]->invoiceNumber;
+			$col['pay_type'] = $pay_type;
+			$col['added'] = $result[$i]->added;
+			$col['amount'] = getMoneyFormat($this->config[0]->currency, $result[$i]->amount);
+			$col['print'] = '
+			<a target="_Blank" href="'. base_url('TPV/printTicket?invoiceID=').$result[$i]->invoiceID.'">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+					<path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+					<path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+				</svg>
+			</a>';
+
+			$row[$i] =  $col;
+		}
+
+		if ($totalRows > 0)
+			$totalRecords = $this->objDataTableModel->getTotalTickets($params);
+
+		$data = array();
+		$data['draw'] = $dataTableRequest['draw'];
+		$data['recordsTotal'] = intval($totalRecords);
+		$data['recordsFiltered'] = intval($totalRecords);
+		$data['data'] = $row;
+
+		return json_encode($data);
 	}
 
 	public function index()
@@ -92,9 +167,9 @@ class Invoice extends BaseController
 			$col['invoiceNumber'] = str_pad($result[$i]->invoiceNumber, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
 			$col['created'] = date($dateFormat, strtotime($result[$i]->created));
 			$col['due_date'] = date($dateFormat, strtotime($result[$i]->due_date));
-			$col['invoiceStatus'] = '<span class="badge bg-primary-subtle text-primary">'.lang('Text.invoices_dt_status_open').'</span>';
+			$col['invoiceStatus'] = '<span class="badge bg-primary-subtle text-primary">' . lang('Text.invoices_dt_status_open') . '</span>';
 			if ($result[$i]->invoiceStatus == 1)
-				$col['invoiceStatus'] = '<span class="badge bg-primary-subtle text-primary">'.lang('Text.invoices_dt_status_paid').'</span>';
+				$col['invoiceStatus'] = '<span class="badge bg-primary-subtle text-primary">' . lang('Text.invoices_dt_status_paid') . '</span>';
 			$row[$i] =  $col;
 		}
 

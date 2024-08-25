@@ -47,7 +47,7 @@
 				<br>
 				<b>Ticket #:</b>
 				<br>
-				<?php echo str_pad($invoice[0]->number, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT); ?>
+				<?php echo $invoice[0]->number; ?>
 			</div>
 		</div>
 
