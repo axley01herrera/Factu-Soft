@@ -80,6 +80,7 @@ $lang['inv_create_page_title'] = "Factura";
 $lang['inv_label_status'] = "Estado";
 $lang['inv_number_label'] = "Número de Factura";
 $lang['inv_status_draft'] = "BORRADOR";
+$lang['inv_status_pending'] = "PENDIENTE";
 $lang['inv_from_label'] = "De";
 $lang['inv_to_label'] = "Para";
 $lang['inv_select_customer'] = "Seleccione un Cliente";
@@ -95,12 +96,15 @@ $lang['inv_due_date'] = "Fecha de Vencimiento";
 $lang['inv_issue_date'] = "Fecha de Emisión";
 $lang['inv_issue_msg'] = "Una vez que emita la factura no prdrá ser modificada";
 $lang['inv_yes_issue'] = "Si, Emitir";
+$lang['inv_dt_col_status'] = "Estado";
+$lang['inv_dt_col_number'] = "Número de Factura";
+$lang['inv_dt_col_added'] = "Fecha de Creación";
 
 # Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Tickets";
 $lang['inv_t_dt_col_number'] = "Ticket #";
 $lang['inv_t_dt_col_pay_type'] = "Tipo de Pago";
-$lang['inv_t_dt_col_added'] = "Creado";
+$lang['inv_t_dt_col_added'] = "Fecha de Creación";
 $lang['inv_t_dt_col_amount'] = "Total";
 
 # Invoices Series

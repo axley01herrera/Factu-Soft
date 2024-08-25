@@ -141,6 +141,54 @@ class Invoice extends BaseController
 		return view('layouts/main', $data);
 	}
 
+	public function processingInvoice()
+	{
+		$dataTableRequest = $_REQUEST;
+
+		$params = array();
+		$params['draw'] = $dataTableRequest['draw'];
+		$params['start'] = $dataTableRequest['start'];
+		$params['length'] = $dataTableRequest['length'];
+		$params['search'] = $dataTableRequest['search']['value'];
+		$params['sortColumn'] = $dataTableRequest['order'][0]['column'];
+		$params['sortDir'] = $dataTableRequest['order'][0]['dir'];
+
+		$row = array();
+		$totalRecords = 0;
+
+		$result = $this->objDataTableModel->getInvoiceProcessingData($params);
+		$totalRows = sizeof($result);
+
+		for ($i = 0; $i < $totalRows; $i++) {
+			$invoiceStatus = "";
+
+			if ($result[$i]->invoiceStatus == 2)
+				$invoiceStatus = '<span class="badge bg-secondary-subtle text-secondary">' . lang('Text.inv_status_draft') . '</span>';
+			else if ($result[$i]->invoiceStatus == 3)
+				$invoiceStatus = '<span class="badge bg-warning-subtle text-warning">' . lang('Text.inv_status_pending') . '</span>';
+
+			$col = array();
+			$col['status'] = $invoiceStatus;
+			$col['number'] = $result[$i]->invoiceNumber;
+			$col['added'] = $result[$i]->added;
+			$col['amount'] = getMoneyFormat($this->config[0]->currency, $result[$i]->amount);
+			$col['action'] = '';
+
+			$row[$i] =  $col;
+		}
+
+		if ($totalRows > 0)
+			$totalRecords = $this->objDataTableModel->getTotalInvoice($params);
+
+		$data = array();
+		$data['draw'] = $dataTableRequest['draw'];
+		$data['recordsTotal'] = intval($totalRecords);
+		$data['recordsFiltered'] = intval($totalRecords);
+		$data['data'] = $row;
+
+		return json_encode($data);
+	}
+
 	public function createInvoice()
 	{
 		# Verify Session 

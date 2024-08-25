@@ -128,93 +128,6 @@ class DataTableModel extends Model
 	}
 
 	####################
-	#### Invoices Data Table
-	####################
-
-	public function getInvoicesProcessingData($params)
-	{
-		$query = $this->db->table('dt_invoice');
-
-		if (!empty($params['search'])) {
-			$query->groupStart();
-			$query->like('dt_invoice.invoiceID', $params['search']);
-			$query->orLike('dt_invoice.invoiceNumber', $params['search']);
-			$query->orLike('dt_invoice.created', $params['search']);
-			$query->orLike('dt_invoice.due_date', $params['search']);
-			$query->orLike('dt_invoice.invoiceStatus', $params['search']);
-			$query->groupEnd();
-		}
-
-		$query->offset($params['start']);
-		$query->limit($params['length']);
-		$query->orderBy($this->getInvoiceProcessingSort($params['sortColumn'], $params['sortDir']));
-
-		$data = $query->get()->getResult();
-
-		return $data;
-	}
-
-	public function getInvoiceProcessingSort($column, $dir)
-	{
-		$sort = '';
-
-		if ($column == 0) {
-			if ($dir == 'asc')
-				$sort = 'dt_invoice.invoiceStatus ASC';
-			else
-				$sort = 'dt_invoice.invoiceStatus DESC';
-		}
-
-		if ($column == 1) {
-			if ($dir == 'asc')
-				$sort = 'dt_invoice.invoiceID ASC';
-			else
-				$sort = 'dt_invoice.invoiceID DESC';
-		}
-
-		if ($column == 2) {
-			if ($dir == 'asc')
-				$sort = 'dt_invoice.invoiceNumber ASC';
-			else
-				$sort = 'dt_invoice.invoiceNumber DESC';
-		}
-
-		if ($column == 3) {
-			if ($dir == 'asc')
-				$sort = 'dt_invoice.created ASC';
-			else
-				$sort = 'dt_invoice.created DESC';
-		}
-
-		if ($column == 4) {
-			if ($dir == 'asc')
-				$sort = 'dt_invoice.due_date ASC';
-			else
-				$sort = 'dt_invoice.due_date DESC';
-		}
-
-		return $sort;
-	}
-
-	public function getTotalInvoices($params)
-	{
-		$query = $this->db->table('dt_invoice');
-
-		if (!empty($params['search'])) {
-			$query->groupStart();
-			$query->like('dt_invoice.invoiceID', $params['search']);
-			$query->orLike('dt_invoice.serieID', $params['search']);
-			$query->orLike('dt_invoice.invoiceNumber', $params['search']);
-			$query->orLike('dt_invoice.created', $params['search']);
-			$query->orLike('dt_invoice.due_date', $params['search']);
-			$query->orLike('dt_invoice.invoiceStatus', $params['search']);
-			$query->groupEnd();
-		}
-
-		return $query->countAllResults();
-	}
-
-	####################
 	#### Tickets Data Table
 	####################
 
@@ -281,6 +194,86 @@ class DataTableModel extends Model
 			$query->groupStart();
 			$query->like('dt_tickets.invoiceNumber', $params['search']);
 			$query->orLike('dt_tickets.added', $params['search']);
+			$query->groupEnd();
+		}
+
+		return $query->countAllResults();
+	}
+
+	####################
+	#### Invoice Data Table
+	####################
+
+	public function getInvoiceProcessingData($params)
+	{
+		$query = $this->db->table('dt_invoices');
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('dt_invoices.invoiceNumber', $params['search']);
+			$query->orLike('DATE(dt_invoices.added)', $params['search']);
+			$query->groupEnd();
+		}
+
+		$query->offset($params['start']);
+		$query->limit($params['length']);
+		$query->orderBy($this->getInvoiceProcessingSort($params['sortColumn'], $params['sortDir']));
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function getInvoiceProcessingSort($column, $dir)
+	{
+		$sort = '';
+
+		if ($column == 0) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.invoiceStatus ASC';
+			else
+				$sort = 'dt_invoices.invoiceStatus DESC';
+		}
+
+		if ($column == 1) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.invoiceNumber ASC';
+			else
+				$sort = 'dt_invoices.invoiceNumber DESC';
+		}
+
+		if ($column == 2) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.pay_type ASC';
+			else
+				$sort = 'dt_invoices.pay_type DESC';
+		}
+
+		if ($column == 3) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.added ASC';
+			else
+				$sort = 'dt_invoices.added DESC';
+		}
+
+		if ($column == 4) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.amount ASC';
+			else
+				$sort = 'dt_invoices.amount DESC';
+		}
+
+		return $sort;
+	}
+
+	public function getTotalInvoice($params)
+	{
+		$query = $this->db->table('dt_invoices');
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('dt_invoices.invoiceNumber', $params['search']);
+			$query->orLike('dt_invoices.added', $params['search']);
 			$query->groupEnd();
 		}
 

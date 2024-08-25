@@ -42,10 +42,9 @@ $routes->get('Invoice/print', 'Invoice::print');
 $routes->get('Invoice/series', 'Invoice::series');
 $routes->post('Invoice/createSerie', 'Invoice::createSerie');
 $routes->post('Invoice/createSerieProcess', 'Invoice::createSerieProcess');
-$routes->post('Invoice/processingInvoices', 'Invoice::processingInvoices');
 $routes->get('Invoice/ticket', 'Invoice::ticket'); 
 $routes->post('Invoice/processingTickets', 'Invoice::processingTickets');
- 
+$routes->post('Invoice/processingInvoice', 'Invoice::processingInvoice');
 
 # Profile
 $routes->get('Profile', 'Profile::index');
