@@ -197,13 +197,15 @@ class Customer extends BaseController
 		}
 
 		if (empty($serialID) && !empty($serial)) {
+			// Todo Validate no duplicate serial
+
 			$data = array();
 			$data['name'] = strtoupper($serial);
 			$data['count'] = 0;
 			$data['created'] = date('Y-m-d H:i:s');
 			$data['updated'] = date('Y-m-d H:i:s');
 
-			$rs = $this->objMainModel->objCreate('serial', $data);
+			$rs = $this->objMainModel->objCreate('serial', $data); // Create Serial
 
 			$data = array();
 			$data['serial_id'] = $rs['id'];

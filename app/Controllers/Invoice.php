@@ -454,6 +454,8 @@ class Invoice extends BaseController
 
 		$name = htmlspecialchars(trim($this->objRequest->getPost('name')));
 
+		// Todo Validate no duplicate serial
+
 		$data = array();
 		$data['name'] = strtoupper($name);
 		$data['count'] = 0;
