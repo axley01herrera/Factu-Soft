@@ -13,9 +13,9 @@
 								<!-- Logo -->
 								<span class="align-items-center d-flex justify-content-center logo-img mb-5 text-center text-nowrap w-100px">
 									<?php if (!empty($profile->logo)) { ?>
-										<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="logo" class="w-50 rounded-circle">
+										<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="logo" class="w-30 rounded-circle">
 									<?php } else { ?>
-										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="logo" class="w-50 rounded-circle">
+										<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="logo" class="w-30 rounded-circle">
 									<?php } ?>
 								</span>
 
