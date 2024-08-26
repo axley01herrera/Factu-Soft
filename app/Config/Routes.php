@@ -50,6 +50,9 @@ $routes->post('Invoice/processingTickets', 'Invoice::processingTickets');
 $routes->post('Invoice/processingInvoice', 'Invoice::processingInvoice');
 $routes->post('Invoice/deleteInvoice', 'Invoice::deleteInvoice');
 $routes->post('Invoice/payInvoice', 'Invoice::payInvoice');
+$routes->get('Invoice/rectifyInvoice', 'Invoice::rectifyInvoice');
+$routes->get('Invoice/finishRectifyInvoice', 'Invoice::finishRectifyInvoice');
+
 
 # Profile
 $routes->get('Profile', 'Profile::index');

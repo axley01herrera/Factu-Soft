@@ -84,6 +84,8 @@ $lang['inv_label_status'] = "Estado";
 $lang['inv_number_label'] = "Número de Factura";
 $lang['inv_status_draft'] = "BORRADOR";
 $lang['inv_status_pending'] = "EMITIDA";
+$lang['inv_status_r'] = "RECTIFICATIVA";
+$lang['inv_status_pr'] = "EMITIDA/RECTIFICADA";
 $lang['inv_status_paid'] = "PAGADA";
 $lang['inv_from_label'] = "De";
 $lang['inv_to_label'] = "Para";
@@ -105,8 +107,10 @@ $lang['inv_dt_col_status'] = "Estado";
 $lang['inv_dt_col_number'] = "Número de Factura";
 $lang['inv_dt_col_added'] = "Fecha de Creación";
 $lang['inv_set_paid'] = "Marcar como pagada";
-$lang['inv_create_rec'] = "Crear factura rectificativa";
-
+$lang['inv_create_rec'] = "Crear factura rectificativa"; 
+$lang['rectify_inv_are_you_sure_msg'] = "Está seguro?";
+$lang['rectify_inv_not_revert_this_msg'] = "Desea crear una rectificación de la factura. Esta acción no es reversible!"; 
+$lang['rectify_inv_yes_rectify_msg'] = "Si, Rectificar";
 # Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Tickets";
 $lang['inv_t_dt_col_number'] = "Ticket #";

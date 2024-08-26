@@ -166,6 +166,10 @@ class Invoice extends BaseController
 				$invoiceStatus = '<span class="badge bg-secondary-subtle text-secondary">' . lang('Text.inv_status_draft') . '</span>';
 			else if ($result[$i]->invoiceStatus == 3)
 				$invoiceStatus = '<span class="badge bg-warning-subtle text-warning">' . lang('Text.inv_status_pending') . '</span>';
+			else if ($result[$i]->invoiceStatus == 4)
+				$invoiceStatus = '<span class="badge bg-danger-subtle text-danger">' . lang('Text.inv_status_r') . '</span>';
+			else if ($result[$i]->invoiceStatus == 5)
+				$invoiceStatus = '<span class="badge bg-secondary-subtle text-secondary">' . lang('Text.inv_status_pr') . '</span>';
 
 			$col = array();
 			$col['status'] = $invoiceStatus;
@@ -194,7 +198,7 @@ class Invoice extends BaseController
 							<path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
 					</svg>
 				</a>
-				<a target="_Blank" href="#" class="me-2" title="' . lang('Text.inv_create_rec') . '">
+				<a href="#" class="me-2 rectify-invoice" data-invoice-id="' . $result[$i]->invoiceID . '" title="' . lang('Text.inv_create_rec') . '">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-x" viewBox="0 0 16 16">
 						<path fill-rule="evenodd" d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708"/>
 						<path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
@@ -531,5 +535,72 @@ class Invoice extends BaseController
 		$data['customer'] = $this->objInvoiceModel->getCustomer($data['invoice'][0]->customer);
 
 		return view('invoice/print', $data);
+	}
+
+	public function rectifyInvoice()
+	{
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		# params
+		$invoiceID = $this->objRequest->getPostGet('id');
+
+		$invoice = $this->objInvoiceModel->getInvoice($invoiceID);
+
+		$serial = $this->objInvoiceModel->getSerial(2);
+		$consecutive = $serial[0]->count + 1;
+
+		$d = array();
+		$d['type'] = 2;
+		$d['serie'] = $serial[0]->id;
+		$d['status'] = 4;
+		$d['number'] = $serial[0]->name . str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
+		$d['r_id'] = $invoiceID;
+		$d['customer'] = $invoice[0]->customer;
+		$d['added'] = date('Y-m-d H:i:s');
+		$d['updated'] = date('Y-m-d H:i:s');
+
+		$rs = $this->objMainModel->objCreate('invoice', $d);
+		$items = $this->objInvoiceModel->getInvoiceItems($invoiceID);
+
+		foreach ($items as $i) {
+			$d = array();
+			$d['invoice_id'] = $rs['id'];
+			$d['service_id'] = $i->service_id;
+			$d['description'] = $i->description;
+			$d['amount'] = 0 - $i->amount;
+			$d['quantity'] = $i->quantity;
+			$d['price'] =  0 - $i->price;
+			$this->objMainModel->objCreate('invoice_items', $d);
+		}
+
+		$d = array();
+		$d['status'] = 5;
+		$this->objMainModel->objUpdate('invoice', $d, $invoiceID);
+
+		return redirect()->to(base_url('Invoice/finishRectifyInvoice?id=') . $rs['id']);
+	}
+
+	public function finishRectifyInvoice()
+	{
+		# params
+		$invoiceID = $this->objRequest->getPostGet('id');
+
+		$data = array();
+		$data['config'] = $this->config;
+		$data['profile'] = $this->profile;
+		$data['lang'] = $this->config[0]->lang;
+		$data['invoiceID'] = $invoiceID;
+		$data['invoice'] = $this->objInvoiceModel->getInvoice($invoiceID);
+		$data['customers'] = $this->objInvoiceModel->getSelCustomers();
+		$data['status'] = '<span class="badge bg-secondary-subtle text-secondary">' . lang('Text.inv_status_draft') . '</span>';
+		$data['customer'] = $this->objInvoiceModel->getCustomer($data['invoice'][0]->customer);
+		$data['items'] = $this->objInvoiceModel->getInvoiceItems($invoiceID);
+		# menu
+		$data['invoiceActive'] = 'active';
+		# page
+		$data['page'] = 'invoice/rectifyInvoice';
+
+		return view('layouts/main', $data);
 	}
 }

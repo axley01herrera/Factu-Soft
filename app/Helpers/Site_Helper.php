@@ -1,7 +1,7 @@
 <?php
 function getMoneyFormat($currency, $value)
 {
-    return $currency . number_format($value, 2, ".", ',');
+    return number_format($value, 2, ".", ',') . $currency;
 }
 
 function getService($serviceID)
@@ -23,5 +23,3 @@ function getDateLabel($lang)
     else
         return "m-d-Y";
 }
-
-

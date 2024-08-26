@@ -21,7 +21,7 @@
 						<th><?php echo lang('Text.inv_dt_col_status'); ?></th>
 						<th><?php echo lang('Text.inv_dt_col_number'); ?></th>
 						<th><?php echo lang('Text.inv_dt_col_added'); ?></th>
-						<th><?php echo lang('Text.inv_t_dt_col_amount'); ?></th>
+						<th class="text-end"><?php echo lang('Text.inv_t_dt_col_amount'); ?></th>
 						<th class="text-end"></th>
 					</tr>
 				</thead>
@@ -70,6 +70,7 @@
 				{
 					data: 'amount',
 					class: 'dt-vertical-align p-2',
+					class: "text-end",
 					searchable: false
 				},
 				{
