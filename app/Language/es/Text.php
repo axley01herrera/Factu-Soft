@@ -69,6 +69,7 @@ $lang['tpv_alert_success_save_invoice'] = "Factura creada";
 $lang['tpv_alert_success_save_new_price'] = "Precio Actualizado";
 $lang['tpv_basket_btn_ticket'] = "Cobrar";
 $lang['ticket_establishment'] = "Establecimiento";
+$lang['tpv_empty_services_label'] = "No hay servicios disponibles..!";
 $lang['ticket_date'] = "Fecha";
 $lang['ticket_pay_type'] = "Pago";
 $lang['ticket_msg'] = "Gracias por su visita";
