@@ -7,6 +7,7 @@ use App\Models\ProfileModel;
 use App\Models\DataTableModel;
 use App\Models\CustomerModel;
 use App\Models\MainModel;
+use App\Models\InvoiceModel;
 
 class Customer extends BaseController
 {
@@ -18,6 +19,7 @@ class Customer extends BaseController
 	protected $objDataTableModel;
 	protected $objCustomerModel;
 	protected $objMainModel;
+	protected $objInvoiceModel;
 
 	protected $config;
 	protected $profile;
@@ -32,6 +34,7 @@ class Customer extends BaseController
 		$this->objDataTableModel = new DataTableModel;
 		$this->objCustomerModel = new CustomerModel;
 		$this->objMainModel = new MainModel;
+		$this->objInvoiceModel = new InvoiceModel;
 
 		# Services
 		$this->objRequest = \Config\Services::request();
@@ -173,7 +176,7 @@ class Customer extends BaseController
 		$address_country = htmlspecialchars(trim($this->objRequest->getPost('address_country')));
 		$nif = htmlspecialchars(trim($this->objRequest->getPost('nif')));
 		$serial = htmlspecialchars(trim($this->objRequest->getPost('serial')));
-		
+
 		$data = array();
 		$data['name'] = $name;
 		$data['last_name'] = $last_name;
@@ -187,34 +190,41 @@ class Customer extends BaseController
 		$data['address_country'] = $address_country;
 		$data['nif'] = $nif;
 
-		if (!empty($customerID)) { // Update
-			$data['updated'] = date('Y-m-d H:i:s');
-			$result = $this->objMainModel->objUpdate('customer', $data, $customerID);
-		} else { // Create
-			$data['updated'] = date('Y-m-d H:i:s');
-			$data['added'] = date('Y-m-d H:i:s');
-			$result = $this->objMainModel->objCreate('customer', $data);
-		}
+		$checkExistSerialName = $this->objInvoiceModel->checkExistSerialName($serial);
 
-		if (empty($serialID) && !empty($serial)) {
-			// Todo Validate no duplicate serial
+		if (empty($checkExistSerialName)) {
 
-			$data = array();
-			$data['name'] = strtoupper($serial);
-			$data['count'] = 0;
-			$data['created'] = date('Y-m-d H:i:s');
-			$data['updated'] = date('Y-m-d H:i:s');
-
-			$rs = $this->objMainModel->objCreate('serial', $data); // Create Serial
-
-			$data = array();
-			$data['serial_id'] = $rs['id'];
-
-			if (!empty($customerID)) {
-				$this->objMainModel->objUpdate('customer', $data, $customerID);
+			if (!empty($customerID)) { // Update
+				$data['updated'] = date('Y-m-d H:i:s');
+				$result = $this->objMainModel->objUpdate('customer', $data, $customerID);
 			} else { // Create
-				$this->objMainModel->objUpdate('customer', $data, $result['id']);
+				$data['updated'] = date('Y-m-d H:i:s');
+				$data['added'] = date('Y-m-d H:i:s');
+				$result = $this->objMainModel->objCreate('customer', $data);
 			}
+
+			if (empty($serialID) && !empty($serial)) {
+				$data = array();
+				$data['name'] = strtoupper($serial);
+				$data['count'] = 0;
+				$data['created'] = date('Y-m-d H:i:s');
+				$data['updated'] = date('Y-m-d H:i:s');
+
+				$rs = $this->objMainModel->objCreate('serial', $data); // Create Serial
+
+				$data = array();
+				$data['serial_id'] = $rs['id'];
+
+				if (!empty($customerID)) {
+					$this->objMainModel->objUpdate('customer', $data, $customerID);
+				} else { // Create
+					$this->objMainModel->objUpdate('customer', $data, $result['id']);
+				}
+			}
+		} else {
+			$result = array();
+			$result['error'] = 1;
+			$result['msg'] = 'DUPLICATE_SERIAL_NAME';
 		}
 
 		return json_encode($result);

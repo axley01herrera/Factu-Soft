@@ -129,4 +129,14 @@ class InvoiceModel extends Model
 
 		return $result;
 	}
+
+	public function checkExistSerialName($serialName)
+	{
+		$query = $this->db->table('serial')
+			->where('name', $serialName);
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
 }

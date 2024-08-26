@@ -12,6 +12,7 @@ class Home extends BaseController
     protected $objConfig;
     protected $objProfile;
     protected $config;
+	protected $profile;
 
     public function __construct()
     {
@@ -27,6 +28,7 @@ class Home extends BaseController
         $this->objRequest = \Config\Services::request();
 
         $this->config = $this->objConfig->getConfig();
+		$this->profile = $this->objProfile->getProfile();
 
         # Set Lang
         if (!empty($this->config)) {
@@ -45,6 +47,7 @@ class Home extends BaseController
 
         $data = array();
         $data['msg'] = $msg;
+		$data['profile'] = $this->profile;
 
         return view('home/mainHome', $data);
     }

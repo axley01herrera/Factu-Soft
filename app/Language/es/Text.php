@@ -118,6 +118,7 @@ $lang['inv_serial_dt_col_name'] = "Name";
 $lang['inv_serial_dt_col_serial'] = "Serial";
 $lang['inv_serial_dt_col_updated'] = "Actualizado";
 $lang['inv_serial_dt_col_added'] = "Agregado";
+$lang['inv_serial_alert_duplicate_name'] = "Nombre de serie existente";
 
 # Customer
 $lang['btn_create_customer'] = 'Crear Cliente';

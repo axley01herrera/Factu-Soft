@@ -11,8 +11,12 @@
 						<div class="card mb-0">
 							<div class="card-body">
 								<!-- Logo -->
-								<span class="align-items-center d-flex justify-content-center logo-img mb-5 text-center text-nowrap w-100">
-									<img src="<?php echo base_url('public/assets/images/logos/dark-logo.svg'); ?>" class="dark-logo" alt="Factu-Soft" />
+								<span class="align-items-center d-flex justify-content-center logo-img mb-5 text-center text-nowrap w-100px">
+									<?php if (empty($profile->logo)) { ?>
+										<img src="<?php echo base_url('public/assets/images/logos/dark-logo.svg'); ?>" class="dark-logo w-100 h-100" alt="Factu-Soft" />
+									<?php } else { ?>
+										<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" class="dark-logo w-50 h-50 rounded-circle round-100" alt="Factu-Soft" />
+									<?php } ?>
 								</span>
 
 								<div class="position-relative text-center my-4">
@@ -28,8 +32,8 @@
 									</div>
 									<div class="d-flex align-items-center justify-content-between mb-4">
 										<div class="form-check">
-											<input id="cbx-rememberme" class="form-check-input primary" type="checkbox" checked />
-											<label class="form-check-label text-dark" for="cbx-rememberme">
+											<input id="cbx-remember" class="form-check-input primary" type="checkbox" data-value="0" />
+											<label class="form-check-label text-dark" for="cbx-remember">
 												<?php echo lang('Text.text_remember_me'); ?>
 											</label>
 										</div>
@@ -58,6 +62,11 @@
 					dataType: "json",
 					success: function(response) {
 						if (response.error == 0) {
+							let remember = $('#cbx-remember').attr('data-value');
+							if (remember == 1) {
+								localStorage.rememberbae = '1';
+								localStorage.passbae = $('#access-key').val();
+							}
 							window.location.href = "<?php echo base_url('Dashboard'); ?>";
 						} else if (response.error == 1) {
 							Swal.fire({
@@ -123,6 +132,33 @@
 					showConfirmButton: false,
 					timer: 2500
 				});
+			}
+		});
+
+		if (localStorage.rememberbae != undefined && localStorage.rememberbae != '') {
+			$('#cbx-remember').trigger('click');
+			$('#cbx-remember').attr('data-value', '1');
+
+			let passInput = document.getElementById("access-key");
+			passInput.value = localStorage.passbae;
+		} else {
+			clearRemember();
+			$('#cbx-remember').attr('data-value', '0');
+		}
+
+		function clearRemember() {
+			localStorage.rememberbae = '';
+			localStorage.passbae = '';
+		}
+
+		$('#cbx-remember').on('click', function() {
+			let value = $(this).attr('data-value');
+
+			if (value == 0)
+				$('#cbx-remember').attr('data-value', '1');
+			else {
+				$('#cbx-remember').attr('data-value', '0');
+				clearRemember();
 			}
 		});
 	</script>

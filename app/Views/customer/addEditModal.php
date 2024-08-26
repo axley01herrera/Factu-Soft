@@ -83,7 +83,7 @@
 
 				<!-- Invoice Serial -->
 				<?php if (empty($customer[0]->serial_id)) { ?>
-					<div class="row particular enterprise" hidden >
+					<div id="div-serial" class="row particular enterprise d-none">
 						<div class="col-12">
 							<div class="alert alert-warning" role="alert">
 								<?php echo lang('Text.customer_serial_msg'); ?>
@@ -184,8 +184,18 @@
 							dtClients.draw();
 						} else if (response.error == 2) {
 							window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
-						} else {
-							globalError();
+						} else if (response.error == 1) {
+							if (response.msg == 'DUPLICATE_SERIAL_NAME') {
+								$('#serial').addClass('is-invalid');
+								Swal.fire({
+									position: "top-end",
+									icon: "warning",
+									text: "<?php echo lang('Text.inv_serial_alert_duplicate_name'); ?>" + '..!',
+									showConfirmButton: false,
+									timer: 2500
+								});
+							} else
+								globalError();
 						}
 						$('#btn-save-customer').removeAttr('disabled');
 					},
@@ -250,10 +260,18 @@
 			$(this).removeClass('is-invalid');
 		});
 
+		$('#serial').on('focus', function() {
+			$(this).removeClass('is-invalid');
+		});
+
 		$('#sel-type').on('change', function() {
 			let value = $(this).val();
 
 			if (value == 0) { // Particular
+
+				$('#div-serial').addClass('d-none');
+				$('#serial').val('');
+
 				$('.enterprise').each(function() {
 					$(this).attr('hidden', true);
 				});
@@ -265,7 +283,10 @@
 				$('#txt-last_name').addClass('required');
 				$('#txt-nif').removeClass('required');
 				$('#txt-nif').val('');
-			} else if (value == 1) { // Enterprize
+			} else if (value == 1) { // Enterprice
+
+				$('#div-serial').removeClass('d-none');
+
 				$('.particular').each(function() {
 					$(this).attr('hidden', true);
 				});

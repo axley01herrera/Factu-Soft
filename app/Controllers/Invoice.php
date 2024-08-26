@@ -534,15 +534,21 @@ class Invoice extends BaseController
 
 		$name = htmlspecialchars(trim($this->objRequest->getPost('name')));
 
-		// Todo Validate no duplicate serial
+		$checkExistSerialName = $this->objInvoiceModel->checkExistSerialName($name);
 
-		$data = array();
-		$data['name'] = strtoupper($name);
-		$data['count'] = 0;
-		$data['created'] = date('Y-m-d H:i:s');
-		$data['updated'] = date('Y-m-d H:i:s');
+		if (empty($checkExistSerialName)) {
+			$data = array();
+			$data['name'] = strtoupper($name);
+			$data['count'] = 0;
+			$data['created'] = date('Y-m-d H:i:s');
+			$data['updated'] = date('Y-m-d H:i:s');
 
-		$result = $this->objMainModel->objCreate('serial', $data);
+			$result = $this->objMainModel->objCreate('serial', $data);
+		} else {
+			$result = array();
+			$result['error'] = 1;
+			$result['msg'] = 'DUPLICATE_SERIAL_NAME';
+		}
 
 		return json_encode($result);
 	}
