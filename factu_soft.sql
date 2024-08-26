@@ -134,6 +134,7 @@ CREATE TABLE IF NOT EXISTS `invoice` (
   `pay_type` int DEFAULT NULL COMMENT '1 = Card\r\n2 = Cash',
   `type` int NOT NULL DEFAULT '1' COMMENT '1 = Ticket\r\n2 = Invoice',
   `r_desc` varchar(999) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `r_id` int DEFAULT NULL,
   `added` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
