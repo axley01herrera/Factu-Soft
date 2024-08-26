@@ -59,7 +59,7 @@ class MainModel extends Model
 			$return['error'] = 0;
 			$return['msg'] = 'success';
 		} else {
-			$return['error'] = 0;
+			$return['error'] = 1;
 			$return['msg'] = 'error on delete record';
 		}
 

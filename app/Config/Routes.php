@@ -36,15 +36,17 @@ $routes->get('Invoice/editInvoice', 'Invoice::editInvoice');
 $routes->post('Invoice/objUpdateInvoice', 'Invoice::objUpdateInvoice');
 $routes->post('Invoice/addLineItem', 'Invoice::addLineItem');
 $routes->post('Invoice/addLineItemProcess', 'Invoice::addLineItemProcess');
-$routes->post('Invoice/removeItem', 'Invoice::removeItem'); 
-$routes->post('Invoice/issueInvoice', 'Invoice::issueInvoice'); 
+$routes->post('Invoice/removeItem', 'Invoice::removeItem');
+$routes->post('Invoice/issueInvoice', 'Invoice::issueInvoice');
 $routes->get('Invoice/print', 'Invoice::print');
 $routes->get('Invoice/series', 'Invoice::series');
 $routes->post('Invoice/createSerie', 'Invoice::createSerie');
 $routes->post('Invoice/createSerieProcess', 'Invoice::createSerieProcess');
-$routes->get('Invoice/ticket', 'Invoice::ticket'); 
+$routes->get('Invoice/ticket', 'Invoice::ticket');
 $routes->post('Invoice/processingTickets', 'Invoice::processingTickets');
 $routes->post('Invoice/processingInvoice', 'Invoice::processingInvoice');
+$routes->post('Invoice/deleteInvoice', 'Invoice::deleteInvoice');
+$routes->post('Invoice/payInvoice', 'Invoice::payInvoice');
 
 # Profile
 $routes->get('Profile', 'Profile::index');

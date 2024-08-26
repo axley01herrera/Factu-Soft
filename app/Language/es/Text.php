@@ -81,6 +81,7 @@ $lang['inv_label_status'] = "Estado";
 $lang['inv_number_label'] = "Número de Factura";
 $lang['inv_status_draft'] = "BORRADOR";
 $lang['inv_status_pending'] = "PENDIENTE";
+$lang['inv_status_paid'] = "PAGADA";
 $lang['inv_from_label'] = "De";
 $lang['inv_to_label'] = "Para";
 $lang['inv_select_customer'] = "Seleccione un Cliente";
