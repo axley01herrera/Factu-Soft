@@ -7,7 +7,6 @@
 		<h4 class="fs-6 mb-0"><?php echo lang('Text.inv_serie_page_title'); ?></h4>
 	</div>
 	<div class="d-flex align-items-center justify-content-between gap-6">
-		<button type="button" id="btn-create-serie" class="btn btn-success"><?php echo lang('Text.inv_create_serial'); ?></button>
 	</div>
 </div>
 
