@@ -113,7 +113,8 @@
 		dom: '<"top"f>rt<"row"<"col-4 mt-3"l><"col-4 mt-3"i><"col-4 mt-3"p>>',
 	});
 
-	dtClients.on('click', '.btn-edit-customer', function() {
+	dtClients.on('click', '.btn-edit-customer', function(e) {
+		e.preventDefault();
 		let customerID = $(this).attr('data-customer-id');
 		$.ajax({
 			type: "POST",
@@ -131,7 +132,8 @@
 		});
 	});
 
-	dtClients.on('click', '.btn-delete-customer', function() {
+	dtClients.on('click', '.btn-delete-customer', function(e) {
+		e.preventDefault();
 		let customerID = $(this).attr('data-customer-id');
 		Swal.fire({
 			title: '<?php echo lang('Text.are_you_sure_msg'); ?>',
