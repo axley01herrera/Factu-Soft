@@ -41,6 +41,9 @@ class Dashboard extends BaseController
 			$this->objRequest->setLocale("es");
 			date_default_timezone_set("UTC");
 		}
+
+		# Helper
+		helper('Site');
 	}
 
 	public function index()
@@ -51,14 +54,61 @@ class Dashboard extends BaseController
 
 		$data = array();
 		$data['profile'] = $this->profile;
+		$data['lang'] = $this->config[0]->lang;
 		# menu
 		$data['dashboardActive'] = 'active';
 		# page
 		$data['page'] = 'dashboard/mainDashboard';
-		# data cards
-		$data['clients'] = $this->objDashboardModel->getActiveClients();
-		$data['services'] = $this->objDashboardModel->getActiveServices();
 
 		return view('layouts/main', $data);
+	}
+
+	public function collectionDay()
+	{
+		$collectionDay = 0;
+		$items = $this->objDashboardModel->getCollectionDay();
+
+		if (empty($items)) {
+			$result = array();
+			$result['collectionDay'] = getMoneyFormat($this->config[0]->currency, $collectionDay);
+		} else {
+			foreach ($items as $i) {
+				$collectionDay += $i->amount;
+			}
+			$result = array();
+			$result['collectionDay'] = getMoneyFormat($this->config[0]->currency, $collectionDay);
+		}
+
+		return json_encode($result);
+	}
+
+	public function customers()
+	{
+		$customers = $this->objDashboardModel->getCustomers();
+
+		if (empty($customers)) {
+			$result = array();
+			$result['customers'] = 0;
+		} else {
+			$result = array();
+			$result['customers'] = sizeof($customers);
+		}
+
+		return json_encode($result);
+	}
+
+	public function services()
+	{
+		$services = $this->objDashboardModel->getServices();
+
+		if (empty($services)) {
+			$result = array();
+			$result['services'] = 0;
+		} else {
+			$result = array();
+			$result['services'] = sizeof($services);
+		}
+
+		return json_encode($result);
 	}
 }
