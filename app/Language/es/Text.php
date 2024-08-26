@@ -103,6 +103,7 @@ $lang['inv_dt_col_status'] = "Estado";
 $lang['inv_dt_col_number'] = "Número de Factura";
 $lang['inv_dt_col_added'] = "Fecha de Creación";
 $lang['inv_set_paid'] = "Marcar como pagada";
+$lang['inv_create_rec'] = "Crear factura rectificativa";
 
 # Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Tickets";

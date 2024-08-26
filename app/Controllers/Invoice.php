@@ -175,35 +175,42 @@ class Invoice extends BaseController
 			$col['action'] = '';
 			if ($result[$i]->invoiceStatus == 2) { // Draft
 				$col['action'] = '
-				<a href="' . base_url('Invoice/editInvoice?id=') . $result[$i]->invoiceID . '">
+				<a href="' . base_url('Invoice/editInvoice?id=') . $result[$i]->invoiceID . '" class="me-2">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 					  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
 					  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
 					</svg>
 				</a>
-				<a href="#" class="delete-invoice" data-invoice-id="' . $result[$i]->invoiceID . '">
+				<a href="#" class="me-2 delete-invoice" data-invoice-id="' . $result[$i]->invoiceID . '">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash ms-2" viewBox="0 0 16 16">
 					  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
 					  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
 					</svg>
 				</a>';
-			} else if ($result[$i]->invoiceStatus == 3) { // Pending 
+			} else if ($result[$i]->invoiceStatus == 3) { // Sent 
 				$col['action'] = '
-				<a href="#" class="pay-invoice" data-invoice-id="' . $result[$i]->invoiceID . '" title="' . lang('Text.inv_set_paid') . '">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
-					  <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
-					  <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z"/>
+				<a href="#" class="me-2 pay-invoice" data-invoice-id="' . $result[$i]->invoiceID . '" title="' . lang('Text.inv_set_paid') . '">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
+							<path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
 					</svg>
 				</a>
-				<a target="_Blank" href="' . base_url('Invoice/print?id=') . $result[$i]->invoiceID . '">
+				<a target="_Blank" href="#" class="me-2" title="' . lang('Text.inv_create_rec') . '">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-x" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708"/>
+						<path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+						<path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+					</svg>
+				</a>
+				<a target="_Blank" href="' . base_url('Invoice/print?id=') . $result[$i]->invoiceID . '" class="me-2 ">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer ms-2" viewBox="0 0 16 16">
 						<path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
 						<path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
 					</svg>
-				</a>';
+				</a>
+				';
 			} else if ($result[$i]->invoiceStatus == 1) { // Paid
 				$col['action'] = '
-				<a target="_Blank" href="' . base_url('TPV/printTicket?invoiceID=') . $result[$i]->invoiceID . '">
+				<a target="_Blank" href="' . base_url('TPV/printTicket?invoiceID=') . $result[$i]->invoiceID . '" class="me-2 ">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
 						<path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
 						<path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
@@ -441,53 +448,6 @@ class Invoice extends BaseController
 		$rs = $this->objMainModel->objUpdate('invoice', [$field => $value], $invoiceID);
 
 		return json_encode($rs);
-	}
-
-	public function processingInvoices()
-	{
-		$dataTableRequest = $_REQUEST;
-
-		$params = array();
-		$params['draw'] = $dataTableRequest['draw'];
-		$params['start'] = $dataTableRequest['start'];
-		$params['length'] = $dataTableRequest['length'];
-		$params['search'] = $dataTableRequest['search']['value'];
-		$params['sortColumn'] = $dataTableRequest['order'][0]['column'];
-		$params['sortDir'] = $dataTableRequest['order'][0]['dir'];
-
-		$row = array();
-		$totalRecords = 0;
-
-		$result = $this->objDataTableModel->getInvoicesProcessingData($params);
-		$totalRows = sizeof($result);
-
-		$dateFormat = 'm-d-Y';
-
-		if ($this->config[0]->lang == 'es')
-			$dateFormat = 'd-m-Y';
-
-		for ($i = 0; $i < $totalRows; $i++) {
-			$col = array();
-			$col['invoiceID'] = $result[$i]->invoiceID;
-			$col['invoiceNumber'] = str_pad($result[$i]->invoiceNumber, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
-			$col['created'] = date($dateFormat, strtotime($result[$i]->created));
-			$col['due_date'] = date($dateFormat, strtotime($result[$i]->due_date));
-			$col['invoiceStatus'] = '<span class="badge bg-primary-subtle text-primary">' . lang('Text.invoices_dt_status_open') . '</span>';
-			if ($result[$i]->invoiceStatus == 1)
-				$col['invoiceStatus'] = '<span class="badge bg-primary-subtle text-primary">' . lang('Text.invoices_dt_status_paid') . '</span>';
-			$row[$i] =  $col;
-		}
-
-		if ($totalRows > 0)
-			$totalRecords = $this->objDataTableModel->getTotalInvoices($params);
-
-		$data = array();
-		$data['draw'] = $dataTableRequest['draw'];
-		$data['recordsTotal'] = intval($totalRecords);
-		$data['recordsFiltered'] = intval($totalRecords);
-		$data['data'] = $row;
-
-		return json_encode($data);
 	}
 
 	public function series()
