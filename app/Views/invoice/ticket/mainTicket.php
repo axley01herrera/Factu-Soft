@@ -21,7 +21,7 @@
                         <th><?php echo lang('Text.inv_t_dt_col_pay_type'); ?></th>
                         <th><?php echo lang('Text.inv_t_dt_col_added'); ?></th>
                         <th><?php echo lang('Text.inv_t_dt_col_amount'); ?></th>
-                        <th class="text-center"></th>
+                        <th class="text-end"></th>
                     </tr>
                 </thead>
             </table>
@@ -72,7 +72,7 @@
             },
             {
                 data: 'print',
-                class: 'dt-vertical-align p-2 text-center',
+                class: 'dt-vertical-align p-2 text-end',
                 orderable: false,
                 searchable: false
             }
