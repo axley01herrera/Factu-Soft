@@ -129,6 +129,7 @@
 						<th></th>
 						<th><?php echo lang('Text.inv_dt_item_col_qty'); ?></th>
 						<th><?php echo lang('Text.inv_dt_item_col_desc'); ?></th>
+						<th class="text-end"><?php echo lang('Text.inv_dt_item_col_price'); ?></th>
 						<th class="text-end"><?php echo lang('Text.inv_dt_item_col_amount'); ?></th>
 					</thead>
 					<tbody>
@@ -145,6 +146,7 @@
 								</td>
 								<td><?php echo 'x' . $i->quantity; ?></td>
 								<td><?php echo $i->description; ?></td>
+								<td class="text-end"><?php echo getMoneyFormat($config[0]->currency, $i->price); ?></td>
 								<td class="text-end"><?php echo getMoneyFormat($config[0]->currency, $i->amount); ?></td>
 							</tr>
 						<?php } ?>

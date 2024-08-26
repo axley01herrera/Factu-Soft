@@ -154,7 +154,5 @@
 </html>
 
 <script>
-    $(document).ready(function () {
-        window.print();
-    });
+    window.print();
 </script>

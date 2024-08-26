@@ -358,6 +358,7 @@ class Invoice extends BaseController
 		$d['service_id'] = $serviceID;
 		$d['description'] = $desc;
 		$d['quantity'] = $qty;
+		$d['price'] = $price;
 		$d['amount'] = $qty * $price;
 
 		$rs = $this->objMainModel->objCreate('invoice_items', $d);

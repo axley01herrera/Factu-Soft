@@ -93,8 +93,10 @@ CREATE TABLE IF NOT EXISTS `serial` (
 );
 
 -- Insert after create table
-INSERT INTO `serial` (`id`, `name`, `count`, `created`, `updated`) VALUES
-(1, 'TPV', 0, '2024-08-24 11:00:18', '2024-08-24 11:00:18');
+INSERT INTO `serial` (`id`, `name`, `count`) VALUES
+(1, 'TPV', 0);
+INSERT INTO `serial` (`id`, `name`, `count`) VALUES
+(2, 'R', 0);
 
 -- --------------------------------------------------------
 
