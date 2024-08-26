@@ -130,9 +130,10 @@ CREATE TABLE IF NOT EXISTS `invoice` (
   `customer` int DEFAULT NULL,
   `created_date` date NOT NULL,
   `due_date` date DEFAULT NULL,
-  `status` int NOT NULL DEFAULT '0' COMMENT '0 = OPEN\r\n1 = PAID\r\n2 = DRAFT\r\n3 = PENDING',
+  `status` int NOT NULL DEFAULT '0' COMMENT '0 = OPEN\r\n1 = PAID\r\n2 = DRAFT\r\n3 = SEND\r\n4 = RECTIFIED\r\n5 = SEND / RECTIFIED',
   `pay_type` int DEFAULT NULL COMMENT '1 = Card\r\n2 = Cash',
   `type` int NOT NULL DEFAULT '1' COMMENT '1 = Ticket\r\n2 = Invoice',
+  `r_desc` varchar(999) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `added` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -152,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `invoice_items` (
   `description` varchar(999) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `amount` float NOT NULL,
   `quantity` int NOT NULL DEFAULT '1',
+  `price` float NOT NULL,
   PRIMARY KEY (`id`)
 );
 
