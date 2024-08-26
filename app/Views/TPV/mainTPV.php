@@ -7,12 +7,6 @@
 		box-sizing: border-box;
 	}
 
-	.scroll-container-name {
-		max-height: 30px;
-		overflow-y: auto;
-		overflow-x: hidden;
-	}
-
 	.scroll-container-description {
 		max-height: 30px;
 		overflow-y: auto;
@@ -40,12 +34,22 @@
 			<?php foreach ($services as $s) { ?>
 				<div class="col-12 col-md-3 col-lg-3">
 					<div class="text-center alert-dismissible fade show p-0 alert card-hover" role="alert">
-						<div class="card card-services" style="cursor: pointer; min-height: 200px;" data-service-id="<?php echo $s->id; ?>">
-							<div class="card-body p-4 text-center border-bottom">
-								<img src="<?php echo base_url('public/assets/images/logos/favicon.png'); ?>" alt="monster-img" class="rounded-circle mb-3">
-								<h4 class="card-title mb-1 scroll-container-name"><?php echo $s->name; ?></h4>
-								<p class="fs-2 mb-0"><?php echo getMoneyFormat($config[0]->currency, $s->price); ?></p>
-								<p class="fs-2 mt-2 scroll-container-description"><?php echo $s->description; ?></p>
+						<div class="card card-services" style="cursor: pointer; height: 200px;" data-service-id="<?php echo $s->id; ?>">
+							<div class="card-body text-center">
+
+								<?php if (!empty($profile->logo)) { ?>
+									<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="logo" class="w-40 rounded-circle">
+								<?php } else { ?>
+									<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="logo" class="w-40 rounded-circle">
+								<?php } ?>
+
+								<div style="height: 75px;" class="mt-2">
+									<h7 class="card-title mb-1"><?php echo $s->name; ?></h7>
+								</div>
+
+								<div style="height: 10px;">
+									<p class="fs-2 mb-0"><?php echo getMoneyFormat($config[0]->currency, $s->price); ?></p>
+								</div>
 							</div>
 						</div>
 					</div>

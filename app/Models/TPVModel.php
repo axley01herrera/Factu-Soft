@@ -46,7 +46,8 @@ class TPVModel extends Model
 	public function getServices()
 	{
 		$query = $this->db->table('services')
-			->where('deleted', 0);
+			->where('deleted', 0)
+			->orderBy('name');
 
 		$data = $query->get()->getResult();
 

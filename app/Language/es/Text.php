@@ -80,7 +80,7 @@ $lang['inv_create_page_title'] = "Factura";
 $lang['inv_label_status'] = "Estado";
 $lang['inv_number_label'] = "Número de Factura";
 $lang['inv_status_draft'] = "BORRADOR";
-$lang['inv_status_pending'] = "PENDIENTE";
+$lang['inv_status_pending'] = "EMITIDA";
 $lang['inv_status_paid'] = "PAGADA";
 $lang['inv_from_label'] = "De";
 $lang['inv_to_label'] = "Para";
@@ -100,6 +100,7 @@ $lang['inv_yes_issue'] = "Si, Emitir";
 $lang['inv_dt_col_status'] = "Estado";
 $lang['inv_dt_col_number'] = "Número de Factura";
 $lang['inv_dt_col_added'] = "Fecha de Creación";
+$lang['inv_set_paid'] = "Marcar como pagada";
 
 # Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Tickets";
@@ -153,7 +154,7 @@ $lang['customer_profile_page_title'] = "Perfil del Cliente";
 $lang['customer_label'] = "Cliente";
 $lang['customer_profile_personal_title'] = "Información";
 $lang['customer_profile_invoices_title'] = "Facturas";
-$lang['customer_serial_msg'] = "Si necesita utilizar una serie específica al emitir facturas para este cliente, por favor, introdúzcala en el campo a continuación.";
+$lang['customer_serial_msg'] = "Se necesita utilizar una serie específica al emitir facturas para este cliente, por favor, introdúzcala en el campo a continuación.";
 $lang['customer_serial'] = "Serie de Facturación";
 
 # Service
