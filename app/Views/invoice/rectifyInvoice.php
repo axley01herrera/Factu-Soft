@@ -9,14 +9,24 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-12 text-end mb-2">
-		<button id="btn-save" class="btn btn-primary" type="button">
-			<?php echo lang('Text.btn_save'); ?>
-		</button>
+<?php if (empty($invoice[0]->r_desc)) { ?>
+	<div class="row">
+		<div class="col-12 text-end mb-2">
+			<button id="btn-save" class="btn btn-primary" type="button">
+				<?php echo lang('Text.btn_save'); ?>
+			</button>
+		</div>
+	</div>
+<?php } ?>
+
+<!-- Page Content -->
+<div class="card">
+	<div class="card-body">
+		<label for="txt-description" class="form-label fw-bold"><?php echo lang('Text.inv_rectified_concept_title'); ?></label>
+		<textarea id="txt-description" class="form-control" <?php if (!empty($invoice[0]->r_desc)) echo 'disabled'; ?>><?php echo $invoice[0]->r_desc; ?></textarea>
 	</div>
 </div>
-<!-- Page Content -->
+
 <div class="card">
 	<div class="card-body">
 
@@ -56,11 +66,12 @@
 
 			<!-- Status -->
 			<div class="col-4 mb-5 text-center">
-				<span class="badge fs-7 bg-danger-subtle text-danger">Factura Rectificada</span>
+				<span class="badge fs-7 bg-danger-subtle text-danger"><?php echo lang('Text.inv_rectified_title'); ?></span>
 
-				<h3 class="mt-10">Número de factura</h3>
-				<h3>R00001</h3>
-				<h5>Rectifica la factura: <?php echo '<span class="fw-bold">' . $invoice[0]->number . '</span>' . ' del ' . date('d-m-Y', strtotime($invoice[0]->updated)) ?><h5>
+				<h3 class="mt-10 mb-0"><?php echo lang('Text.inv_rectified_number'); ?></h3>
+				<h3><?php echo $invoice[0]->number; ?></h3>
+				<h4 class="mt-3 mb-0"><?php echo lang('Text.inv_rectified_invoice'); ?></h4>
+				<h4><?php echo '<span class="fw-bold">' . $invoiceRectified[0]->number . '</span>' . ' del ' . date('d-m-Y', strtotime($invoiceRectified[0]->updated)) ?></h4>
 			</div>
 
 			<!-- From -->
@@ -113,11 +124,6 @@
 			</div>
 		</div>
 
-		<!-- Concept -->
-		<div class="col-12 mb-2">
-			<input type="text" id="txt-description" class="form-control required" placeholder="Concepto de Rectificación">
-		</div>
-
 		<!-- Items -->
 		<div class="row">
 			<div class="table-responsive">
@@ -166,6 +172,46 @@
 
 <script>
 	$(document).ready(function() {
+		$('#btn-save').on('click', function() {
+			let description = $('#txt-description').val();
 
+			if (description != '') {
+				$.ajax({
+					type: "POST",
+					url: "<?php echo base_url('Invoice/objUpdateInvoice'); ?>",
+					data: {
+						'field': 'r_desc',
+						'value': description,
+						'invoiceID': '<?php echo $invoice[0]->id; ?>'
+					},
+					dataType: "json",
+					success: function(response) {
+						if (response.error == 0) {
+							window.location.reload();
+						} else if (response.error == 2) {
+							window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
+						} else {
+							globalError();
+						}
+					},
+					error: function(error) {
+						globalError();
+					}
+				});
+			} else {
+				$('#txt-description').addClass('is-invalid');
+				Swal.fire({
+					position: "top-end",
+					icon: "warning",
+					text: "<?php echo lang('Text.inv_required_rectify_concept_msg'); ?>" + '..!',
+					showConfirmButton: false,
+					timer: 2500
+				});
+			}
+		});
+
+		$('#txt-description').on('focus', function() {
+			$(this).removeClass('is-invalid');
+		});
 	});
 </script>

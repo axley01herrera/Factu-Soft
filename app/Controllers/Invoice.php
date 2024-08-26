@@ -206,7 +206,7 @@ class Invoice extends BaseController
 					</svg>
 				</a>
 				<a target="_Blank" href="' . base_url('Invoice/print?id=') . $result[$i]->invoiceID . '" class="me-2 ">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer ms-2" viewBox="0 0 16 16">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
 						<path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
 						<path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
 					</svg>
@@ -214,7 +214,15 @@ class Invoice extends BaseController
 				';
 			} else if ($result[$i]->invoiceStatus == 1) { // Paid
 				$col['action'] = '
-				<a target="_Blank" href="' . base_url('TPV/printTicket?invoiceID=') . $result[$i]->invoiceID . '" class="me-2 ">
+				<a target="_Blank" href="' . base_url('Invoice/print?id=') . $result[$i]->invoiceID . '" class="me-2 ">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+						<path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+						<path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+					</svg>
+				</a>';
+			} else if ($result[$i]->invoiceStatus == 4 || $result[$i]->invoiceStatus == 5) { // Rectified or Issued/Retified
+				$col['action'] = '
+				<a target="_Blank" href="' . base_url('Invoice/print?id=') . $result[$i]->invoiceID . '" class="me-2 ">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
 						<path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
 						<path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
@@ -578,6 +586,10 @@ class Invoice extends BaseController
 		$d['status'] = 5;
 		$this->objMainModel->objUpdate('invoice', $d, $invoiceID);
 
+		$d = array();
+		$d['count'] = $consecutive;
+		$this->objMainModel->objUpdate('serial', $d, $serial[0]->id);
+
 		return redirect()->to(base_url('Invoice/finishRectifyInvoice?id=') . $rs['id']);
 	}
 
@@ -596,6 +608,8 @@ class Invoice extends BaseController
 		$data['status'] = '<span class="badge bg-secondary-subtle text-secondary">' . lang('Text.inv_status_draft') . '</span>';
 		$data['customer'] = $this->objInvoiceModel->getCustomer($data['invoice'][0]->customer);
 		$data['items'] = $this->objInvoiceModel->getInvoiceItems($invoiceID);
+		$data['invoiceRectified'] = $this->objInvoiceModel->getInvoice($data['invoice'][0]->r_id);
+
 		# menu
 		$data['invoiceActive'] = 'active';
 		# page
