@@ -12,6 +12,7 @@ $lang['yes_remove_msg'] = "Sí, Eliminar";
 $lang['no_cancel_msg'] = "No, Cancelar";
 $lang['cash'] = "Efectivo";
 $lang['card'] = "Tarjeta";
+$lang['loading'] = "Cargando...";
 
 # Status
 $lang['status_active'] = "Activo";
@@ -52,8 +53,9 @@ $lang['text_error_empty_access_key'] = "Introduzca su clave de acceso";
 $lang['text_error_invalid_access_key'] = "Rectifique su clave de acceso";
 
 # Dashboard
-$lang['dashboard_cards_customers_active'] = "Clientes Activos";
-$lang['dashboard_cards_services_active'] = "Servicios Activos";
+$lang['dashboard_collection_day'] = "Recaudación del Día";
+$lang['dashboard_cards_customers_active'] = "Clientes";
+$lang['dashboard_cards_services_active'] = "Servicios";
 
 # TPV
 $lang['tpv_page_title'] = "TPV";

@@ -13,6 +13,9 @@ $routes->post('Home/login', 'Home::login');
 
 # Dashboard
 $routes->get('Dashboard', 'Dashboard::index');
+$routes->post('Dashboard/collectionDay', 'Dashboard::collectionDay');
+$routes->post('Dashboard/customers', 'Dashboard::customers');
+$routes->post('Dashboard/services', 'Dashboard::services');
 
 # Customers
 $routes->get('Customer', 'Customer::index');

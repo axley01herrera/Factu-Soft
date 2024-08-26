@@ -14,7 +14,19 @@ class DashboardModel extends Model
 		$this->db = \Config\Database::connect();
 	}
 
-	public function getActiveClients()
+	public function getCollectionDay()
+	{
+		$query = $this->db->table('invoice')
+		->select('invoice_items.amount as amount')
+		->where("DATE(added)", date('Y-m-d'))
+		->join('invoice_items', "invoice_items.invoice_id = invoice.id");
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function getCustomers()
 	{
 		$query = $this->db->table('customer')
 			->where('deleted', 0);
@@ -23,7 +35,7 @@ class DashboardModel extends Model
 		return $data;
 	}
 
-	public function getActiveServices()
+	public function getServices()
 	{
 		$query = $this->db->table('services')
 			->where('deleted', 0);
