@@ -28,6 +28,7 @@ $routes->post('Customer/addEditCustomer', 'Customer::addEditCustomer');
 $routes->post('Customer/saveCustomer', 'Customer::saveCustomer');
 $routes->post('Customer/deleteCustomer', 'Customer::deleteCustomer');
 $routes->post('Customer/getTabContent', 'Customer::getTabContent');
+$routes->post('Customer/processingInvoice', 'Customer::processingInvoice');
 
 # Services
 $routes->get('Services', 'Services::index');
