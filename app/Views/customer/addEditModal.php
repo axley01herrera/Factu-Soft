@@ -10,7 +10,7 @@
 			<div class="modal-body">
 				<div class="row">
 
-					<!-- Custmer Type -->
+					<!-- Customer Type -->
 					<div class="col-12 mb-2">
 						<label for="sel-type" class="form-label"><?php echo lang('Text.customer_text_type'); ?></label>
 						<select id="sel-type" class="form-select" <?php if ($action == "update") echo "disabled"; ?>>

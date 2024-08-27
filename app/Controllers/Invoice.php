@@ -173,7 +173,7 @@ class Invoice extends BaseController
 
 			$col = array();
 			$col['status'] = $invoiceStatus;
-			$col['number'] = '<a href="' . base_url('Invoice/invoiceDetail?id=') . $result[$i]->invoiceID . '" class="text-primary" target="Blank">' . $result[$i]->invoiceNumber . '</a>';
+			$col['number'] = '<a href="' . base_url('Invoice/invoiceDetail?id=') . $result[$i]->invoiceID . '" class="text-primary">' . $result[$i]->invoiceNumber . '</a>';
 			$col['customer'] = $result[$i]->customerName;
 			$col['added'] = $result[$i]->added;
 			$col['amount'] = getMoneyFormat($this->config[0]->currency, $result[$i]->amount);
@@ -283,7 +283,12 @@ class Invoice extends BaseController
 			$data['status_label'] = '<h1>' . lang('Text.inv_status_pendingr_p') . '</h1>';
 		}
 
-		return view('invoice/invoiceDetail', $data);
+		# menu
+		$data['invoiceActive'] = 'active';
+		# page
+		$data['page'] = 'invoice/invoiceDetail';
+
+		return view('layouts/main', $data);
 	}
 
 	public function createInvoice()

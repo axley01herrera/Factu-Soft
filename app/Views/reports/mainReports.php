@@ -14,32 +14,33 @@
 
 <!-- Page Content -->
 <div class="row">
-	<div class="card card-flush mb-5">
-		<div class="card-body">
-			<div class="row">
-				<div class="col-12 col-lg-6">
-					<label for="sel-start-date" class="form-label"><?php echo lang('Text.reports_date_start_label'); ?></label>
-					<input type="date" id="sel-start-date" class="form-control required" />
-				</div>
-				<div class="col-12 col-lg-6">
-					<label for="sel-end-date" class="form-label"><?php echo lang('Text.reports_date_end_label'); ?></label>
-					<input type="date" id="sel-end-date" class="form-control" />
-				</div>
-				<div class="col-12 mt-5 text-end">
-					<a href="#" id="btn-view-report" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-text me-1"></i><?php echo lang('Text.reports_btn_view_report'); ?></a>
+	<div class="col-12 mb-2">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-lg-6">
+						<label for="sel-start-date" class="form-label"><?php echo lang('Text.reports_date_start_label'); ?></label>
+						<input type="date" id="sel-start-date" class="form-control required" />
+					</div>
+					<div class="col-12 col-lg-6">
+						<label for="sel-end-date" class="form-label"><?php echo lang('Text.reports_date_end_label'); ?></label>
+						<input type="date" id="sel-end-date" class="form-control" />
+					</div>
+					<div class="col-12 mt-5 text-end">
+						<a href="#" id="btn-view-report" class="btn btn-primary"><i class="bi bi-file-earmark-text me-1"></i><?php echo lang('Text.reports_btn_view_report'); ?></a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="main-search-results">
-		<div class="alert alert-dismissible bg-light-danger d-flex flex-center flex-column py-10 px-10 px-lg-20 mb-10 border-dashed border-danger">
-			<i class="ki-duotone ki-information-5 fs-5tx text-danger mb-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-			<div class="text-center">
-				<h5 class="fw-bold mb-5"><?php echo lang('Text.important_label'); ?></h5>
-				<div class="separator separator-dashed border-danger opacity-25 mb-5"></div>
-				<div class="mb-9 text-gray-900">
-					<?php echo lang('Text.reports_not_search_label'); ?>
+	<div class="col-12 mb-5">
+		<div id="main-search-results">
+			<div class="alert customize-alert alert-dismissible text-primary alert-light-primary bg-primary-subtle fade show remove-close-icon" role="alert">
+				<span class="side-line bg-primary"></span>
+				<div class="d-flex align-items-center ">
+					<i class="ti ti-info-circle fs-5 me-2 flex-shrink-0 text-primary"></i>
+					<span class="text-truncate"><?php echo lang('Text.reports_not_search_label'); ?></span>
 				</div>
 			</div>
 		</div>
@@ -60,22 +61,44 @@
 
 	$('#btn-view-report').on('click', function(e) {
 		e.preventDefault();
-
 		dateStart = $('#sel-start-date').val();
 		dateEnd = $('#sel-end-date').val();
 
+		let correctDate = 0;
+
+		if (dateEnd != '')
+			if (dateStart > dateEnd)
+				correctDate = 1;
+
+
 		let result = checkRequiredValues();
 
-		if (result == 0)
-			getReports();
-		else {
-			Swal.fire({
-				position: "top-end",
-				icon: "warning",
-				text: "<?php echo lang("Text.msg_required_values"); ?>..!",
-				showConfirmButton: false,
-				timer: 2500
+		if (result == 0 && correctDate == 0) {
+			$('.form-control').each(function() {
+				$(this).removeClass('is-invalid');
 			});
+			getReports();
+		} else {
+			if (result != 0) {
+				Swal.fire({
+					position: "top-end",
+					icon: "warning",
+					text: "<?php echo lang("Text.msg_required_values"); ?>..!",
+					showConfirmButton: false,
+					timer: 2500
+				});
+			} else if (correctDate != 0) {
+				$('#sel-start-date').addClass('is-invalid');
+				$('#sel-end-date').addClass('is-invalid');
+
+				Swal.fire({
+					position: "top-end",
+					icon: "warning",
+					text: "<?php echo lang("Text.reports_search_incorrect_date"); ?>..!",
+					showConfirmButton: false,
+					timer: 2500
+				});
+			}
 		}
 
 	});
@@ -114,7 +137,7 @@
 		return result;
 	}
 
-	$('.required').on('focus', function() {
+	$('.form-control').on('focus', function() {
 		$(this).removeClass('is-invalid');
 	});
 </script>

@@ -83,6 +83,14 @@ $lang['reports_date_start_label'] = "Seleccione una fecha inicial";
 $lang['reports_date_end_label'] = "Seleccione una fecha final";
 $lang['reports_not_search_label'] = "Defina sus filtros y presione en <span class='fw-bold'>Ver Reporte</span>";
 $lang['reports_btn_view_report'] = "Ver Reporte";
+$lang['reports_not_results_label'] = "Sin Resultados";
+$lang['table_reports_col_invoice_number'] = "Número de Factura";
+$lang['table_reports_col_customer_name'] = "Cliente";
+$lang['table_reports_col_date'] = "Fecha de Creación";
+$lang['table_reports_col_amount'] = "Total";
+$lang['report_print_total'] = "Total";
+$lang['reports_search_date_label'] = "Resultados de la Búsquedad";
+$lang['reports_search_incorrect_date'] = "Rectifique las fechas";
 
 # TPV
 $lang['tpv_page_title'] = "TPV";

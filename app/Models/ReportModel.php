@@ -24,13 +24,14 @@ class ReportModel extends Model
 
 	public function getReports($dateStart, $dateEnd)
 	{
-		$query = $this->db->table('dt_invoices');
+		$query = $this->db->table('dt_invoices')
+		->where('invoiceStatus!=', 2);
 
 		if (empty($dateEnd)) { // CASE DAY
-			$query->where('added', $dateStart);
+			$query->where('DATE(added)', $dateStart);
 		} else { // CASE RANGE DAYS
-			$query->where('added >=', $dateStart);
-			$query->where('added <=', $dateEnd);
+			$query->where('DATE(added) >=', $dateStart);
+			$query->where('DATE(added) <=', $dateEnd);
 		}
 
 		$query->orderBy('added', 'ASC');

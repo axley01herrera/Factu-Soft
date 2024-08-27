@@ -1,39 +1,13 @@
-<style>
-	@media print {
-		.no-print {
-			display: none;
-		}
-	}
-</style>
+<!-- Page Header-->
+<div class="d-md-flex align-items-center justify-content-between mb-7">
+	<div class="mb-4 mb-md-0">
+		<h4 class="fs-6 mb-0"><?php echo lang('Text.inv_page_title'); ?></h4>
+	</div>
+</div>
 
-<?php $total = 0; ?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
-
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta content="Software de Facturacion" name="description" />
-	<meta content="Axley Herrera" name="author" />
-
-	<!-- Favicon icon-->
-	<link rel="shortcut icon" type="image/png" href="<?php echo base_url('public/assets/images/logos/favicon.png'); ?>" />
-
-	<!-- css -->
-	<link rel="stylesheet" href="<?php echo base_url('public/assets/css/styles.css'); ?>" />
-	<link rel="stylesheet" href="<?php echo base_url('public/assets/libs/sweetalert/sweetalert2.css'); ?>" />
-
-	<!-- js -->
-	<script src="<?php echo base_url('public/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js'); ?>"></script>
-	<script src="<?php echo base_url('public/assets/libs/jquery/3.7.1.min.js'); ?>"></script>
-	<script src="<?php echo base_url('public/assets/libs/sweetalert/sweetalert2.js'); ?>"></script>
-
-	<title>Factu-Soft</title>
-</head>
-
-<body>
-	<div class="container mt-10">
+<!-- Page Content -->
+<div class="card">
+	<div class="card-body">
 		<div class="row">
 			<?php if ($status <> 2) { ?>
 				<div class="col-6 mb-4">
@@ -137,7 +111,9 @@
 						<th class="text-end"><?php echo lang('Text.inv_dt_item_col_amount'); ?></th>
 					</thead>
 					<tbody>
-						<?php foreach ($items as $i) {
+						<?php
+						$total = 0;
+						foreach ($items as $i) {
 							$total = $total + $i->amount; ?>
 							<tr>
 								<td><?php echo 'x' . $i->quantity; ?></td>
@@ -204,9 +180,7 @@
 
 		</div>
 	</div>
-</body>
-
-</html>
+</div>
 
 <script>
 	let invoiceID = "<?php echo $invoice[0]->id; ?>";
@@ -264,6 +238,7 @@
 	});
 
 	$('#btn-print').on('click', function() {
-		window.print();
+		let url = "<?php echo base_url('Invoice/print?id='); ?>" + invoiceID;
+		window.open(url, '_blank');
 	});
 </script>

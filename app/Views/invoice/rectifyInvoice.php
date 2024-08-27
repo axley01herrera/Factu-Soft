@@ -7,17 +7,15 @@
 	<div class="mb-4 mb-md-0">
 		<h4 class="fs-6 mb-0"><?php echo lang('Text.inv_create_page_title'); ?></h4>
 	</div>
-</div>
 
-<?php if (empty($invoice[0]->r_desc)) { ?>
-	<div class="row">
-		<div class="col-12 text-end mb-2">
+	<?php if (empty($invoice[0]->r_desc)) { ?>
+		<div class="d-flex align-items-center justify-content-between gap-6">
 			<button id="btn-save" class="btn btn-primary" type="button">
 				<?php echo lang('Text.btn_save'); ?>
 			</button>
 		</div>
-	</div>
-<?php } ?>
+	<?php } ?>
+</div>
 
 <!-- Page Content -->
 <div class="card">

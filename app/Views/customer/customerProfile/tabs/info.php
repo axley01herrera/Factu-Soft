@@ -6,11 +6,6 @@
 				<input type="text" id="txt-name" class="form-control c-disabled required" value="<?php echo $customer[0]->name; ?>" disabled />
 			</div>
 
-			<div id="div-particular" class="col-12 col-md-6 col-lg-6 mb-2" <?php if ($customer[0]->type == 1) echo 'hidden'; ?>>
-				<label for="txt-last-name" class="form-label"><?php echo lang('Text.customer_text_last_name'); ?></label>
-				<input type="text" id="txt-last-name" class="form-control c-disabled <?php if ($customer[0]->type == 0) echo 'required'; ?>" value="<?php echo $customer[0]->last_name; ?>" disabled />
-			</div>
-
 			<div id="div-enterprise" class="col-12 col-md-6 col-lg-6 mb-2" <?php if ($customer[0]->type == 0) echo 'hidden'; ?>>
 				<label for="txt-nif" class="form-label"><?php echo lang('Text.customer_text_nif'); ?></label>
 				<input type="text" id="txt-nif" class="form-control c-disabled <?php if ($customer[0]->type == 1) echo 'required'; ?>" value="<?php echo $customer[0]->nif; ?>" disabled />
@@ -91,9 +86,6 @@
 			$('#div-particular').attr('hidden', true);
 			$('#div-enterprise').removeAttr('hidden');
 
-			$('#txt-last-name').val('');
-			$('#txt-last-name').removeClass('required');
-
 			$('#txt-nif').val('<?php echo $customer[0]->nif; ?>');
 			$('#txt-nif').addClass('required');
 		} else if (value == 0) { // CASE PARTICULAR
@@ -102,9 +94,6 @@
 
 			$('#txt-nif').val('');
 			$('#txt-nif').removeClass('required');
-
-			$('#txt-last-name').val('<?php echo $customer[0]->last_name; ?>');
-			$('#txt-last-name').addClass('required');
 		}
 	});
 
@@ -119,7 +108,6 @@
 				data: {
 					'customerID': '<?php echo $customer[0]->id; ?>',
 					'name': $('#txt-name').val(),
-					'last_name': $('#txt-last-name').val(),
 					'nif': $('#txt-nif').val(),
 					'email': $('#txt-email').val(),
 					'phone': $('#txt-phone').val(),
