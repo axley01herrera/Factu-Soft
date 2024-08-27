@@ -276,4 +276,86 @@ class DataTableModel extends Model
 
 		return $query->countAllResults();
 	}
+
+	####################
+	#### Custoemr Invoice Data Table
+	####################
+
+	public function getCustomerInvoiceProcessingData($params, $customerID)
+	{
+		$query = $this->db->table('dt_invoices')
+			->where('customerID', $customerID);
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('dt_invoices.invoiceNumber', $params['search']);
+			$query->orLike('DATE(dt_invoices.added)', $params['search']);
+			$query->groupEnd();
+		}
+
+		$query->offset($params['start']);
+		$query->limit($params['length']);
+		$query->orderBy($this->getCustomerInvoiceProcessingSort($params['sortColumn'], $params['sortDir']));
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function getCustomerInvoiceProcessingSort($column, $dir)
+	{
+		$sort = '';
+
+		if ($column == 0) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.invoiceStatus ASC';
+			else
+				$sort = 'dt_invoices.invoiceStatus DESC';
+		}
+
+		if ($column == 1) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.invoiceNumber ASC';
+			else
+				$sort = 'dt_invoices.invoiceNumber DESC';
+		}
+
+		if ($column == 2) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.customerName ASC';
+			else
+				$sort = 'dt_invoices.customerName DESC';
+		}
+
+		if ($column == 3) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.added ASC';
+			else
+				$sort = 'dt_invoices.added DESC';
+		}
+
+		if ($column == 4) {
+			if ($dir == 'asc')
+				$sort = 'dt_invoices.amount ASC';
+			else
+				$sort = 'dt_invoices.amount DESC';
+		}
+
+		return $sort;
+	}
+
+	public function getCustomerTotalInvoice($params, $customerID)
+	{
+		$query = $this->db->table('dt_invoices')
+			->where('customerID', $customerID);
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('dt_invoices.invoiceNumber', $params['search']);
+			$query->orLike('dt_invoices.added', $params['search']);
+			$query->groupEnd();
+		}
+
+		return $query->countAllResults();
+	}
 }

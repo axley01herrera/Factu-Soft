@@ -210,6 +210,7 @@ CREATE VIEW dt_invoices AS SELECT
     invoice.updated AS updated,
     SERIAL.name,
     COALESCE(SUM(invoice_items.amount),0) AS amount,
+    customer.id as customerID,
     customer.name as customerName,
     customer.nif
 FROM

@@ -20,6 +20,10 @@ $routes->post('Dashboard/chartMont', 'Dashboard::chartMont');
 $routes->post('Dashboard/pendingInvoices', 'Dashboard::pendingInvoices');
 $routes->post('Dashboard/getPendingInvoicesDT', 'Dashboard::getPendingInvoicesDT');
 
+# Reports
+$routes->get('Reports', 'Reports::index');
+$routes->post('Reports/getReports', 'Reports::getReports');
+
 # Customers
 $routes->get('Customer', 'Customer::index');
 $routes->get('Customer/customerProfile', 'Customer::customerProfile');
@@ -28,6 +32,7 @@ $routes->post('Customer/addEditCustomer', 'Customer::addEditCustomer');
 $routes->post('Customer/saveCustomer', 'Customer::saveCustomer');
 $routes->post('Customer/deleteCustomer', 'Customer::deleteCustomer');
 $routes->post('Customer/getTabContent', 'Customer::getTabContent');
+$routes->post('Customer/processingInvoice', 'Customer::processingInvoice');
 
 # Services
 $routes->get('Services', 'Services::index');
@@ -55,6 +60,7 @@ $routes->post('Invoice/deleteInvoice', 'Invoice::deleteInvoice');
 $routes->post('Invoice/payInvoice', 'Invoice::payInvoice');
 $routes->get('Invoice/rectifyInvoice', 'Invoice::rectifyInvoice');
 $routes->get('Invoice/finishRectifyInvoice', 'Invoice::finishRectifyInvoice');
+$routes->get('Invoice/invoiceDetail', 'Invoice::invoiceDetail');
 
 # Profile
 $routes->get('Profile', 'Profile::index');

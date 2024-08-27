@@ -173,7 +173,7 @@ class Invoice extends BaseController
 
 			$col = array();
 			$col['status'] = $invoiceStatus;
-			$col['number'] = $result[$i]->invoiceNumber;
+			$col['number'] = '<a href="' . base_url('Invoice/invoiceDetail?id=') . $result[$i]->invoiceID . '" class="text-primary" target="Blank">' . $result[$i]->invoiceNumber . '</a>';
 			$col['customer'] = $result[$i]->customerName;
 			$col['added'] = $result[$i]->added;
 			$col['amount'] = getMoneyFormat($this->config[0]->currency, $result[$i]->amount);
@@ -187,7 +187,7 @@ class Invoice extends BaseController
 					</svg>
 				</a>
 				<a class="me-2 delete-invoice" href="#" data-invoice-id="' . $result[$i]->invoiceID . '" title="' . lang('Text.inv_del_invoice') . '">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash ms-2" viewBox="0 0 16 16">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 					  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
 					  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
 					</svg>
@@ -251,6 +251,39 @@ class Invoice extends BaseController
 		$data['data'] = $row;
 
 		return json_encode($data);
+	}
+
+	public function invoiceDetail()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		$invoiceID = $this->objRequest->getPostGet('id');
+
+		$data = array();
+		$data['config'] = $this->config;
+		$data['profile'] = $this->profile;
+		$data['lang'] = $this->config[0]->lang;
+		$data['invoice'] = $this->objInvoiceModel->getInvoice($invoiceID);
+		$data['items'] = $this->objInvoiceModel->getInvoiceItems($invoiceID);
+		$data['customer'] = $this->objInvoiceModel->getCustomer($data['invoice'][0]->customer);
+		$data['status'] = $data['invoice'][0]->status;
+
+		if ($data['invoice'][0]->status == 1) { // Paid
+			$data['status_label'] = '<h1>' . lang('Text.inv_status_paid_p') . '</h1>';
+		} else if ($data['invoice'][0]->status == 2) { // Draft
+			$data['status_label'] = '<h1>' . lang('Text.inv_status_draft_p') . '</h1>';
+		} else if ($data['invoice'][0]->status == 3) { // Sent
+			$data['status_label'] = '';
+		} else if ($data['invoice'][0]->status == 4) { // Rectified
+			$data['status_label'] = '<h1>' . lang('Text.inv_status_r_p') . '</h1>';
+			$data['invoiceRectified'] = $this->objInvoiceModel->getInvoice($data['invoice'][0]->r_id);
+		} else if ($data['invoice'][0]->status == 5) { // Sent / Rectified
+			$data['status_label'] = '<h1>' . lang('Text.inv_status_pendingr_p') . '</h1>';
+		}
+
+		return view('invoice/invoiceDetail', $data);
 	}
 
 	public function createInvoice()
