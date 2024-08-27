@@ -90,7 +90,7 @@
 
 	$('#txt-new-price').keypress(function(event) {
 		var charCode = event.which;
-		if ((charCode < 48 || charCode > 57) && charCode != 45) {
+		if ((charCode < 48 || charCode > 57) && charCode !== 45 && charCode !== 46) {
 			event.preventDefault();
 		}
 	});

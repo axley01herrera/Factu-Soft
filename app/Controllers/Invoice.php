@@ -541,6 +541,15 @@ class Invoice extends BaseController
 		$data['invoice'] = $this->objInvoiceModel->getInvoice($invoiceID);
 		$data['items'] = $this->objInvoiceModel->getInvoiceItems($invoiceID);
 		$data['customer'] = $this->objInvoiceModel->getCustomer($data['invoice'][0]->customer);
+		$data['status'] = '<span class="badge fs-7 bg-danger-subtle text-danger text-uppercase">' . lang('Text.inv_create_page_title') . ' ' . lang('Text.inv_status_paid') . '<span>';
+
+		if ($data['invoice'][0]->status == 3) // Sent
+			$data['status'] = '';
+		else if ($data['invoice'][0]->status == 4) // Rectified
+			$data['status'] = '<span class="badge fs-7 bg-danger-subtle text-danger text-uppercase">' . lang('Text.inv_create_page_title') . ' ' . lang('Text.inv_status_r') . '<span>';
+		else if ($data['invoice'][0]->status == 5) // Sent / Rectified
+			$data['status'] = '<span class="badge fs-7 bg-danger-subtle text-danger text-uppercase">' . lang('Text.inv_create_page_title') . ' ' . lang('Text.inv_status_pr') . '<span>';
+
 
 		return view('invoice/print', $data);
 	}
