@@ -56,6 +56,7 @@ $routes->post('Invoice/deleteInvoice', 'Invoice::deleteInvoice');
 $routes->post('Invoice/payInvoice', 'Invoice::payInvoice');
 $routes->get('Invoice/rectifyInvoice', 'Invoice::rectifyInvoice');
 $routes->get('Invoice/finishRectifyInvoice', 'Invoice::finishRectifyInvoice');
+$routes->get('Invoice/invoiceDetail', 'Invoice::invoiceDetail');
 
 # Profile
 $routes->get('Profile', 'Profile::index');
