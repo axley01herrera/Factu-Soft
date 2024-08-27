@@ -58,7 +58,7 @@
 					</div>
 				</h4>
 				<p class="card-text text-white opacity-75 fs-3 fw-normal">
-					<?php echo lang('Text.dashboard_cards_customers_active') ?>
+					<?php echo lang('Text.dashboard_cards_customers_active'); ?>
 				</p>
 			</div>
 		</div>
@@ -66,7 +66,7 @@
 
 	<!-- Services -->
 	<div class="col-12 col-md-4 col-lg-3">
-		<div class="card text-white text-bg-success rounded" style="height: 150px;">
+		<div class="card text-white text-bg-secondary rounded" style="height: 150px;">
 			<div class="card-body p-4">
 				<span>
 					<svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24">
@@ -83,6 +83,28 @@
 				</h4>
 				<p class="card-text text-white opacity-75 fs-3 fw-normal">
 					<?php echo lang('Text.dashboard_cards_services_active') ?>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Pending Invoices -->
+	<div class="col-12 col-md-4 col-lg-3">
+		<div class="card text-white text-bg-danger rounded" style="height: 150px;">
+			<div class="card-body p-4">
+				<span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24">
+						<path fill="currentColor" d="M19 12a1 1 0 1 1-2 0a1 1 0 0 1 2 0" />
+						<path fill="currentColor" fill-rule="evenodd" d="M9.944 3.25h3.112c1.838 0 3.294 0 4.433.153c1.172.158 2.121.49 2.87 1.238c.924.925 1.219 2.163 1.326 3.77c.577.253 1.013.79 1.06 1.47c.005.061.005.126.005.186v3.866c0 .06 0 .125-.004.185c-.048.68-.484 1.218-1.061 1.472c-.107 1.606-.402 2.844-1.326 3.769c-.749.748-1.698 1.08-2.87 1.238c-1.14.153-2.595.153-4.433.153H9.944c-1.838 0-3.294 0-4.433-.153c-1.172-.158-2.121-.49-2.87-1.238c-.748-.749-1.08-1.698-1.238-2.87c-.153-1.14-.153-2.595-.153-4.433v-.112c0-1.838 0-3.294.153-4.433c.158-1.172.49-2.121 1.238-2.87c.749-.748 1.698-1.08 2.87-1.238c1.14-.153 2.595-.153 4.433-.153m10.224 12.5H18.23c-2.145 0-3.981-1.628-3.981-3.75s1.836-3.75 3.98-3.75h1.938c-.114-1.341-.371-2.05-.87-2.548c-.423-.423-1.003-.677-2.009-.812c-1.027-.138-2.382-.14-4.289-.14h-3c-1.907 0-3.261.002-4.29.14c-1.005.135-1.585.389-2.008.812S3.025 6.705 2.89 7.71c-.138 1.028-.14 2.382-.14 4.289s.002 3.262.14 4.29c.135 1.005.389 1.585.812 2.008s1.003.677 2.009.812c1.028.138 2.382.14 4.289.14h3c1.907 0 3.262-.002 4.29-.14c1.005-.135 1.585-.389 2.008-.812c.499-.498.756-1.206.87-2.548M5.25 8A.75.75 0 0 1 6 7.25h4a.75.75 0 0 1 0 1.5H6A.75.75 0 0 1 5.25 8m15.674 1.75H18.23c-1.424 0-2.481 1.059-2.481 2.25s1.057 2.25 2.48 2.25h2.718c.206-.013.295-.152.302-.236V9.986c-.007-.084-.096-.223-.302-.235z" clip-rule="evenodd" />
+					</svg>
+				</span>
+				<h4 class="card-title mt-3 mb-0 text-white">
+					<div id="main-pending-invoices">
+						<div class="spinner-grow text-light" role="status"></div> <?php echo lang('Text.loading'); ?>
+					</div>
+				</h4>
+				<p class="card-text text-white opacity-75 fs-3 fw-normal">
+					<?php echo lang('Text.dashboard_cards_pending_invoices'); ?>
 				</p>
 			</div>
 		</div>
@@ -116,16 +138,15 @@
 	</div>
 </div>
 
-
-
 <script>
 	$(document).ready(function() {
 		collectionDay();
 		customers();
 		services();
+		pendingInvoices();
 		chartMont();
 
-		$('#sel-year').on('change', function () {
+		$('#sel-year').on('change', function() {
 			let year = $(this).val();
 			chartMont(year);
 		});
@@ -163,6 +184,18 @@
 			dataType: "json",
 			success: function(response) {
 				$('#main-services').html(response.services);
+			}
+		});
+	}
+
+	function pendingInvoices() {
+		$.ajax({
+			type: "post",
+			url: "<?php echo base_url('Dashboard/pendingInvoices'); ?>",
+			data: "",
+			dataType: "json",
+			success: function(response) {
+				$('#main-pending-invoices').html(response.pendingInvoices);
 			}
 		});
 	}

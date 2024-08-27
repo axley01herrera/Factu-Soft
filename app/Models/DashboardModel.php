@@ -45,6 +45,17 @@ class DashboardModel extends Model
 		return $data;
 	}
 
+	public function getPendingInvoices()
+	{
+		$query = $this->db->table('invoice')
+			->select('id')
+			->where("invoice.status", 3);
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
 	public function chartMont($year)
 	{
 		$firstDay = "$year-01-01 00:00:00";

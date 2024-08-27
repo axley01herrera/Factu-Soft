@@ -30,8 +30,6 @@
             <?php echo $chartMont[12]; ?>
         ];
 
-        console.log(data)
-
         let total = '<?php echo $chartMont['total']; ?>';
 
         let option = {

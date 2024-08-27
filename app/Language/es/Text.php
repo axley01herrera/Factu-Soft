@@ -70,6 +70,7 @@ $lang['text_error_invalid_access_key'] = "Rectifique su clave de acceso";
 $lang['dashboard_collection_day'] = "Recaudación del Día";
 $lang['dashboard_cards_customers_active'] = "Clientes";
 $lang['dashboard_cards_services_active'] = "Servicios";
+$lang['dashboard_cards_pending_invoices'] = "Facturas Pendientes de Pago";
 $lang['dashboard_chart_mont_title'] = "Gráfico de Facturación";
 
 # TPV

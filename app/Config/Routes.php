@@ -17,6 +17,7 @@ $routes->post('Dashboard/collectionDay', 'Dashboard::collectionDay');
 $routes->post('Dashboard/customers', 'Dashboard::customers');
 $routes->post('Dashboard/services', 'Dashboard::services');
 $routes->post('Dashboard/chartMont', 'Dashboard::chartMont');
+$routes->post('Dashboard/pendingInvoices', 'Dashboard::pendingInvoices');
 
 # Customers
 $routes->get('Customer', 'Customer::index');

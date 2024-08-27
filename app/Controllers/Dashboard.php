@@ -126,4 +126,19 @@ class Dashboard extends BaseController
 
 		return view('dashboard/chartMont', $data);
 	}
+
+	public function pendingInvoices()
+	{
+		$pendingInvoices = $this->objDashboardModel->getPendingInvoices();
+
+		if (empty($pendingInvoices)) {
+			$result = array();
+			$result['pendingInvoices'] = 0;
+		} else {
+			$result = array();
+			$result['pendingInvoices'] = sizeof($pendingInvoices);
+		}
+
+		return json_encode($result);
+	}
 }
