@@ -37,6 +37,7 @@ $lang['btn_save'] = "Guardar";
 $lang['btn_update'] = "Actualizar";
 $lang['btn_edit'] = "Editar";
 $lang['btn_cancel'] = "Cancelar";
+$lang['btn_print'] = "Imprimir";
 
 # Menu
 $lang['menu_user'] = "Usuario";
