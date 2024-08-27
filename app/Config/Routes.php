@@ -20,6 +20,10 @@ $routes->post('Dashboard/chartMont', 'Dashboard::chartMont');
 $routes->post('Dashboard/pendingInvoices', 'Dashboard::pendingInvoices');
 $routes->post('Dashboard/getPendingInvoicesDT', 'Dashboard::getPendingInvoicesDT');
 
+# Reports
+$routes->get('Reports', 'Reports::index');
+$routes->post('Reports/getReports', 'Reports::getReports');
+
 # Customers
 $routes->get('Customer', 'Customer::index');
 $routes->get('Customer/customerProfile', 'Customer::customerProfile');

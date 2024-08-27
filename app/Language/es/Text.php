@@ -13,6 +13,7 @@ $lang['no_cancel_msg'] = "No, Cancelar";
 $lang['cash'] = "Efectivo";
 $lang['card'] = "Tarjeta";
 $lang['loading'] = "Cargando...";
+$lang['important_label'] = "Atención";
 
 # Monts
 $lang['jan'] = "Ene";
@@ -43,6 +44,7 @@ $lang['btn_print'] = "Imprimir";
 $lang['menu_user'] = "Usuario";
 $lang['menu_statistics'] = "Estadísticas";
 $lang['menu_dashboard'] = "Tablero";
+$lang['menu_reports'] = "Reportes";
 $lang['menu_tpv'] = "TPV";
 $lang['menu_customers'] = "Clientes";
 $lang['menu_customers_list'] = "Listado de Clientes";
@@ -74,6 +76,13 @@ $lang['dashboard_cards_services_active'] = "Servicios";
 $lang['dashboard_cards_pending_invoices'] = "Facturas Pendientes de Pago";
 $lang['dashboard_chart_mont_title'] = "Gráfico de Facturación";
 $lang['dashboard_sent_invoices_title'] = "Listado de Facturas Pendientes de Pago";
+
+# Reports
+$lang['reports_page_title'] = "Reportes de Facturación";
+$lang['reports_date_start_label'] = "Seleccione una fecha inicial";
+$lang['reports_date_end_label'] = "Seleccione una fecha final";
+$lang['reports_not_search_label'] = "Defina sus filtros y presione en <span class='fw-bold'>Ver Reporte</span>";
+$lang['reports_btn_view_report'] = "Ver Reporte";
 
 # TPV
 $lang['tpv_page_title'] = "TPV";
