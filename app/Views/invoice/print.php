@@ -24,16 +24,22 @@
 <body>
 	<div class="container mt-10">
 		<div class="row">
-			<div class="col-6 mb-4">
-				<h5><?php echo lang('Text.inv_number_label'); ?></h5>
-				<?php echo $invoice[0]->number; ?>
-			</div>
-			<div class="col-6 mb-4 text-end">
-				<h5><?php echo lang('Text.inv_issue_date'); ?></h5>
-				<?php echo $invoice[0]->added; ?>
-			</div>
+			<?php if ($status <> 2) { ?>
+				<div class="col-6 mb-4">
+					<h5><?php echo lang('Text.inv_number_label'); ?></h5>
+					<?php echo $invoice[0]->number; ?>
+				</div>
+				<div class="col-6 mb-4 text-end">
+					<h5><?php echo lang('Text.inv_issue_date'); ?></h5>
+					<?php echo $invoice[0]->added; ?>
+				</div>
+			<?php } ?>
 			<div class="col-12 mb-4 text-center">
-				<?php echo @$status;?>
+				<?php echo $status_label; ?>
+				<?php if ($status == 4) { ?>
+					<h4 class="mt-3 mb-0"><?php echo lang('Text.inv_rectified_invoice'); ?></h4>
+					<h4><?php echo '<span class="fw-bold">' . $invoiceRectified[0]->number . '</span>'; ?></h4>
+				<?php } ?>
 			</div>
 		</div>
 		<div class="row">
@@ -68,8 +74,6 @@
 				</svg>
 				<?php echo $profile->email; ?>
 			</div>
-
-
 
 			<div class="col-6 mb-5 text-end">
 				<b><?php echo lang('Text.inv_to_label'); ?></b>:
@@ -117,6 +121,7 @@
 					<thead>
 						<th><?php echo lang('Text.inv_dt_item_col_qty'); ?></th>
 						<th><?php echo lang('Text.inv_dt_item_col_desc'); ?></th>
+						<th class="text-end"><?php echo lang('Text.inv_dt_item_col_price'); ?></th>
 						<th class="text-end"><?php echo lang('Text.inv_dt_item_col_amount'); ?></th>
 					</thead>
 					<tbody>
@@ -125,6 +130,7 @@
 							<tr>
 								<td><?php echo 'x' . $i->quantity; ?></td>
 								<td><?php echo $i->description; ?></td>
+								<td class="text-end"><?php echo getMoneyFormat($config[0]->currency, $i->price); ?></td>
 								<td class="text-end"><?php echo getMoneyFormat($config[0]->currency, $i->amount); ?></td>
 							</tr>
 						<?php } ?>
@@ -158,5 +164,5 @@
 </html>
 
 <script>
-	window.print();
+	//window.print();
 </script>

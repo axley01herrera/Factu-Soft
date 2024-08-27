@@ -71,7 +71,7 @@
 				<h3 class="mt-10 mb-0"><?php echo lang('Text.inv_rectified_number'); ?></h3>
 				<h3><?php echo $invoice[0]->number; ?></h3>
 				<h4 class="mt-3 mb-0"><?php echo lang('Text.inv_rectified_invoice'); ?></h4>
-				<h4><?php echo '<span class="fw-bold">' . $invoiceRectified[0]->number . '</span>' . ' del ' . date('d-m-Y', strtotime($invoiceRectified[0]->updated)) ?></h4>
+				<h4><?php echo '<span class="fw-bold">' . $invoiceRectified[0]->number . '</span>'; ?></h4>
 			</div>
 
 			<!-- From -->
@@ -187,7 +187,7 @@
 					dataType: "json",
 					success: function(response) {
 						if (response.error == 0) {
-							window.location.reload();
+							window.location.href = "<?php echo base_url('Invoice/invoice'); ?>";
 						} else if (response.error == 2) {
 							window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
 						} else {
