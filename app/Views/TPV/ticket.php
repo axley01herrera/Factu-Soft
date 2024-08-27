@@ -92,6 +92,7 @@
 
 		<div class="row">
 			<div class="col-12 text-center">
+				<p>EXENTO IGIC. REPEP, REGIMEN PEQUEÑO EMPRESARIO O PROFESIONAL</p>
 				<?php echo lang('Text.ticket_msg');?>..!
 			</div>
 		</div>

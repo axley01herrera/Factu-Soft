@@ -33,7 +33,6 @@ DROP TABLE IF EXISTS `customer`;
 CREATE TABLE IF NOT EXISTS `customer` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(150) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `last_name` varchar(250) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `type` int NOT NULL COMMENT '0 = particular\r\n1 = empresa',
   `email` varchar(250) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
@@ -212,7 +211,6 @@ CREATE VIEW dt_invoices AS SELECT
     SERIAL.name,
     COALESCE(SUM(invoice_items.amount),0) AS amount,
     customer.name as customerName,
-    customer.last_name,
     customer.nif
 FROM
     invoice

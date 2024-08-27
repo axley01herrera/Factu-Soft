@@ -25,7 +25,6 @@ class DataTableModel extends Model
 		if (!empty($params['search'])) {
 			$query->groupStart();
 			$query->like('customer.name', $params['search']);
-			$query->orLike('customer.last_name', $params['search']);
 			$query->orLike('customer.nif', $params['search']);
 			$query->orLike('customer.email', $params['search']);
 			$query->orLike('customer.phone', $params['search']);
@@ -62,7 +61,6 @@ class DataTableModel extends Model
 			else
 				$sort = 'customer.name DESC';
 		}
-
 
 		if ($column == 3) {
 			if ($dir == 'asc')
@@ -101,7 +99,6 @@ class DataTableModel extends Model
 		if (!empty($params['search'])) {
 			$query->groupStart();
 			$query->like('customer.name', $params['search']);
-			$query->orLike('customer.last_name', $params['search']);
 			$query->orLike('customer.nif', $params['search']);
 			$query->orLike('customer.email', $params['search']);
 			$query->orLike('customer.phone', $params['search']);

@@ -83,7 +83,7 @@
 				class: 'dt-vertical-align p-2',
 			},
 			{
-				data: 'last_nif',
+				data: 'nif',
 				class: 'dt-vertical-align p-2',
 				orderable: false
 			},

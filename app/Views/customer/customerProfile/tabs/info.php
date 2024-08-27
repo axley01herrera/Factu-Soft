@@ -23,7 +23,7 @@
 
 			<div class="col-12 col-md-6 col-lg-6 mb-2">
 				<label for="txt-phone" class="form-label"><?php echo lang('Text.customer_text_phone'); ?></label>
-				<input type="text" id="txt-phone" class="form-control c-disabled" value="<?php echo $customer[0]->phone; ?>" disabled />
+				<input type="text" id="txt-phone" class="form-control required c-disabled" value="<?php echo $customer[0]->phone; ?>" disabled />
 			</div>
 
 			<div class="col-12 mb-2">

@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="col-6 mb-2">
-                        <label for=""><?php echo lang('Text.inv_dt_item_col_amount'); ?></label>
+                        <label for=""><?php echo lang('Text.inv_dt_item_col_price'); ?></label>
                         <input type="text" id="item-price" class="form-control required-item">
                     </div>
                 </div>

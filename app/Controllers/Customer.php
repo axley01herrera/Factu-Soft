@@ -90,11 +90,10 @@ class Customer extends BaseController
 		for ($i = 0; $i < $totalRows; $i++) {
 			$col = array();
 			$col['name'] = '<a href=' . base_url('Customer/customerProfile?customerID=') . $result[$i]->id . '&tab=info' . ' class="text-primary" style="cursor: pointer;" title="' . lang('Text.customer_view_profile_label') . '">' . $result[$i]->name . '</a>';
+			$col['nif'] = $result[$i]->nif;
 			if ($result[$i]->type == 0) {
-				$col['last_nif'] = $result[$i]->last_name;
 				$col['type'] = '<span class="badge bg-primary-subtle text-primary">' . lang('Text.customer_type_particular') . '</span>';
 			} else if ($result[$i]->type == 1) {
-				$col['last_nif'] = $result[$i]->nif;
 				$col['type'] = '<span class="badge bg-success-subtle text-success">' . lang('Text.customer_type_enterprise') . '</span>';
 			}
 
@@ -168,7 +167,6 @@ class Customer extends BaseController
 		$customerID = $this->objRequest->getPost('customerID');
 		$serialID = $this->objRequest->getPost('serialID');
 		$name = htmlspecialchars(trim($this->objRequest->getPost('name')));
-		$last_name = htmlspecialchars(trim($this->objRequest->getPost('last_name')));
 		$type = htmlspecialchars(trim($this->objRequest->getPost('type')));
 		$email = htmlspecialchars(trim($this->objRequest->getPost('email')));
 		$phone = htmlspecialchars(trim($this->objRequest->getPost('phone')));
@@ -182,8 +180,8 @@ class Customer extends BaseController
 
 		$data = array();
 		$data['name'] = $name;
-		$data['last_name'] = $last_name;
-		if (!empty($type)) $data['type'] = $type;
+		if (!empty($type))
+			$data['type'] = $type;
 		$data['email'] = $email;
 		$data['phone'] = $phone;
 		$data['address_a'] = $address_a;
@@ -191,7 +189,7 @@ class Customer extends BaseController
 		$data['address_state'] = $address_state;
 		$data['address_zip'] = $address_zip;
 		$data['address_country'] = $address_country;
-		$data['nif'] = $nif;
+		$data['nif'] = strtoupper($nif);
 
 		$checkExistSerialName = $this->objInvoiceModel->checkExistSerialName($serial);
 
