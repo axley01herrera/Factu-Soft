@@ -1,3 +1,4 @@
+<script src="<?php echo base_url('public/assets/libs/apexcharts/dist/apexcharts.min.js'); ?>"></script>
 <!-- Page Header-->
 <div class="d-md-flex align-items-center justify-content-between mb-7">
 	<div class="mb-4 mb-md-0">
@@ -18,7 +19,7 @@
 <div class="row">
 
 	<!-- Collection Day -->
-	<div class="col-12 col-md-4 col-lg-3" >
+	<div class="col-12 col-md-4 col-lg-3">
 		<div class="card text-white text-bg-success rounded" style="height: 150px;">
 			<div class="card-body p-4">
 				<span>
@@ -88,11 +89,46 @@
 	</div>
 </div>
 
+<div class="card">
+	<div class="card-header">
+		<div class="d-flex align-items-center">
+			<h4 class="card-title mb-0"><?php echo lang('Text.dashboard_chart_mont_title') ?></h4>
+			<div class="ms-auto">
+				<select id="sel-year" class="form-select">
+					<?php
+					$currentYear = date('Y'); // Obtiene el año actual
+					for ($year = $currentYear; $year >= $currentYear - 5; $year--) {
+						echo "<option value=\"$year\">$year</option>";
+					}
+					?>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div id="main-chart">
+			<div class="text-center">
+				<h4 class="card-title mt-3 mb-0 text-dark">
+					<div class="spinner-grow text-light" role="status"></div> <?php echo lang('Text.loading'); ?>
+				</h4>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
 <script>
 	$(document).ready(function() {
 		collectionDay();
 		customers();
 		services();
+		chartMont();
+
+		$('#sel-year').on('change', function () {
+			let year = $(this).val();
+			chartMont(year);
+		});
 	});
 
 	function collectionDay() {
@@ -127,6 +163,20 @@
 			dataType: "json",
 			success: function(response) {
 				$('#main-services').html(response.services);
+			}
+		});
+	}
+
+	function chartMont(year = "") {
+		$.ajax({
+			type: "post",
+			url: "<?php echo base_url('Dashboard/chartMont'); ?>",
+			data: {
+				'year': year
+			},
+			dataType: "html",
+			success: function(response) {
+				$('#main-chart').html(response);
 			}
 		});
 	}

@@ -174,6 +174,7 @@ class Invoice extends BaseController
 			$col = array();
 			$col['status'] = $invoiceStatus;
 			$col['number'] = $result[$i]->invoiceNumber;
+			$col['customer'] = $result[$i]->customerName;
 			$col['added'] = $result[$i]->added;
 			$col['amount'] = getMoneyFormat($this->config[0]->currency, $result[$i]->amount);
 			$col['action'] = '';

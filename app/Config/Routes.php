@@ -16,6 +16,7 @@ $routes->get('Dashboard', 'Dashboard::index');
 $routes->post('Dashboard/collectionDay', 'Dashboard::collectionDay');
 $routes->post('Dashboard/customers', 'Dashboard::customers');
 $routes->post('Dashboard/services', 'Dashboard::services');
+$routes->post('Dashboard/chartMont', 'Dashboard::chartMont');
 
 # Customers
 $routes->get('Customer', 'Customer::index');
@@ -52,7 +53,6 @@ $routes->post('Invoice/deleteInvoice', 'Invoice::deleteInvoice');
 $routes->post('Invoice/payInvoice', 'Invoice::payInvoice');
 $routes->get('Invoice/rectifyInvoice', 'Invoice::rectifyInvoice');
 $routes->get('Invoice/finishRectifyInvoice', 'Invoice::finishRectifyInvoice');
-
 
 # Profile
 $routes->get('Profile', 'Profile::index');

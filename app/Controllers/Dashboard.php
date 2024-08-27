@@ -111,4 +111,19 @@ class Dashboard extends BaseController
 
 		return json_encode($result);
 	}
+
+	public function chartMont()
+	{
+		# params
+		$year = $this->request->getPostGet('year');
+
+		if (empty($year))
+			$year = date('Y');
+
+		$data = array();
+		$data['config'] = $this->config;
+		$data['chartMont'] = $this->objDashboardModel->chartMont($year);
+
+		return view('dashboard/chartMont', $data);
+	}
 }

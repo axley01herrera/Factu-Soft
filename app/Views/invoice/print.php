@@ -145,6 +145,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="pull-right mt-4 text-end">
+					EXENTO IGIC. REPEP, REGIMEN PEQUEÑO EMPRESARIO O PROFESIONAL
 					<h3>
 						<b>Total :</b> <?php echo getMoneyFormat($config[0]->currency, $total); ?>
 					</h3>

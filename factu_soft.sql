@@ -196,10 +196,9 @@ GROUP BY
 -- View structure for view `dt_invoices`
 --
 
-DROP VIEW IF EXISTS dt_invoices;
-
-CREATE VIEW dt_invoices AS
-SELECT
+DROP VIEW IF EXISTS
+    dt_invoices;
+CREATE VIEW dt_invoices AS SELECT
     invoice.id AS invoiceID,
     invoice.serie AS serieID,
     invoice.number AS invoiceNumber,
@@ -207,16 +206,20 @@ SELECT
     invoice.due_date AS due_date,
     invoice.status AS invoiceStatus,
     invoice.pay_type AS pay_type,
-    invoice.type AS type,
+    invoice.type AS TYPE,
     invoice.added AS added,
     invoice.updated AS updated,
-    serial.name,
-    COALESCE(SUM(invoice_items.amount), 0) AS amount 
+    SERIAL.name,
+    COALESCE(SUM(invoice_items.amount),0) AS amount,
+    customer.name as customerName,
+    customer.last_name,
+    customer.nif
 FROM
     invoice
-LEFT JOIN serial ON invoice.serie = serial.id
-LEFT JOIN invoice_items ON invoice.id = invoice_items.invoice_id  
+LEFT JOIN SERIAL ON invoice.serie = SERIAL.id
+LEFT JOIN invoice_items ON invoice.id = invoice_items.invoice_id
+LEFT JOIN customer ON customer.id = invoice.customer
 WHERE
     invoice.type = 2
 GROUP BY
-    invoice.id;  
+    invoice.id;

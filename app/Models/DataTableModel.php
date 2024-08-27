@@ -244,9 +244,9 @@ class DataTableModel extends Model
 
 		if ($column == 2) {
 			if ($dir == 'asc')
-				$sort = 'dt_invoices.pay_type ASC';
+				$sort = 'dt_invoices.customerName ASC';
 			else
-				$sort = 'dt_invoices.pay_type DESC';
+				$sort = 'dt_invoices.customerName DESC';
 		}
 
 		if ($column == 3) {

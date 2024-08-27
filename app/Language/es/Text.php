@@ -14,6 +14,20 @@ $lang['cash'] = "Efectivo";
 $lang['card'] = "Tarjeta";
 $lang['loading'] = "Cargando...";
 
+# Monts
+$lang['jan'] = "Ene";
+$lang['feb'] = "Feb";
+$lang['mar'] = "Mar";
+$lang['apr'] = "Abr";
+$lang['may'] = "May";
+$lang['jun'] = "Jun";
+$lang['jul'] = "Jul";
+$lang['aug'] = "Ago";
+$lang['sep'] = "Sep";
+$lang['oct'] = "Oct";
+$lang['nov'] = "Nov";
+$lang['dec'] = "Dic";
+
 # Status
 $lang['status_active'] = "Activo";
 $lang['status_deleted'] = "Eliminado";
@@ -56,6 +70,7 @@ $lang['text_error_invalid_access_key'] = "Rectifique su clave de acceso";
 $lang['dashboard_collection_day'] = "Recaudación del Día";
 $lang['dashboard_cards_customers_active'] = "Clientes";
 $lang['dashboard_cards_services_active'] = "Servicios";
+$lang['dashboard_chart_mont_title'] = "Gráfico de Facturación";
 
 # TPV
 $lang['tpv_page_title'] = "TPV";
@@ -104,7 +119,8 @@ $lang['inv_issue_date'] = "Fecha de Emisión";
 $lang['inv_issue_msg'] = "Una vez que emita la factura no podrá ser modificada";
 $lang['inv_yes_issue'] = "Si, Emitir";
 $lang['inv_dt_col_status'] = "Estado";
-$lang['inv_dt_col_number'] = "Número de Factura";
+$lang['inv_dt_col_number'] = "Factura";
+$lang['inv_dt_col_customer'] = "Cliente";
 $lang['inv_dt_col_added'] = "Fecha de Creación";
 $lang['inv_set_paid'] = "Marcar como pagada";
 $lang['inv_create_rec'] = "Crear factura rectificativa";
@@ -112,7 +128,7 @@ $lang['rectify_inv_are_you_sure_msg'] = "Está seguro?";
 $lang['rectify_inv_not_revert_this_msg'] = "Desea crear una rectificación de la factura. Esta acción no es reversible!";
 $lang['rectify_inv_yes_rectify_msg'] = "Si, Rectificar";
 $lang['pay_inv_are_you_sure_msg'] = "Está seguro?";
-$lang['pay_inv_not_revert_this_msg'] = "Desea pagar la factura. Esta acción no es reversible!";
+$lang['pay_inv_not_revert_this_msg'] = "Desea marcar la factura como pagada. Esta acción no es reversible!";
 $lang['pay_inv_yes_pay_msg'] = "Si, Pagar";
 $lang['inv_rectified_concept_title'] = "Añada un concepto a su factura rectificativa";
 $lang['inv_rectified_title'] = "Factura Rectificativa";

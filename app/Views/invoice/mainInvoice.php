@@ -20,6 +20,7 @@
 					<tr>
 						<th><?php echo lang('Text.inv_dt_col_status'); ?></th>
 						<th><?php echo lang('Text.inv_dt_col_number'); ?></th>
+						<th><?php echo lang('Text.inv_dt_col_customer'); ?></th>
 						<th><?php echo lang('Text.inv_dt_col_added'); ?></th>
 						<th class="text-end"><?php echo lang('Text.inv_t_dt_col_amount'); ?></th>
 						<th class="text-end"></th>
@@ -53,13 +54,17 @@
 				type: "POST"
 			},
 			order: [
-				[2, 'desc']
+				[3, 'desc']
 			],
 			columns: [{
 					data: 'status',
 					class: 'dt-vertical-align p-2',
 				}, {
 					data: 'number',
+					class: 'dt-vertical-align p-2',
+					searchable: false
+				}, {
+					data: 'customer',
 					class: 'dt-vertical-align p-2',
 					searchable: false
 				},
