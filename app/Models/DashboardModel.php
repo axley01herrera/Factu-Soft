@@ -87,7 +87,7 @@ class DashboardModel extends Model
 		return $serie;
 	}
 
-	public function getSentInvoices()
+	public function pendingInvoices()
 	{
 		$query = $this->db->table('dt_invoices')
 			->where("invoiceStatus", 3);

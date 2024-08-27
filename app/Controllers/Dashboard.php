@@ -56,7 +56,6 @@ class Dashboard extends BaseController
 		$data['config'] = $this->config;
 		$data['profile'] = $this->profile;
 		$data['lang'] = $this->config[0]->lang;
-		$data['sentInvoices'] = $this->objDashboardModel->getSentInvoices();
 		# menu
 		$data['dashboardActive'] = 'active';
 		# page
@@ -142,5 +141,15 @@ class Dashboard extends BaseController
 		}
 
 		return json_encode($result);
+	}
+
+	public function getPendingInvoicesDT()
+	{
+		$data = array();
+		$data['config'] = $this->config;
+		$data['lang'] = $this->config[0]->lang;
+		$data['pendingInvoices'] = $this->objDashboardModel->pendingInvoices();
+
+		return view('dashboard/pendingInvoicesDT', $data);
 	}
 }
