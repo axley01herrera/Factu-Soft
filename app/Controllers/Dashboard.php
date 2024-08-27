@@ -53,8 +53,10 @@ class Dashboard extends BaseController
 			return view('logout');
 
 		$data = array();
+		$data['config'] = $this->config;
 		$data['profile'] = $this->profile;
 		$data['lang'] = $this->config[0]->lang;
+		$data['sentInvoices'] = $this->objDashboardModel->getSentInvoices();
 		# menu
 		$data['dashboardActive'] = 'active';
 		# page

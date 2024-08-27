@@ -72,7 +72,7 @@ class DashboardModel extends Model
 			->groupBy('MONTH(invoice.added)');
 
 		$data = $query->get()->getResult();
-		
+
 		$serie = array_fill(1, 12, 0);
 		$total = 0;
 
@@ -85,5 +85,15 @@ class DashboardModel extends Model
 		$serie['total'] = $total;
 
 		return $serie;
+	}
+
+	public function getSentInvoices()
+	{
+		$query = $this->db->table('dt_invoices')
+			->where("invoiceStatus", 3);
+
+		$data = $query->get()->getResult();
+
+		return $data;
 	}
 }

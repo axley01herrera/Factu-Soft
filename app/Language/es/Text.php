@@ -72,6 +72,7 @@ $lang['dashboard_cards_customers_active'] = "Clientes";
 $lang['dashboard_cards_services_active'] = "Servicios";
 $lang['dashboard_cards_pending_invoices'] = "Facturas Pendientes de Pago";
 $lang['dashboard_chart_mont_title'] = "Gráfico de Facturación";
+$lang['dashboard_sent_invoices_title'] = "Facturas Emitidas";
 
 # TPV
 $lang['tpv_page_title'] = "TPV";
