@@ -13,7 +13,7 @@
 					<!-- Customer Type -->
 					<div class="col-12 mb-2">
 						<label for="sel-type" class="form-label"><?php echo lang('Text.customer_text_type'); ?></label>
-						<select id="sel-type" class="form-select" <?php if ($action == "update") echo "disabled"; ?>>
+						<select id="sel-type" class="form-select required">
 							<option value="" hidden></option>
 							<option value="0" <?php if (isset($customer[0]->type) && $customer[0]->type == 0) echo 'selected'; ?>><?php echo lang('Text.customer_type_particular'); ?></option>
 							<option value="1" <?php if (isset($customer[0]->type) && $customer[0]->type == 1) echo 'selected'; ?>><?php echo lang('Text.customer_type_enterprise'); ?></option>
@@ -21,55 +21,55 @@
 					</div>
 
 					<!-- Name -->
-					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
+					<div class="col-12 mb-2">
 						<label for="txt-name" class="form-label"><?php echo lang('Text.customer_text_name'); ?></label>
-						<input type="text" id="txt-name" class="form-control required particular enterprise" value="<?php echo @$customer[0]->name; ?>" />
+						<input type="text" id="txt-name" class="form-control required " value="<?php echo @$customer[0]->name; ?>" />
 					</div>
 
 					<!-- NIF -->
-					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
-						<label for="txt-nif" class="form-label">DNI / NIF</label>
-						<input type="text" id="txt-nif" class="form-control required particular enterprise text-uppercase" value="<?php echo @$customer[0]->nif; ?>" />
+					<div class="col-12 mb-2">
+						<label for="txt-nif" class="form-label"><?php echo lang("Text.customer_text_nif"); ?></label>
+						<input type="text" id="txt-nif" class="form-control required text-uppercase" value="<?php echo @$customer[0]->nif; ?>" />
 					</div>
 
 					<!-- Email -->
-					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
+					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-email" class="form-label"><?php echo lang('Text.customer_text_email'); ?></label>
 						<input type="text" id="txt-email" class="form-control email" value="<?php echo @$customer[0]->email; ?>" />
 					</div>
 
 					<!-- Phone -->
-					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
+					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-phone" class="form-label"><?php echo lang('Text.customer_text_phone'); ?></label>
-						<input type="text" id="txt-phone" class="form-control required particular enterprise" value="<?php echo @$customer[0]->phone; ?>" />
+						<input type="text" id="txt-phone" class="form-control required " value="<?php echo @$customer[0]->phone; ?>" />
 					</div>
 
 					<!-- Address -->
-					<div class="col-12 mb-2 particular enterprise" hidden>
+					<div class="col-12 mb-2">
 						<label for="txt-address_a" class="form-label"><?php echo lang('Text.customer_text_address_a'); ?></label>
 						<input type="text" id="txt-address_a" class="form-control" value="<?php echo @$customer[0]->address_a; ?>" />
 					</div>
 
 					<!-- City -->
-					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
+					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-city" class="form-label"><?php echo lang('Text.customer_text_city'); ?></label>
 						<input type="text" id="txt-city" class="form-control" value="<?php echo @$customer[0]->address_city; ?>" />
 					</div>
 
 					<!-- State -->
-					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
+					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-state" class="form-label"><?php echo lang('Text.customer_text_state'); ?></label>
 						<input type="text" id="txt-state" class="form-control " value="<?php echo @$customer[0]->address_state; ?>" />
 					</div>
 
 					<!-- Zip -->
-					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
+					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-zip" class="form-label"><?php echo lang('Text.customer_text_zip'); ?></label>
 						<input type="text" id="txt-zip" class="form-control" maxlength="5" value="<?php if (!empty(@$customer[0]->address_zip)) echo @$customer[0]->address_zip; ?>" />
 					</div>
 
 					<!-- Country -->
-					<div class="col-12 col-md-6 col-lg-6 mb-2 particular enterprise" hidden>
+					<div class="col-12 col-md-6 col-lg-6 mb-2">
 						<label for="txt-country" class="form-label"><?php echo lang('Text.customer_text_country'); ?></label>
 						<input type="text" id="txt-country" class="form-control" value="<?php echo @$customer[0]->address_country; ?>" />
 					</div>
@@ -77,12 +77,12 @@
 
 				<!-- Invoice Serial -->
 				<?php if (empty($customer[0]->serial_id)) { ?>
-					<div id="div-serial" class="row particular enterprise" hidden>
+					<div id="div-serial" class="row">
 						<div class="col-12">
 							<div class="alert alert-warning" role="alert">
 								<?php echo lang('Text.customer_serial_msg'); ?>
 							</div>
-							<input type="text" id="serial" class="form-control required particular enterprise text-uppercase" placeholder="<?php echo lang('Text.customer_serial') ?>"  />
+							<input type="text" id="serial" class="form-control required  text-uppercase" placeholder="<?php echo lang('Text.customer_serial') ?>" />
 						</div>
 					</div>
 				<?php } ?>
@@ -107,28 +107,6 @@
 		if (action == 'update') {
 			$('#btn-save-customer').html('<?php echo lang('Text.btn_update'); ?>');
 			alerMsg = '<?php echo lang('Text.customer_msg_success_update'); ?>';
-
-			let value = $('#sel-type').val();
-
-			if (value == 0) { // Particular
-				$('.enterprise').each(function() {
-					$(this).attr('hidden', true);
-				});
-
-				$('.particular').each(function() {
-					$(this).removeAttr('hidden');
-				});
-			} else if (value == 1) { // Enterprize
-				$('.particular').each(function() {
-					$(this).attr('hidden', true);
-				});
-
-				$('.enterprise').each(function() {
-					$(this).removeAttr('hidden');
-				});
-			}
-
-			focused();
 		}
 
 		$('#btn-save-customer').on('click', function() {
@@ -218,7 +196,6 @@
 				value = $(this).val();
 				if (value == "") {
 					$(this).addClass('is-invalid');
-					console.log()
 					result = 1;
 				}
 			});
@@ -252,34 +229,10 @@
 
 		$('#sel-type').on('change', function() {
 			let value = $(this).val();
-
-			if (value == 0) { // Particular
-				$('.enterprise').each(function() {
-					$(this).attr('hidden', true);
-				});
-
-				$('.particular').each(function() {
-					$(this).removeAttr('hidden');
-				});
-			} else if (value == 1) { // Enterprize
-				$('.particular').each(function() {
-					$(this).attr('hidden', true);
-				});
-
-				$('.enterprise').each(function() {
-					$(this).removeAttr('hidden');
-				});
-			}
-
-			focused();
 		});
 
-		function focused() {
-			$('.required').on('focus', function() {
-				$(this).removeClass('is-invalid');
-			});
-		}
-
-		focused();
+		$('.required').on('focus', function() {
+			$(this).removeClass('is-invalid');
+		});
 	});
 </script>

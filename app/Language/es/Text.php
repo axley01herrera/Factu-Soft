@@ -15,6 +15,7 @@ $lang['card'] = "Tarjeta";
 $lang['transfer'] = "Transferencia";
 $lang['loading'] = "Cargando...";
 $lang['important_label'] = "Atención";
+$lang['msg_action_not_reversible'] = "Esta acción no es reversible!";
 
 # Monts
 $lang['jan'] = "Ene";
@@ -91,7 +92,7 @@ $lang['table_reports_col_pay_type'] = "Método de Pago";
 $lang['table_reports_col_date'] = "Fecha de Emisión";
 $lang['table_reports_col_amount'] = "Cobrado";
 $lang['report_print_total'] = "Total";
-$lang['reports_search_date_label'] = "Resultados de la Búsquedad";
+$lang['reports_search_date_label'] = "Resultados de la Búsqueda";
 $lang['reports_search_incorrect_date'] = "Rectifique el rango de fechas seleccionado";
 $lang['reports_ticket'] = "Ticket";
 $lang['reports_invoice'] = "Factura";
@@ -117,8 +118,9 @@ $lang['ticket_msg'] = "Gracias por su visita";
 
 # Invoices
 $lang['inv_page_title'] = "Facturas";
+$lang['inv_detail_page_title'] = "Detalle de Factura";
 $lang['inv_create'] = "Crear Factura";
-$lang['inv_create_page_title'] = "Factura";
+$lang['inv_create_page_title'] = "Borrador de Factura";
 $lang['inv_label_status'] = "Estado";
 $lang['inv_number_label'] = "Número de Factura";
 $lang['inv_status_draft'] = "BORRADOR";
@@ -145,9 +147,11 @@ $lang['inv_add_service_msg'] = " Puede selecionar un servicio para añadirlo a l
 $lang['inv_due_date'] = "Fecha de Vencimiento";
 $lang['inv_issue_date'] = "Fecha de Emisión";
 $lang['inv_issue_msg'] = "Una vez que emita la factura no podrá ser modificada";
+$lang['inv_remove_tax_msg'] = "Desea retirar este impuesto de la factura";
 $lang['inv_yes_issue'] = "Si, Emitir";
+$lang['inv_yes_remove_tax'] = "Si, remover";
 $lang['inv_dt_col_status'] = "Estado";
-$lang['inv_dt_col_number'] = "Factura";
+$lang['inv_dt_col_number'] = "Factura #";
 $lang['inv_dt_col_customer'] = "Cliente";
 $lang['inv_dt_col_added'] = "Fecha de Creación";
 $lang['inv_set_paid'] = "Marcar como pagada";
@@ -166,6 +170,11 @@ $lang['inv_rectified_title'] = "Factura Rectificativa";
 $lang['inv_rectified_number'] = "Número de Factura";
 $lang['inv_rectified_invoice'] = "Rectifica la factura";
 $lang['inv_required_rectify_concept_msg'] = "Necesita agregar un concepto a la factura rectificativa";
+$lang['inv_add_tax'] = "Añadir Impuestos";
+$lang['inv_applicable_taxes'] = "Impuestos Aplicables";
+$lang['inv_action_add_tax'] = "Agregar Impuesto Seleccionado a la Factura";
+$lang['inv_action_add_tax_msg'] = "Seleccione un tipo de impuesto para agregar"; 
+$lang['tax_base'] = "Base Imponible"; 
 
 # Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Tickets";
@@ -202,7 +211,7 @@ $lang['customer_modal_title_create'] = "Nuevo Cliente";
 $lang['customer_modal_title_update'] = "Actualizando Cliente";
 $lang['customer_text_name'] = "Nombre o Razón Social";
 $lang['customer_text_last_name'] = "Apellidos";
-$lang['customer_text_nif'] = "NIF";
+$lang['customer_text_nif'] = "Identificación (NIF / DNI / NIE / PASAPORTE)";
 $lang['customer_text_type'] = "Tipo";
 $lang['customer_text_email'] = "Correo Electrónico";
 $lang['customer_text_phone'] = "Teléfono";

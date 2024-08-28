@@ -24,10 +24,37 @@ class InvoiceModel extends Model
 		return $data;
 	}
 
+	public function getInvoiceTax($invoiceID)
+	{
+		$query = $this->db->table('invoice_tax')
+			->select('
+			invoice_tax.id as itID,
+			tax.name as taxName,
+			tax.description as taxDesc,
+			tax.percent as taxPercent,
+			tax.operator as taxOperator
+			')
+			->join('tax', 'tax.id = invoice_tax.tax_id')
+			->where('invoice_id', $invoiceID);
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
 	public function getSelCustomers()
 	{
 		$query = $this->db->table('customer')
 			->where('serial_id !=', NULL);
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function getSelTax()
+	{
+		$query = $this->db->table('tax');
 
 		$data = $query->get()->getResult();
 

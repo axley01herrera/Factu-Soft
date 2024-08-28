@@ -183,8 +183,7 @@ class Customer extends BaseController
 
 		$data = array();
 		$data['name'] = $name;
-		if (!empty($type))
-			$data['type'] = $type;
+		$data['type'] = $type;
 		$data['email'] = $email;
 		$data['phone'] = $phone;
 		$data['address_a'] = $address_a;
@@ -323,11 +322,11 @@ class Customer extends BaseController
 		$params['search'] = $dataTableRequest['search']['value'];
 		$params['sortColumn'] = $dataTableRequest['order'][0]['column'];
 		$params['sortDir'] = $dataTableRequest['order'][0]['dir'];
-
+		$params['sortDir'] = $dataTableRequest['order'][0]['dir'];
 		$row = array();
 		$totalRecords = 0;
 
-		$customerID = $this->objRequest->getPost('customerID');
+		$customerID = $dataTableRequest['customerID'];
 
 		$result = $this->objDataTableModel->getCustomerInvoiceProcessingData($params, $customerID);
 		$totalRows = sizeof($result);

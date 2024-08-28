@@ -22,6 +22,8 @@
 					</div>
 					<div class="text-center">
 						<h5 class="mb-0"><?php echo $customer[0]->name ?></h5>
+						<h7><?php echo $customer[0]->nif ?></h5>
+						<br><br>
 						<p class="mb-0">
 							<?php if ($customer[0]->type == 0) { ?>
 								<span class="badge bg-primary-subtle text-primary"><?php echo lang('Text.customer_type_particular'); ?></span>

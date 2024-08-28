@@ -6,9 +6,9 @@
 				<input type="text" id="txt-name" class="form-control c-disabled required" value="<?php echo $customer[0]->name; ?>" disabled />
 			</div>
 
-			<div id="div-enterprise" class="col-12 col-md-6 col-lg-6 mb-2" <?php if ($customer[0]->type == 0) echo 'hidden'; ?>>
+			<div class="col-12 col-md-6 col-lg-6 mb-2">
 				<label for="txt-nif" class="form-label"><?php echo lang('Text.customer_text_nif'); ?></label>
-				<input type="text" id="txt-nif" class="form-control c-disabled <?php if ($customer[0]->type == 1) echo 'required'; ?>" value="<?php echo $customer[0]->nif; ?>" disabled />
+				<input type="text" id="txt-nif" class="form-control c-disabled required" value="<?php echo $customer[0]->nif; ?>" disabled />
 			</div>
 
 			<div class="col-12 col-md-6 col-lg-6 mb-2">
@@ -69,14 +69,7 @@
 	});
 
 	$('#btn-cancel-customer').on('click', function() {
-		$('.c-disabled').each(function() {
-			$(this).attr('disabled', true);
-		});
-
-		$('#btn-cancel-customer').attr('hidden', true);
-		$('#btn-save-customer').attr('hidden', true);
-
-		$('#btn-edit-customer').removeAttr('hidden');
+		window.location.reload();
 	});
 
 	$('#sel-type').on('change', function() {

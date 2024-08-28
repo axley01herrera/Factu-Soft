@@ -21,8 +21,8 @@
 
 <script>
 	$(document).ready(function() {
-		var lang = "<?php echo $lang; ?>";
-		var dtLang = "";
+		let lang = "<?php echo $lang; ?>";
+		let dtLang = "";
 
 		if (lang == "es")
 			dtLang = "<?php echo base_url('public/assets/js/dataTableLang/es.json'); ?>";
@@ -40,8 +40,8 @@
 			ajax: {
 				url: "<?php echo base_url('Customer/processingInvoice'); ?>",
 				type: "POST",
-				data: {
-					'customerID': "<?php echo $customer[0]->id; ?>"
+				data: function(d) {
+					d.customerID = "<?php echo $customer[0]->id; ?>"
 				}
 			},
 			order: [

@@ -322,7 +322,9 @@ class Invoice extends BaseController
 		$data['lang'] = $this->config[0]->lang;
 		$data['invoiceID'] = $invoiceID;
 		$data['invoice'] = $this->objInvoiceModel->getInvoice($invoiceID);
+		$data['invoice_tax'] = $this->objInvoiceModel->getInvoiceTax($invoiceID);
 		$data['customers'] = $this->objInvoiceModel->getSelCustomers();
+		$data['tax'] = $this->objInvoiceModel->getSelTax();
 
 		if ($data['invoice'][0]->status == 2)
 			$data['status'] = '<span class="badge bg-secondary-subtle text-secondary">' . lang('Text.inv_status_draft') . '</span>';
@@ -676,5 +678,41 @@ class Invoice extends BaseController
 		$data['page'] = 'invoice/rectifyInvoice';
 
 		return view('layouts/main', $data);
+	}
+
+	public function addTaxToInvoice()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+			return json_encode($result);
+		}
+
+		# params
+		$taxID = $this->objRequest->getPost('taxID');
+		$invoiceID = $this->objRequest->getPost('invoiceID');
+
+		$d = array();
+		$d['tax_id'] = $taxID;
+		$d['invoice_id'] = $invoiceID;
+
+		$rs = $this->objMainModel->objCreate('invoice_tax', $d);
+
+		return json_encode($rs);
+	}
+
+	public function removeTaxInvoice()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+			return json_encode($result);
+		}
+
+		
 	}
 }
