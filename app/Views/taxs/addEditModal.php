@@ -24,7 +24,7 @@
 					<!-- Percent -->
 					<div class="col-6 mb-2">
 						<label for="txt-percent" class="form-label"><?php echo lang('Text.taxs_text_percent'); ?></label>
-						<input type="text" id="txt-percent" class="form-control" value="<?php echo @$tax[0]->percent; ?>" />
+						<input type="text" id="txt-percent" class="form-control" value="<?php if (!empty($tax[0]->percent)) echo @$tax[0]->percent; ?>" />
 					</div>
 
 					<!-- Operator -->
