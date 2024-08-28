@@ -52,6 +52,7 @@ $lang['menu_customers'] = "Clientes";
 $lang['menu_customers_list'] = "Listado de Clientes";
 $lang['menu_invoices'] = "Facturación";
 $lang['menu_series'] = "Series";
+$lang['menu_taxs'] = "Impuestos";
 $lang['menu_tickets'] = "Tickets";
 $lang['menu_invoice'] = "Facturas";
 $lang['menu_services'] = "Servicios";
@@ -196,6 +197,15 @@ $lang['inv_serial_dt_col_serial'] = "Serial";
 $lang['inv_serial_dt_col_updated'] = "Actualizado";
 $lang['inv_serial_dt_col_added'] = "Agregado";
 $lang['inv_serial_alert_duplicate_name'] = "Nombre de serie existente";
+
+# Invoices Taxs
+$lang['taxs_page_title'] = "Listado de Impuestos";
+$lang['btn_create_taxs'] = "Añadir Impuesto";
+$lang['taxs_dt_col_name'] = "Nombre";
+$lang['taxs_dt_col_description'] = "Descripción";
+$lang['taxs_dt_col_percent'] = "%";
+$lang['taxs_dt_col_operator'] = "Operador";
+$lang['taxs_create_modal_title'] = "Crear Impuesto";
 
 # Customer
 $lang['btn_create_customer'] = 'Crear Cliente';

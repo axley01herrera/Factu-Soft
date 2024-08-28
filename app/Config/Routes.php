@@ -64,6 +64,10 @@ $routes->get('Invoice/invoiceDetail', 'Invoice::invoiceDetail');
 $routes->post('Invoice/addTaxToInvoice', 'Invoice::addTaxToInvoice');
 $routes->post('Invoice/removeTaxInvoice', 'Invoice::removeTaxInvoice');
 
+# Taxs
+$routes->get('Taxs', 'Taxs::index');
+$routes->post('Taxs/createTax', 'Taxs::createTax');
+
 # Profile
 $routes->get('Profile', 'Profile::index');
 $routes->post('Profile/updateProfile', 'Profile::updateProfile');
