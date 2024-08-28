@@ -1,3 +1,9 @@
+<?php
+$cash = 0;
+$card = 0;
+$transfer = 0;
+$total = 0;
+?>
 <?php if (empty($reports)) { ?>
 	<div class="alert customize-alert alert-dismissible text-danger alert-light-danger bg-danger-subtle fade show remove-close-icon" role="alert">
 		<span class="side-line bg-danger"></span>
@@ -7,9 +13,9 @@
 		</div>
 	</div>
 <?php } else { ?>
-	<div class="card card-flush mt-10">
+	<div class="card card-flush">
 		<div class="card-header d-flex align-items-center">
-			<h4 class="card-title mb-0"><?php echo lang('Text.reports_search_date_label') . '<span class="ms-1 fst-italic fs-4">( ' . sizeof($reports) . ' )</span>'; ?></h4>
+			<h4 class="card-title mb-0"><?php echo lang('Text.reports_search_date_label'); ?></h4>
 			<div class="card-actions cursor-pointer ms-auto d-flex button-group">
 				<button type="button" id="btn-print" class="btn btn-muted">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer me-1" viewBox="0 0 16 16">
@@ -21,44 +27,63 @@
 			</div>
 		</div>
 		<div class="card-body">
-			<div id="print" class="table-responsive">
-				<table id="dt-print" class="table table-row-bordered no-footer table-hover" style="width: 100%;">
+			<div class="table-responsive">
+				<table class="table table-row-bordered no-footer table-hover" style="width: 100%;">
 					<thead>
 						<tr class="fs-4">
-							<th class="p-2"><?php echo lang('Text.table_reports_col_invoice_number'); ?></th>
-							<th class="p-2"><?php echo lang('Text.table_reports_col_customer_name'); ?></th>
-							<th class="p-2"><?php echo lang('Text.table_reports_col_date'); ?></th>
-							<th class="text-end p-2"><?php echo lang('Text.table_reports_col_amount'); ?></th>
+							<th><?php echo lang('Text.table_reports_col_invoice_number'); ?> #</th>
+							<th><?php echo lang('Text.table_reports_col_type'); ?></th>
+							<th><?php echo lang('Text.table_reports_col_pay_type'); ?></th>
+							<th><?php echo lang('Text.table_reports_col_date'); ?></th>
+							<th class="text-end"><?php echo lang('Text.table_reports_col_amount'); ?></th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php
-						$totalAmount = 0;
-						foreach ($reports as $r) {
-							$totalAmount = $totalAmount + $r->amount; ?>
+						<?php foreach ($reports as $r) { ?>
 							<tr>
-								<td class="p-2"><?php echo $r->invoiceNumber; ?></td>
-								<td class="p-2"><?php echo $r->customerName; ?></td>
-								<td class="p-2"><?php echo $r->added; ?></td>
-								<td class="text-end p-2"><?php echo getMoneyFormat($config[0]->currency, $r->amount); ?></td>
+								<td><?php echo $r->invoiceNumber; ?></td>
+								<td>
+									<?php
+									if ($r->invoiceType == 1)
+										echo lang('Text.reports_ticket');
+									else if ($r->invoiceType == 2)
+										echo lang('Text.reports_invoice');
+									?>
+								</td>
+								<td>
+									<?php
+									if ($r->payType == 1) {
+										echo lang('Text.card');
+										$card += $r->totalAmount;
+									} else if ($r->payType == 2) {
+										echo lang('Text.cash');
+										$cash += $r->totalAmount;
+									} else if ($r->payType == 3 || empty($r->payType)) {
+										echo lang('Text.transfer');
+										$transfer += $r->totalAmount;
+									}
+									?>
+								</td>
+								<td><?php echo $r->date; ?></td>
+								<td class="text-end">
+									<?php echo getMoneyFormat($config[0]->currency, $r->totalAmount); ?>
+								</td>
 							</tr>
 						<?php } ?>
+						<tr>
+							<td colspan="5" class="text-end">
+								<span>Tarjeta: <?php echo getMoneyFormat($config[0]->currency, $card); ?></span>
+								<br>
+								<span>Efectivo: <?php echo getMoneyFormat($config[0]->currency, $cash); ?></span>
+								<br>
+								<span>Transferencia: <?php echo getMoneyFormat($config[0]->currency, $transfer); ?></span>
+								<br>
+								<span>Total: <?php echo getMoneyFormat($config[0]->currency, $transfer + $cash + $card); ?></span>
+							</td>
+						</tr>
 					</tbody>
 				</table>
-				<div class="text-end">
-					<p class="fw-bold fs-6 mb-0"><?php echo lang('Text.report_print_total'); ?>: <?php echo getMoneyFormat($config[0]->currency, $totalAmount); ?></p>
-				</div>
 			</div>
 		</div>
 	</div>
 <?php } ?>
-
-<script>
-	$('#btn-print').on('click', function() {
-		var printContent = $('#print').html();
-		var printWindow = window.open('', '_blank');
-		printWindow.document.write(printContent);
-		printWindow.document.close();
-		printWindow.print();
-	});
-</script>

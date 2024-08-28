@@ -27,7 +27,9 @@
 						<input type="date" id="sel-end-date" class="form-control" />
 					</div>
 					<div class="col-12 mt-5 text-end">
-						<a href="#" id="btn-view-report" class="btn btn-primary"><i class="bi bi-file-earmark-text me-1"></i><?php echo lang('Text.reports_btn_view_report'); ?></a>
+						<button type="button" id="btn-view-report" class="btn btn-primary">
+							<?php echo lang('Text.reports_btn_view_report'); ?>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -48,38 +50,48 @@
 </div>
 
 <script>
-	var lang = "<?php echo $config[0]->lang; ?>";
-	var dateStart = '';
-	var dateEnd = '';
-	var dateLabel = "";
+	$(document).ready(function() {
 
-	if (lang == 'es') {
-		dateLabel = "d-m-Y";
-	} else if (lang == 'en') {
-		dateLabel = "m-d-Y";
-	}
+		$('#btn-view-report').on('click', function(e) {
+			e.preventDefault();
 
-	$('#btn-view-report').on('click', function(e) {
-		e.preventDefault();
-		dateStart = $('#sel-start-date').val();
-		dateEnd = $('#sel-end-date').val();
+			let dateStart = $('#sel-start-date').val();
+			let dateEnd = $('#sel-end-date').val();
 
-		let correctDate = 0;
+			if (dateEnd == "")
+				dateEnd = dateStart;
+			
+			let objStartDate = new Date(dateStart);
+			let objEndDate = new Date(dateEnd);
 
-		if (dateEnd != '')
-			if (dateStart > dateEnd)
-				correctDate = 1;
-
-
-		let result = checkRequiredValues();
-
-		if (result == 0 && correctDate == 0) {
-			$('.form-control').each(function() {
-				$(this).removeClass('is-invalid');
-			});
-			getReports();
-		} else {
-			if (result != 0) {
+			if (dateStart != "") {
+				if (objStartDate <= objEndDate) {
+					$.ajax({
+						type: "POST",
+						url: "<?php echo base_url('Reports/getReports'); ?>",
+						data: {
+							'dateStart': dateStart,
+							'dateEnd': dateEnd
+						},
+						dataType: "html",
+						success: function(response) {
+							$('#main-search-results').html(response);
+							$('#date-label').html($('#sel-date').val());
+						},
+						error: function(error) {
+							globalError();
+						}
+					});
+				} else {
+					Swal.fire({
+					position: "top-end",
+					icon: "warning",
+					text: "<?php echo lang("Text.reports_search_incorrect_date"); ?>..!",
+					showConfirmButton: false,
+					timer: 2500
+				});
+				}
+			} else {
 				Swal.fire({
 					position: "top-end",
 					icon: "warning",
@@ -87,57 +99,11 @@
 					showConfirmButton: false,
 					timer: 2500
 				});
-			} else if (correctDate != 0) {
-				$('#sel-start-date').addClass('is-invalid');
-				$('#sel-end-date').addClass('is-invalid');
-
-				Swal.fire({
-					position: "top-end",
-					icon: "warning",
-					text: "<?php echo lang("Text.reports_search_incorrect_date"); ?>..!",
-					showConfirmButton: false,
-					timer: 2500
-				});
-			}
-		}
-
-	});
-
-	function getReports() {
-		$.ajax({
-			type: "POST",
-			url: "<?php echo base_url('Reports/getReports'); ?>",
-			data: {
-				'dateStart': dateStart,
-				'dateEnd': dateEnd
-			},
-			dataType: "html",
-			success: function(response) {
-				$('#main-search-results').html(response);
-				$('#date-label').html($('#sel-date').val());
-			},
-			error: function(error) {
-				globalError();
-			}
-		});
-	}
-
-	function checkRequiredValues() {
-		let result = 0;
-		let value = "";
-
-		$('.required').each(function() {
-			value = $(this).val();
-			if (value == "") {
-				$(this).addClass('is-invalid');
-				result = 1;
 			}
 		});
 
-		return result;
-	}
-
-	$('.form-control').on('focus', function() {
-		$(this).removeClass('is-invalid');
+		$('.form-control').on('focus', function() {
+			$(this).removeClass('is-invalid');
+		});
 	});
 </script>

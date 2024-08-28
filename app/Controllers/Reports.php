@@ -78,9 +78,8 @@ class Reports extends BaseController
 		$dateEnd = htmlspecialchars(trim($this->objRequest->getPost('dateEnd')));
 
 		$data = array();
-		$data['reports'] = $this->objReportModel->getReports($dateStart, $dateEnd);
-		# config
 		$data['config'] = $this->config;
+		$data['reports'] = $this->objReportModel->getReports($dateStart, $dateEnd);
 
 		return view('reports/reportsDT', $data);
 	}

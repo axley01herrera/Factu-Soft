@@ -12,6 +12,7 @@ $lang['yes_remove_msg'] = "Sí, Eliminar";
 $lang['no_cancel_msg'] = "No, Cancelar";
 $lang['cash'] = "Efectivo";
 $lang['card'] = "Tarjeta";
+$lang['transfer'] = "Transferencia";
 $lang['loading'] = "Cargando...";
 $lang['important_label'] = "Atención";
 
@@ -79,18 +80,21 @@ $lang['dashboard_sent_invoices_title'] = "Listado de Facturas Pendientes de Pago
 
 # Reports
 $lang['reports_page_title'] = "Reportes de Facturación";
-$lang['reports_date_start_label'] = "Seleccione una fecha inicial";
-$lang['reports_date_end_label'] = "Seleccione una fecha final";
+$lang['reports_date_start_label'] = "Fecha Inicial";
+$lang['reports_date_end_label'] = "Fecha Final";
 $lang['reports_not_search_label'] = "Defina sus filtros y presione en <span class='fw-bold'>Ver Reporte</span>";
 $lang['reports_btn_view_report'] = "Ver Reporte";
 $lang['reports_not_results_label'] = "Sin Resultados";
-$lang['table_reports_col_invoice_number'] = "Número de Factura";
-$lang['table_reports_col_customer_name'] = "Cliente";
-$lang['table_reports_col_date'] = "Fecha de Creación";
-$lang['table_reports_col_amount'] = "Total";
+$lang['table_reports_col_invoice_number'] = "Factura";
+$lang['table_reports_col_type'] = "Tipo";
+$lang['table_reports_col_pay_type'] = "Método de Pago";
+$lang['table_reports_col_date'] = "Fecha de Emisión";
+$lang['table_reports_col_amount'] = "Cobrado";
 $lang['report_print_total'] = "Total";
 $lang['reports_search_date_label'] = "Resultados de la Búsquedad";
-$lang['reports_search_incorrect_date'] = "Rectifique las fechas";
+$lang['reports_search_incorrect_date'] = "Rectifique el rango de fechas seleccionado";
+$lang['reports_ticket'] = "Ticket";
+$lang['reports_invoice'] = "Factura";
 
 # TPV
 $lang['tpv_page_title'] = "TPV";

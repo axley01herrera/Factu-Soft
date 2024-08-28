@@ -24,18 +24,26 @@ class ReportModel extends Model
 
 	public function getReports($dateStart, $dateEnd)
 	{
-		$query = $this->db->table('dt_invoices')
-		->where('invoiceStatus!=', 2);
+		$start = date('Y-m-d', strtotime($dateStart)) . ' 00:00:00';
+		$end = date('Y-m-d', strtotime($dateEnd)) . ' 23:59:59';
 
-		if (empty($dateEnd)) { // CASE DAY
-			$query->where('DATE(added)', $dateStart);
-		} else { // CASE RANGE DAYS
-			$query->where('DATE(added) >=', $dateStart);
-			$query->where('DATE(added) <=', $dateEnd);
-		}
+		$query = $this->db->table('invoice')
+			->select('
+				invoice.number as invoiceNumber,
+				invoice.type as invoiceType,
+				invoice.pay_type as payType,
+				invoice.added as date,
+				SUM(invoice_items.amount) as totalAmount
+			')
+			->join('invoice_items', "invoice_items.invoice_id = invoice.id", 'left')
+			->where('status != 2')
+			->where("added >=", $start)
+			->where("added <=", $end)
+			->orderBy('added', 'ASC')
+			->groupBy('invoice.id');
 
-		$query->orderBy('added', 'ASC');
+		$data = $query->get()->getResult();
 
-		return $query->get()->getResult();
+		return $data;
 	}
 }
