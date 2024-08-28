@@ -35,7 +35,7 @@
 								<tr>
 									<td><?php echo $t->name; ?></td>
 									<td><?php echo $t->description; ?></td>
-									<td><?php if($t->percent != 0) echo $t->percent; ?></td>
+									<td><?php if ($t->percent != 0) echo $t->percent; ?></td>
 									<td><?php echo $t->operator; ?></td>
 									<td class="text-end">
 										<a href="#" class="btn-edit-taxs" data-taxs-id='<?php echo $t->id; ?>'>
@@ -56,46 +56,47 @@
 </div>
 
 <script>
-	var lang = "<?php echo $config[0]->lang; ?>";
-	var dtLang = "";
+	$(document).ready(function() {
+		let lang = "<?php echo $config[0]->lang; ?>";
+		let dtLang = "";
 
-	if (lang == "es")
-		dtLang = "<?php echo base_url('public/assets/js/dataTableLang/es.json'); ?>";
-	else if (lang == "en")
-		dtLang = "<?php echo base_url('public/assets/js/dataTableLang/en.json'); ?>";
+		if (lang == "es")
+			dtLang = "<?php echo base_url('public/assets/js/dataTableLang/es.json'); ?>";
+		else if (lang == "en")
+			dtLang = "<?php echo base_url('public/assets/js/dataTableLang/en.json'); ?>";
 
-	$('#btn-create-tax').on('click', function() {
-		$('#btn-create-tax').attr('disabled', true);
-		$.ajax({
-			type: "POST",
-			url: "<?php echo base_url('Taxs/createTax') ?>",
-			data: "",
-			dataType: "html",
-			success: function(response) {
-				$('#btn-create-tax').removeAttr('disabled');
-				$('#app-modal').html(response);
+		var dtTaxs = $('#dt-taxs').DataTable({
+			processing: false,
+			paging: false,
+			language: {
+				url: dtLang
 			},
-			error: function(error) {
-				globalError();
-			}
+			columnDefs: [{
+				targets: [4],
+				searchable: false,
+				orderable: false
+			}],
+			order: [
+				[0, 'desc']
+			],
+			dom: '<"top"f>rt<"row"<"col-4 mt-3"l><"col-4 mt-3"i><"col-4 mt-3"p>>',
 		});
-	});
 
-	var dtTaxs = $('#dt-taxs').DataTable({
-		processing: false,
-		serverSide: false,
-		pageLength: 10,
-		language: {
-			url: dtLang
-		},
-		columnDefs: [{
-			targets: [4],
-			searchable: false,
-			orderable: false
-		}],
-		order: [
-			[0, 'desc']
-		],
-		dom: '<"top"f>rt<"row"<"col-4 mt-3"l><"col-4 mt-3"i><"col-4 mt-3"p>>',
+		$('#btn-create-tax').on('click', function() {
+			$('#btn-create-tax').attr('disabled', true);
+			$.ajax({
+				type: "POST",
+				url: "<?php echo base_url('Taxs/createTax') ?>",
+				data: "",
+				dataType: "html",
+				success: function(response) {
+					$('#btn-create-tax').removeAttr('disabled');
+					$('#app-modal').html(response);
+				},
+				error: function(error) {
+					globalError();
+				}
+			});
+		});
 	});
 </script>
