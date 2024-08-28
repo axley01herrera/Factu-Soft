@@ -157,6 +157,35 @@ CREATE TABLE IF NOT EXISTS `invoice_items` (
   PRIMARY KEY (`id`)
 );
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tax`
+--
+DROP TABLE IF EXISTS `tax`;
+CREATE TABLE IF NOT EXISTS `tax` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `description` varchar(999) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `percent` float DEFAULT '0',
+  `operator` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_tax`
+--
+DROP TABLE IF EXISTS `invoice_tax`;
+CREATE TABLE IF NOT EXISTS `invoice_tax` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `invoice_id` int NOT NULL,
+  `tax_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
 -- --------------------------------------------------------
 
 --
