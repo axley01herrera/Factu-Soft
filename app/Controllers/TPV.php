@@ -78,7 +78,7 @@ class TPV extends BaseController
 		# menu
 		$data['tpvActive'] = 'active';
 		# page
-		$data['page'] = 'TPV/mainTPV';
+		$data['page'] = 'tpv/mainTPV';
 
 		$data['services'] = $this->objTPVModel->getServices();
 		$data['invoice'] = $invoice;
@@ -100,7 +100,7 @@ class TPV extends BaseController
 		$data['config'] = $this->config;
 		$data['items'] = $this->objTPVModel->getInvoiceItems($invoiceID);
 
-		return view('TPV/items', $data);
+		return view('tpv/items', $data);
 	}
 
 	public function addInvoiceItem()
@@ -219,7 +219,7 @@ class TPV extends BaseController
 		$data['serviceInfo'] = $serviceInfo;
 		$data['uniqid'] = uniqid();
 
-		return view('TPV/editPriceModal', $data);
+		return view('tpv/editPriceModal', $data);
 	}
 
 	public function editPriceProcessTPV()
@@ -290,6 +290,6 @@ class TPV extends BaseController
 		$data['invoice'] = $invoice;
 		$data['items'] = $items;
 
-		return view('TPV/ticket', $data);
+		return view('tpv/ticket', $data);
 	}
 }
