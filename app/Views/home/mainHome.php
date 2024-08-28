@@ -40,6 +40,9 @@
 									</div>
 									<button type="button" id="sign-in" class="btn btn-primary w-100 py-8 mb-4 rounded-2"><?php echo lang('Text.text_log_in'); ?></button>
 								</form>
+								<div class="d-flex align-items-center justify-content-center">
+									<a class="text-primary fw-medium ms-2" href="https://axleyherrera.com/">© Powered by Axley Herrera Vázquez</a>
+								</div>
 							</div>
 						</div>
 					</div>

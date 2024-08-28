@@ -17,12 +17,6 @@ CREATE TABLE IF NOT EXISTS `config` (
   PRIMARY KEY (`id`)
 );
 
--- Insert after create table
-INSERT INTO `profile` (`id`, `logo`, `access_key`, `name`, `company_id`, `email`, `phone`, `address_a`, `address_b`, `city`, `state`, `zip`, `country`, `description`) VALUES
-(1, NULL, '$2y$10$nSh5/VR7O3a0IkaZD8MVwO0o8xoia0JS9FVTfH.RVj8TZrLWBR0uC', 'Grupo AHV', '45368548-X', 'grupoahv@gmail.com', '(+34) 658-789-789', 'Calle Rosa #2', '', '', 'Las Palmas', 35570, 'España', 'Empresa dedicada al desarrollo de soluciones informáticas.');
-
-INSERT INTO `config` (`id`, `lang`, `timezone`, `currency`) VALUES (NULL, 'es', 'Atlantic/Canary', '€');
-
 -- --------------------------------------------------------
 
 --
@@ -60,7 +54,7 @@ DROP TABLE IF EXISTS `profile`;
 CREATE TABLE IF NOT EXISTS `profile` (
   `id` int NOT NULL AUTO_INCREMENT,
   `logo` longblob,
-  `access_key` varchar(999) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT '$2y$10$k/0mttt2zPfZ3P2SCfTRZeQQmQkX3ySC3fN4xfydKQl...',
+  `access_key` varchar(999) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT '$2y$10$k/0mttt2zPfZ3P2SCfTRZeQQmQkX3ySC3fN4xfydKQluIDkBQoPNS',
   `name` varchar(250) COLLATE utf8mb4_spanish_ci NOT NULL,
   `company_id` varchar(45) COLLATE utf8mb4_spanish_ci NOT NULL,
   `email` varchar(250) COLLATE utf8mb4_spanish_ci NOT NULL,
@@ -93,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `serial` (
 
 -- Insert after create table
 INSERT INTO `serial` (`id`, `name`, `count`) VALUES
-(1, 'TPV', 0);
+(1, 'T', 0);
 INSERT INTO `serial` (`id`, `name`, `count`) VALUES
 (2, 'R', 0);
 

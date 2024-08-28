@@ -82,7 +82,7 @@
 							<div class="alert alert-warning" role="alert">
 								<?php echo lang('Text.customer_serial_msg'); ?>
 							</div>
-							<input type="text" id="serial" class="form-control required  text-uppercase" placeholder="<?php echo lang('Text.customer_serial') ?>" />
+							<input type="text" id="serial" class="form-control text-uppercase" placeholder="<?php echo lang('Text.customer_serial') ?>" />
 						</div>
 					</div>
 				<?php } ?>
