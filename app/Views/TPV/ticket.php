@@ -35,7 +35,7 @@
 
 		<div class="row">
 			<div class="col-12 text-center mb-2">
-				<b><?php echo lang('Text.ticket_establishment')?>:</b>
+				<b><?php echo lang('Text.ticket_establishment') ?>:</b>
 				<br>
 				<?php echo $profile->name; ?>
 				<br>
@@ -78,22 +78,21 @@
 
 		<div class="row">
 			<div class="col-6 text-center mb-5">
-				<b><?php echo lang('Text.ticket_pay_type')?>:</b>
+				<b><?php echo lang('Text.ticket_pay_type') ?>:</b>
 			</div>
 			<div class="col-6 text-center mb-5">
 				<?php
-					if($invoice[0]->pay_type == 1)
-						echo lang("Text.card");
-					else if($invoice[0]->pay_type == 2)
-						echo lang("Text.cash");
+				if ($invoice[0]->pay_type == 1)
+					echo lang("Text.card");
+				else if ($invoice[0]->pay_type == 2)
+					echo lang("Text.cash");
 				?>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-12 text-center">
-				<p>EXENTO IGIC. REPEP, REGIMEN PEQUEÑO EMPRESARIO O PROFESIONAL</p>
-				<?php echo lang('Text.ticket_msg');?>..!
+				<?php echo lang('Text.ticket_msg'); ?>..!
 			</div>
 		</div>
 	</div>
