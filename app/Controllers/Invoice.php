@@ -371,10 +371,11 @@ class Invoice extends BaseController
 		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
 			return view('logout');
 
+		# params
 		$invoiceID = $this->objRequest->getPost('invoiceID');
 
 		$data = array();
-		$data['modalTitle'] = lang('Text.inv_set_paid');
+		$data['modalTitle'] = lang('Text.table_reports_col_invoice_number');
 		$data['invoice'] = $this->objInvoiceModel->getInvoice($invoiceID);
 		$data['invoiceID'] = $invoiceID;
 
@@ -391,16 +392,18 @@ class Invoice extends BaseController
 			return json_encode($result);
 		}
 
-		$invoiceID = $this->objRequest->getPostGet('id');
+		# params
+		$invoiceID = $this->objRequest->getPost('invoiceID');
+		$payType = $this->objRequest->getPost('payType');
 
-		$data = array();
-		$data['status']  = 1;
-		$data['updated'] = date('Y-m-d H:i:s');
-		$data['due_date'] = date('Y-m-d');
+		$d = array();
+		$d['status']  = 1;
+		$d['pay_type']  = $payType;
+		$d['due_date'] = date('Y-m-d');
+		$d['updated'] = date('Y-m-d H:i:s');
 
-		$result = $this->objInvoiceModel->payInvoice($invoiceID, $data);
-
-		return json_encode($result);
+		$rs = $this->objMainModel->objUpdate('invoice', $d, $invoiceID);
+		return json_encode($rs);
 	}
 
 	public function addLineItem()
@@ -481,7 +484,7 @@ class Invoice extends BaseController
 		$invoiceID = $this->objRequest->getPost('invoiceID');
 		$customerID = $this->objRequest->getPost('customerID');
 		$totalAmount = $this->objRequest->getPost('totalAmount');
-		
+
 		$customer = $this->objInvoiceModel->getCustomer($customerID);
 		$serialID = $customer[0]->serial_id;
 
@@ -495,7 +498,7 @@ class Invoice extends BaseController
 		$d = array();
 		$d['serie'] = $serialID;
 		$d['status'] = 3;
-		$d['number'] = $serial[0]->name . str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT); 
+		$d['number'] = $serial[0]->name . str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
 		$d['total_amount'] = $totalAmount;
 		$d['added'] = date('Y-m-d H:i:s');
 		$d['updated'] = date('Y-m-d H:i:s');
@@ -652,6 +655,7 @@ class Invoice extends BaseController
 		$d['serie'] = $serial[0]->id;
 		$d['status'] = 4;
 		$d['number'] = $serial[0]->name . str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
+		$d['total_amount'] = 0 - $invoice[0]->total_amount;
 		$d['r_id'] = $invoiceID;
 		$d['customer'] = $invoice[0]->customer;
 		$d['added'] = date('Y-m-d H:i:s');

@@ -91,7 +91,7 @@ $lang['table_reports_col_invoice_number'] = "Factura";
 $lang['table_reports_col_type'] = "Tipo";
 $lang['table_reports_col_pay_type'] = "Método de Pago";
 $lang['table_reports_col_date'] = "Fecha de Emisión";
-$lang['table_reports_col_amount'] = "Cobrado";
+$lang['table_reports_col_amount'] = "Importe";
 $lang['report_print_total'] = "Total";
 $lang['reports_search_date_label'] = "Resultados de la Búsqueda";
 $lang['reports_search_incorrect_date'] = "Rectifique el rango de fechas seleccionado";
@@ -178,6 +178,7 @@ $lang['inv_action_add_tax'] = "Agregar Impuesto Seleccionado a la Factura";
 $lang['inv_action_add_tax_msg'] = "Seleccione un tipo de impuesto para agregar";
 $lang['tax_base'] = "Base Imponible";
 $lang['inv_alert_tax'] = "El sistema no valida la compatibilidad de los impuestos aplicados. Asegúrese de revisar y verificar toda la información de la factura antes de emitirla.";
+$lang['select_pay_type_msg'] = "Seleccione un método de pago..!";
 
 # Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Tickets";

@@ -33,14 +33,12 @@ class ReportModel extends Model
 				invoice.type as invoiceType,
 				invoice.pay_type as payType,
 				invoice.added as date,
-				SUM(invoice_items.amount) as totalAmount
+				invoice.total_amount as totalAmount
 			')
-			->join('invoice_items', "invoice_items.invoice_id = invoice.id", 'left')
 			->where('status != 2')
 			->where("added >=", $start)
 			->where("added <=", $end)
-			->orderBy('added', 'ASC')
-			->groupBy('invoice.id');
+			->orderBy('added', 'ASC');
 
 		$data = $query->get()->getResult();
 

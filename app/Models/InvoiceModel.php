@@ -135,24 +135,6 @@ class InvoiceModel extends Model
 		return $return;
 	}
 
-	public function payInvoice($invoiceID, $data)
-	{
-		$query = $this->db->table('invoice')
-			->where('id', $invoiceID)
-			->update($data);
-
-		$result = array();
-
-		if ($query == true) {
-			$result['error'] = 0;
-			$result['id'] = $invoiceID;
-		} else {
-			$result['error'] = 1;
-		}
-
-		return $result;
-	}
-
 	public function checkExistSerialName($serialName)
 	{
 		$query = $this->db->table('serial')
