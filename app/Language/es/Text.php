@@ -175,8 +175,8 @@ $lang['inv_required_rectify_concept_msg'] = "Necesita agregar un concepto a la f
 $lang['inv_add_tax'] = "Añadir Impuestos";
 $lang['inv_applicable_taxes'] = "Impuestos Aplicables";
 $lang['inv_action_add_tax'] = "Agregar Impuesto Seleccionado a la Factura";
-$lang['inv_action_add_tax_msg'] = "Seleccione un tipo de impuesto para agregar"; 
-$lang['tax_base'] = "Base Imponible"; 
+$lang['inv_action_add_tax_msg'] = "Seleccione un tipo de impuesto para agregar";
+$lang['tax_base'] = "Base Imponible";
 $lang['inv_alert_tax'] = "El sistema no valida la compatibilidad de los impuestos aplicados. Asegúrese de revisar y verificar toda la información de la factura antes de emitirla.";
 
 # Invoices Tickets
@@ -205,7 +205,13 @@ $lang['taxs_dt_col_name'] = "Nombre";
 $lang['taxs_dt_col_description'] = "Descripción";
 $lang['taxs_dt_col_percent'] = "%";
 $lang['taxs_dt_col_operator'] = "Operador";
-$lang['taxs_create_modal_title'] = "Crear Impuesto";
+$lang['taxs_create_modal_title'] = "Añadir un Impuesto";
+$lang['taxs_text_name'] = "Nombre";
+$lang['taxs_text_description'] = "Descripción";
+$lang['taxs_text_percent'] = "%";
+$lang['taxs_text_operator'] = "Operador";
+$lang['taxs_msg_success_create'] = "Impuesto Añadido";
+$lang['taxs_msg_success_update'] = "Impuesto Actualizado";
 
 # Customer
 $lang['btn_create_customer'] = 'Crear Cliente';
