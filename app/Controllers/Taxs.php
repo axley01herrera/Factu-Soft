@@ -100,6 +100,33 @@ class Taxs extends BaseController
 		return view('taxs/addEditModal', $data);
 	}
 
+	public function deleteTax()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+
+			return json_encode($result);
+		}
+
+		# Params
+		$taxID = $this->objRequest->getPost('taxID');
+
+		$verifyTaxExist = $this->objTaxsModel->getInvoicesTax($taxID);
+
+		if (empty($verifyTaxExist))
+			$result = $this->objMainModel->objDelete('tax', $taxID);
+		else {
+			$result = array();
+			$result['error'] = 1;
+			$result['msg'] = 'INVOICE_TAX_EXITS';
+		}
+
+		return json_encode($result);
+	}
+
 	public function saveTax()
 	{
 		# Verify Session 
