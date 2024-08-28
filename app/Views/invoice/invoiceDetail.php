@@ -170,9 +170,35 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="pull-right mt-4 text-end">
-					EXENTO IGIC. REPEP, REGIMEN PEQUEÑO EMPRESARIO O PROFESIONAL
+					<h7><?php echo lang('Text.tax_base') . ': ' . getMoneyFormat($config[0]->currency, $total);; ?></h7>
+					<br>
+					<?php $totalTax = $total; ?>
+					<?php foreach ($invoice_tax as $it) { ?>
+						<?php
+						$calcTax = 0;
+						if ($it->taxPercent != 0) {
+							$calcTax = $it->taxPercent / 100 * $total;
+							if ($it->taxOperator == "-")
+								$totalTax = $totalTax - $calcTax;
+							else if ($it->taxOperator == "+")
+								$totalTax = $totalTax + $calcTax;
+
+							$calcTax = getMoneyFormat($config[0]->currency, $calcTax);
+							$calcTax = $it->taxOperator . $calcTax;
+						}
+						?>
+						<h7>
+							<?php
+							if ($calcTax == 0)
+								echo $it->taxDesc;
+							else
+								echo $it->taxDesc . ': ' . @$calcTax;
+							?>
+						</h7>
+						<br>
+					<?php } ?>
 					<h3>
-						<b>Total :</b> <?php echo getMoneyFormat($config[0]->currency, $total); ?>
+						<b>Total: </b> <?php echo getMoneyFormat($config[0]->currency, $totalTax); ?>
 					</h3>
 				</div>
 			</div>

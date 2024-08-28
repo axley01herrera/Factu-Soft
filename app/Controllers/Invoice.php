@@ -269,6 +269,8 @@ class Invoice extends BaseController
 		$data['items'] = $this->objInvoiceModel->getInvoiceItems($invoiceID);
 		$data['customer'] = $this->objInvoiceModel->getCustomer($data['invoice'][0]->customer);
 		$data['status'] = $data['invoice'][0]->status;
+		$data['invoice_tax'] = $this->objInvoiceModel->getInvoiceTax($invoiceID);
+		$data['tax'] = $this->objInvoiceModel->getSelTax();
 
 		if ($data['invoice'][0]->status == 1) { // Paid
 			$data['status_label'] = '<h1>' . lang('Text.inv_status_paid_p') . '</h1>';
@@ -323,8 +325,8 @@ class Invoice extends BaseController
 		$data['invoiceID'] = $invoiceID;
 		$data['invoice'] = $this->objInvoiceModel->getInvoice($invoiceID);
 		$data['invoice_tax'] = $this->objInvoiceModel->getInvoiceTax($invoiceID);
-		$data['customers'] = $this->objInvoiceModel->getSelCustomers();
 		$data['tax'] = $this->objInvoiceModel->getSelTax();
+		$data['customers'] = $this->objInvoiceModel->getSelCustomers();
 
 		if ($data['invoice'][0]->status == 2)
 			$data['status'] = '<span class="badge bg-secondary-subtle text-secondary">' . lang('Text.inv_status_draft') . '</span>';
@@ -590,6 +592,8 @@ class Invoice extends BaseController
 		$data['items'] = $this->objInvoiceModel->getInvoiceItems($invoiceID);
 		$data['customer'] = $this->objInvoiceModel->getCustomer($data['invoice'][0]->customer);
 		$data['status'] = $data['invoice'][0]->status;
+		$data['invoice_tax'] = $this->objInvoiceModel->getInvoiceTax($invoiceID);
+		$data['tax'] = $this->objInvoiceModel->getSelTax();
 
 		if ($data['invoice'][0]->status == 1) { // Paid
 			$data['status_label'] = '<h1>' . lang('Text.inv_status_paid_p') . '</h1>';
@@ -671,6 +675,8 @@ class Invoice extends BaseController
 		$data['customer'] = $this->objInvoiceModel->getCustomer($data['invoice'][0]->customer);
 		$data['items'] = $this->objInvoiceModel->getInvoiceItems($invoiceID);
 		$data['invoiceRectified'] = $this->objInvoiceModel->getInvoice($data['invoice'][0]->r_id);
+		$data['invoice_tax'] = $this->objInvoiceModel->getInvoiceTax($data['invoice'][0]->r_id);
+		$data['tax'] = $this->objInvoiceModel->getSelTax();
 
 		# menu
 		$data['invoiceActive'] = 'active';
@@ -713,6 +719,9 @@ class Invoice extends BaseController
 			return json_encode($result);
 		}
 
-		
+		# params
+		$id = $this->objRequest->getPost('id');
+		$rs = $this->objMainModel->objDelete('invoice_tax', $id);
+		return json_encode($rs);
 	}
 }

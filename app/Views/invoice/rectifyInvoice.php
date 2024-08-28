@@ -20,8 +20,7 @@
 <!-- Page Content -->
 <div class="card">
 	<div class="card-body">
-		<label for="txt-description" class="form-label fw-bold"><?php echo lang('Text.inv_rectified_concept_title'); ?></label>
-		<textarea id="txt-description" class="form-control" <?php if (!empty($invoice[0]->r_desc)) echo 'disabled'; ?>><?php echo $invoice[0]->r_desc; ?></textarea>
+		<textarea id="txt-description" class="form-control" <?php if (!empty($invoice[0]->r_desc)) echo 'disabled'; ?> placeholder="<?php echo lang('Text.inv_rectified_concept_title'); ?>"><?php echo $invoice[0]->r_desc; ?></textarea>
 	</div>
 </div>
 
@@ -159,8 +158,37 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="pull-right mt-4 text-end">
+					<h7><?php echo lang('Text.tax_base') . ': ' . getMoneyFormat($config[0]->currency, $total);; ?></h7>
+					<br>
+					<?php $totalTax = $total; ?>
+					<?php foreach ($invoice_tax as $it) { ?>
+						<?php
+						$calcTax = 0;
+						if ($it->taxPercent != 0) {
+							$calcTax = $it->taxPercent / 100 * $total;
+							$operator = "";
+							if ($it->taxOperator == "-") {
+								$totalTax = $totalTax - $calcTax;
+							} else if ($it->taxOperator == "+") {
+								$totalTax = $totalTax + $calcTax;
+								$operator = "+";
+							}
+							$calcTax = getMoneyFormat($config[0]->currency, $calcTax);
+							$calcTax = $operator . $calcTax;
+						}
+						?>
+						<h7>
+							<?php
+							if ($calcTax == 0)
+								echo $it->taxDesc;
+							else
+								echo $it->taxDesc . ': ' . @$calcTax;
+							?>
+						</h7>
+						<br>
+					<?php } ?>
 					<h3>
-						<b>Total :</b> <?php echo getMoneyFormat($config[0]->currency, $total); ?>
+						<b>Total: </b> <?php echo getMoneyFormat($config[0]->currency, $totalTax); ?>
 					</h3>
 				</div>
 			</div>

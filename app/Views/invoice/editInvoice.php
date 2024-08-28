@@ -18,7 +18,7 @@ $totalTax = 0;
 		<button id="add-line" class="btn btn-success" type="button">
 			<?php echo lang('Text.inv_add_line'); ?>
 		</button>
-		<?php if (sizeof($items) > 0 && !empty($invoice[0]->customer)) { ?>
+		<?php if (sizeof($items) > 0 && !empty($invoice[0]->customer) && !empty($invoice_tax)) { ?>
 			<button id="issue-invoice" class="btn btn-primary" type="button">
 				<?php echo lang('Text.inv_issue'); ?>
 			</button>
@@ -157,7 +157,7 @@ $totalTax = 0;
 
 						<?php if (empty($items)) { ?>
 							<tr>
-								<td colspan="4" class="text-center">
+								<td colspan="5" class="text-center">
 									<span class="text-danger"><?php echo lang('Text.inv_not_invoice_lines'); ?></span>
 								</td>
 							</tr>
@@ -214,7 +214,7 @@ $totalTax = 0;
 </div>
 
 <!-- Tax -->
-<div class="card">
+<div class="card mb-4">
 	<div class="card-header d-flex align-items-center">
 		<h4 class="card-title mb-0"><?php echo lang('Text.inv_add_tax'); ?></h4>
 	</div>
@@ -225,7 +225,9 @@ $totalTax = 0;
 				<select id="sel-tax" class="form-select">
 					<option value="" hidden></option>
 					<?php foreach ($tax as $t) { ?>
-						<option value="<?php echo $t->id; ?>"><?php echo $t->name . ' (' . $t->description . ')'; ?></option>
+						<?php if (!in_array($t->id, array_column($invoice_tax, 'taxID'))) { ?>
+							<option value="<?php echo $t->id; ?>"><?php echo $t->name . ' (' . $t->description . ')'; ?></option>
+						<?php } ?>
 					<?php } ?>
 				</select>
 			</div>
@@ -233,6 +235,12 @@ $totalTax = 0;
 				<button type="button" id="add-tax-invoice" class="btn btn-primary"><?php echo lang('Text.inv_action_add_tax'); ?></button>
 			</div>
 		</div>
+	</div>
+</div>
+
+<div class="col-12 mb-2">
+	<div class="alert alert-warning" role="alert">
+		<?php echo lang('Text.inv_alert_tax'); ?>
 	</div>
 </div>
 

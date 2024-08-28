@@ -29,6 +29,7 @@ class InvoiceModel extends Model
 		$query = $this->db->table('invoice_tax')
 			->select('
 			invoice_tax.id as itID,
+			tax.id as taxID,
 			tax.name as taxName,
 			tax.description as taxDesc,
 			tax.percent as taxPercent,

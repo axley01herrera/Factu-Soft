@@ -121,6 +121,7 @@ $lang['inv_page_title'] = "Facturas";
 $lang['inv_detail_page_title'] = "Detalle de Factura";
 $lang['inv_create'] = "Crear Factura";
 $lang['inv_create_page_title'] = "Borrador de Factura";
+$lang['inv_create_page_title'] = "Rectificando Factura";
 $lang['inv_label_status'] = "Estado";
 $lang['inv_number_label'] = "Número de Factura";
 $lang['inv_status_draft'] = "BORRADOR";
@@ -175,6 +176,7 @@ $lang['inv_applicable_taxes'] = "Impuestos Aplicables";
 $lang['inv_action_add_tax'] = "Agregar Impuesto Seleccionado a la Factura";
 $lang['inv_action_add_tax_msg'] = "Seleccione un tipo de impuesto para agregar"; 
 $lang['tax_base'] = "Base Imponible"; 
+$lang['inv_alert_tax'] = "El sistema no valida la compatibilidad de los impuestos aplicados. Asegúrese de revisar y verificar toda la información de la factura antes de emitirla.";
 
 # Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Tickets";
