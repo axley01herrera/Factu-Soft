@@ -48,12 +48,18 @@
 	$(document).ready(function() {
 		$('#modal').modal('show');
 
+		$('#modal').on('hidden.bs.modal', function(event) {
+			$('#app-modal').html('');
+		});
+
 		let taxID = '<?php echo @$taxID; ?>';
 		let alerMsg = '<?php echo lang('Text.taxs_msg_success_create'); ?>';
 
-		if (taxID != '') { // Update
+		if (taxID != '') {
 			$('#btn-save').html('<?php echo lang('Text.btn_update'); ?>');
 			alerMsg = '<?php echo lang('Text.taxs_msg_success_update'); ?>';
+			$('#txt-percent').attr('disabled', true);
+			$('#sel-operator').attr('disabled', true);
 		}
 
 		$('#btn-save').on('click', function() {
@@ -122,13 +128,5 @@
 		$('.required').on('focus', function() {
 			$(this).removeClass('is-invalid');
 		});
-
-		function focused() {
-			$('.required').on('focus', function() {
-				$(this).removeClass('is-invalid');
-			});
-		}
-
-		focused();
 	});
 </script>

@@ -5,7 +5,7 @@
 <!-- Page Header-->
 <div class="d-md-flex align-items-center justify-content-between mb-7">
 	<div class="mb-4 mb-md-0">
-		<h4 class="fs-6 mb-0"><?php echo lang('Text.inv_create_page_title'); ?></h4>
+		<h4 class="fs-6 mb-0"><?php echo lang('Text.inv_r_page_title'); ?></h4>
 	</div>
 
 	<?php if (empty($invoice[0]->r_desc)) { ?>
