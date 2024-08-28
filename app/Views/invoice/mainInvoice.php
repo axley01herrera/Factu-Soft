@@ -76,6 +76,7 @@
 					data: 'amount',
 					class: 'dt-vertical-align p-2',
 					class: "text-end",
+					orderable: false,
 					searchable: false
 				},
 				{

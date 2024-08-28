@@ -187,6 +187,7 @@
 				data: {
 					'invoiceID': invoiceID,
 					'payType': payType,
+					'totalAmount': totalPrice
 				},
 				dataType: "json",
 				success: function(response) {

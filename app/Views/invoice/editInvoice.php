@@ -371,7 +371,8 @@ $totalTax = 0;
 						url: "<?php echo base_url('Invoice/issueInvoice'); ?>",
 						data: {
 							'invoiceID': invoiceID,
-							'customerID': "<?php echo $invoice[0]->customer; ?>"
+							'customerID': "<?php echo $invoice[0]->customer; ?>",
+							'totalAmount': "<?php echo $totalTax; ?>"
 						},
 						dataType: "json",
 						success: function(response) {

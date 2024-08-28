@@ -17,10 +17,9 @@ class DashboardModel extends Model
 	public function getCollectionDay()
 	{
 		$query = $this->db->table('invoice')
-			->select('invoice_items.amount as amount')
+			->select('SUM(invoice.total_amount) as amount')
 			->where("DATE(added)", date('Y-m-d'))
-			->where("invoice.status !=2")
-			->join('invoice_items', "invoice_items.invoice_id = invoice.id");
+			->where("invoice.status !=2");
 
 		$data = $query->get()->getResult();
 
@@ -62,14 +61,12 @@ class DashboardModel extends Model
 		$lastDay = "$year-12-31 23:59:59";
 
 		$query = $this->db->table('invoice')
-			->select('SUM(invoice_items.amount) as totalPrice, MONTH(invoice.added) as month, status')
-			->join('invoice_items', "invoice_items.invoice_id = invoice.id", 'left')
+			->select('SUM(invoice.total_amount) as totalPrice, MONTH(invoice.added) as month, status')
 			->where("invoice.added >=", $firstDay)
 			->where("invoice.added <=", $lastDay)
 			->groupStart()
 			->where("invoice.status !=2")
-			->groupEnd()
-			->groupBy('MONTH(invoice.added)');
+			->groupEnd();
 
 		$data = $query->get()->getResult();
 

@@ -183,8 +183,8 @@ $lang['inv_alert_tax'] = "El sistema no valida la compatibilidad de los impuesto
 $lang['inv_t_page_title'] = "Historial de Tickets";
 $lang['inv_t_dt_col_number'] = "Ticket #";
 $lang['inv_t_dt_col_pay_type'] = "Método de Pago";
-$lang['inv_t_dt_col_added'] = "Fecha de Creación";
-$lang['inv_t_dt_col_amount'] = "Total";
+$lang['inv_t_dt_col_added'] = "Fecha";
+$lang['inv_t_dt_col_amount'] = "Importe";
 
 # Invoices Series
 $lang['inv_serie_page_title'] = "Listado de Series";

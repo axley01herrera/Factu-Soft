@@ -176,7 +176,7 @@ class Invoice extends BaseController
 			$col['number'] = '<a href="' . base_url('Invoice/invoiceDetail?id=') . $result[$i]->invoiceID . '" class="text-primary">' . $result[$i]->invoiceNumber . '</a>';
 			$col['customer'] = $result[$i]->customerName;
 			$col['added'] = $result[$i]->added;
-			$col['amount'] = getMoneyFormat($this->config[0]->currency, $result[$i]->amount);
+			$col['amount'] = getMoneyFormat($this->config[0]->currency, $result[$i]->totalAmount);
 			$col['action'] = '';
 			if ($result[$i]->invoiceStatus == 2) { // Draft
 				$col['action'] = '
@@ -480,7 +480,8 @@ class Invoice extends BaseController
 		# params
 		$invoiceID = $this->objRequest->getPost('invoiceID');
 		$customerID = $this->objRequest->getPost('customerID');
-
+		$totalAmount = $this->objRequest->getPost('totalAmount');
+		
 		$customer = $this->objInvoiceModel->getCustomer($customerID);
 		$serialID = $customer[0]->serial_id;
 
@@ -492,9 +493,10 @@ class Invoice extends BaseController
 		$consecutive = $serial[0]->count + 1;
 
 		$d = array();
-		$d['serie'] = $customer[0]->serial_id;
+		$d['serie'] = $serialID;
 		$d['status'] = 3;
-		$d['number'] = $serial[0]->name . str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
+		$d['number'] = $serial[0]->name . str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT); 
+		$d['total_amount'] = $totalAmount;
 		$d['added'] = date('Y-m-d H:i:s');
 		$d['updated'] = date('Y-m-d H:i:s');
 
