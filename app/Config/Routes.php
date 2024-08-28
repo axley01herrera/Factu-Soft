@@ -69,6 +69,7 @@ $routes->post('Invoice/payInvoiceModal', 'Invoice::payInvoiceModal');
 $routes->get('Taxs', 'Taxs::index');
 $routes->post('Taxs/createTax', 'Taxs::createTax');
 $routes->post('Taxs/editTax', 'Taxs::editTax');
+$routes->post('Taxs/deleteTax', 'Taxs::deleteTax');
 $routes->post('Taxs/saveTax', 'Taxs::saveTax');
 
 # Profile

@@ -23,4 +23,12 @@ class TaxModel extends Model
 
 		return $query->get()->getResult();
 	}
+
+	public function getInvoicesTax($taxID)
+	{
+		$query = $this->db->table('invoice_tax')
+			->where('tax_id', $taxID);
+
+		return $query->get()->getResult();
+	}
 }

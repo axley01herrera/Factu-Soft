@@ -44,6 +44,13 @@
 												<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
 											</svg>
 										</a>
+
+										<a href="#" class="btn-delete-tax" data-tax-id='<?php echo $t->id; ?>'>
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+												<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+												<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+											</svg>
+										</a>
 									</td>
 								</tr>
 							<?php } ?>
@@ -104,7 +111,7 @@
 			$('.btn-edit-tax').attr('disabled', true);
 
 			let taxID = $(this).attr('data-tax-id');
-			
+
 			$.ajax({
 				type: "POST",
 				url: "<?php echo base_url('Taxs/editTax') ?>",
@@ -115,6 +122,52 @@
 				success: function(response) {
 					$('.btn-edit-tax').removeAttr('disabled');
 					$('#app-modal').html(response);
+				},
+				error: function(error) {
+					globalError();
+				}
+			});
+		});
+
+
+		$('.btn-delete-tax').on('click', function(e) {
+			e.preventDefault();
+			$('.btn-delete-tax').attr('disabled', true);
+
+			let taxID = $(this).attr('data-tax-id');
+			$.ajax({
+				type: "POST",
+				url: "<?php echo base_url('Taxs/deleteTax') ?>",
+				data: {
+					'taxID': taxID
+				},
+				dataType: "json",
+				success: function(response) {
+					if (response.error == 0) {
+						Swal.fire({
+							position: "top-end",
+							icon: "success",
+							text: alerMsg + '..!',
+							showConfirmButton: false,
+							timer: 2500
+						});
+						setTimeout(() => {
+							window.location.reload();
+						}, 2500);
+					} else if (response.error == 2)
+						window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
+					else if (response.error == 1) {
+						if (response.msg == 'INVOICE_TAX_EXITS') {
+							Swal.fire({
+								position: "top-end",
+								icon: "success",
+								text: alerMsg + '..!',
+								showConfirmButton: false,
+								timer: 2500
+							});
+						} else
+							globalError();
+					}
 				},
 				error: function(error) {
 					globalError();
