@@ -14,9 +14,12 @@ class TaxModel extends Model
 		$this->db = \Config\Database::connect();
 	}
 
-	public function getTaxs()
+	public function getTaxs($taxID = null)
 	{
 		$query = $this->db->table('tax');
+
+		if (!empty($taxID))
+			$query->where('id', $taxID);
 
 		return $query->get()->getResult();
 	}

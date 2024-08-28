@@ -80,6 +80,26 @@ class Taxs extends BaseController
 		return view('taxs/addEditModal', $data);
 	}
 
+	public function editTax()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		# Params
+		$taxID = $this->objRequest->getPost('taxID');
+
+		$tax = $this->objTaxsModel->getTaxs($taxID);
+
+		$data = array();
+		$data['config'] = $this->config;
+		$data['taxID'] = $taxID;
+		$data['tax'] = $tax;
+		$data['modalTitle'] = $tax[0]->name;
+
+		return view('taxs/addEditModal', $data);
+	}
+
 	public function saveTax()
 	{
 		# Verify Session 
