@@ -11,26 +11,30 @@
 				<div class="row">
 					<!-- Name -->
 					<div class="col-12 mb-2">
-						<label for="txt-name" class="form-label"><?php echo lang('Text.service_text_name'); ?></label>
+						<label for="txt-name" class="form-label"><?php echo lang('Text.taxs_text_name'); ?></label>
 						<input type="text" id="txt-name" class="form-control required" value="<?php echo @$tax[0]->name; ?>" />
 					</div>
 
 					<!-- Description -->
 					<div class="col-12 mb-2">
-						<label for="txt-description" class="form-label"><?php echo lang('Text.service_text_description'); ?></label>
+						<label for="txt-description" class="form-label"><?php echo lang('Text.taxs_text_description'); ?></label>
 						<input type="text" id="txt-description" class="form-control required" value="<?php echo @$tax[0]->description; ?>" />
 					</div>
 
 					<!-- Percent -->
 					<div class="col-6 mb-2">
-						<label for="txt-percent" class="form-label"><?php echo lang('Text.service_text_price'); ?> (<?php echo $config[0]->currency; ?>)</label>
-						<input type="text" id="txt-percent" class="form-control required" value="<?php echo @$tax[0]->percent; ?>" />
+						<label for="txt-percent" class="form-label"><?php echo lang('Text.taxs_text_percent'); ?></label>
+						<input type="text" id="txt-percent" class="form-control" value="<?php echo @$tax[0]->percent; ?>" />
 					</div>
 
 					<!-- Operator -->
 					<div class="col-6 mb-2">
-						<label for="txt-price" class="form-label"><?php echo lang('Text.service_text_price'); ?> (<?php echo $config[0]->currency; ?>)</label>
-						<input type="text" id="txt-price" class="form-control required price" value="<?php echo @$tax[0]->operator; ?>" />
+						<label for="sel-operator" class="form-label"><?php echo lang('Text.taxs_text_operator'); ?></label>
+						<select id="sel-operator" class="form-select">
+							<option value=""></option>
+							<option value="+" <?php if (@$tax[0]->operator == '+') echo 'selected'; ?>>+</option>
+							<option value="-" <?php if (@$tax[0]->operator == '-') echo 'selected'; ?>>-</option>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -43,6 +47,62 @@
 <script>
 	$(document).ready(function() {
 		$('#modal').modal('show');
+
+		let taxID = '<?php echo @$taxID; ?>';
+		let alerMsg = '<?php echo lang('Text.taxs_msg_success_create'); ?>';
+
+		if (taxID != '') { // Update
+			$('#btn-save').html('<?php echo lang('Text.btn_update'); ?>');
+			alerMsg = '<?php echo lang('Text.taxs_msg_success_update'); ?>';
+		}
+
+		$('#btn-save').on('click', function() {
+			let result = checkRequiredValues();
+
+			if (result == 0) {
+				$.ajax({
+					type: "POST",
+					url: "<?php echo base_url('Taxs/saveTax'); ?>",
+					data: {
+						'taxID': taxID,
+						'name': $('#txt-name').val(),
+						'description': $('#txt-description').val(),
+						'percent': $('#txt-percent').val(),
+						'operator': $('#sel-operator').val()
+					},
+					dataType: "json",
+					success: function(response) {
+						if (response.error == 0) {
+							$('#modal').modal('hide');
+							Swal.fire({
+								position: "top-end",
+								icon: "success",
+								text: alerMsg + '..!',
+								showConfirmButton: false,
+								timer: 2500
+							});
+							setTimeout(() => {
+								window.location.reload();
+							}, 2500);
+						} else if (response.error == 2)
+							window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
+						else
+							globalError();
+					},
+					error: function(error) {
+						globalError();
+					}
+				});
+			} else {
+				Swal.fire({
+					position: "top-end",
+					icon: "warning",
+					text: "<?php echo lang("Text.msg_required_values"); ?>..!",
+					showConfirmButton: false,
+					timer: 2500
+				});
+			}
+		});
 
 		function checkRequiredValues() {
 			let result = 0;
@@ -61,15 +121,6 @@
 
 		$('.required').on('focus', function() {
 			$(this).removeClass('is-invalid');
-		});
-
-		$('.price').each(function() {
-			$(this).on('keypress', function(event) {
-				var charCode = event.which;
-				if ((charCode < 48 || charCode > 57) && charCode !== 46) {
-					event.preventDefault();
-				}
-			});
 		});
 
 		function focused() {

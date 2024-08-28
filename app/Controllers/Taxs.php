@@ -79,4 +79,38 @@ class Taxs extends BaseController
 
 		return view('taxs/addEditModal', $data);
 	}
+
+	public function saveTax()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+
+			return json_encode($result);
+		}
+
+		# Params
+		$taxID = $this->objRequest->getPost('taxID');
+		$name = htmlspecialchars(trim($this->objRequest->getPost('name')));
+		$description = htmlspecialchars(trim($this->objRequest->getPost('description')));
+		$percent = htmlspecialchars(trim($this->objRequest->getPost('percent')));
+		$operator = htmlspecialchars(trim($this->objRequest->getPost('operator')));
+
+		$data = array();
+		$data['name'] = $name;
+		$data['description'] = $description;
+		$data['percent'] = $percent;
+		$data['operator'] = $operator;
+
+		if (!empty($taxID)) // Case Update
+			$result = $this->objMainModel->objUpdate('tax', $data, $taxID);
+
+		else // Case Create
+			$result = $this->objMainModel->objCreate('tax', $data);
+
+
+		return json_encode($result);
+	}
 }

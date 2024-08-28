@@ -35,7 +35,7 @@
 								<tr>
 									<td><?php echo $t->name; ?></td>
 									<td><?php echo $t->description; ?></td>
-									<td><?php echo $t->percent; ?></td>
+									<td><?php if($t->percent != 0) echo $t->percent; ?></td>
 									<td><?php echo $t->operator; ?></td>
 									<td class="text-end">
 										<a href="#" class="btn-edit-taxs" data-taxs-id='<?php echo $t->id; ?>'>
