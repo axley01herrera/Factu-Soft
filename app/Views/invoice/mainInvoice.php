@@ -131,39 +131,20 @@
 			e.preventDefault();
 			let invoiceID = $(this).attr('data-invoice-id');
 
-			Swal.fire({
-				title: '<?php echo lang('Text.pay_inv_are_you_sure_msg'); ?>',
-				text: "<?php echo lang('Text.pay_inv_not_revert_this_msg'); ?>",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: '<?php echo lang('Text.pay_inv_yes_pay_msg'); ?>',
-				cancelButtonText: '<?php echo lang('Text.no_cancel_msg'); ?>'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					$.ajax({
-						type: "POST",
-						url: "<?php echo base_url('Invoice/payInvoice'); ?>",
-						data: {
-							'id': invoiceID
-						},
-						dataType: "json",
-						success: function(response) {
-							if (response.error == 0) {
-								dtInvoice.draw();
-							} else if (response.error == 2)
-								window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
-							else
-								globalError();
-						},
-						error: function(error) {
-							globalError();
-						}
-					});
+			$.ajax({
+				type: "POST",
+				url: "<?php echo base_url('Invoice/payInvoiceModal'); ?>",
+				data: {
+					'invoiceID': invoiceID
+				},
+				dataType: "html",
+				success: function(response) {
+					$('#app-modal').html(response);
+				},
+				error: function(error) {
+					globalError();
 				}
 			});
-
 		});
 
 		dtInvoice.on('click', '.rectify-invoice', function(e) {

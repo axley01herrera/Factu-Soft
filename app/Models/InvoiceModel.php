@@ -45,20 +45,15 @@ class InvoiceModel extends Model
 
 	public function getSelCustomers()
 	{
-		$query = $this->db->table('customer')
-			->where('serial_id !=', NULL);
-
+		$query = $this->db->table('customer');
 		$data = $query->get()->getResult();
-
 		return $data;
 	}
 
 	public function getSelTax()
 	{
 		$query = $this->db->table('tax');
-
 		$data = $query->get()->getResult();
-
 		return $data;
 	}
 

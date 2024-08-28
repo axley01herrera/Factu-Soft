@@ -365,6 +365,22 @@ class Invoice extends BaseController
 		return json_encode($result);
 	}
 
+	public function payInvoiceModal()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin")
+			return view('logout');
+
+		$invoiceID = $this->objRequest->getPost('invoiceID');
+
+		$data = array();
+		$data['modalTitle'] = lang('Text.inv_set_paid');
+		$data['invoice'] = $this->objInvoiceModel->getInvoice($invoiceID);
+		$data['invoiceID'] = $invoiceID;
+
+		return view('invoice/payInvoice', $data);
+	}
+
 	public function payInvoice()
 	{
 		# Verify Session 
@@ -466,7 +482,12 @@ class Invoice extends BaseController
 		$customerID = $this->objRequest->getPost('customerID');
 
 		$customer = $this->objInvoiceModel->getCustomer($customerID);
-		$serial = $this->objInvoiceModel->getSerial($customer[0]->serial_id);
+		$serialID = $customer[0]->serial_id;
+
+		if (empty($serialID))
+			$serialID = 3;
+
+		$serial = $this->objInvoiceModel->getSerial($serialID);
 
 		$consecutive = $serial[0]->count + 1;
 

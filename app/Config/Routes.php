@@ -62,7 +62,8 @@ $routes->get('Invoice/rectifyInvoice', 'Invoice::rectifyInvoice');
 $routes->get('Invoice/finishRectifyInvoice', 'Invoice::finishRectifyInvoice');
 $routes->get('Invoice/invoiceDetail', 'Invoice::invoiceDetail');
 $routes->post('Invoice/addTaxToInvoice', 'Invoice::addTaxToInvoice');
-$routes->post('Invoice/removeTaxInvoice', 'Invoice::removeTaxInvoice');
+$routes->post('Invoice/removeTaxInvoice', 'Invoice::removeTaxInvoice'); 
+$routes->post('Invoice/payInvoiceModal', 'Invoice::payInvoiceModal');
 
 # Taxs
 $routes->get('Taxs', 'Taxs::index');
