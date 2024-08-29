@@ -1,4 +1,4 @@
-<?php $total = 0; ?>
+<?php $baseImponible = 0; ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
@@ -41,21 +41,22 @@
 				<br>
 				<?php echo $profile->company_id; ?>
 				<br>
+				<b><?php echo lang('Text.simple_invoice'); ?>:</b>
+				<br>
+				<?php echo $invoice[0]->number; ?>
+				<br>
 				<b><?php echo lang('Text.ticket_date'); ?>:</b>
 				<br>
 				<?php echo $invoice[0]->added; ?>
-				<br>
-				<b>Ticket #:</b>
-				<br>
-				<?php echo $invoice[0]->number; ?>
+
 			</div>
 		</div>
 
 		<div class="row">
 			<?php foreach ($items as $i) {
-				$total = $total + $i->amount; ?>
-				<div class="col-6 text-center mb-2">
-					<?php echo getService($i->service_id)[0]->name . ' x ' . $i->quantity; ?>
+				$baseImponible = $baseImponible + $i->amount; ?>
+				<div class="col-6 text-center mb-2 text-truncate">
+					<?php echo 'x' . $i->quantity . ' ' .  getService($i->service_id)[0]->name; ?>
 				</div>
 				<div class="col-6 text-center mb-2">
 					<?php echo getMoneyFormat($config[0]->currency, $i->amount); ?>
@@ -66,30 +67,74 @@
 		<hr>
 
 		<div class="row">
-
-			<div class="col-6 text-center">
-				<b>Total:</b>
+			<div class="row">
+				<div class="col-6 text-center mb-5">
+					<?php echo lang('Text.ticket_pay_type') ?>
+				</div>
+				<div class="col-6 text-center mb-5">
+					<?php
+					if ($invoice[0]->pay_type == 1)
+						echo lang("Text.card");
+					else if ($invoice[0]->pay_type == 2)
+						echo lang("Text.cash");
+					?>
+				</div>
 			</div>
-			<div class="col-6 text-center">
+
+			<div class="col-6 text-center mb-1">
+				<?php echo lang('Text.tax_base'); ?>
+			</div>
+			<div class="col-6 text-center mb-1">
+				<?php echo getMoneyFormat($config[0]->currency, $baseImponible); ?>
+			</div>
+
+			<?php foreach ($invoiceTax as $it) { ?>
+
+				<div class="<?php if (empty($it->taxPercent)) echo 'col-12';
+							else echo 'col-6'; ?> text-center mb-1">
+					<?php echo $it->taxDesc; ?>
+				</div>
+
+
+				<div class="<?php if (empty($it->taxPercent)) echo 'col-12';
+							else echo 'col-6'; ?> text-center mb-1">
+					<span id="tax-<?php echo $it->itID; ?>"></span>
+				</div>
+			<?php } ?>
+
+			<?php
+			$total = $baseImponible;
+			foreach ($invoiceTax as $it) {
+				$aux = 0;
+				if ($it->taxPercent != 0) {
+					$aux = $it->taxPercent / 100 * $baseImponible;
+					if ($it->taxOperator == "-") {
+						$total -= $aux;  // Forma abreviada de restar
+					} else if ($it->taxOperator == "+") {
+						$total += $aux;  // Forma abreviada de sumar
+					}
+
+					// Formatear el valor del impuesto
+					$auxFormatted = getMoneyFormat($config[0]->currency, $aux);
+					$auxFormatted = $it->taxOperator . $auxFormatted;
+
+					// Escapar el valor formateado para evitar problemas de inyección de código
+					$auxEscaped = htmlspecialchars($auxFormatted, ENT_QUOTES, 'UTF-8');
+
+					// Usar JSON para evitar problemas de sintaxis en JavaScript
+					echo "<script>document.getElementById('tax-" . $it->itID . "').innerHTML = " . json_encode($auxEscaped) . ";</script>";
+				}
+			}
+			?>
+
+			<div class="col-6 text-center mb-1">
+				<b>Total</b>
+			</div>
+			<div class="col-6 text-center mb-1">
 				<?php echo getMoneyFormat($config[0]->currency, $total); ?>
 			</div>
 
 		</div>
-
-		<div class="row">
-			<div class="col-6 text-center mb-5">
-				<b><?php echo lang('Text.ticket_pay_type') ?>:</b>
-			</div>
-			<div class="col-6 text-center mb-5">
-				<?php
-				if ($invoice[0]->pay_type == 1)
-					echo lang("Text.card");
-				else if ($invoice[0]->pay_type == 2)
-					echo lang("Text.cash");
-				?>
-			</div>
-		</div>
-
 		<div class="row">
 			<div class="col-12 text-center">
 				<?php echo lang('Text.ticket_msg'); ?>..!

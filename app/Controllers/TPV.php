@@ -53,7 +53,7 @@ class TPV extends BaseController
 			return view('logout');
 
 		$invoice = $this->objTPVModel->getOpenInvoice();
-
+		
 		if (empty($invoice)) {
 			$serial = $this->objTPVModel->getTpvSerial();
 			$consecutive = $serial[0]->count + 1;
@@ -62,13 +62,24 @@ class TPV extends BaseController
 			$d['serie'] = $serial[0]->id;
 			$d['number'] = $serial[0]->name.str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
 			
-			$rsInvoice = $this->objMainModel->objCreate('invoice', $d);
-
+			$rsInvoice = $this->objMainModel->objCreate('invoice', $d); // Create Invoice
+			
 			$d = array();
 			$d['count'] = $consecutive;
 			$d['updated'] = date('Y-m-d H:i:s');
 
-			$this->objMainModel->objUpdate('serial', $d, $serial[0]->id);
+			$this->objMainModel->objUpdate('serial', $d, $serial[0]->id); // Update Serial
+			
+			$taxes = $this->objTPVModel->getTpvTaxes();
+
+			foreach ($taxes as $t) {
+				$d = array();
+				$d['invoice_id'] = $rsInvoice['id'];
+				$d['tax_id'] = $t->id;
+
+				$this->objMainModel->objCreate('invoice_tax', $d);
+			}
+
 			$invoice = $this->objTPVModel->getInvoice($rsInvoice['id']);
 		}
 
@@ -79,9 +90,10 @@ class TPV extends BaseController
 		$data['tpvActive'] = 'active';
 		# page
 		$data['page'] = 'tpv/mainTPV';
-
+		$data['invoiceTax'] = $this->objTPVModel->getInvoiceTax($invoice[0]->id);
 		$data['services'] = $this->objTPVModel->getServices();
 		$data['invoice'] = $invoice;
+		
 
 		return view('layouts/main', $data);
 	}
@@ -99,6 +111,7 @@ class TPV extends BaseController
 		$data = array();
 		$data['config'] = $this->config;
 		$data['items'] = $this->objTPVModel->getInvoiceItems($invoiceID);
+		$data['invoiceTax'] = $this->objTPVModel->getInvoiceTax($invoiceID);
 
 		return view('tpv/items', $data);
 	}
@@ -291,6 +304,7 @@ class TPV extends BaseController
 		# data 
 		$data['invoice'] = $invoice;
 		$data['items'] = $items;
+		$data['invoiceTax'] = $this->objTPVModel->getInvoiceTax($invoiceID);
 
 		return view('tpv/ticket', $data);
 	}

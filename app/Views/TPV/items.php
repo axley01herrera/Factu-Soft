@@ -1,4 +1,6 @@
-<?php $total = 0; ?>
+<?php
+$baseImponible = 0;
+?>
 <div class="scroll-container">
 	<?php if (empty($items)) { ?>
 		<div class="text-center ">
@@ -9,7 +11,9 @@
 			<tbody>
 				<?php
 				foreach ($items as $item) {
-					$total = $total + $item->amount; ?>
+					$baseImponible += $item->amount;
+				?>
+
 					<tr>
 						<td class="dt-vertical-align p-2 fs-4">
 							<?php echo getService($item->service_id)[0]->name; ?>
@@ -58,7 +62,34 @@
 	<?php } ?>
 </div>
 
+<?php
+$total = $baseImponible;
+foreach ($invoiceTax as $it) {
+	$aux = 0;
+	if ($it->taxPercent != 0) {
+		$aux = $it->taxPercent / 100 * $baseImponible;
+		if ($it->taxOperator == "-") {
+			$total -= $aux;  // Forma abreviada de restar
+		} else if ($it->taxOperator == "+") {
+			$total += $aux;  // Forma abreviada de sumar
+		}
+
+		// Formatear el valor del impuesto
+		$auxFormatted = getMoneyFormat($config[0]->currency, $aux);
+		$auxFormatted = $it->taxOperator . $auxFormatted;
+
+		// Escapar el valor formateado para evitar problemas de inyección de código
+		$auxEscaped = htmlspecialchars($auxFormatted, ENT_QUOTES, 'UTF-8');
+
+		// Usar JSON para evitar problemas de sintaxis en JavaScript
+		echo "<script>document.getElementById('tax-" . $it->itID . "').innerHTML = " . json_encode($auxEscaped) . ";</script>";
+	}
+}
+?>
+
+
 <script>
+	$('#tax-base').html("<?php echo getMoneyFormat($config[0]->currency, $baseImponible); ?>");
 	$('#total-price').html("<?php echo getMoneyFormat($config[0]->currency, $total); ?>");
 
 	var totalPrice = "<?php echo @$total; ?>";

@@ -61,7 +61,7 @@
 		<div class="card">
 			<div class="card-header">
 				<div class="d-flex align-items-center">
-					<h4 class="card-title mb-0">Ticket #: <?php echo str_pad($invoice[0]->number, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT); ?></h4>
+					<h4 class="card-title mb-0">#: <?php echo str_pad($invoice[0]->number, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT); ?></h4>
 					<div class="ms-auto">
 						<button id="btn-clear-basket" class="btn btn-rounded btn-danger hstack gap-1">
 							<?php echo lang('Text.tpv_basket_btn_clear'); ?>
@@ -72,6 +72,15 @@
 			<div class="card-body">
 				<!-- Main Items -->
 				<div id="main-items" class="mb-3 mt-3"></div>
+				<div class="row">
+					<div class="col-12 text-end">
+						<?php echo lang('Text.tax_base'); ?> <span id="tax-base"></span>
+						<br>
+						<?php foreach($invoiceTax as $it) { ?>
+							<?php echo $it->taxDesc; ?> <span id="tax-<?php echo $it->itID; ?>"></span>
+						<?php } ?>
+					</div>
+				</div>
 				<div class="d-flex flex-stack bg-success rounded-3 p-3 mb-2 mt-2">
 					<div class="fs-6 fw-bold text-white">
 						<span class="d-block fs-6 lh-6">Total</span>
