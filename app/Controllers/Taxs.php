@@ -160,4 +160,25 @@ class Taxs extends BaseController
 
 		return json_encode($result);
 	}
+
+	public function setTPV()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
+			$result = array();
+			$result['error'] = 2;
+			$result['msg'] = "SESSION_EXPIRED";
+
+			return json_encode($result);
+		}
+
+		# params
+		$id = $this->objRequest->getPost('taxID');
+		$value = $this->objRequest->getPost('value');
+
+		$d = array();
+		$d['tpv'] = $value;
+
+		return json_encode($this->objMainModel->objUpdate('tax', $d, $id));
+	}
 }

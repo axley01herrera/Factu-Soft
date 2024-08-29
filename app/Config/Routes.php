@@ -71,6 +71,7 @@ $routes->post('Taxs/createTax', 'Taxs::createTax');
 $routes->post('Taxs/editTax', 'Taxs::editTax');
 $routes->post('Taxs/deleteTax', 'Taxs::deleteTax');
 $routes->post('Taxs/saveTax', 'Taxs::saveTax');
+$routes->post('Taxs/setTPV', 'Taxs::setTPV');
 
 # Profile
 $routes->get('Profile', 'Profile::index');

@@ -211,6 +211,7 @@ $lang['taxs_dt_col_name'] = "Nombre";
 $lang['taxs_dt_col_description'] = "Descripción";
 $lang['taxs_dt_col_percent'] = "%";
 $lang['taxs_dt_col_operator'] = "Operador";
+$lang['taxs_dt_col_tpv'] = "Aplicar en TPV";
 $lang['taxs_create_modal_title'] = "Crear Impuesto";
 $lang['taxs_text_name'] = "Nombre";
 $lang['taxs_text_description'] = "Descripción";

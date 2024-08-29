@@ -27,6 +27,7 @@
 								<th><?php echo lang('Text.taxs_dt_col_description'); ?></th>
 								<th><?php echo lang('Text.taxs_dt_col_percent'); ?></th>
 								<th><?php echo lang('Text.taxs_dt_col_operator'); ?></th>
+								<th><?php echo lang('Text.taxs_dt_col_tpv'); ?></th>
 								<th style="width: 75px;"></th>
 							</tr>
 						</thead>
@@ -37,6 +38,11 @@
 									<td><?php echo $t->description; ?></td>
 									<td><?php if ($t->percent != 0) echo $t->percent; ?></td>
 									<td><?php echo $t->operator; ?></td>
+									<td>
+										<div class="form-check form-switch py-2">
+											<input class="form-check-input switch-tpv" type="checkbox" <?php if ($t->tpv == 1) echo "checked"; ?> data-value="<?php echo $t->tpv; ?>" data-id="<?php echo $t->id; ?>">
+										</div>
+									</td>
 									<td class="text-end">
 										<a href="#" class="btn-edit-tax" data-tax-id='<?php echo $t->id; ?>'>
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -79,7 +85,7 @@
 				url: dtLang
 			},
 			columnDefs: [{
-				targets: [4],
+				targets: [2, 3, 4, 5],
 				searchable: false,
 				orderable: false
 			}],
@@ -129,7 +135,6 @@
 			});
 		});
 
-
 		$('.btn-delete-tax').on('click', function(e) {
 			e.preventDefault();
 			$('.btn-delete-tax').attr('disabled', true);
@@ -167,6 +172,40 @@
 							});
 						} else
 							globalError();
+					}
+				},
+				error: function(error) {
+					globalError();
+				}
+			});
+		});
+
+		$('.switch-tpv').on('click', function() {
+			let taxID = $(this).attr('data-id');
+			let value = $(this).attr('data-value');
+			let newValue = "";
+
+			if (value == 0)
+				newValue = 1;
+			else if (value == 1)
+				newValue = 0
+
+			$(this).attr('data-value', newValue);
+
+			$.ajax({
+				type: "post",
+				url: "<?php echo base_url('Taxs/setTPV'); ?>",
+				data: {
+					'taxID': taxID,
+					'value': newValue
+				},
+				dataType: "json",
+				success: function(response) {
+					if (response.error == 0) {} else if (response.error == 2) {
+						window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
+					} else {
+						globalError();
+						window.location.reload();
 					}
 				},
 				error: function(error) {

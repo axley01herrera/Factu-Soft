@@ -165,6 +165,7 @@ CREATE TABLE IF NOT EXISTS `tax` (
   `description` varchar(999) COLLATE utf8mb4_spanish_ci NOT NULL,
   `percent` float DEFAULT '0',
   `operator` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `tpv` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 );
 
