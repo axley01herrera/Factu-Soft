@@ -18,7 +18,7 @@
 	<!-- js -->
 	<script src="<?php echo base_url('public/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js'); ?>"></script>
 
-	<title>Factu-Soft</title>
+	<title>FactuHi</title>
 </head>
 
 <body>

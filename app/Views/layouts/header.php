@@ -44,5 +44,5 @@
 		}
 	</script>
 
-	<title>Factu-Soft</title>
+	<title>FactuHi</title>
 </head>

@@ -16,7 +16,7 @@
 				<div class="offcanvas-header justify-content-between ps-0 pt-0">
 					<div class="brand-logo d-flex align-items-center">
 						<a href="<?php echo base_url('Dashboard'); ?>" class="text-nowrap logo-img">
-							<img src="<?php echo base_url('assets/images/logos/dark-logo.svg'); ?>" alt="Logo" class="dark-logo" />
+							<img src="<?php echo base_url('assets/images/logos/logo.png'); ?>" alt="Logo" class="dark-logo" />
 						</a>
 					</div>
 				</div>
@@ -34,13 +34,13 @@
 				<li class="nav-item d-none d-xl-flex align-items-center">
 					<a href="./horizontal/index.html" class="text-nowrap nav-link">
 
-						<img src="<?php echo base_url('assets/images/logos/dark-logo.svg'); ?>" alt="Logo" />
+						<img src="<?php echo base_url('assets/images/logos/logo.png'); ?>" alt="Logo" />
 					</a>
 				</li>
 			</ul>
 			<div class="d-block d-xl-none">
 				<a href="<?php echo base_url('DashboardV2/index'); ?>" class="text-nowrap nav-link">
-					<img src="<?php echo base_url('assets/images/logos/dark-logo.svg'); ?>" alt="Logo" />
+					<img src="<?php echo base_url('assets/images/logos/logo.png'); ?>" alt="Logo" />
 				</a>
 			</div>
 			<ul class="navbar-nav navbar-toggler p-0 border-0">

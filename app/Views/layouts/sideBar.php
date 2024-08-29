@@ -4,7 +4,7 @@
 		<!-- Logo -->
 		<div class="brand-logo d-flex align-items-center">
 			<a href="<?php echo base_url('Dashboard'); ?>" class="text-nowrap logo-img">
-				<img src="<?php echo base_url('assets/images/logos/dark-logo.svg'); ?>" alt="Logo" class="dark-logo">
+				<img src="<?php echo base_url('assets/images/logos/logo.png'); ?>" alt="Logo" class="dark-logo">
 			</a>
 		</div>
 
