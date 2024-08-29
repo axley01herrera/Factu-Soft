@@ -58,7 +58,7 @@ class Reports extends BaseController
 		$data = array();
 		$data['profile'] = $this->profile;
 		$data['config'] = $this->config;
-		$data['customers'] = $this->objReportModel->getCustomers();
+		$data['selFilterSerial'] = $this->objReportModel->selFilterSerial();
 		# menu
 		$data['reportsActive'] = 'active';
 		# page
@@ -76,10 +76,12 @@ class Reports extends BaseController
 		# Params
 		$dateStart = htmlspecialchars(trim($this->objRequest->getPost('dateStart')));
 		$dateEnd = htmlspecialchars(trim($this->objRequest->getPost('dateEnd')));
+		$series = $this->objRequest->getPost('series');
 
 		$data = array();
 		$data['config'] = $this->config;
-		$data['reports'] = $this->objReportModel->getReports($dateStart, $dateEnd);
+		$data['lang'] = $this->config[0]->lang;
+		$data['reports'] = $this->objReportModel->getReports($dateStart, $dateEnd, $series);
 
 		return view('reports/reportsDT', $data);
 	}

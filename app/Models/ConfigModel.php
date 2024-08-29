@@ -88,7 +88,7 @@ class ConfigModel extends Model
 
             $d = array();
             $d['name'] = 'IVA';
-            $d['description'] = 'IGIC (21%)';
+            $d['description'] = 'IVA (21%)';
             $d['percent'] = 21;
             $d['operator'] = "+";
             $this->db->table('tax')->insert($d); // Create Tax

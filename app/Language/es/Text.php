@@ -16,6 +16,9 @@ $lang['transfer'] = "Transferencia";
 $lang['loading'] = "Cargando...";
 $lang['important_label'] = "Atención";
 $lang['msg_action_not_reversible'] = "Esta acción no es reversible!";
+$lang['simple_invoice'] = "Factura Simplificada";
+$lang['invoice'] = "Factura";
+$lang['invoice_retify'] = "Factura Rectificada";
 
 # Monts
 $lang['jan'] = "Ene";
@@ -82,12 +85,14 @@ $lang['dashboard_sent_invoices_title'] = "Listado de Facturas Pendientes de Pago
 
 # Reports
 $lang['reports_page_title'] = "Reportes de Facturación";
+$lang['reports_serial_label'] = "Serie";
 $lang['reports_date_start_label'] = "Fecha Inicial";
 $lang['reports_date_end_label'] = "Fecha Final";
 $lang['reports_not_search_label'] = "Defina sus filtros y presione en <span class='fw-bold'>Ver Reporte</span>";
 $lang['reports_btn_view_report'] = "Ver Reporte";
 $lang['reports_not_results_label'] = "Sin Resultados";
-$lang['table_reports_col_invoice_number'] = "Factura";
+$lang['table_reports_col_invoice_concept'] = "Concepto"; 
+$lang['table_reports_col_invoice_number'] = "Número de Factura";
 $lang['table_reports_col_type'] = "Tipo";
 $lang['table_reports_col_pay_type'] = "Método de Pago";
 $lang['table_reports_col_date'] = "Fecha de Emisión";
