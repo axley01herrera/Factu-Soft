@@ -56,7 +56,7 @@ $lang['menu_customers_list'] = "Listado de Clientes";
 $lang['menu_invoices'] = "Facturación";
 $lang['menu_series'] = "Series";
 $lang['menu_taxs'] = "Impuestos";
-$lang['menu_tickets'] = "Tickets";
+$lang['menu_tickets'] = "Facturas Simplificadas";
 $lang['menu_invoice'] = "Facturas";
 $lang['menu_services'] = "Servicios";
 $lang['menu_services_list'] = "Listado de Servicios";
@@ -186,8 +186,8 @@ $lang['inv_alert_tax'] = "El sistema no valida la compatibilidad de los impuesto
 $lang['select_pay_type_msg'] = "Seleccione un método de pago..!";
 
 # Invoices Tickets
-$lang['inv_t_page_title'] = "Historial de Tickets";
-$lang['inv_t_dt_col_number'] = "Ticket #";
+$lang['inv_t_page_title'] = "Historial de Facturas Simplificadas";
+$lang['inv_t_dt_col_number'] = "Factura Simplficada #";
 $lang['inv_t_dt_col_pay_type'] = "Método de Pago";
 $lang['inv_t_dt_col_added'] = "Fecha";
 $lang['inv_t_dt_col_amount'] = "Importe";
