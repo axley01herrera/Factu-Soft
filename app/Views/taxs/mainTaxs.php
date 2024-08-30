@@ -140,42 +140,56 @@
 			$('.btn-delete-tax').attr('disabled', true);
 
 			let taxID = $(this).attr('data-tax-id');
-			$.ajax({
-				type: "POST",
-				url: "<?php echo base_url('Taxs/deleteTax') ?>",
-				data: {
-					'taxID': taxID
-				},
-				dataType: "json",
-				success: function(response) {
-					if (response.error == 0) {
-						Swal.fire({
-							position: "top-end",
-							icon: "success",
-							text: alerMsg + '..!',
-							showConfirmButton: false,
-							timer: 2500
-						});
-						setTimeout(() => {
-							window.location.reload();
-						}, 2500);
-					} else if (response.error == 2)
-						window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
-					else if (response.error == 1) {
-						if (response.msg == 'INVOICE_TAX_EXITS') {
-							Swal.fire({
-								position: "top-end",
-								icon: "success",
-								text: alerMsg + '..!',
-								showConfirmButton: false,
-								timer: 2500
-							});
-						} else
+
+			Swal.fire({
+				title: '<?php echo lang('Text.are_you_sure_msg'); ?>',
+				text: "<?php echo lang('Text.not_revert_this_msg'); ?>",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: '<?php echo lang('Text.yes_remove_msg'); ?>',
+				cancelButtonText: '<?php echo lang('Text.no_cancel_msg'); ?>'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: "POST",
+						url: "<?php echo base_url('Taxs/deleteTax') ?>",
+						data: {
+							'taxID': taxID
+						},
+						dataType: "json",
+						success: function(response) {
+							if (response.error == 0) {
+								Swal.fire({
+									position: "top-end",
+									icon: "success",
+									text: '<?php echo lang('Text.taxs_msg_success_delete');?>..!',
+									showConfirmButton: false,
+									timer: 2500
+								});
+								setTimeout(() => {
+									window.location.reload();
+								}, 2500);
+							} else if (response.error == 2)
+								window.location.href = "<?php echo base_url('Home/index?session=expired'); ?>";
+							else if (response.error == 1) {
+								if (response.msg == 'INVOICE_TAX_EXIST') {
+									Swal.fire({
+										position: "top-end",
+										icon: "warning",
+										text: '<?php echo lang('Text.taxs_msg_error_delete');?>..!',
+										showConfirmButton: false,
+										timer: 2500
+									});
+								} else
+									globalError();
+							}
+						},
+						error: function(error) {
 							globalError();
-					}
-				},
-				error: function(error) {
-					globalError();
+						}
+					});
 				}
 			});
 		});

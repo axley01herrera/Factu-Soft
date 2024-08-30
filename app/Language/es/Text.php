@@ -223,6 +223,8 @@ $lang['taxs_text_percent'] = "%";
 $lang['taxs_text_operator'] = "Operador";
 $lang['taxs_msg_success_create'] = "Impuesto Añadido";
 $lang['taxs_msg_success_update'] = "Impuesto Actualizado";
+$lang['taxs_msg_success_delete'] = "Impuesto Eliminado";
+$lang['taxs_msg_error_delete'] = "No se puede eliminar este impuesto.";
 
 # Customer
 $lang['btn_create_customer'] = 'Crear Cliente';

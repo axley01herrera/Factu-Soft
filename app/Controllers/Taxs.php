@@ -121,7 +121,7 @@ class Taxs extends BaseController
 		else {
 			$result = array();
 			$result['error'] = 1;
-			$result['msg'] = 'INVOICE_TAX_EXITS';
+			$result['msg'] = 'INVOICE_TAX_EXIST';
 		}
 
 		return json_encode($result);
