@@ -24,7 +24,16 @@
 <body>
 	<div class="container mt-10">
 		<div class="row">
-			<?php if ($status <> 2) { ?>
+			<div class="col-12">
+				<?php if (!empty($profile->logo)) { ?>
+					<img src="data:image/png;base64, <?php echo base64_encode($profile->logo); ?>" alt="logo" class="rounded-circle" style="width: 125px;">
+				<?php } else { ?>
+					<img src="<?php echo base_url('public/assets/images/avatar/logoBlank.png') ?>" alt="logo" class="rounded-circle" style="width: 125px;">
+				<?php } ?>
+			</div>
+		</div>
+		<?php if ($status <> 2) { ?>
+			<div class="row">
 				<div class="col-6 mb-4">
 					<h5><?php echo lang('Text.inv_number_label'); ?></h5>
 					<?php echo $invoice[0]->number; ?>
@@ -33,15 +42,15 @@
 					<h5><?php echo lang('Text.inv_issue_date'); ?></h5>
 					<?php echo $invoice[0]->added; ?>
 				</div>
-			<?php } ?>
-			<div class="col-12 mb-4 text-center">
-				<?php echo $status_label; ?>
-				<?php if ($status == 4) { ?>
-					<h4 class="mt-3 mb-0"><?php echo lang('Text.inv_rectified_invoice'); ?></h4>
-					<h4><?php echo '<span class="fw-bold">' . $invoiceRectified[0]->number . '</span>'; ?></h4>
-				<?php } ?>
+				<div class="col-12 mb-4 text-center">
+					<?php echo $status_label; ?>
+					<?php if ($status == 4) { ?>
+						<h4 class="mt-3 mb-0"><?php echo lang('Text.inv_rectified_invoice'); ?></h4>
+						<h4><?php echo '<span class="fw-bold">' . $invoiceRectified[0]->number . '</span>'; ?></h4>
+					<?php } ?>
+				</div>
 			</div>
-		</div>
+		<?php } ?>
 		<div class="row">
 			<div class="col-6 mb-5">
 				<b><?php echo lang('Text.inv_from_label'); ?></b>:
@@ -165,7 +174,7 @@
 								$totalTax = $totalTax + $calcTax;
 
 							$calcTax = getMoneyFormat($config[0]->currency, $calcTax);
-							$calcTax = $it->taxOperator . $calcTax;
+							$calcTax = $calcTax;
 						}
 						?>
 						<h7>

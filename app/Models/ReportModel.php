@@ -12,6 +12,9 @@ class ReportModel extends Model
 	{
 		parent::__construct();
 		$this->db = \Config\Database::connect();
+
+		# Helper
+		helper('Site');
 	}
 
 	public function selFilterSerial()
@@ -29,7 +32,7 @@ class ReportModel extends Model
 		return $data;
 	}
 
-	public function getReports($dateStart, $dateEnd, $series)
+	public function getReports($dateStart, $dateEnd, $series, $config)
 	{
 		$start = date('Y-m-d', strtotime($dateStart)) . ' 00:00:00';
 		$end = date('Y-m-d', strtotime($dateEnd)) . ' 23:59:59';
@@ -42,6 +45,7 @@ class ReportModel extends Model
             invoice.type as invoiceType,
             invoice.pay_type as payType,
             invoice.added as date,
+			invoice.tax_base as taxBase,
             invoice.total_amount as totalAmount,
             customer.name as customer
         ')
@@ -62,17 +66,18 @@ class ReportModel extends Model
 		$tHead[] = lang('Text.table_reports_col_invoice_number');
 		$tHead[] = lang('Text.table_reports_col_invoice_concept');
 		$tHead[] = lang('Text.table_reports_col_tax_base');
-		$tHead[] = lang('Text.table_reports_col_taxes_applied'); // New column for applied taxes
+		$tHead[] = lang('Text.table_reports_col_taxes_applied');
 		$tHead[] = lang('Text.table_reports_col_amount');
 
 		$tBody = [];
 
 		foreach ($invoices as $i) {
+
 			$row = [];
-			$row[] = $i->date;               // Fecha de la factura
-			$row[] = $i->invoiceNumber;      // Número de factura completo
-			$row[] = $i->customer;           // Cliente
-			$row[] = $i->tax_base;        	// Monto total
+			$row[]     = date('Y-m-d', strtotime($i->date));                                                     // Fecha de la factura
+			$row[]     = $i->invoiceNumber;                                            // Número de factura completo
+			$row[]     = $i->customer ?? lang('Text.simple_invoice');                  // Concepto
+			$row[]     = getMoneyFormat($config[0]->currency, $i->taxBase);            // Base Imponible
 
 			$query_invoice_tax = $this->db->table('invoice_tax')
 				->select('
@@ -87,13 +92,13 @@ class ReportModel extends Model
 			$taxes_applied = [];
 
 			foreach ($invoice_tax as $it) {
-				$taxes_applied[] = $it->tax . ' ' . $it->taxPercent . '%'; // Collect tax information
+				$taxes_applied[] = $it->tax . ' ';                                   // Collect tax information
 			}
 
 			// Add the taxes information as a single string in the new column
 			$row[] = implode(', ', $taxes_applied);
 
-			$row[] = $i->totalAmount;        // Importe
+			$row[] = getMoneyFormat($config[0]->currency, $i->totalAmount);         // Importe
 			$tBody[] = $row;
 		}
 

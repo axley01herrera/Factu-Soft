@@ -483,6 +483,7 @@ class Invoice extends BaseController
 		# params
 		$invoiceID = $this->objRequest->getPost('invoiceID');
 		$customerID = $this->objRequest->getPost('customerID');
+		$taxBase = $this->objRequest->getPost('taxBase');
 		$totalAmount = $this->objRequest->getPost('totalAmount');
 
 		$customer = $this->objInvoiceModel->getCustomer($customerID);
@@ -499,6 +500,7 @@ class Invoice extends BaseController
 		$d['serie'] = $serialID;
 		$d['status'] = 3;
 		$d['number'] = $serial[0]->name . str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
+		$d['tax_base'] = $taxBase;
 		$d['total_amount'] = $totalAmount;
 		$d['added'] = date('Y-m-d H:i:s');
 		$d['updated'] = date('Y-m-d H:i:s');

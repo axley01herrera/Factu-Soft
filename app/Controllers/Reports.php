@@ -81,7 +81,7 @@ class Reports extends BaseController
 		$data = array();
 		$data['config'] = $this->config;
 		$data['lang'] = $this->config[0]->lang;
-		$data['data'] = $this->objReportModel->getReports($dateStart, $dateEnd, $series);
+		$data['data'] = $this->objReportModel->getReports($dateStart, $dateEnd, $series, $this->config);
 
 		return view('reports/reportsDT', $data);
 	}

@@ -372,6 +372,7 @@ $totalTax = 0;
 						data: {
 							'invoiceID': invoiceID,
 							'customerID': "<?php echo $invoice[0]->customer; ?>",
+							'taxBase': "<?php echo $total; ?>",
 							'totalAmount': "<?php echo $totalTax; ?>"
 						},
 						dataType: "json",
