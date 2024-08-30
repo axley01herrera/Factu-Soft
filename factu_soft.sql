@@ -232,7 +232,7 @@ CREATE VIEW dt_invoices AS SELECT
     customer.nif
 FROM
     invoice
-LEFT JOIN SERIAL ON invoice.serie = SERIAL.id
+LEFT JOIN serial ON invoice.serie = SERIAL.id
 LEFT JOIN invoice_items ON invoice.id = invoice_items.invoice_id
 LEFT JOIN customer ON customer.id = invoice.customer
 WHERE
