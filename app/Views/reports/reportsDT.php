@@ -1,4 +1,4 @@
-<?php if (empty($reports)) { ?>
+<?php if (empty($data)) { ?>
 	<div class="alert customize-alert alert-dismissible text-danger alert-light-danger bg-danger-subtle fade show remove-close-icon" role="alert">
 		<span class="side-line bg-danger"></span>
 		<div class="d-flex align-items-center ">
@@ -16,48 +16,17 @@
 				<table id="dt-reports" class="table table-row-bordered no-footer table-hover" style="width: 100%;">
 					<thead>
 						<tr class="fs-4">
-							<th><?php echo lang('Text.table_reports_col_date'); ?></th>
-							<th><?php echo lang('Text.table_reports_col_invoice_number'); ?></th>
-							<th><?php echo lang('Text.table_reports_col_invoice_concept'); ?></th>
-							<th class="text-end"><?php echo lang('Text.table_reports_col_amount'); ?></th>
+							<?php foreach ($data['cols'] as $c) { ?>
+								<th><?php echo $c; ?></th>
+							<?php } ?>
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($reports as $r) { ?>
+						<?php foreach ($data['rows'] as $r) { ?>
 							<tr>
-								<td><?php echo date('Y-m-d', strtotime($r->date)); ?></td>
-								<td><?php echo $r->invoiceNumber; ?></td>
-								<td>
-									<?php
-									$concepto = "";
-									if (!empty($r->customer)) {
-
-										if ($r->serie == 1)
-											$concepto = lang('Text.simple_invoice');
-										else if ($r->serie == 2)
-											$concepto = lang('Text.invoice_retify');
-										else if ($r->serie == 3)
-											$concepto = lang('Text.invoice');
-										else
-											$concepto = lang('Text.invoice');
-
-										$concepto .= ' ' . $r->customer;
-									} else {
-										if ($r->serie == 1)
-											$concepto = lang('Text.simple_invoice');
-										if ($r->serie == 2)
-											$concepto = lang('Text.invoice_retify');
-										if ($r->serie == 3)
-											$concepto = lang('Text.invoice');
-									}
-
-									echo $concepto;
-
-									?>
-								</td>
-								<td class="text-end">
-									<?php echo getMoneyFormat($config[0]->currency, $r->totalAmount); ?>
-								</td>
+								<?php foreach ($r as $d) { ?>
+									<td><?php echo $d;?></td>
+								<?php } ?>
 							</tr>
 						<?php } ?>
 					</tbody>
@@ -92,3 +61,4 @@
 		</div>
 	</div>
 <?php } ?>
+<?php var_dump($data['rows']); ?>

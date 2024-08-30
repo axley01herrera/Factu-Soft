@@ -196,6 +196,7 @@
 				data: {
 					'invoiceID': invoiceID,
 					'payType': payType,
+					'baseImponible': baseImponible,
 					'totalAmount': totalPrice
 				},
 				dataType: "json",

@@ -221,7 +221,7 @@ foreach ($invoiceTax as $it) {
 		});
 	});
 
+	baseImponible = "<?php echo $baseImponible; ?>";
 	totalPrice = "<?php echo $total; ?>";
 	basket = "<?php echo sizeof($items); ?>";
-
 </script>

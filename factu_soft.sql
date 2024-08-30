@@ -113,16 +113,17 @@ DROP TABLE IF EXISTS `invoice`;
 CREATE TABLE IF NOT EXISTS `invoice` (
   `id` int NOT NULL AUTO_INCREMENT,
   `serie` int NOT NULL,
-  `number` varchar(150) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `number` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `customer` int DEFAULT NULL,
   `created_date` date NOT NULL,
   `due_date` date DEFAULT NULL,
   `status` int NOT NULL DEFAULT '0' COMMENT '0 = OPEN\r\n1 = PAID\r\n2 = DRAFT\r\n3 = SEND\r\n4 = RECTIFIED\r\n5 = SEND / RECTIFIED',
   `pay_type` int DEFAULT NULL COMMENT '1 = Card\r\n2 = Cash\r\n3 = Transferencia',
   `type` int NOT NULL DEFAULT '1' COMMENT '1 = Ticket\r\n2 = Invoice',
-  `r_desc` varchar(999) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `r_desc` varchar(999) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `r_id` int DEFAULT NULL,
-  `total_amount` float DEFAULT NULL,
+  `tax_base` float NOT NULL DEFAULT '0',
+  `total_amount` float NOT NULL DEFAULT '0',
   `added` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -145,7 +146,6 @@ CREATE TABLE IF NOT EXISTS `invoice_items` (
   `price` float NOT NULL,
   PRIMARY KEY (`id`)
 );
-
 
 -- --------------------------------------------------------
 

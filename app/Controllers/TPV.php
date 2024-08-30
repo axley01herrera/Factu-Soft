@@ -268,11 +268,13 @@ class TPV extends BaseController
 		# params
 		$invoiceID = $this->objRequest->getPost('invoiceID');
 		$payType = $this->objRequest->getPost('payType');
+		$baseImponible = $this->objRequest->getPost('baseImponible');
 		$totalAmount = $this->objRequest->getPost('totalAmount');
 		
 		$d = array();
 		$d['status'] = 1;
 		$d['pay_type'] = $payType;
+		$d['tax_base'] = $baseImponible;
 		$d['total_amount'] = $totalAmount;
 		$d['added'] = date('Y-m-d H:i:s');
 		$d['updated'] = date('Y-m-d H:i:s');
