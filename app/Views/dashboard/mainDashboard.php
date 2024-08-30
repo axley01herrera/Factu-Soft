@@ -20,7 +20,6 @@
 
 <!-- Page Content -->
 <div class="row">
-
 	<!-- Collection Day -->
 	<div class="col-12 col-md-4 col-lg-3">
 		<div class="card text-white text-bg-success rounded" style="height: 150px;">
@@ -170,7 +169,7 @@
 		pendingInvoices();
 		chartMont();
 		getPendingInvoicesDT();
-		
+
 		$('#sel-year').on('change', function() {
 			let year = $(this).val();
 			chartMont(year);

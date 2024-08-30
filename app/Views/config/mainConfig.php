@@ -25,13 +25,16 @@
 						<label for="txt-timezone" class="form-label"><?php echo lang('Text.config_text_timezone'); ?></label>
 						<input type="text" id="txt-timezone" class="form-control config-disabled required" value="<?php echo $config[0]->timezone; ?>" disabled />
 					</div>
-					<div class="col-12 mb-2">
+					<div class="col-12 mb-4">
 						<label for="sel-currency" class="form-label"><?php echo lang('Text.config_text_currency'); ?></label>
 						<select id="sel-currency" class="form-select config-disabled required" disabled>
 							<option value="" hidden></option>
 							<option value="€" <?php if ($config[0]->currency == "€") echo 'selected'; ?>>Euro (€)</option>
 							<option value="$" <?php if ($config[0]->currency == "$") echo 'selected'; ?>>USD ($)</option>
 						</select>
+					</div>
+					<div class="col-12 mb-2 text-center">
+						<button id="backup-db" class="btn btn-primary">Crear copia de seguridad de la BD</button>
 					</div>
 				</div>
 				<div class="row">
@@ -95,6 +98,26 @@
 				timer: 2500
 			});
 		}
+	});
+
+	$('#backup-db').on('click', function() {
+		$(this).attr('disabled', true);
+		$.ajax({
+			type: 'POST',
+			url: '<?php echo base_url('Backup/createBackup'); ?>',
+			data: {},
+			success: function(response) {
+				$('#backup-db').removeAttr('disabled');
+				Swal.fire({
+					position: "top-end",
+					icon: "success",
+					text: "Copia de seguridad " + response + " exitosa..!",
+					showConfirmButton: false,
+					timer: 2500
+				});
+			}
+		});
+
 	});
 
 	$('#btn-edit-config').on('click', function() {
