@@ -3,7 +3,7 @@
 
 <div class="card shadow-none border">
 	<div class="card-body">
-		<div class="table-responsive overflow-hidden">
+		<div class="table-responsive">
 			<table id="dt-invoice" class="table text-nowrap align-middle" style="width: 100%;">
 				<thead>
 					<tr>

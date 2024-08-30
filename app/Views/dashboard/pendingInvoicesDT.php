@@ -1,4 +1,4 @@
-<div class="table-responsive overflow-hidden">
+<div class="table-responsive">
 	<table id="dt-pending-invoices" class="table text-nowrap align-middle" style="width: 100%;">
 		<thead>
 			<tr>

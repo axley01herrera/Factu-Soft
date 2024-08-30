@@ -19,7 +19,7 @@
 	<div class="col-12 mb-2">
 		<div class="card">
 			<div class="card-body">
-				<div class="table-responsive overflow-hidden">
+				<div class="table-responsive">
 					<table id="dt-taxs" class="table text-nowrap align-middle" style="width: 100%;">
 						<thead>
 							<tr>
