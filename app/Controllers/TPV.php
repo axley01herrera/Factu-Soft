@@ -136,9 +136,11 @@ class TPV extends BaseController
 		$d = array();
 		$d['invoice_id'] = $invoiceID;
 		$d['service_id'] = $serviceID;
+		$d['description'] = $service[0]->name;
 		$d['amount'] = $amount;
 		$d['quantity'] = 1;
-
+		$d['price'] = $service[0]->price;
+		
 		$result = $this->objMainModel->objCreate('invoice_items', $d);
 
 		return json_encode($result);

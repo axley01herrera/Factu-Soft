@@ -33,6 +33,9 @@
 <script>
 	$(document).ready(function() {
 		$('#modal').modal('show');
+		$('#modal').on('hidden.bs.modal', function(event) {
+			$('#app-modal').html('');
+		});
 
 		function initializeDropzone(selector) {
 			return new Dropzone(selector, {

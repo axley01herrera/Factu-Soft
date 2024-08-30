@@ -23,8 +23,8 @@ $baseImponible = 0;
 					<tr style="border-bottom: 1px;">
 						<td class="dt-vertical-align p-2 fs-7 text-primary">
 							<div class="row d-flex align-items-center">
-								<div class="col-4 ms-auto d-flex align-items-center">
-									<a href="#" class="edit-price pe-4" data-invoice-items-id="<?php echo $item->id; ?>" data-service-info="<?php echo getService($item->service_id)[0]->name . ' (' . getMoneyFormat($config[0]->currency, $item->amount) . ')'; ?>">
+								<div class="col-2 ms-auto d-flex align-items-center">
+									<a href="#" class="edit-price pe-1" data-invoice-items-id="<?php echo $item->id; ?>" data-service-info="<?php echo getService($item->service_id)[0]->name . ' (' . getMoneyFormat($config[0]->currency, $item->amount) . ')'; ?>">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 											<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 											<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -37,7 +37,7 @@ $baseImponible = 0;
 										</svg>
 									</a>
 								</div>
-								<div class="col-4 ms-auto">
+								<div class="col-4 ms-auto d-flex align-items-center">
 									<div class="position-relative d-flex align-items-center" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="10" data-kt-dialer-step="1" data-kt-dialer-decimals="0">
 										<button type="button" class="btn btn-icon btn-sm btn-quantity btn-light btn-icon-gray-400 w-30px h-30px" data-kt-dialer-control="rest" data-invoice-items-id="<?php echo $item->id; ?>" data-quantity="<?php echo $item->quantity; ?>" data-service-id="<?php echo $item->service_id; ?>" data-amount="<?php echo $item->amount; ?>">
 											<i class="fas fa-minus fs-1"></i>
@@ -48,8 +48,8 @@ $baseImponible = 0;
 										</button>
 									</div>
 								</div>
-								<div class="col-4 text-end">
-									<span class="text-black fs-7">
+								<div class="col-6 text-end">
+									<span class="text-black fs-8">
 										<?php echo getMoneyFormat($config[0]->currency, $item->amount); ?>
 									</span>
 								</div>

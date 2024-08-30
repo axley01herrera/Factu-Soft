@@ -13,14 +13,14 @@
 <!-- Page Content -->
 <div class="card">
     <div class="card-body">
-        <div class="table-responsive overflow-hidden">
+        <div class="table-responsive">
             <table id="dt-tickets" class="table text-nowrap align-middle" style="width: 100%;">
                 <thead>
                     <tr>
                         <th><?php echo lang('Text.inv_t_dt_col_number'); ?></th>
-                        <th><?php echo lang('Text.inv_t_dt_col_pay_type'); ?></th>
-                        <th><?php echo lang('Text.inv_t_dt_col_added'); ?></th>
-                        <th><?php echo lang('Text.inv_t_dt_col_amount'); ?></th>
+                        <th class="text-center"><?php echo lang('Text.inv_t_dt_col_pay_type'); ?></th>
+                        <th class="text-center"><?php echo lang('Text.inv_t_dt_col_added'); ?></th>
+                        <th class="text-end"><?php echo lang('Text.inv_t_dt_col_amount'); ?></th>
                         <th class="text-end"></th>
                     </tr>
                 </thead>
@@ -51,23 +51,24 @@
             type: "POST"
         },
         order: [
-            [0, 'desc']
+            [2, 'desc']
         ],
         columns: [{
                 data: 'number',
                 class: 'dt-vertical-align p-2',
             }, {
                 data: 'pay_type',
-                class: 'dt-vertical-align p-2',
+                class: 'dt-vertical-align p-2 text-center',
                 searchable: false
             },
             {
                 data: 'added',
-                class: 'dt-vertical-align p-2',
+                class: 'dt-vertical-align p-2 text-center',
             },
             {
                 data: 'amount',
-                class: 'dt-vertical-align p-2',
+                class: 'dt-vertical-align p-2 text-end',
+                orderable: false,
                 searchable: false
             },
             {

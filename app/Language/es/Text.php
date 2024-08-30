@@ -19,6 +19,8 @@ $lang['msg_action_not_reversible'] = "Esta acción no es reversible!";
 $lang['simple_invoice'] = "Factura Simplificada";
 $lang['invoice'] = "Factura";
 $lang['invoice_retify'] = "Factura Rectificada";
+$lang['description'] = "Descripción";
+$lang['price'] = "Precio";
 
 # Monts
 $lang['jan'] = "Ene";
@@ -187,10 +189,10 @@ $lang['select_pay_type_msg'] = "Seleccione un método de pago..!";
 
 # Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Facturas Simplificadas";
-$lang['inv_t_dt_col_number'] = "Factura Simplficada #";
+$lang['inv_t_dt_col_number'] = "Número de Factura";
 $lang['inv_t_dt_col_pay_type'] = "Método de Pago";
-$lang['inv_t_dt_col_added'] = "Fecha";
-$lang['inv_t_dt_col_amount'] = "Importe";
+$lang['inv_t_dt_col_added'] = "Fecha de Emsión";
+$lang['inv_t_dt_col_amount'] = "Importe Cobrado";
 
 # Invoices Series
 $lang['inv_serie_page_title'] = "Listado de Series";
@@ -293,6 +295,8 @@ $lang['profile_upload_logo_modal_dropzone_text_2'] = ".PNG .JPG .JPEG";
 $lang['profile_change_password_modal_title'] = "Cambiar Clave de Acceso";
 $lang['profile_new_password_label'] = "Nueva Clave de Acceso";
 $lang['profile_msg_success_change_password'] = "Clave de acceso actualizada";
+$lang['profile_edit_logo'] = "Editar Logo";
+
 
 # Config
 $lang['config_page_title'] = "Configuración del Sistema";

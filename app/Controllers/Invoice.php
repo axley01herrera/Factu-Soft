@@ -100,7 +100,7 @@ class Invoice extends BaseController
 			$col['number'] = $result[$i]->invoiceNumber;
 			$col['pay_type'] = $pay_type;
 			$col['added'] = $result[$i]->added;
-			$col['amount'] = getMoneyFormat($this->config[0]->currency, $result[$i]->amount);
+			$col['amount'] = getMoneyFormat($this->config[0]->currency, $result[$i]->totalAmount);
 			$col['print'] = '
 			<a target="_Blank" href="' . base_url('TPV/printTicket?invoiceID=') . $result[$i]->invoiceID . '">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
