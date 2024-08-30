@@ -93,7 +93,7 @@ $lang['reports_date_end_label'] = "Fecha Final";
 $lang['reports_not_search_label'] = "Defina sus filtros y presione en <span class='fw-bold'>Ver Reporte</span>";
 $lang['reports_btn_view_report'] = "Ver Reporte";
 $lang['reports_not_results_label'] = "Sin Resultados";
-$lang['table_reports_col_invoice_concept'] = "Concepto"; 
+$lang['table_reports_col_invoice_concept'] = "Concepto";
 $lang['table_reports_col_invoice_number'] = "Número de Factura";
 $lang['table_reports_col_type'] = "Tipo";
 $lang['table_reports_col_pay_type'] = "Método de Pago";
@@ -308,5 +308,6 @@ $lang['config_text_lang'] = "Idioma";
 $lang['config_text_timezone'] = "Zona Horaria";
 $lang['config_text_currency'] = "Moneda de Facturación";
 $lang['config_msg_success_save_config'] = "Configuración actualizada";
+$lang['config_btn_create_bd_backup'] = "Crear copia de seguridad de la BD";
 
 return $lang;

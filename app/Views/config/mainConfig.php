@@ -3,7 +3,11 @@
 	<div class="mb-4 mb-md-0">
 		<h4 class="fs-6 mb-0"><?php echo lang('Text.config_page_title'); ?></h4>
 	</div>
-	<div class="d-flex align-items-center justify-content-between gap-6"></div>
+	<div class="d-flex align-items-center justify-content-between gap-6">
+		<div class="col-12 mb-2 text-center">
+			<button id="backup-db" class="btn btn-primary"><?php echo lang('Text.config_btn_create_bd_backup'); ?></button>
+		</div>
+	</div>
 </div>
 
 <!-- Page Content -->
@@ -25,7 +29,7 @@
 						<label for="txt-timezone" class="form-label"><?php echo lang('Text.config_text_timezone'); ?></label>
 						<input type="text" id="txt-timezone" class="form-control config-disabled required" value="<?php echo $config[0]->timezone; ?>" disabled />
 					</div>
-					<div class="col-12 mb-4">
+					<div class="col-12 mb-2">
 						<label for="sel-currency" class="form-label"><?php echo lang('Text.config_text_currency'); ?></label>
 						<select id="sel-currency" class="form-select config-disabled required" disabled>
 							<option value="" hidden></option>
@@ -33,15 +37,12 @@
 							<option value="$" <?php if ($config[0]->currency == "$") echo 'selected'; ?>>USD ($)</option>
 						</select>
 					</div>
-					<div class="col-12 mb-2 text-center">
-						<button id="backup-db" class="btn btn-primary">Crear copia de seguridad de la BD</button>
-					</div>
 				</div>
 				<div class="row">
 					<div class="col-12 text-end">
-						<button id="btn-edit-config" class="btn btn-warning">Editar</button>
-						<button id="btn-cancel-config" class="btn btn-secondary" hidden>Cancelar</button>
-						<button id="btn-save-config" class="btn btn-primary" hidden>Guardar</button>
+						<button id="btn-edit-config" class="btn btn-warning"><?php echo lang('Text.btn_edit'); ?></button>
+						<button id="btn-cancel-config" class="btn btn-secondary" hidden><?php echo lang('Text.btn_cancel'); ?></button>
+						<button id="btn-save-config" class="btn btn-primary" hidden><?php echo lang('Text.btn_save'); ?></button>
 					</div>
 				</div>
 			</div>
