@@ -85,12 +85,6 @@ CREATE TABLE IF NOT EXISTS `serial` (
   PRIMARY KEY (`id`)
 );
 
--- Insert after create table
-INSERT INTO `serial` (`id`, `name`, `count`) VALUES
-(1, 'T', 0);
-INSERT INTO `serial` (`id`, `name`, `count`) VALUES
-(2, 'R', 0);
-
 -- --------------------------------------------------------
 
 --
