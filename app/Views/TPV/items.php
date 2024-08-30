@@ -76,7 +76,7 @@ foreach ($invoiceTax as $it) {
 
 		// Formatear el valor del impuesto
 		$auxFormatted = getMoneyFormat($config[0]->currency, $aux);
-		$auxFormatted = $it->taxOperator . $auxFormatted;
+		$auxFormatted = $auxFormatted;
 
 		// Escapar el valor formateado para evitar problemas de inyección de código
 		$auxEscaped = htmlspecialchars($auxFormatted, ENT_QUOTES, 'UTF-8');
@@ -87,13 +87,9 @@ foreach ($invoiceTax as $it) {
 }
 ?>
 
-
 <script>
 	$('#tax-base').html("<?php echo getMoneyFormat($config[0]->currency, $baseImponible); ?>");
 	$('#total-price').html("<?php echo getMoneyFormat($config[0]->currency, $total); ?>");
-
-	var totalPrice = "<?php echo @$total; ?>";
-	basket = "<?php echo sizeof($items); ?>"
 
 	$('.edit-price').on('click', function(e) {
 		e.preventDefault();
@@ -224,4 +220,8 @@ foreach ($invoiceTax as $it) {
 			}
 		});
 	});
+
+	totalPrice = "<?php echo $total; ?>";
+	basket = "<?php echo sizeof($items); ?>";
+
 </script>
