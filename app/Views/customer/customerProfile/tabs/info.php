@@ -100,6 +100,7 @@
 				url: "<?php echo base_url('Customer/saveCustomer'); ?>",
 				data: {
 					'customerID': '<?php echo $customer[0]->id; ?>',
+					'type': "<?php echo $customer[0]->type; ?>",
 					'name': $('#txt-name').val(),
 					'nif': $('#txt-nif').val(),
 					'email': $('#txt-email').val(),
