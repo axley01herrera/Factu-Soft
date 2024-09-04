@@ -32,25 +32,28 @@
 				<?php } ?>
 			</div>
 		</div>
-		<?php if ($status <> 2) { ?>
-			<div class="row">
-				<div class="col-6 mb-4">
+		<div class="row">
+			<div class="col-6 mb-4">
+				<?php if ($status <> 2) { ?>
 					<h5><?php echo lang('Text.inv_number_label'); ?></h5>
 					<?php echo $invoice[0]->number; ?>
-				</div>
-				<div class="col-6 mb-4 text-end">
+				<?php } ?>
+			</div>
+			<div class="col-6 mb-4 text-end">
+				<?php if ($status <> 2) { ?>
 					<h5><?php echo lang('Text.inv_issue_date'); ?></h5>
 					<?php echo $invoice[0]->added; ?>
-				</div>
-				<div class="col-12 mb-4 text-center">
-					<?php echo $status_label; ?>
-					<?php if ($status == 4) { ?>
-						<h4 class="mt-3 mb-0"><?php echo lang('Text.inv_rectified_invoice'); ?></h4>
-						<h4><?php echo '<span class="fw-bold">' . $invoiceRectified[0]->number . '</span>'; ?></h4>
-					<?php } ?>
-				</div>
+				<?php } ?>
 			</div>
-		<?php } ?>
+			<div class="col-12 mb-4 text-center">
+				<?php echo $status_label; ?>
+				<?php if ($status == 4) { ?>
+					<h4 class="mt-3 mb-0"><?php echo lang('Text.inv_rectified_invoice'); ?></h4>
+					<h4><?php echo '<span class="fw-bold">' . $invoiceRectified[0]->number . '</span>'; ?></h4>
+				<?php } ?>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-6 mb-5">
 				<b><?php echo lang('Text.inv_from_label'); ?></b>:
