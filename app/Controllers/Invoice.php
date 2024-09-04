@@ -667,6 +667,7 @@ class Invoice extends BaseController
 		$d['serie'] = $serial[0]->id;
 		$d['status'] = 4;
 		$d['number'] = $serial[0]->name . str_pad($consecutive, STR_PAD_LEFT_NUMBER, '0', STR_PAD_LEFT);
+		$d['tax_base'] = 0 - $invoice[0]->tax_base;
 		$d['total_amount'] = 0 - $invoice[0]->total_amount;
 		$d['r_id'] = $invoiceID;
 		$d['customer'] = $invoice[0]->customer;
