@@ -9,7 +9,7 @@
 					<tr>
 						<th><?php echo lang('Text.inv_dt_col_status'); ?></th>
 						<th><?php echo lang('Text.inv_dt_col_number'); ?></th>
-						<th><?php echo lang('Text.inv_dt_col_added'); ?></th>
+						<th class="text-center"><?php echo lang('Text.inv_dt_col_added'); ?></th>
 						<th class="text-end"><?php echo lang('Text.inv_t_dt_col_amount'); ?></th>
 						<th class="text-end"></th>
 					</tr>
@@ -45,7 +45,7 @@
 				}
 			},
 			order: [
-				[3, 'desc']
+				[2, 'desc']
 			],
 			columns: [{
 					data: 'status',
@@ -58,12 +58,13 @@
 				},
 				{
 					data: 'added',
-					class: 'dt-vertical-align p-2',
+					class: 'dt-vertical-align p-2 text-center',
 				},
 				{
 					data: 'amount',
 					class: 'dt-vertical-align p-2',
 					class: "text-end",
+					orderable: false,
 					searchable: false
 				},
 				{
