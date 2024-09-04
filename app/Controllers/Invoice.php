@@ -660,6 +660,8 @@ class Invoice extends BaseController
 		$serial = $this->objInvoiceModel->getSerial(2);
 		$consecutive = $serial[0]->count + 1;
 
+		$invoice_tax = $this->objInvoiceModel->getInvoiceTax($invoiceID);
+
 		$d = array();
 		$d['type'] = 2;
 		$d['serie'] = $serial[0]->id;
@@ -692,6 +694,14 @@ class Invoice extends BaseController
 		$d = array();
 		$d['count'] = $consecutive;
 		$this->objMainModel->objUpdate('serial', $d, $serial[0]->id);
+
+		foreach ($invoice_tax as $it) {
+			$d = array();
+			$d['invoice_id'] = $rs['id'];
+			$d['tax_id'] = $it->taxID;
+
+			$this->objMainModel->objCreate('invoice_tax', $d);
+		}
 
 		return redirect()->to(base_url('Invoice/finishRectifyInvoice?id=') . $rs['id']);
 	}

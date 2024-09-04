@@ -42,7 +42,7 @@
 			<div class="col-6 mb-4 text-end">
 				<?php if ($status <> 2) { ?>
 					<h5><?php echo lang('Text.inv_issue_date'); ?></h5>
-					<?php echo $invoice[0]->added; ?>
+					<?php echo date('Y-m-d', strtotime($invoice[0]->added)); ?>
 				<?php } ?>
 			</div>
 			<div class="col-12 mb-4 text-center">
