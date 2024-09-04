@@ -177,6 +177,7 @@ $lang['pay_inv_are_you_sure_msg'] = "Está seguro?";
 $lang['pay_inv_not_revert_this_msg'] = "Desea marcar la factura como pagada. Esta acción no es reversible!";
 $lang['pay_inv_yes_pay_msg'] = "Si, Pagar";
 $lang['inv_rectified_concept_title'] = "Añada un concepto a su factura rectificativa";
+$lang['inv_rectified_concept_title_print'] = "Concepto de factura rectificativa";
 $lang['inv_rectified_title'] = "Factura Rectificativa";
 $lang['inv_rectified_number'] = "Número de Factura";
 $lang['inv_rectified_invoice'] = "Rectifica la factura";

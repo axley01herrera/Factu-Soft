@@ -159,6 +159,16 @@
 			</div>
 		</div>
 
+		<?php if ($status == 4) { ?>
+			<div class="row">
+				<div class="col-12">
+					<label for=""><?php echo lang('Text.inv_rectified_concept_title_print'); ?></label>
+					<br>
+					<span><?php echo $invoice[0]->r_desc;?></span>
+				</div>
+			</div>
+		<?php } ?>
+
 		<!-- Total -->
 		<div class="row">
 			<div class="col-md-12">
