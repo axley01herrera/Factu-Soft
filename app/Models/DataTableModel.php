@@ -209,6 +209,7 @@ class DataTableModel extends Model
 			$query->groupStart();
 			$query->like('dt_invoices.invoiceNumber', $params['search']);
 			$query->orLike('DATE(dt_invoices.added)', $params['search']);
+			$query->orLike('customerName', $params['search']);
 			$query->groupEnd();
 		}
 
@@ -271,6 +272,7 @@ class DataTableModel extends Model
 			$query->groupStart();
 			$query->like('dt_invoices.invoiceNumber', $params['search']);
 			$query->orLike('dt_invoices.added', $params['search']);
+			$query->orLike('customerName', $params['search']);
 			$query->groupEnd();
 		}
 
