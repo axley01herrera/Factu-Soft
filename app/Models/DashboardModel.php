@@ -57,30 +57,37 @@ class DashboardModel extends Model
 
 	public function chartMont($year)
 	{
+		// Definimos el primer y último día del año
 		$firstDay = "$year-01-01 00:00:00";
 		$lastDay = "$year-12-31 23:59:59";
 
+		// Consulta modificada para asegurar que se agrupa por mes
 		$query = $this->db->table('invoice')
-			->select('SUM(invoice.total_amount) as totalPrice, MONTH(invoice.added) as month, status')
+			->select('SUM(invoice.total_amount) as totalPrice, MONTH(invoice.added) as month')
 			->where("invoice.added >=", $firstDay)
 			->where("invoice.added <=", $lastDay)
-			->groupStart()
-			->where("invoice.status !=2")
-			->groupEnd();
+			->where("invoice.status !=", 2) // Excluir status igual a 2
+			->groupBy('MONTH(invoice.added)') // Agrupar por mes
+			->orderBy('month', 'ASC'); // Ordenar por mes para asegurar el orden correcto
 
+		// Ejecutamos la consulta y obtenemos los resultados
 		$data = $query->get()->getResult();
 
+		// Inicializamos un array con 12 posiciones (1 por cada mes)
 		$serie = array_fill(1, 12, 0);
 		$total = 0;
 
+		// Recorremos los resultados y los asignamos al mes correspondiente
 		foreach ($data as $row) {
 			$month = (int) $row->month;
 			$serie[$month] = (float) $row->totalPrice;
-			$total += $serie[$month];
+			$total += $serie[$month]; // Sumamos al total
 		}
 
+		// Agregamos el total de todos los meses al final del array
 		$serie['total'] = $total;
 
+		// Devolvemos el array que contiene los totales por mes y el total general
 		return $serie;
 	}
 
