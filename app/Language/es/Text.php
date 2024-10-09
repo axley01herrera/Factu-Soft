@@ -44,6 +44,7 @@ $lang['status_deleted'] = "Eliminado";
 $lang['btn_save'] = "Guardar";
 $lang['btn_update'] = "Actualizar";
 $lang['btn_edit'] = "Editar";
+$lang['btn_delete'] = "Eliminar";
 $lang['btn_cancel'] = "Cancelar";
 $lang['btn_print'] = "Imprimir";
 
@@ -269,14 +270,14 @@ $lang['services_modal_title_create'] = "Nuevo Servicio";
 $lang['service_text_name'] = 'Nombre';
 $lang['service_text_price'] = 'Precio';
 $lang['service_text_description'] = 'Descripción';
-$lang['services_dt_col_name'] = "Nombre";
-$lang['services_dt_col_price'] = 'Precio';
-$lang['services_dt_col_description'] = 'Descripción';
-$lang['services_dt_col_date_updated'] = 'Actualizado';
-$lang['services_dt_col_date_created'] = 'Creado';
+$lang['service_text_date_updated'] = 'Actualizado';
+$lang['service_text_date_created'] = 'Creado';
 $lang['services_msg_success_create'] = "Servicio Creado";
 $lang['services_msg_success_update'] = "Servicio Actualizado";
 $lang['services_msg_success_deleted'] = "Servicio Eliminado";
+$lang['services_text_order_services'] = "Ordenar Servicios";
+$lang['services_msg_success_order_services'] = "Servicios Ordenados";
+$lang['services_alert_empty_services'] = "No hay servicios creados. Para añadir uno presione en Crear Servicio";
 
 # Profile
 $lang['profile_page_title'] = "Perfil de Empresa";

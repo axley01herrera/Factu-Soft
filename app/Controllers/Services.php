@@ -80,7 +80,7 @@ class Services extends BaseController
 
 		$data = array();
 		$data['config'] = $this->config;
-		
+
 		if (empty($serviceID)) {
 			$data['modalTitle'] = lang('Text.services_modal_title_create');
 			$data['action'] = 'create';
@@ -111,6 +111,8 @@ class Services extends BaseController
 		$description = htmlspecialchars(trim($this->objRequest->getPost('description')));
 		$price = htmlspecialchars(trim($this->objRequest->getPost('price')));
 
+		$ordering = sizeof($this->objServicesModel->getServices()) + 1;
+
 		$data = array();
 		$data['name'] = $name;
 		$data['description'] = $description;
@@ -121,6 +123,7 @@ class Services extends BaseController
 			$result = $this->objMainModel->objUpdate('services', $data, $serviceID);
 		else { // Create
 			$data['created'] = date('Y-m-d H:i:s');
+			$data['ordering'] = $ordering;
 			$result = $this->objMainModel->objCreate('services', $data);
 		}
 
@@ -145,6 +148,41 @@ class Services extends BaseController
 		$data['deleted'] = 1;
 
 		$result = $this->objMainModel->objUpdate('services', $data, $serviceID);
+
+		return json_encode($result);
+	}
+
+	public function showOrderModal()
+	{
+		# Verify Session 
+		if (empty($this->objSession->get('user')) || ($this->objSession->get('user')['role'] != "admin" && $this->objSession->get('user')['role'] != "master"))
+			return view('controlPanelLogout');
+
+		$data = array();
+		# config
+		$data['config'] = $this->config;
+		# data
+		$data['services'] = $this->objServicesModel->getServices();
+		# page
+		$view = 'services/orderModal';
+
+		return view($view, $data);
+	}
+
+	public function updateServicesOrder()
+	{
+		# params
+		$ids = $this->objRequest->getPost('ids');
+
+		$i = 1;
+		foreach ($ids as $id) {
+			$data = array();
+			$data['ordering'] = $i;
+			$this->objMainModel->objUpdate('services', $data, $id);
+			$i++;
+		}
+
+		$result['error'] = 0;
 
 		return json_encode($result);
 	}

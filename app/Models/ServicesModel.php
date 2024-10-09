@@ -17,7 +17,8 @@ class ServicesModel extends Model
 	public function getServices($serviceID = null)
 	{
 		$query = $this->db->table('services')
-			->where('deleted', 0);
+			->where('deleted', 0)
+			->orderBy('ordering', 'asc');
 
 		if (!empty($serviceID))
 			$query->where('id', $serviceID);

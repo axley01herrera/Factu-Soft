@@ -39,6 +39,8 @@ $routes->get('Services', 'Services::index');
 $routes->post('Services/addEditService', 'Services::addEditService');
 $routes->post('Services/saveService', 'Services::saveService');
 $routes->post('Services/deleteService', 'Services::deleteService');
+$routes->post('Services/showOrderModal', 'Services::showOrderModal');
+$routes->post('Services/updateServicesOrder', 'Services::updateServicesOrder');
 
 # Invoices
 $routes->get('Invoice/invoice', 'Invoice::invoice');

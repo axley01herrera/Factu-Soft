@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `services` (
   `updated` datetime NOT NULL,
   `created` datetime NOT NULL,
   `deleted` int NOT NULL DEFAULT '0' COMMENT '1 = deleted',
+  `ordering` INT NOT NULL DEFAULT '0'
   PRIMARY KEY (`id`)
 );
 
@@ -239,3 +240,13 @@ WHERE
     invoice.type = 2
 GROUP BY
     invoice.id;
+
+
+
+
+
+##################################################
+LAST CHANGES
+##################################################
+
+ALTER TABLE `services` ADD `ordering` INT NOT NULL DEFAULT '0' AFTER `created`; 
