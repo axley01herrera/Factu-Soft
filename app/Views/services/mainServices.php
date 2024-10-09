@@ -1,3 +1,10 @@
+<style>
+	.scroll-container {
+		height: 50px;
+		overflow-y: scroll;
+	}
+</style>
+
 <!-- Page Header-->
 <div class="d-md-flex align-items-center justify-content-between mb-7">
 	<div class="mb-4 mb-md-0">
@@ -21,7 +28,7 @@
 	<?php } ?>
 	<?php foreach ($services as $s) { ?>
 		<div class="col-12 col-md-6 col-lg-4">
-			<div class="card">
+			<div class="card" style="height: 250px;">
 				<div class="card-body">
 					<h5 class="card-title mb-1"><?php echo $s->name; ?>
 						<div class="float-end">
@@ -48,8 +55,15 @@
 							</ul>
 						</div>
 					</h5>
-					<h5 class="card-subtitle"><?php echo getMoneyFormat($config[0]->currency, $s->price); ?></h5>
-					<p class="mt-2"><?php echo $s->description; ?></p>
+					<h5 class="card-subtitle">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+							<path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+							<path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z" />
+						</svg>
+						<?php echo getMoneyFormat($config[0]->currency, $s->price); ?>
+					</h5>
+					<p class="fw-bold mt-3 mb-1">Descripción</p>
+					<p class="mt-0 scroll-container"><?php echo $s->description; ?></p>
 					<div class="row mt-3">
 						<div class="col-6">
 							<p class="fw-bold mb-0"><?php echo lang('Text.service_text_date_created'); ?></p>

@@ -1,5 +1,19 @@
 <script src="<?php echo base_url('public/assets/js/draggable/draggable.bundle.js'); ?>"></script>
 
+<style>
+	.card-heigth {
+		width: 70px;
+		height: 70px;
+	}
+
+	@media only screen and (max-width: 768px) {
+		.card-heigth {
+			width: 35px;
+			height: 70px;
+		}
+	}
+</style>
+
 <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	<div class="modal-dialog modal-md modal-dialog-centered">
 		<div class="modal-content">
@@ -11,7 +25,7 @@
 				<div class="row mt-2">
 					<div class="col-2">
 						<?php for ($i = 1; $i <= sizeof($services); $i++) { ?>
-							<div class="card mt-0 mb-3" style="height: 70px; width: 70px;">
+							<div class="card mt-0 mb-3 card-heigth">
 								<div class="text-center mt-4">
 									<?php echo $i; ?>
 								</div>
