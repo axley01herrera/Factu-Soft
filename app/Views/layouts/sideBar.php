@@ -140,6 +140,36 @@
 				</li>
 
 				<li class="nav-small-cap">
+					<span class="hide-menu"><?php echo lang('Text.menu_bills'); ?></span>
+				</li>
+
+				<!-- Upload Files -->
+				<li class="sidebar-item">
+					<a class="sidebar-link <?php echo @$uploadFileActive; ?>" href="<?php echo base_url('Bills/uploadFiles'); ?>" aria-expanded="false">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-cloud-upload">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1" />
+							<path d="M9 15l3 -3l3 3" />
+							<path d="M12 12l0 9" />
+						</svg>
+						<span class="hide-menu"><?php echo lang('Text.menu_upload_files'); ?></span>
+					</a>
+				</li>
+
+				<!-- Files List -->
+				<li class="sidebar-item">
+					<a class="sidebar-link <?php echo @$fileListActive; ?>" href="<?php echo base_url('Bills/fileList'); ?>" aria-expanded="false">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-files">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<path d="M15 3v4a1 1 0 0 0 1 1h4" />
+							<path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" />
+							<path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />
+						</svg>
+						<span class="hide-menu"><?php echo lang('Text.menu_list_files'); ?></span>
+					</a>
+				</li>
+
+				<li class="nav-small-cap">
 					<span class="hide-menu"><?php echo lang('Text.menu_config'); ?></span>
 				</li>
 

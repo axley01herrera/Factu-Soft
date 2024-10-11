@@ -101,3 +101,9 @@ $routes->get('TPV/printTicket', 'TPV::printTicket');
 
 # DB Backup
 $routes->post('Backup/createBackup', 'Backup::createBackup');
+
+# Bills
+$routes->get('Bills/uploadFiles', 'Bills::uploadFiles');
+$routes->get('Bills/fileList', 'Bills::fileList');
+$routes->post('Bills/uploadFilesProccess', 'Bills::uploadFilesProccess');
+$routes->post('Bills/deleteUploadFile', 'Bills::deleteUploadFile');

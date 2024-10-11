@@ -59,6 +59,9 @@ $lang['menu_customers_list'] = "Listado de Clientes";
 $lang['menu_invoices'] = "Facturación";
 $lang['menu_series'] = "Series";
 $lang['menu_taxs'] = "Impuestos";
+$lang['menu_bills'] = "Gastos";
+$lang['menu_upload_files'] = "Subir Archivos";
+$lang['menu_list_files'] = "Listado de archivos";
 $lang['menu_tickets'] = "Facturas Simplificadas";
 $lang['menu_invoice'] = "Facturas";
 $lang['menu_services'] = "Servicios";
@@ -311,5 +314,17 @@ $lang['config_text_timezone'] = "Zona Horaria";
 $lang['config_text_currency'] = "Moneda de Facturación";
 $lang['config_msg_success_save_config'] = "Configuración actualizada";
 $lang['config_btn_create_bd_backup'] = "Crear copia de seguridad de la BD";
+
+# Bills
+$lang['bills_title'] = 'Gastos';
+
+# Files list section
+$lang['bil_dt_col_file_name'] = 'Nombre del archivo';
+$lang['msg_success_deleted_files'] = 'Archivo eliminado';
+
+# Upload files section
+$lang['bil_upload_files_title'] = 'Suba sus archivos';
+$lang['bil_upload_files_subtitle'] = 'Arrastre o examine hasta 10 archivos';
+$lang['msg_success_upload_files'] = 'Archivos subidos';
 
 return $lang;

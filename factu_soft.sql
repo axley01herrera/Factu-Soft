@@ -241,9 +241,18 @@ WHERE
 GROUP BY
     invoice.id;
 
+-- --------------------------------------------------------
 
-##################################################
-LAST CHANGES
-##################################################
+--
+-- Table structure for table `files`
+--
 
-ALTER TABLE `services` ADD `ordering` INT NOT NULL DEFAULT '0' AFTER `created`; 
+CREATE TABLE `files` (
+	`id` INT NOT NULL AUTO_INCREMENT ,
+	`filename` VARCHAR(999) NOT NULL ,
+	`path` VARCHAR(999) NOT NULL ,
+	`date` DATETIME NOT NULL
+	PRIMARY KEY (`id`)
+); 
+
+-- --------------------------------------------------------
