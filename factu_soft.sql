@@ -177,6 +177,19 @@ CREATE TABLE IF NOT EXISTS `invoice_tax` (
   PRIMARY KEY (`id`)
 );
 
+
+--
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+	`id` INT NOT NULL AUTO_INCREMENT ,
+	`filename` VARCHAR(999) NOT NULL ,
+	`path` VARCHAR(999) NOT NULL ,
+	`date` DATETIME NOT NULL
+	PRIMARY KEY (`id`)
+); 
+
 -- --------------------------------------------------------
 
 --
@@ -241,18 +254,4 @@ WHERE
 GROUP BY
     invoice.id;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `files`
---
-
-CREATE TABLE `files` (
-	`id` INT NOT NULL AUTO_INCREMENT ,
-	`filename` VARCHAR(999) NOT NULL ,
-	`path` VARCHAR(999) NOT NULL ,
-	`date` DATETIME NOT NULL
-	PRIMARY KEY (`id`)
-); 
-
--- --------------------------------------------------------
+ALTER TABLE `services` ADD `ordering` INT NOT NULL DEFAULT '0' AFTER `created`; 
