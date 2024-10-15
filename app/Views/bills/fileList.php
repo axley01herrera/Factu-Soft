@@ -52,7 +52,7 @@
 				url: dtLang
 			},
 			order: [
-				[0, 'desc']
+				[1, 'desc']
 			],
 			dom: '<"top"f>rt<"row"<"col-4 mt-3"l><"col-4 mt-3"i><"col-4 mt-3"p>>',
 			ajax: {
