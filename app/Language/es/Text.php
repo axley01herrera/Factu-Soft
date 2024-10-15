@@ -61,7 +61,7 @@ $lang['menu_series'] = "Series";
 $lang['menu_taxs'] = "Impuestos";
 $lang['menu_bills'] = "Gastos";
 $lang['menu_upload_files'] = "Subir Archivos";
-$lang['menu_list_files'] = "Listado de archivos";
+$lang['menu_list_files'] = "Listado de Archivos";
 $lang['menu_tickets'] = "Facturas Simplificadas";
 $lang['menu_invoice'] = "Facturas";
 $lang['menu_services'] = "Servicios";
@@ -319,10 +319,14 @@ $lang['config_btn_create_bd_backup'] = "Crear copia de seguridad de la BD";
 $lang['bills_title'] = 'Gastos';
 
 # Files list section
+$lang['file_list_title'] = 'Listado de Justificantes de Gastos';
 $lang['bil_dt_col_file_name'] = 'Nombre del archivo';
+$lang['bil_dt_col_file_date'] = 'Fecha';
 $lang['msg_success_deleted_files'] = 'Archivo eliminado';
 
 # Upload files section
+$lang['upload_list_title'] = 'Subir Archivos Justificantes de Gastos';
+$lang['bil_upload_files_text_1'] = 'Los archivos se subirán con fecha:';
 $lang['bil_upload_files_title'] = 'Suba sus archivos';
 $lang['bil_upload_files_subtitle'] = 'Arrastre o examine hasta 10 archivos';
 $lang['msg_success_upload_files'] = 'Archivos subidos';

@@ -4,7 +4,7 @@
 <!-- Page Header-->
 <div class="d-md-flex align-items-center justify-content-between mb-7">
 	<div class="mb-4 mb-md-0">
-		<h4 class="fs-6 mb-0"><?php echo lang('Text.menu_bills'); ?></h4>
+		<h4 class="fs-6 mb-0"><?php echo lang('Text.file_list_title'); ?></h4>
 	</div>
 	<div class="d-flex align-items-center justify-content-between gap-6">
 	</div>
@@ -25,6 +25,7 @@
 				<thead>
 					<tr>
 						<th><?php echo lang('Text.bil_dt_col_file_name'); ?></th>
+						<th><?php echo lang('Text.bil_dt_col_file_date'); ?></th>
 						<th class="text-end"></th>
 					</tr>
 				</thead>
@@ -32,6 +33,7 @@
 					<?php foreach ($files as $f) { ?>
 						<tr>
 							<td><?php echo $f->filename; ?></td>
+							<td><?php echo date('d-m-Y', strtotime($f->date)); ?></td>
 							<td class="text-end">
 								<a class="me-2" href="<?php echo base_url('public/' . '' . $f->path); ?>" download>
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-download">
@@ -78,7 +80,7 @@
 				url: dtLang
 			},
 			columnDefs: [{
-				targets: [1],
+				targets: [2],
 				searchable: false,
 				orderable: false
 			}],

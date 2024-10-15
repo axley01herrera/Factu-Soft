@@ -186,7 +186,7 @@ CREATE TABLE `files` (
 	`id` INT NOT NULL AUTO_INCREMENT ,
 	`filename` VARCHAR(999) NOT NULL ,
 	`path` VARCHAR(999) NOT NULL ,
-	`date` DATETIME NOT NULL
+	`date` DATE NOT NULL
 	PRIMARY KEY (`id`)
 ); 
 

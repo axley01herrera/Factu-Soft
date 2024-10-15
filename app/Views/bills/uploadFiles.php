@@ -4,20 +4,25 @@
 <!-- Page Header-->
 <div class="d-md-flex align-items-center justify-content-between mb-7">
 	<div class="mb-4 mb-md-0">
-		<h4 class="fs-6 mb-0"><?php echo lang('Text.menu_bills'); ?></h4>
+		<h4 class="fs-6 mb-0"><?php echo lang('Text.upload_list_title'); ?></h4>
 	</div>
 	<div class="d-flex align-items-center justify-content-between gap-6">
 	</div>
 </div>
 
 <!-- Page Content -->
-<div class="row">
-	<div class="dropzone mb-5" id="dropzone">
-		<div class="dz-message needsclick">
-			<i class="ki-duotone ki-file-up fs-4x text-primary"><span class="path1"></span><span class="path2"></span></i>
-			<div class="ms-4">
-				<h3 class="fs-5 fw-bold text-gray-900 mb-1"><?php echo lang('Text.bil_upload_files_title'); ?></h3>
-				<span class="fs-7 fw-semibold text-gray-500"><?php echo lang('Text.bil_upload_files_subtitle'); ?></span>
+<div class="card">
+	<div class="card-body">
+		<div class="mb-5">
+			<p><?php echo lang('Text.bil_upload_files_text_1'); ?></p> <input type="date" id="sel-date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+		</div>
+		<div class="dropzone" id="dropzone">
+			<div class="dz-message needsclick">
+				<i class="ki-duotone ki-file-up fs-4x text-primary"><span class="path1"></span><span class="path2"></span></i>
+				<div class="ms-4">
+					<h3 class="fs-5 fw-bold text-gray-900 mb-1"><?php echo lang('Text.bil_upload_files_title'); ?></h3>
+					<span class="fs-7 fw-semibold text-gray-500"><?php echo lang('Text.bil_upload_files_subtitle'); ?></span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -25,6 +30,7 @@
 
 <script>
 	Dropzone.autoDiscover = false;
+	let date = '';
 
 	let myDropzone = new Dropzone("#dropzone", {
 		url: '<?php echo base_url('Bills/uploadFilesProccess'); ?>',
@@ -38,7 +44,10 @@
 		parallelUploads: 10,
 		init: function() {
 			dropzone = this;
-			this.on("sending", function(file, xhr, formData) {});
+			this.on("sending", function(file, xhr, formData) {
+				date = $('#sel-date').val();
+				formData.append('date', date);
+			});
 		}
 	});
 

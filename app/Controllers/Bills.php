@@ -100,8 +100,7 @@ class Bills extends BaseController
 		helper('filesystem');
 
 		$files = $_FILES['files'];
-		$date = date('Y-m-d');
-		$dateTime = date('Y-m-d H:i:s');
+		$date = $_POST['date'];
 
 		$folder = 'upload/bills/' . $date . '/';
 		$invalidExtensions = array('php', 'js', 'html', 'css');
@@ -132,7 +131,7 @@ class Bills extends BaseController
 			$data = array();
 			$data['fileName'] = $fileName;
 			$data['path'] = $path;
-			$data['date'] = $dateTime;
+			$data['date'] = $date;
 
 			$result = $this->objMainModel->objCreate('files', $data);
 		}
@@ -143,7 +142,7 @@ class Bills extends BaseController
 	public function deleteUploadFile()
 	{
 		# Verify Assist Session
-		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin"){
+		if (empty($this->objSession->get('user')) || $this->objSession->get('user')['role'] != "admin") {
 			$response = array();
 			$response['error'] = 2;
 			$response['msg'] = 'SESSION_EXPIRED';
