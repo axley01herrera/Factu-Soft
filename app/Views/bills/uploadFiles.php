@@ -13,8 +13,13 @@
 <!-- Page Content -->
 <div class="card">
 	<div class="card-body">
-		<div class="mb-5">
-			<p><?php echo lang('Text.bil_upload_files_text_1'); ?></p> <input type="date" id="sel-date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+		<div class="row mb-5">
+			<div class="col-12">
+				<p><?php echo lang('Text.bil_upload_files_text_1'); ?></p>
+			</div>
+			<div class="col-12 col-lg-2">
+				<input type="date" id="sel-date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+			</div>
 		</div>
 		<div class="dropzone" id="dropzone">
 			<div class="dz-message needsclick">

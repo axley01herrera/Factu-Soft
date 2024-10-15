@@ -328,7 +328,7 @@ $lang['msg_success_deleted_files'] = 'Archivo eliminado';
 $lang['upload_list_title'] = 'Subir Archivos Justificantes de Gastos';
 $lang['bil_upload_files_text_1'] = 'Los archivos se subirán con fecha:';
 $lang['bil_upload_files_title'] = 'Suba sus archivos';
-$lang['bil_upload_files_subtitle'] = 'Arrastre o examine hasta 10 archivos';
+$lang['bil_upload_files_subtitle'] = 'Arrastre o examine los archivos';
 $lang['msg_success_upload_files'] = 'Archivos subidos';
 
 return $lang;
