@@ -29,34 +29,6 @@
 						<th class="text-end"></th>
 					</tr>
 				</thead>
-				<tbody>
-					<?php foreach ($files as $f) { ?>
-						<tr>
-							<td><?php echo $f->filename; ?></td>
-							<td><?php echo date('d-m-Y', strtotime($f->date)); ?></td>
-							<td class="text-end">
-								<a class="me-2" href="<?php echo base_url('public/' . '' . $f->path); ?>" download>
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-download">
-										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-										<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-										<path d="M7 11l5 5l5 -5" />
-										<path d="M12 4l0 12" />
-									</svg>
-								</a>
-								<a class="me-2 delete-file" href="#" data-file-id="<?php echo $f->id; ?>" data-file-path="<?php echo $f->path; ?>">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-										<path d="M4 7l16 0" />
-										<path d="M10 11l0 6" />
-										<path d="M14 11l0 6" />
-										<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-										<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-									</svg>
-								</a>
-							</td>
-						</tr>
-					<?php } ?>
-				</tbody>
 			</table>
 		</div>
 	</div>
@@ -73,21 +45,35 @@
 			dtLang = "<?php echo base_url('public/assets/js/dataTableLang/en.json'); ?>";
 
 		var dtFileList = $('#dt-files').DataTable({ // DATA TABLE 
-			processing: false,
-			serverSide: false,
+			processing: true,
+			serverSide: true,
 			pageLength: 10,
 			language: {
 				url: dtLang
 			},
-			columnDefs: [{
-				targets: [2],
-				searchable: false,
-				orderable: false
-			}],
 			order: [
 				[0, 'desc']
 			],
 			dom: '<"top"f>rt<"row"<"col-4 mt-3"l><"col-4 mt-3"i><"col-4 mt-3"p>>',
+			ajax: {
+				url: '<?php echo base_url('Bills/proccesingFilesDT'); ?>',
+				type: "POST"
+			},
+			columns: [{
+					data: 'filename',
+					class: 'dt-vertical-align',
+				},
+				{
+					data: 'date',
+					class: 'dt-vertical-align'
+				},
+				{
+					data: 'action',
+					class: 'dt-vertical-align text-end',
+					orderable: false,
+					searchable : false,
+				}
+			],
 		});
 
 		dtFileList.on('click', '.delete-file', function(e) {
@@ -125,9 +111,7 @@
 										timer: 2500
 									});
 
-									setTimeout(() => {
-										window.location.reload();
-									}, 2500);
+									dtFileList.draw();
 									break;
 								case 1:
 									globalError();

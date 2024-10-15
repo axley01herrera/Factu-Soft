@@ -346,4 +346,62 @@ class DataTableModel extends Model
 
 		return $query->countAllResults();
 	}
+
+	####################
+	#### Files Data Table
+	####################
+
+	public function getFilesProcessingData($params)
+	{
+		$query = $this->db->table('files');
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('files.filename', $params['search']);
+			$query->orLike('files.date', $params['search']);
+			$query->groupEnd();
+		}
+
+		$query->offset($params['start']);
+		$query->limit($params['length']);
+		$query->orderBy($this->getFilesProcessingSort($params['sortColumn'], $params['sortDir']));
+
+		$data = $query->get()->getResult();
+
+		return $data;
+	}
+
+	public function getFilesProcessingSort($column, $dir)
+	{
+		$sort = '';
+
+		if ($column == 0) {
+			if ($dir == 'asc')
+				$sort = 'files.filename ASC';
+			else
+				$sort = 'files.filename DESC';
+		}
+
+		if ($column == 1) {
+			if ($dir == 'asc')
+				$sort = 'files.date ASC';
+			else
+				$sort = 'files.date DESC';
+		}
+		return $sort;
+	}
+
+	public function getTotalFiles($params)
+	{
+		$query = $this->db->table('files');
+
+		if (!empty($params['search'])) {
+			$query->groupStart();
+			$query->like('files.filename', $params['search']);
+			$query->orLike('files.date', $params['search']);
+			$query->groupEnd();
+		}
+
+		return $query->countAllResults();
+	}
 }

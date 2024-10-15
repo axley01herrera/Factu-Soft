@@ -64,7 +64,7 @@ $routes->get('Invoice/rectifyInvoice', 'Invoice::rectifyInvoice');
 $routes->get('Invoice/finishRectifyInvoice', 'Invoice::finishRectifyInvoice');
 $routes->get('Invoice/invoiceDetail', 'Invoice::invoiceDetail');
 $routes->post('Invoice/addTaxToInvoice', 'Invoice::addTaxToInvoice');
-$routes->post('Invoice/removeTaxInvoice', 'Invoice::removeTaxInvoice'); 
+$routes->post('Invoice/removeTaxInvoice', 'Invoice::removeTaxInvoice');
 $routes->post('Invoice/payInvoiceModal', 'Invoice::payInvoiceModal');
 
 # Taxs
@@ -107,3 +107,4 @@ $routes->get('Bills/uploadFiles', 'Bills::uploadFiles');
 $routes->get('Bills/fileList', 'Bills::fileList');
 $routes->post('Bills/uploadFilesProccess', 'Bills::uploadFilesProccess');
 $routes->post('Bills/deleteUploadFile', 'Bills::deleteUploadFile');
+$routes->post('Bills/proccesingFilesDT', 'Bills::proccesingFilesDT');

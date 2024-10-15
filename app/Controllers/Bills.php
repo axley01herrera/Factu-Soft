@@ -6,6 +6,7 @@ use App\Models\ConfigModel;
 use App\Models\ProfileModel;
 use App\Models\BillsModel;
 use App\Models\MainModel;
+use App\Models\DataTableModel;
 
 class Bills extends BaseController
 {
@@ -16,6 +17,7 @@ class Bills extends BaseController
 	protected $objProfile;
 	protected $objBillsModel;
 	protected $objMainModel;
+	protected $objDataTableModel;
 
 	protected $config;
 	protected $profile;
@@ -29,6 +31,7 @@ class Bills extends BaseController
 		$this->objProfile = new ProfileModel;
 		$this->objBillsModel = new BillsModel;
 		$this->objMainModel = new MainModel;
+		$this->objDataTableModel = new DataTableModel;
 
 		# Services
 		$this->objRequest = \Config\Services::request();
@@ -160,5 +163,63 @@ class Bills extends BaseController
 		$result = $this->objMainModel->objDelete('files', $fileID);
 
 		return json_encode($result);
+	}
+
+	public function proccesingFilesDT()
+	{
+		$dataTableRequest = $_REQUEST;
+
+		$params = array();
+		$params['draw'] = $dataTableRequest['draw'];
+		$params['start'] = $dataTableRequest['start'];
+		$params['length'] = $dataTableRequest['length'];
+		$params['search'] = $dataTableRequest['search']['value'];
+		$params['sortColumn'] = $dataTableRequest['order'][0]['column'];
+		$params['sortDir'] = $dataTableRequest['order'][0]['dir'];
+
+		$row = array();
+		$totalRecords = 0;
+
+		$result = $this->objDataTableModel->getFilesProcessingData($params);
+		$totalRows = sizeof($result);
+
+		for ($i = 0; $i < $totalRows; $i++) {
+
+			$col = array();
+			$col['filename'] = $result[$i]->filename;
+			$col['date'] = date('d-m-Y', strtotime($result[$i]->date));
+			$col['action'] = '
+			<a class="me-2" href="' . base_url("public/" . "" . $result[$i]->path) . '" download>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-download">
+					<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+					<path d="M7 11l5 5l5 -5" />
+					<path d="M12 4l0 12" />
+				</svg>
+			</a>
+			<a class="me-2 delete-file" href="#" data-file-id="' . $result[$i]->id . '" data-file-path="' . $result[$i]->path . '">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+					<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					<path d="M4 7l16 0" />
+					<path d="M10 11l0 6" />
+					<path d="M14 11l0 6" />
+					<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+					<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+				</svg>
+			</a>';
+
+			$row[$i] =  $col;
+		}
+
+		if ($totalRows > 0)
+			$totalRecords = $this->objDataTableModel->getTotalFiles($params);
+
+		$data = array();
+		$data['draw'] = $dataTableRequest['draw'];
+		$data['recordsTotal'] = intval($totalRecords);
+		$data['recordsFiltered'] = intval($totalRecords);
+		$data['data'] = $row;
+
+		return json_encode($data);
 	}
 }
