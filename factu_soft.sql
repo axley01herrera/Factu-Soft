@@ -255,3 +255,4 @@ GROUP BY
     invoice.id;
 
 ALTER TABLE `services` ADD `ordering` INT NOT NULL DEFAULT '0' AFTER `created`; 
+ALTER TABLE `files` CHANGE `date` `date` DATE NOT NULL; 
