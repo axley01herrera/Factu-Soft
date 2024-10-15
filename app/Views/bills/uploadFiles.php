@@ -37,7 +37,6 @@
 		method: 'post',
 		acceptedFiles: 'image/*, application/*, text/*, .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .zip, .rar, .7z, .gz, .bz2, .tar',
 		addRemoveLinks: true,
-		maxFiles: 10,
 		autoProcessQueue: true,
 		paramName: 'files',
 		uploadMultiple: true,
