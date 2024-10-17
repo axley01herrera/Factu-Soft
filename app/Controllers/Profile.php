@@ -81,18 +81,20 @@ class Profile extends BaseController
 		$zip = htmlspecialchars(trim($this->objRequest->getPost('zip')));
 		$country = htmlspecialchars(trim($this->objRequest->getPost('country')));
 		$description = htmlspecialchars(trim($this->objRequest->getPost('description')));
+		$iban = htmlspecialchars(trim($this->objRequest->getPost('iban')));
 
 		$data = array();
-		$data['name'] = $name;
-		$data['company_id'] = $company_id;
-		$data['email'] = $email;
+		$data['name'] = ucfirst($name);
+		$data['company_id'] = ucfirst($company_id);
+		$data['email'] = strtolower($email);
 		$data['phone'] = $phone;
-		$data['address_a'] = $address_a;
-		$data['city'] = $city;
-		$data['state'] = $state;
+		$data['address_a'] = ucfirst($address_a);
+		$data['city'] = ucfirst($city);
+		$data['state'] = ucfirst($state);
 		$data['zip'] = $zip;
-		$data['country'] = $country;
+		$data['country'] = ucfirst($country);
 		$data['description'] = $description;
+		$data['bank_account_number'] = strtoupper($iban);
 
 		$result = $this->objMainModel->objUpdate('profile', $data, 1);
 

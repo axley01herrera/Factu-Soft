@@ -256,3 +256,4 @@ GROUP BY
 
 ALTER TABLE `services` ADD `ordering` INT NOT NULL DEFAULT '0' AFTER `created`; 
 ALTER TABLE `files` CHANGE `date` `date` DATE NOT NULL; 
+ALTER TABLE `profile` ADD `bank_account_number` VARCHAR(500) NULL AFTER `description`; 

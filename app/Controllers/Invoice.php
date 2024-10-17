@@ -627,9 +627,10 @@ class Invoice extends BaseController
 		$data['invoice'] = $this->objInvoiceModel->getInvoice($invoiceID);
 		$data['items'] = $this->objInvoiceModel->getInvoiceItems($invoiceID);
 		$data['customer'] = $this->objInvoiceModel->getCustomer($data['invoice'][0]->customer);
-		$data['status'] = $data['invoice'][0]->status;
 		$data['invoice_tax'] = $this->objInvoiceModel->getInvoiceTax($invoiceID);
 		$data['tax'] = $this->objInvoiceModel->getSelTax();
+		$data['status'] = $data['invoice'][0]->status;
+		$data['profile'] = $this->profile;
 
 		if ($data['invoice'][0]->status == 1) { // Paid
 			$data['status_label'] = '<h1>' . lang('Text.inv_status_paid_p') . '</h1>';

@@ -193,6 +193,7 @@ $lang['inv_action_add_tax_msg'] = "Seleccione un tipo de impuesto para agregar";
 $lang['tax_base'] = "Base Imponible";
 $lang['inv_alert_tax'] = "El sistema no valida la compatibilidad de los impuestos aplicados. Asegúrese de revisar y verificar toda la información de la factura antes de emitirla.";
 $lang['select_pay_type_msg'] = "Seleccione un método de pago..!";
+$lang['inv_print_iban'] = "IBAN PARA TRANSFERENCIAS";
 
 # Invoices Tickets
 $lang['inv_t_page_title'] = "Historial de Facturas Simplificadas";
@@ -305,7 +306,7 @@ $lang['profile_change_password_modal_title'] = "Cambiar Clave de Acceso";
 $lang['profile_new_password_label'] = "Nueva Clave de Acceso";
 $lang['profile_msg_success_change_password'] = "Clave de acceso actualizada";
 $lang['profile_edit_logo'] = "Editar Logo";
-
+$lang['profile_card_bank_title'] = "Cuenta de Banco ( IBAN )";
 
 # Config
 $lang['config_page_title'] = "Configuración del Sistema";

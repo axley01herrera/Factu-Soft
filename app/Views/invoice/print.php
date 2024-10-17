@@ -164,7 +164,7 @@
 				<div class="col-12">
 					<label for=""><?php echo lang('Text.inv_rectified_concept_title_print'); ?></label>
 					<br>
-					<span><?php echo $invoice[0]->r_desc;?></span>
+					<span><?php echo $invoice[0]->r_desc; ?></span>
 				</div>
 			</div>
 		<?php } ?>
@@ -206,6 +206,17 @@
 				</div>
 			</div>
 		</div>
+
+		<?php if ($status == 3 && !empty($profile->bank_account_number)) { ?>
+			<div class="row">
+				<div class="col-12 border border-1" style="border-radius: 5px;">
+					<b><span class="text-uppercase"><?php echo lang('Text.inv_print_iban'); ?></span></b>
+					<br>
+					 <?php echo $profile->bank_account_number; ?>
+				</div>
+			</div>
+		<?php } ?>
+
 	</div>
 </body>
 

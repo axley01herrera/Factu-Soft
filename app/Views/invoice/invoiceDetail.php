@@ -196,7 +196,7 @@
 								$totalTax = $totalTax + $calcTax;
 
 							$calcTax = getMoneyFormat($config[0]->currency, $calcTax);
-							$calcTax = $it->taxOperator . $calcTax;
+							$calcTax = $calcTax;
 						}
 						?>
 						<h7>

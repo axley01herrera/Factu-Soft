@@ -31,7 +31,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="text-center " >
+							<div class="text-center ">
 								<h5 class="mb-0">
 									<?php
 									if (!empty($profile->name))
@@ -178,19 +178,25 @@
 						<input type="text" id="txt-country" class="form-control ci-disabled required" value="<?php echo $profile->country; ?>" disabled />
 					</div>
 
-					<div class="col-12">
+					<div class="col-12 mb-2">
 						<label for="txt-desc" class="form-label"><?php echo lang('Text.profile_text_desc'); ?></label>
 						<textarea id="txt-desc" class="form-control ci-disabled required" rows="5" disabled><?php echo $profile->description; ?></textarea>
+					</div>
+
+					<div class="col-12">
+						<label for="txt-bank-account" class="form-label"><?php echo lang('Text.profile_card_bank_title'); ?></label>
+						<input type="text" id="txt-bank-account" class="form-control ci-disabled" value="<?php echo $profile->bank_account_number; ?>" disabled />
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-12 text-end">
-						<button id="btn-edit-company-info" class="btn btn-warning"><?php echo lang('Text.btn_edit');?></button>
-						<button id="btn-cancel-company-info" class="btn btn-secondary" hidden><?php echo lang('Text.btn_cancel');?></button>
-						<button id="btn-save-company-info" class="btn btn-primary" hidden><?php echo lang('Text.btn_save');?></button>
+						<button id="btn-edit-company-info" class="btn btn-warning"><?php echo lang('Text.btn_edit'); ?></button>
+						<button id="btn-cancel-company-info" class="btn btn-secondary" hidden><?php echo lang('Text.btn_cancel'); ?></button>
+						<button id="btn-save-company-info" class="btn btn-primary" hidden><?php echo lang('Text.btn_save'); ?></button>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -230,12 +236,12 @@
 						'state': $('#txt-state').val(),
 						'zip': $('#txt-zip').val(),
 						'country': $('#txt-country').val(),
-						'description': $('#txt-desc').val()
-
+						'description': $('#txt-desc').val(),
+						'iban': $('#txt-bank-account').val()
 					},
 					dataType: "json",
 					success: function(response) {
-						console.log(response);
+	
 						if (response.error == 0) { // Success
 							Swal.fire({
 								position: "top-end",
