@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `services` (
   `updated` datetime NOT NULL,
   `created` datetime NOT NULL,
   `deleted` int NOT NULL DEFAULT '0' COMMENT '1 = deleted',
-  `ordering` INT NOT NULL DEFAULT '0'
+  `ordering` INT NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 );
 
@@ -239,14 +239,14 @@ CREATE VIEW dt_invoices AS SELECT
     invoice.total_amount AS totalAmount,
     invoice.added AS added,
     invoice.updated AS updated,
-    SERIAL.name,
+    serial.name,
     COALESCE(SUM(invoice_items.amount),0) AS amount,
     customer.id as customerID,
     customer.name as customerName,
     customer.nif
 FROM
     invoice
-LEFT JOIN serial ON invoice.serie = SERIAL.id
+LEFT JOIN serial ON invoice.serie = serial.id
 LEFT JOIN invoice_items ON invoice.id = invoice_items.invoice_id
 LEFT JOIN customer ON customer.id = invoice.customer
 WHERE
@@ -254,6 +254,5 @@ WHERE
 GROUP BY
     invoice.id;
 
-ALTER TABLE `services` ADD `ordering` INT NOT NULL DEFAULT '0' AFTER `created`; 
 ALTER TABLE `files` CHANGE `date` `date` DATE NOT NULL; 
 ALTER TABLE `profile` ADD `bank_account_number` VARCHAR(500) NULL AFTER `description`; 
